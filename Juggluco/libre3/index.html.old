@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>FreeStyle Libre 3</title>
+    <link rel="icon" href="../arrow.png">
+    <meta name="generator" content="LibreOffice 7.3.5.2 (Linux)">
+    <meta name="created" content="2022-09-08T14:52:09.323587508">
+    <meta name="changed" content="2022-09-08T15:04:59.577314981">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		a:link { color: #000080; text-decoration: underline }
+figure {
+    display: inline-block;
+}
+
+        h3{text-align: right;}
+        h4{text-align: center;}
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
+    <p style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid"
+      align="center"> <font face="Liberation Sans, sans-serif"><font style="font-size: 28pt"
+          size="6"><b>FreeStyle Libre 3 sensors</b></font></font></p>
+    <figure> <img src="libre3-menu.jpg" alt="Juggluco" style="object-fit:contain;
+		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Libre
+          3 menu with added interface to Juggluco</span></figcaption> </figure>
+    <figure> <img src="libre3-overview.jpg" alt="Juggluco" style="object-fit:contain;
+		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Libre3:
+          Mirror overview</span></figcaption> </figure>
+    <figure> <img src="libre3-connection.jpg" alt="Juggluco" style="object-fit:contain;
+		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Libre3:
+          Mirror connection with Juggluco</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">Freestyle Libre 3 sensors
+      are considerably different from Freestyle Libre 2 sensors and can't be
+      used with Juggluco. But there exists a cracked Abbott's FreeStyle Libre 3
+      app that can send glucose values to Juggluco.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">In the cracked FreeStyle
+      Libre 3 app an item is added to the menu, that brings you to a modified
+      version of Juggluco's Mirror dialog (left middle menu-&gt; Mirror). Here
+      you specify how to send glucose values to Juggluco. In Juggluco you
+      specify complementary information. Press in Juggluco the help button in <i>left
+        middle menu-&gt; Mirror</i> and <i>Left middle menu-&gt;Mirror-&gt;Add
+        Connection</i> for more information.</p>
+    <figure> <img src="juggluco-netoverview.jpg" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco:
+          Mirror overview</span></figcaption> </figure>
+    <figure> <img src="juggluco-connection.jpg" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco:
+          Mirror connection with Libre3</span></figcaption> </figure>
+    <p>Cracked Libre3 (arm64 only):    
+         <a href="https://apkfab.com/libre-3/com.freestylelibre3.app.de/apk?h=142cfbb2e0b1f10cd280408b10c5a5127e46e00e78d7775dae382529921487e9"> Apkfab </a> 
+	 </p>  (Version without WakeLock no longer shown because it had other problems).
+
+    <p style="line-height: 100%; margin-bottom: 0in"> If you are already using
+      Juggluco for FreeStyle Libre 2 sensors and want to keep you data, you have
+      to send all data to the cracked Freestyle libre 3 app and then reverse the
+      direction, because Juggluco's Mirror function always creates complete
+      copies of the data and no integration of data takes place. Because Libre3
+      doesn't sent amount data, that can be left out. </p>
+    <p>It is possible that sometimes after configuring everything, you have to
+      force close Libre3 and restart it. If you reinstall Juggluco, you have to
+      create a new connection in the Libre 3 app or press "Resend Data".</p>
+    <p> You can use a sensor that was already used with the original Libre3 app
+      if you specify the same LibreView account name. You have to press '"Start
+      New Sensor" and&nbsp; scan the sensor. If you want to go back to the
+      unpatched Libre 3 app, you have to do the same.</p>
+      <p>The cracked libre3 app, like the unpatched libre3 app, can't take over a sensor started with <a href="https://www.reddit.com/r/diabetes_t1/comments/xsdp4r/question_regarding_free_style_libre_3/iqrcdun/?context=3">Freestyle Libre 3 reader</a> or activated with the Libre3 app without a LibreView account.
+      </p>
+    <p>Because it supports both mmol/L and mg/dL out of the box, the German
+      Libre 3 app (com.freestylelibre3.app.de) was patched; this means that
+      current users of this app have to uninstall the original before they can
+      use the cracked one. Users in other countries can install the cracked
+      German Libre 3 app beside their current one. If that app is currently
+      connected with the sensor, you should use Force Close to stop it, so that
+      it loses contact with the sensor.</p>
+    <p>The cracked Libre3 app can only be used on Arm64. The Google Play
+      Freestyle Libre 3.3.0 APKs available on the net are all arm64-v8a only. (I
+      found an apk containing all the x86, x86_64, armeabi-v7a and arm64-v8a
+      shared libraries, but it couldn't be from Google Play and an armeabi-v7a
+      function gave the wrong results.) </p>
+    <p> Juggluco knows only English, Dutch and Italian. Previously the cracked
+      Libre3 app knew only English, but I have now added some files with the
+      following language codes: ar, de, es, fr, hi, in, it, ja, ko, my, nl, pt,
+      ru, th, tr and vi.</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+  </body>
+</html>

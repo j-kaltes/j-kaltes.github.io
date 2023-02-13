@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Juggluco for WearOS install</title>
+	<meta name="generator" content="LibreOffice 7.4.5.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2023-01-28T12:58:10.167315884"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		h4.cjk { font-family: "Droid Sans Fallback" }
+		h4.ctl { font-family: "Droid Sans Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><h1>Install via ADB</h1>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://j-kaltes.github.io/JugglucoWearOS">Juggluco</a>
+no longer available on <a href="https://play.google.com/store/apps/details?id=tk.glucodata&amp;hl=en&amp;gl=US">Google
+Play</a>, but it is still possible to install Juggluco via adb.
+<a href="https://j-kaltes.github.io/Juggluco/download.html">Download
+Juggluco</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">For instruction more
+instruction on how to install an APK on WearOS see:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.guidingtech.com/how-to-install-apks-on-wear-os-smartwatches">https://www.guidingtech.com/how-to-install-apks-on-wear-os-smartwatches</a>
+</p>
+<p><a href="https://www.reddit.com/r/WearOS/comments/p1l9of/how_to_install_apps_on_wear_os_all_methods/">https://www.reddit.com/r/WearOS/comments/p1l9of/how_to_install_apps_on_wear_os_all_methods/</a>
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">First you need to
+get adb, see
+<a href="https://www.xda-developers.com/install-adb-windows-macos-linux/">https://www.xda-developers.com/install-adb-windows-macos-linux/</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>Download adb:</b></p>
+<p style="line-height: 100%; margin-bottom: 0in">Windows:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">Mac:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">https://dl.google.com/android/repository/platform-tools-latest-darwin.zip</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">Linux:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">https://dl.google.com/android/repository/platform-tools-latest-linux.zip</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">You also need to
+enable <b>developer options</b> on your watch
+(<a href="https://developer.android.com/training/wearables/get-started/debugging">https://developer.android.com/training/wearables/get-started/debugging</a>):</p>
+<p style="line-height: 100%; margin-bottom: 0in">How exactly you have
+to do it, differs per watch. On Watch4 you have to press on &quot;About
+Watch&quot; in Settings. Press on &quot;Software Info&quot; and then
+touch 7 times &quot;Software version&quot;. You can turn it off again
+by doing the same, so if you do it too long it is turned off again.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Now an item called
+&quot;Developer options&quot; is added to Settings. Here &quot;ADB
+Debugging&quot; and &quot;Debug over Wi-Fi&quot; should be turned on.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Ensure that <b>WIFI</b>
+is stably turned on on your watch. If it is not, go in Juggluco on
+your watch to Left menu-&gt;Mirror and turn on WIFI (remember to turn
+it off later).</p>
+<p style="line-height: 100%; margin-bottom: 0in">Get the IP of your
+watch. In Watch4 you can find it be going to
+settings-&gt;Connections-&gt;Wifi and pressing on your connection. At
+the bottom you find the IP address of the watch.</p>
+<p style="line-height: 100%; margin-bottom: 0in">On your computer
+press:</p>
+<pre style="margin-bottom: 0.2in"><b>adb connect IP-of-watch</b></pre><p style="line-height: 100%; margin-bottom: 0in">
+On you watch you are asked: allow debugging?</p>
+<p style="line-height: 100%; margin-bottom: 0in">Press Yes or Always
+allow from this computer.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Hereafter</p>
+<pre style="margin-bottom: 0.2in"><b>adb devices</b></pre><p style="line-height: 100%; margin-bottom: 0in">
+should show something like:</p>
+<p style="line-height: 100%; margin-bottom: 0in">192.168.1.73:5555
+device</p>
+<p style="line-height: 100%; margin-bottom: 0in">Now you can install
+Juggluco with the following command:</p>
+<pre style="margin-bottom: 0.2in"><b>adb install -r <i>apkfile</i></b></pre><p style="line-height: 100%; margin-bottom: 0in">
+Here &quot;<i>apkfile</i>&quot; stands for the apk file you
+previously downloaded from
+<a href="https://j-kaltes.github.io/Juggluco/download.html">https://j-kaltes.github.io/Juggluco/download.html</a>.
+If that file was <i>Juggluco4.6.1-wear-arm32.apk</i>, it becomes:</p>
+<pre style="margin-bottom: 0.2in"><b>adb install -r Juggluco4.6.1-wear-arm32.apk</b></pre><p style="line-height: 100%; margin-bottom: 0in">
+The -r option is only needed for an update (when Juggluco was already
+installed on the watch).</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<h4 class="western">PATH</h4>
+<p style="line-height: 100%; margin-bottom: 0in">To use adb in the
+above manner under bash or powershell, adb's location should be in
+the PATH environmental variable. You can set that in the following
+way:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><span style="text-decoration: none"><b>Linux</b></span>:</p>
+<p style="line-height: 100%; margin-bottom: 0in">If adb is located
+/home/jka/Android/Sdk/platform-tools, you type:</p>
+<p style="line-height: 100%; margin-bottom: 0in">export
+PATH=/home/jka/Android/Sdk/platform-tools:$PATH</p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>Windows
+Powershell</b>:</p>
+<p style="line-height: 100%; margin-bottom: 0in">If adb is located in
+C:\Android\platform-tools, do</p>
+<p style="line-height: 100%; margin-bottom: 0in">$Env:PATH+=&quot;;C:\Android\platform-tools&quot;</p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>Windows cmd.com</b>:</p>
+<p style="line-height: 100%; margin-bottom: 0in">set
+PATH=%PATH%;C:\Android\platform-tools</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can also run the
+commands from the place were adb is located and using ./adb instead
+of adb under Linux and .\adb instead of adb under Windows.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
+</html>

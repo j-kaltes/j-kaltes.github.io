@@ -1,0 +1,72 @@
+<html>
+   <head>     
+   </head>
+   
+   <body>
+<h1> mg/dL</h1>
+<p id="country"></p>
+<p id="lang"></p>
+<script>
+let mmol=[
+"AM",
+"AU",
+"BA",
+"BG",
+"BW",
+"BY",
+"CA",
+"CH",
+"CN",
+"CZ",
+"DK",
+"EE",
+"FI",
+"GB",
+"HK",
+"HR",
+"HU",
+"IE",
+"IS",
+"KW",
+"KZ",
+"LT",
+"LV",
+"MT",
+"MY",
+"NA",
+"NL",
+"NO",
+"NZ",
+"RS",
+"RU",
+"SE",
+"SI",
+"SK",
+"UA",
+"ZA"];
+
+
+
+
+
+
+
+
+var userLang = navigator.language || navigator.userLanguage;
+var  co=userLang.toUpperCase();
+//var co='NL';
+
+for(const element of mmol) {
+  console.log(element);
+  if(co.includes(element)) {
+	 window.location = "mmol/index.html";
+	 break;
+  	}
+   }
+
+
+document.getElementById("country").innerHTML =  co;
+document.getElementById("lang").innerHTML =  userLang;
+      </script>      
+   </body>
+</html>

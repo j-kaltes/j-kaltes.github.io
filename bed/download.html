@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; Linux 2.0.33 i586) [Netscape]">
+   <META NAME="Author" CONTENT="Jaap Korthals Altes">
+   <META NAME="Description" CONTENT="Description of bed (binary editor for linux). Urls to download the source and the Elf binary.">
+   <META NAME="Keywords" CONTENT="Hex, editor, bed, binary, octal, decimal, ascii. Linux.">
+<title>bed - download</title>
+</HEAD>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EF" vlink="#55188A" alink="#FF0000">
+<div align=right><font face="Arial,Helvetica"><a href="bed.1.html">Manual</a></font></div>
+<h1>download</h1>
+<FONT SIZE=+1>Bed <B>source</B>:</FONT>
+<br><br><font size=+1>
+<A HREF="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.src.tar.xz">bed-3.1.1.src.tar.xz</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(608K)&nbsp; <A HREF="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.src.tar.xz.asc">SIGN</A>
+</FONT>
+
+<br><P><FONT SIZE=+1><B>Linux</B> 
+<br><FONT SIZE=+1>
+See <A HREF="bed.1.html#lbAK">Terminal emulation requirements</A>
+</FONT>
+<br>x86-64 binary:</FONT>	
+<font size=+1>
+<A  target="_blank" rel="noopener noreferrer" HREF="https://sourceforge.net/projects/binaryeditor/files/bed_3.1.1_amd64.deb"> bed_3.1.1_amd64.deb</A>&nbsp;&nbsp;&nbsp;&nbsp;
+(424K) <A  target="_blank" rel="noopener noreferrer" HREF="https://sourceforge.net/projects/binaryeditor/files/bed_3.1.1_amd64.deb.asc">SIGN</A>
+</FONT>
+<p>
+Install with (you should have installed libhyperscan, libmagic  libncurses and libre2): <PRE>
+ar x bed_3.1.1_amd64.deb
+rm control.tar.gz
+tar -a -xf data.tar.xz -C /
+</PRE>
+Uninstall with: <PRE>
+bash /usr/share/bed/uninstallbed.sh 
+</PRE>
+On some Linux distribution you can also install with:
+<PRE>
+apt install ./bed_3.1.1_amd64.deb
+</PRE>
+and uninstall with
+<PRE>
+apt remove bed
+</PRE>
+<br><FONT SIZE=+1><b>Android</b> 8.0 arm64 binary: </FONT><A target="_blank" rel="noopener noreferrer" HREF="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.arm64.android8.0.tar.gz">bed-3.1.1.arm64.android8.0.tar.gz</A> (908K) <A HREF="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.arm64.android8.0.tar.gz.asc" target="_blank" rel="noopener noreferrer">SIGN</A>
+<br>
+    Run bed in an unix shell under adb or termux, for example to look in block
+    devices or saved data of an app. See <a href="README.android.txt">README.android.txt</a>
+    in the source for more information about using bed on android devices.
+
+   <p> <font size="+1"><b>Windows</b> :</font> <A  target="_blank" rel="noopener noreferrer" href="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.win64.zip">bed-3.1.1.win64.zip</a> (812K) <A  target="_blank" rel="noopener noreferrer" href="https://sourceforge.net/projects/binaryeditor/files/bed-3.1.1.win64.zip.asc">SIGN</a>
+
+   <br>
+      You can also run the linux version of bed under Linux running under
+      windows 10, but raw editing harddisk devices is than not possible.
+      <br>
+<br><font size="+1">
+          The unzip the zip file in c:\ (with create subdirectories enabled).
+          bed.exe ends up in c:\Windows other files in c:\Program Files\bed. If
+          you like to use x:\Program Files\bed instead (with x another drive
+          number), use a hex editor on bed.exe.<br>
+          &nbsp;
+          <br>
+          <font size="+1">To compile bed for win32/64 you need:
+          </font></font></font></p>
+    <ul>
+      <li><font size="+1"><font size="+1"><font size="+1">g++ or clang++,
+              binutils, gnu make,grep, sed, textutils, findutils, fileutils,
+              diffutils from https://www.msys2.org/.<br>
+            </font></font></font></li>
+      <li><font size="+1"><font size="+1"><font size="+1">pdcurses source (<a href="http://pdcurses.sourceforge.net"
+                target="_top">http://pdcurses.sourceforge.net</a>)
+            </font></font></font></li>
+    </ul>
+    <font size="+1"><font size="+1"><font size="+1">
+          <p>
+            Previous versions compiled also under win95, cygwin, FreeBSD32,
+            FreeBSD64 and OpenSolaris. I haven't tried this version.
+          </p>
+          <p>
+            <font size="+1"><a name="oldbeds">Previous versions:</a> <br>
+	    <a href="http://bedlinux.tripod.com/download/" target="_top">Tripod</a><br>
+	    <a href="https://sourceforge.net/projects/binaryeditor/files/" target="_top">Sourceforge</a><br>
+            </font></p>
+          <p><font size="+1"><a href="pgpkey.bed">pgp public key</a>
+            </font></p>
+        </font></font></font>
+</body>
+</html>

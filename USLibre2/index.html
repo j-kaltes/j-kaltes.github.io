@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="generator" content="LibreOffice 7.2.5.2 (Linux)">
+    <meta name="created" content="2022-01-30T12:00:15.471484040">
+    <meta name="changed" content="2022-01-30T12:32:00.171897172">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h1 { margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Mangal"; font-size: 18pt; font-weight: bold }
+		a:link { color: #000080; text-decoration: underline }
+		a.cjk:link { so-language: zxx }
+		a.ctl:link { so-language: zxx }
+		a:visited { color: #800000; text-decoration: underline }
+		a.cjk:visited { so-language: zxx }
+		a.ctl:visited { so-language: zxx }
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US"><img src="libre2.jpg"
+      style="object-fit:contain; width:auto;		    height:14cm;" alt="Libre2" title="Libre2"
+      align="right">
+    <h1 class="western">Patched US Libre 2</h1>
+    <p style="line-height: 100%; margin-bottom: 0in">Patch for Abbots US Libre 2
+      Android app:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a class="western" href="https://sourceforge.net/projects/binaryeditor/files/binpatch/libre2.7.1-patch9.zip">https://sourceforge.net/projects/binaryeditor/files/binpatch/libre2.7.1-patch9.zip</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">For this you need binpatch:
+      <a class="western" href="https://sourceforge.net/projects/binaryeditor/files/binpatch">https://sourceforge.net/projects/binaryeditor/files/binpatch</a>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">When everything goes will you get this file:
+      <a class="western" href="https://apkfab.com/libre-2/test.freestylelibre2.us/apk?h=c23a18f939207ee342d2054c551274f1b91c69a87f9691ac78f94eb49bc4a056">Patched US Libre 2 app</a>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">This makes it possible to
+      send glucose values from the Libre 2 app to <a href="https://j-kaltes.github.io/Juggluco">Juggluco</a>.
+      You needed this app to use US Freestyle Libre 2 sensors with Juggluco.
+      From Juggluco 2.2.1 on Juggluco can connect directly with US Freestyle
+      libre 2 sensors and this app is probably superfluous.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">There are some differences
+      with the unpatched version: Normally the US Libre2 app doesn't scan
+      sensors that were started with Freestyle Reader or another device. This
+      restriction is removed. The unpatched US libre 2 app can't scan European
+      sensors, the patched version can. The unpatched version always displays
+      glucose values in mg/dL, in the patched version you can choice between
+      mmol/L and mg/dL. The patched version has removed all contact with
+      Abbott's servers and for that reason LibreView and most help menus don't
+      work. Alarms don't work. Firebase analytics is partly removed and partly
+      left intact. The authentication information is changed and I have disabled
+      firebase in AndroidManifest.xml, but I still see <b>isEmailSend:POST</b>
+      in logcat, so probably they just continue sending information when turned
+      off (<i>Firebase Analytics</i>), without displaying the data to the
+      Firebase account holder. I changed the Application Id, so you can install
+      it besides the unpatched Libre 2 app. It is also possible to receive
+      glucose values via bluetooth on a device <a class="western" href="withoutnfc.html">without
+        NFC</a>. The patched version is only available for <u>arm64</u>,
+      because I couldn't find the unpatched <u>arm</u> Libre2 app. </p>
+    <br>
+    <img src="connectionoverview.jpg" style="object-fit:contain; width:14cm;		    height:auto;"
+      alt="Juggluco's connection overview" title="Juggluco's connection overview">
+    <p style="line-height: 100%; margin-bottom: 0in">The Patched Libre 2 app
+      makes use of Juggluco's Mirror function to send glucose values to
+      Juggluco. Under the right menu the Item "Juggluco" is added. This opened a
+      modified version of Juggluco's "Mirror" dialog. An example connection is
+      already specified.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">To establish the Juggluco
+      side of this example connection, you only need to open the Mirror dialog
+      in Juggluco: Left middle menu, Mirror. Change port to 8118, save. Press '<i>Add
+        Connection'</i>, change there port to 7117. Add the IP 127.0.0.1. Check
+      '<i>Test Label</i>' and write libre2juggluco. Check '<i>Receive from</i>'
+      and press Save. Now press '<i>Sync'</i>.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Now the Last scan and
+      history values should be shown. Later the values via Bluetooth will
+      arrive.</p>
+    <br>
+    <img src="addconnection.jpg" style="object-fit:contain; width:14cm;		    height:auto;"
+      alt="Add connection" title="Add connection">
+    <p> When making a connection between the patched Libre 2 app and Juggluco
+      running on the same smartphone, you can use different IPs for local
+      connection on the phone. Using 127.0.01 seems to be the simplest, but on
+      my phone it worked better when I used the home net wlan IP. On a Realme GT
+      5G phone I had turned battery optimization for Juggluco of at two place
+      and allowed background at one place and still there were moments when the
+      traffic between Libre 2 and Juggluco was stopped when using 127.0.0.1, but
+      this didn't happen when using the home net wlan IP.</p>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+cat<<"!"
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="icon" href="arrow.png">
+    <title>Juggluco versions</title>
+  </head>
+  <h1>Juggluco versions </h1>
+!
+for((h=2;h>=0;h--))
+do
+for((m=6;m>=0;m--))
+do
+for((l=30;l>=0;l--))
+do
+name=Juggluco$h.$m.$l.apk
+
+if test -e $name
+then
+show=`ls -sh $name`
+echo "<p><a href=\"http://jkaltes.byethost16.com/Juggluco/$name\">$show</a></p>"
+fi
+done
+done
+done
+cat<<!
+  </body>
+</html>
+!

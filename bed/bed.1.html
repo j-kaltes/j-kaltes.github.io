@@ -1,0 +1,3528 @@
+
+
+<HTML><HEAD><TITLE>Manpage of bed</TITLE>
+</HEAD><body text="#000000" bgcolor="#FFFFFF" link="#0000EF" vlink="#55188A" alink="#FF0000">
+
+
+
+
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+bed - adjustable data format binary editor
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+
+<P>
+<B>bed</B>
+
+[
+<I>Options</I>
+
+]
+[
+<I>Files</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+
+<P>
+Adjustable data format binary editor. Data formats are
+ASCII, unsigned and signed integers, float, bit-flags,
+bit-fields, labels, ebcdic and time_t. Different sizes
+and byte orderings are possible. Data types can
+be used in structures. Other data formats, filters and
+procedures can be defined in plugins. Contains copy,
+past, undo, redo, search, replace, marks, record/play and
+context sensitive help. Raw edit of hard drives. Under  
+Linux and FreeBSD even usable without X windows.
+<A NAME="lbAE">&nbsp;</A>
+<H3>Interface</H3>
+
+Some general remarks about working with bed.
+In bed you can do everything with the menu. You open a menu by pressing Alt in combination
+with the highlighted key. A menu item is selected by pressing only the highlighted key or
+using movement keys followed by Enter. You can get help about a menu item by pressing F1.
+You escape from the menu by pressing Esc.
+In dialog boxes you can jump to the highlighted character by pressing Alt-char or
+by using Tab and Alt-tab or shift-tab. Options are switched on by pressing space or *.
+Buttons like Ok and Cancel are operated by moving to the button and pressing Enter.
+<P>
+
+While editing the usual movement keys should work, if they don't run bed -k.
+<P>
+
+Select works wp5.1 (and vi) like: You specify a starting point (<A HREF="#setselect">Alt-e,s</A>)
+and with whatever moving function exist you go to an other
+point and you then press copy (<A HREF="#copyselect">Alt-e,c</A>) or save selection (<A HREF="#saveselect">Alt-e,a</A>).
+<P>
+
+bed has only a type-over mode, so your data doesn't move to another offset without
+explicitly saying so. To extend a file you should explicitly call <A HREF="#extend">Alt-e,x</A>. If you like to leave something out you should copy everything after it, past it
+over what you like to remove and truncate the file with <A HREF="#truncate">Alt-e,t</A>.
+<P>
+
+To be able to handle large files (e.g. whole hard drives) bed only holds in memory what 
+is  changed and reads the other parts from disk at the moments they are needed. 
+<P>
+
+If bed seems to get into a time consuming operation, you can try Ctrl-C (Ctrl-Break when using win95 with pdcurses). It should bring bed back to it's main loop, but  sometimes problems arise.
+<A NAME="lbAF">&nbsp;</A>
+<H3>Data types</H3>
+
+In bed you can display the file content in different dataformats for example: ASCII, signed and unsigned integers of variable base and size, and Floating point number of size 4 (float),8(double) and 12 (long double). 
+Beside this standard types there are lots of other data types like:  bitflags, bitfields, translate (enum), ebcdic etc. You can also also add new data types in plugins.
+<P>
+
+<B>composed data type</B>
+<BR>
+
+It is also possible to form composed data types (structures, records).
+At different offset within a unit the file content is displays in a different
+data type. 
+<PRE>
+struct nameincome {
+        char name[20];
+        unsigned long income;
+        };
+</PRE>
+
+For example if the file contains a database of strings of size 20 followed by a digit of 4 bytes, you can make a composed data type of ASCII/20 and Dec/4. You do this simple by first making a ascii of size 20 by pressing <A HREF="#naarASCII">Alt-d,a</A> and filling in 20 for Nr Bytes and setting Separate and then adding a unsigned integer by pressing <A HREF="#makemode">Alt-t,d,makemode</A> setting for Nr bytes 4 and check Dec and Add field.
+<P>
+
+All kind of operations which can be applied to basic (single) data types can also be applied on composed data types: search, replace and the addition of a filter (e.g reorder). To do this you need to make the composed data type the active data type. You can do this by setting the cursor between two of its elements or by using <A HREF="#uplevel">Alt-y,t</A>.
+<P>
+
+<B>Switching data type</B>
+<BR>
+
+Moving between parts of the screen with different data types
+you can do with Prev (<A HREF="#prevmode">Alt-d,v</A>) and Next (<A HREF="#nextmode">Alt-d,n</A>). 
+<BR>
+
+Zooming a data type you do with Full (<A HREF="#zoommode">Alt-d,f</A>), removing a
+data type with Remove (<A HREF="#removemode">Alt-d,r</A>).
+<BR>
+
+Save selection saves the selected part of the file in the
+format of the active data type. 
+<BR>
+
+<B>Adding data types</B>
+<BR>
+
+You can add a data type with ASCII, Integer, Signed, Float, Clone.
+Clone gives an identical copy of the currently active
+data type.
+<BR>
+
+Integer (alt-d,i) gives the following window:
+<PRE>
+                                          
+   (*) Hex   ( ) Dec   ( ) Custom:        
+   ( ) Oct   ( ) Bin   Base nr:           
+                                          
+   Nr bytes:   1                          
+                          (*) Add field   
+     Ok        Cancel     ( ) Separate    
+                                          
+</PRE>
+
+<BR>
+
+You can specify the base of the integer in the field Base nr
+or you can use one of the options Hex,Oct,Dec or Bin. Hex
+stands for hexadecimal, Oct for octal, Dec for decimal and bin
+for binary. You can also check Custom and specify a base number.
+<BR>
+
+You can specify the number of bytes and the order in which the
+bytes are interpreted.
+<BR>
+
+You can set Add field or Separate.
+Separate makes a separate data type. Add field means that this data type is added to the currently active data type, making a composed data type (struct, record).  In the last case where in the existing data type the new field is placed depends on the cursor position:
+<BR>
+
+- At the end of the existing data type if the cursor is at the end of the screen
+<BR>
+
+- At the beginning of the existing data type if the cursor is at the beginning of the screen
+<BR>
+
+- Otherwise at the place closest to the cursor.
+<BR>
+
+- After the cursor position if the distances are equal
+<BR>
+
+<B>Modifying data types</B>: 
+<BR>
+
+Basic data types you can change by pressing <A HREF="#datatypeconfig">Alt-y,g</A> (Config).
+This are operation you can apply on some data types which
+changes certain aspects while leaving other aspects the same. 
+It are usually the same options you had when creating a data type.
+<BR>
+
+<B>Filters</B>: 
+<BR>
+
+It is possible to place filters between the file and a data type. Such a filter can transform the file content before interpretating it as a certain kind of data type.
+Currently there are the following filters:
+<BR>
+
+<BR>
+
+Reorder (<A HREF="#reorderunit">Alt-y,o</A>)
+<BR>
+
+Duplicate (<A HREF="#duplicate">Alt-y,i</A>)
+<BR>
+
+Skip (<A HREF="#addskip">Alt-y,k</A>)
+<BR>
+
+Backward (<A HREF="#backward">Alt-t,d,backward</A>)
+<BR>
+
+Index2table (<A HREF="#index2table">Alt-t,d,index2table</A>)
+<BR>
+
+Translate (<A HREF="#translate">Alt-d,l</A>)
+<BR>
+
+You can find a description by pressing F1 in the menu with the appropriate menu item
+selected. The same description you can find somewhat further in this file in the list of all procedures. You can remove the last added filter by pressing <A HREF="#rmlastfilter">Alt-y,m</A> (Rm filter).
+<BR>
+
+When using some filters, filters, like Skip, Index2table and and possibly Backward, differences in
+file content are not always shown on the screen. Skip for example skips some bytes. Normal search translates the search string in a string of bytes and then
+searches for this string in the raw content of the file. This is obviously
+not possible if skipped bytes can contain different data within the file.
+Regex search uses a different method. It first transformes the file content
+to the search data type and then searches in this data type for the search string.
+So if you use this kind if filters you should check regex search. The same applies for other data type were what is displayed can corresponced to different bytes
+like Float and Empty.
+<P>
+
+<B>Saving data types</B>: 
+<BR>
+
+Press <A HREF="#savedatatype">Alt-y,w</A> (Write Type) to save a data type. You can read it again with <A HREF="#readcontain">Alt-y,d</A> (Read Type). /data/local/tmp/nontmp/share/bed/misc contains some example
+saved data types. Read /data/local/tmp/nontmp/share/bed/misc/README.txt for a description.
+<A NAME="lbAG">&nbsp;</A>
+<H3>Search</H3>
+
+When you press on search of the Move menu (<A HREF="#search">Alt-m,s</A>), you come in the
+search window. Standard you search in the currently active
+data type. To select a different data type you press on space
+when the appropriate data type is selected (like ASCII). 
+<BR>
+
+When you instead presses on Return the search string is also
+converted from the old data type to the new data type. 
+<BR>
+
+Beside this there are also the usual features like starting
+from the top or the bottom of the file instead of the cursor
+position, searching backwards, searching case insensitive and
+using regular expressions. 
+<BR>
+
+<P>
+<BR>
+
+<B>Regular expression</B>:  Use the GNU regular expression library to
+match a pattern against the text (See 
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=7&topic=regex" TARGET="_top">regex</A>(7)</B>
+
+). When using regular expression you can search forward and backward in
+ascii text. In any other data type you can only search
+forward. When &quot;Regular expression&quot; is not checked everything
+is first converted to a general byte string and then for this
+byte string is searched in the file. When searching  with
+regular expressions enabled the file is block for block
+converted to the currently active data type and this printable
+representation is searched for regular expressions in exactly
+the same way as when the file was originally in this form.
+This means for example that when searching case sensitively
+the hex data type ff is different from FF.
+<BR>
+
+When using  a floating point plugin different byte
+strings can give the same superficial appearance. When you
+convert the search pattern first into bytes and then search
+for the bytes, you will only find one of this underlying byte
+strings. When searching in regex mode you will find all of
+them. The char2 plugin contains a data type which leaves out
+every other byte. And when converting to bytes you have to
+fill them in with something and when in the file they are
+filled different you will not find the byte string. But when
+searching only in the superficial appearance you can find
+them.
+<BR>
+
+I haven't tried any attempt to optimize regular
+expressions so regular expression search in ascii is very
+slow, and this conversion to other data types before searching
+makes it even slower. So only small distances can be searched
+this way.
+<BR>
+
+Further shortcoming of regular expressions search:
+<BR>
+
+- Only one hit in a single data type is returned. When
+searching for 1 in a hex data type it stops only once in 11.
+<BR>
+
+- The same byte can generate a hit in different alignments.
+Only one is shown. To see them all you should change the
+alignment around every hit.
+<P>
+
+<B>Case sensitive</B>: When checked upper and lower case are
+treated distinctively
+<BR>
+
+<B>Boundaries</B>: Multibyte data types can be aligned differently a 4
+byte digit can start at offset 0,1,2 or 3 and give then
+different 4 byte digits. Without checking Boundaries all will
+be returned. With Boundaries checked only bytes aligned in the
+same way as is now shown on the screen are returned.
+<BR>
+
+<B>Forward</B>: When checked the file is searched in the forward
+direction going from lower to higher offsets.  When not checked the file is searched backward.
+<BR>
+
+<B>Edge file</B>: When checked the file is searched from the edge of
+the file. From offset 0 when searching forward, from end of
+file when searching backward.
+<BR>
+
+<B>Find</B>: Here you type the search pattern
+<BR>
+
+<B>List</B>: Generated a list of all hits. If compiled with
+CONFIG_THREADS=y, you can go on editing while hits are marked
+so you can view them in marklist (<A HREF="#showmarks">Alt-t,d,showmarks</A>).
+<BR>
+
+<B>ASCII</B>, <B>Dec</B> etc give when checked the current active data type.
+The last data type is the currently active. In this case that it char2. Which is a plugin data type.
+<BR>
+
+<B>Nr bytes</B>: give the number of bytes each data item occupies. By
+some data type you can change this for example by unsigned integers. 
+<A NAME="lbAH">&nbsp;</A>
+<H3>Replace</H3>
+
+Everything has the same meaning as in search, with a replace
+string added.
+<BR>
+
+At the place where the search string is found the replacestring is placed. The replace string
+<BR>
+
+overwrites the data. When Regular expression is checked you
+can insert the whole search string by &amp; or
+<BR>
+
+subexpressions by \1 \2 to \9. In the searchstring
+subexpressions are demarcated by \(pattern\).
+<A NAME="lbAI">&nbsp;</A>
+<H3>Tools</H3>
+
+A few options not handles by other menus.
+<BR>
+
+<B>Numbertype</B>: changing the number type in which the offset in
+the file is shown (or removing offset numbers).
+<BR>
+
+<B>Messageline</B>: switching the messageline on and off, 
+<BR>
+
+<B>Menu</B>: switching the menu bar on and off
+<BR>
+
+<B>Commandmode</B>:  setting commandmode on and off. Inside command
+mode the normal keys are not automatically put into the
+document. This makes it possible to bound commands to normal
+keys, like is done inside vi. By default there are no
+key bindings of this kind, but you can put it into the
+configuration file if you want. 
+<BR>
+
+<B>Procedures</B>: View list off all procedures which can be bounded
+to keys or are part of the menu. Press return on a procedure
+to execute the procedure.
+<BR>
+
+<B>Dynamic</B>: view procedures defined in plugins
+<BR>
+
+<B>Load plugin</B>: file manager to select a plugin
+<BR>
+
+<B>Key binding</B>: shows the procedure bounded to a particular key
+<A NAME="lbAJ">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<BR>
+
+Usage: bed [Options] [Files]
+<P>
+<P>
+
+Options (applied to all files)
+<DL COMPACT>
+<DT><B>-w:</B>
+
+<DD>
+<BR>&nbsp;Always&nbsp;test&nbsp;filesize
+<DT><B>-d SIZE:</B>
+
+<DD>
+<BR>&nbsp;Set&nbsp;filesize&nbsp;to&nbsp;SIZE&nbsp;(dangerous!!)
+<DT><B>-b BLOCKSIZE:</B>
+
+<DD>
+<BR>&nbsp;disk&nbsp;read/write&nbsp;blocksize.&nbsp;&nbsp;
+<DT><B>-V SIZE:</B>
+
+<DD>
+<BR>&nbsp;set&nbsp;maximal&nbsp;DVD/CDROM&nbsp;size
+<DT><B>-v:</B>
+
+<DD>
+<BR>&nbsp;Version&nbsp;information
+<DT><B>-c:</B>
+
+<DD>
+<BR>&nbsp;Source&nbsp;and&nbsp;compile&nbsp;info
+<DT><B>-h:</B>
+
+<DD>
+<BR>&nbsp;This&nbsp;screen
+<DT><B>-s FILE:</B>
+
+<DD>
+<BR>&nbsp;play&nbsp;recorded&nbsp;keystrokes&nbsp;file&nbsp;FILE
+<DT><B>-e procedure:</B>
+
+<DD>
+<BR>&nbsp;execute&nbsp;procedure&nbsp;at&nbsp;startup
+<DT><B>-f bedrc:</B>
+
+<DD>
+<BR>&nbsp;Use&nbsp;configuration&nbsp;file&nbsp;bedrc,&nbsp;instead&nbsp;of&nbsp;env&nbsp;BEDRC
+<BR>&nbsp;&nbsp;&nbsp;or&nbsp;~/.bedrc&nbsp;or&nbsp;/usr/share/bed/bedrc
+<DT><B>-p plugin:</B>
+
+<DD>
+<BR>&nbsp;load&nbsp;plugin&nbsp;at&nbsp;startup
+<DT><B>-k file:</B>
+
+<DD>
+<BR>&nbsp;Configure&nbsp;key&nbsp;bindings&nbsp;for&nbsp;current&nbsp;terminal.&nbsp;Append&nbsp;to&nbsp;file.
+<DT><B>-B:</B>
+
+<DD>
+<BR>&nbsp;black-white
+<DT><B>-C:</B>
+
+<DD>
+<BR>&nbsp;color
+<P>
+<P>
+</DL>
+<A NAME="lbAK">&nbsp;</A>
+<H2>TERMINALS</H2>
+
+<A NAME="lbAL">&nbsp;</A>
+<H3>Linux</H3>
+
+<BR>
+
+Bed is a terminal program. So you can
+use it with an X windows terminal emulator like
+<B>rxvt</B>
+
+or
+<B>xterm</B>
+
+or with
+<B>Linux console</B>
+without using X windows.
+These terminals give always problems with functions keys. What they do
+changes constantly and differs between computers. Here are some suggestions to make them work. As you can guess, this is probably also outdated.
+<BR>
+
+Add
+<PRE>
+
+XTerm*metaSendsEscape:  true
+XTerm*altSendsEscape:   true
+</PRE>
+
+to ~/.Xdefaults or /etc/X11/app-defaults/XTerm to use bed in xterm. 
+Changes take effect in newly created xterms after the next restart of X windows or after running 
+xrdb filename.
+<BR>
+
+<B>gnome-terminal</B>
+
+becomes usable after the following changes:
+<BR>
+
+If
+<PRE>
+
+        set|grep TERM
+
+</PRE>
+
+returns TERM=xterm, you probably get a
+messed up screen.
+<PRE>
+
+        export TERM=rxvt
+
+</PRE>
+
+will solve the problem (if you have the
+right bedrc file, this is already done for you).
+<BR>
+
+If you run Ubuntu 18.04 under Windows 10 (Windows Subsystem for Linux) you have to set TERM to one of
+the following values: xterm, xterms-sun, xterm-sun or rxvt-unicode-256color
+<BR>
+
+xterm-sco works also for bed, but not mc.
+<P>
+
+In the 
+<PRE>
+
+Edit-&gt;Keyboard Shortcuts
+
+</PRE>
+
+menu of  gnome-terminal you switch off 
+<PRE>
+
+        [ ] Enable menu access keys
+
+</PRE>
+
+and
+<PRE>
+
+        [ ] Enable menu shortcut key
+
+</PRE>
+
+Also change the following Shortcut keys:
+<PRE>
+
+Help
+        Contents        Ctrl+Alt+H
+
+</PRE>
+
+(instead of F1)
+<PRE>
+
+View
+        Full Screen     Ctrl+Alt+F 
+
+</PRE>
+
+(instead of F11)
+<A NAME="lbAM">&nbsp;</A>
+<H3>FreeBSD</H3>
+
+With the keymap of my FreeBSD installation Alt-key combinations didn't work properly in 
+virtual consoles. In /usr/local/share/bed/README.FreeBSD I explain how to solve that.
+<A NAME="lbAN">&nbsp;</A>
+<H3>MS Windows</H3>
+
+The precompiled version is compiled with mingw-w64 and <B>pdcurses</B> and runs under MS Windows consoles like <B>cmd</B>, <B>command</B> and <B>powershell</B>. 
+Earlier versions were compiled with cygwin and had beside a pdcurses version also an ncurses version running under x terminals like xterm and rxvt.
+Within xterm, koi8rxterm and uxterm you should check &quot;Main Options-&gt;Meta Sends Escape&quot; to use Alt-key combinations. To make it permanent
+add the following to  ~/.Xresources (or ~/.Xdefaults) or KOI8RXTerm, UXTerm, XTerm and XTerm-color in
+/usr/X11R6/lib/X11/app-defaults
+<PRE>
+
+XTerm*metaSendsEscape:  true
+XTerm*altSendsEscape:   true
+UXTerm*metaSendsEscape: true
+UXTerm*altSendsEscape:  true
+KOI8RXTerm*metaSendsEscape:     true
+KOI8RXTerm*altSendsEscape:      true
+</PRE>
+
+<P>
+urxvt uses Alt-s itself. You can make urxvt send it to bed, by putting the following in ~/.Xresources
+<PRE>
+
+URxvt.Keysym.M-s: builtin:
+</PRE>
+
+On my computer urxvt did only read ~/.Xresources after I had also executed:
+<PRE>
+
+export XENVIRONMENT=&quot;${HOME}/.Xresources&quot;
+</PRE>
+
+<A NAME="lbAO">&nbsp;</A>
+<H2>CONFIGURATION</H2>
+
+In the configuration file you can change colors, assign keys, change
+the menulayout, loud plugins. and configure to call procedure's at certain moments.
+As configuration file is used the first file found of following:
+the argument to -f at the command line ,
+the environmental variable BEDRC, /sdcard/.bedrc or /data/local/tmp/nontmp/share/bed/bedrc.
+<A NAME="lbAP">&nbsp;</A>
+<H3>Commandline Options</H3>
+
+<PRE>
+<B>options</B> options
+</PRE>
+
+After the keyword <B>options</B> options are given in exactly the same way as after
+bed in the command line. These options are processed after the commandline options and in
+the order they are given in the configuration file (when multiple <B>options</B> keywords
+are specified). For example if you add
+<PRE>
+options -C
+</PRE>
+
+to the /data/local/tmp/nontmp/share/bed/bedrc (and that is the only configuration file) -B on the command line loses
+its effect.
+<BR>
+
+With
+<BR>
+
+<PRE>
+options -w
+</PRE>
+
+you can for example make bed always experimentally determine the sizes of hard drives and DVD's instead of relying on the sizes returned by system calls end the like.
+<A NAME="lbAQ">&nbsp;</A>
+<H3>Path</H3>
+
+<B>plugindir</B> path
+<BR>
+
+Sets plugindir to path. This makes bed search for plugins in path. It also affects
+<A HREF="#opendynlib">Alt-t,l</A>.
+<BR>
+
+<B>datatypedir</B> path
+<BR>
+
+Saved datatypes will be looked for in path. Affects <A HREF="#savedatatype">Alt-y,w</A> and <A HREF="#readcontain">Alt-y,d</A>.
+<BR>
+
+<B>macrodir</B> path
+<BR>
+
+Save recorded (<A HREF="#saverecord">Alt-t,s</A>) en Play File (<A HREF="#playkeysfile">Alt-t,y</A>) will open
+the filemanager in path.
+<BR>
+
+<B>bedrcbin</B> filename
+<BR>
+
+Filename bed uses to save (search) settings.  Default ~/.bedrc-bin on unix.
+<BR>
+
+<B>newfilesize</B> num
+<BR>
+
+The size of new files is num bytes, when created startup or with (<A HREF="#emptyfile">Alt-f,n</A>).
+<A NAME="lbAR">&nbsp;</A>
+<H3>Keys</H3>
+
+When the keys don't work or you want to make different key bindings, you can assign 
+<BR>&nbsp;new&nbsp;key&nbsp;bindings&nbsp;in&nbsp;the&nbsp;configuration&nbsp;file.&nbsp;
+<BR>
+
+In bedrc the keys are defined by lines of the following format:
+<BR>
+
+<BR>
+
+<B></B>keys key1 key2 ...keyn = procedure
+<BR>
+
+<P>
+<BR>
+
+for example:
+<BR>
+
+<P>
+<BR>
+
+keys 27 115 = search
+<BR>
+
+<P>
+<BR>
+
+In which case Alt-s is bound to 'search' which is the search function.
+<BR>
+
+<P>
+<BR>
+
+The numbers are a decimal representation of the escape sequences generated by a
+key or a key combination. Within bed you can press <A HREF="#showprocedure">Alt-t,k</A> to press
+a key and see the keycodes and keybinding.
+<P>
+Bed version 0.2.7 added the possibility to make keys statements of the
+following format:
+<BR>
+
+<BR>
+
+<B></B>keys capname  = procedure
+<BR>
+
+<BR>
+
+capname is a terminfo name for a key sequence. For example
+<BR>
+
+<BR>
+
+<B></B>keys kf1  = selectprocedure 
+<BR>
+
+<BR>
+
+binds selectprocedure to function key F1. See man <A HREF="http://www.tin.org/bin/man.cgi?section=5&topic=terminfo" TARGET="_top">terminfo</A>(5) for details.
+There seems to be as much variation in keylabels as keycodes, 
+so don't expect to much.
+<BR>
+
+<P>
+<BR>
+
+<B>bed -k
+<BR>
+
+</B>If you only want to assign the right meaning to the keys used
+by the program
+(instead of making new keybinding), you can press bed -k. You are
+asked to press function
+keys and it will append the corresponding key assignments to
+/sdcard/.bedrc.
+<BR>
+
+<B>Personal keybindings
+<BR>
+
+</B>If you want to make personal keybindings you should come to
+know the
+procedure argument to keys. To come to know the name of a
+procedure mentioned
+in the menu or bounded to an other key you press <A HREF="#showprocedure">Alt-t,k</A> followed
+by the
+key or menukey combination.
+<BR>
+
+If you want for example to know what the name is of the
+procedure behind
+Alt-f,o you press <A HREF="#showprocedure">Alt-t,k</A> followed by Alt-f,o and on the
+command line
+you see something like &quot;menu item Alt-f,o = addfile&quot;.
+To bind this to insert you press <A HREF="#showprocedure">Alt-t,k</A> ,INS and get as answer
+something like:
+No keybinding for 27 91 50 126
+You add now at the bottum of /sdcard/.bedrc 
+<BR>
+
+keys 27 91 50 126 = addfile
+<BR>
+
+An other way to learn the names of the procedures is the read the
+<A HREF="#lbAW">Procedures section</A> later in this manual, but the program itself is
+always  
+more up to date then the manual.
+<A NAME="lbAS">&nbsp;</A>
+<H3>Menu</H3>
+
+New in bed-0.2.12 is the possibility to change the menu layout. 
+You can add new items to the menu, add new menus and delete
+menu items and menu's. A 'menu' corresponds to the list of names you get 
+when you press for example Alt-f, (the menu with menulabel &quot;~File&quot;). 
+A 'menuitem' corresponds on name in this list for example &quot;~Open     C-o&quot;.
+<BR>
+
+The menu's are numbered. The first menu on the left usually
+&quot;~File&quot; has number 0, the following menu &quot;~Edit&quot; number 1 etc.
+This number I will call 'menunum' in this manual.
+<P>
+
+<B>menu</B> [menunum] menulabel [+]
+<BR>
+
+This command is used to give a menu a certain label and
+keybinding. 
+One character in label should be prefixed by ~ meaning that is the
+highlighted letter what should be pressed in combination with Alt
+to open the menu. The menu label should be surrounded by  &quot;'-s.
+e.g.
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu&nbsp;0&nbsp;&quot;My&nbsp;F~ile&quot;
+<BR>
+
+Changes the label of the &quot;~File&quot; menu to &quot;My ~File&quot;.
+To insert a new empty menu at position 0 shifting the other menu's to the right, you
+should add a + after the previous command, getting:
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu&nbsp;0&nbsp;&quot;My&nbsp;F~ile&quot;&nbsp;+
+<BR>
+
+To create an empty menu at the very right you can use:
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu&nbsp;8&nbsp;&quot;~Hallo&quot;
+<BR>
+
+In this case you can also leave out 8, 
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu&nbsp;&quot;~Hallo&quot;
+<BR>
+
+In the menu command menunum defaults to the highest used menu number+1.
+<P>
+
+<B>menuitem</B> [menunum] menuitemlabel [keylabel] [menitemnum] [+]= procedure
+<BR>
+
+This command is used to add menu items to menu's.
+For example:
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>menuitem 0 &quot;~Quit&quot; 1 = quit<BR>
+<P>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>menuitem menunum menuitemlabel menuitemnum<BR>
+<BR>
+
+Replaces the existing menu item at position 1 in menu 0 with the label &quot;~Quit&quot; and the
+procedure quit.
+Menuitem's are numbered from 0 starting from above.
+If you like to insert the menu item, while shifting the existing menu items downwards,
+you can add a +, which gives:
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>menuitem 0 &quot;~Quit&quot; 1 + = quit<BR>
+<BR>
+
+If you like to add a keylabel (e.g. M-q) you can change it to
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>menuitem 0 &quot;~Quit&quot; &quot;M-q&quot; 1 + = quit<BR>
+<BR>
+
+this will be displaced as something like &quot; <B>Q</B>uit     M-q &quot;
+to make M-q work you should also add something like:
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>keys 27 113 =quit<BR>
+<BR>
+
+In menu item menunum defaults to the last mentioned menu. menuitemnum defaults
+to the highest menu item number + 1 (in this menu).
+You can write:
+<PRE>
+     menu &quot;S~imple&quot;
+     menuitem &quot;~New&quot; = emptyfile
+     menuitem &quot;~Open&quot; = addfile
+     menuitem &quot;~Save&quot; = dosave
+     menuitem &quot;~Quit&quot; = quit
+</PRE>
+
+<P>
+
+<B>menuitem</B> [menunum] LINE [menitemnum] [+]
+<BR>
+
+This command is used to create a blank like in a menu (leaving a menu item empty).
+<BR>
+
+To insert a line after &quot;~Open&quot; in the previous menu you can write:
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menuitem&nbsp;LINE&nbsp;2&nbsp;+
+<P>
+
+<B>deletemenu</B> [menunum]
+<BR>
+
+This command is used to delete a menu and all it's menu items. If you dislikes the first
+menu (&quot;~File&quot;) you simply writes:
+<BR>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deletemenu&nbsp;0
+<BR>
+
+In deletemenu menunum defaults to the highest numbered menu.
+<P>
+
+<B>deletemenuitem</B> [menunum] [menitemnum]
+<BR>
+
+Deletes menu item menuitemnum from menu menunum. menunum defaults to the last
+mentioned menu, menuitemnum to the highest numbered menu item.
+When only one number is given it is interpret as meaning menuitemnum (for
+menunum the default is used).
+To delete the fourth menu item out of the first menu, you write:
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>deletemenuitem 0 3<BR>
+<BR>
+
+In all menu commands you can explicitly use the default value by using a negative
+number.
+<A NAME="lbAT">&nbsp;</A>
+<H3>Call_on</H3>
+
+Instead of calling a procedure after pressing a key or using a menu, you can also
+specify in the configuration file that procedure will be called at certain moment (on
+startup,open,switch).
+<BR>
+
+<B>call_on_start</B> procedure
+<BR>
+
+Calls procedure at startup, which means after the program is has started, and a file is opened. Operated is on this file. 
+<BR>
+
+<B>call_on_open</B> procedure
+<BR>
+
+Procedure is called every time a file is opened.
+<BR>
+
+<B>call_on_switch</B> procedure
+<BR>
+
+Procedure is called every time you switch to a file.
+<A NAME="lbAU">&nbsp;</A>
+<H3>Context</H3>
+
+When you use more than one terminal (for example linux console and rxvt), you can set a environmental variable to differentiate between the type of terminal
+and use the context key word in ~/.bedrc.
+<BR>
+
+Everything started with the context keyword until the following context keyword or
+end of file is only used when the right environmental variable set.
+<BR>
+
+The format of context is the following.
+<BR>
+
+<BR>
+
+context [!] variablename [variablevalue]
+<BR>
+
+<BR>
+
+For example:
+<BR>
+
+<BR>
+
+context term xterm
+<BR>
+
+<BR>
+
+You can also say
+<BR>
+
+<BR>
+
+context variablename
+<BR>
+
+<BR>
+
+when it should apply for all cases in which the variablename has a definition.
+<BR>
+
+For example
+<BR>
+
+<BR>
+
+context termcap
+<BR>
+
+<BR>
+
+applies in all cases in which termcap is defined.
+<BR>
+
+If you like to apply the next configuration only when an enviromental variable
+is not set or has a different value, you have to write ! before the
+enviromental variable.
+<BR>
+
+context ! DISPLAY
+<BR>
+
+means to apply the statements following this context statement and before
+the next context statement only when DISPLAY is not set.
+<BR>
+
+If there is no environmental variable shared by the context you like to give
+the same configuration you can set a environmental variable and use this at a context argument. It is possible to set enviromental variables within the configuration file with:
+<BR>
+
+<B>setenv</B> name val
+<BR>
+
+To do the same by TERM=cons25 as with TERM=cons50 you can write:
+<PRE>
+        context TERM cons25
+        setenv consoleterm yes
+        context TERM cons50
+        setenv consoleterm yes
+        context TERM cons43
+        setenv consoleterm yes
+        context consoleterm
+        keys  27 91 97 = beginfile #S-F3
+        keys  27 91 98 = endfile #S-F4
+        keys  27 91 101 = middlepage #S-F7      
+</PRE>
+
+In combination with '!' you can this way create every possible boolean logic
+formula (using the statement that every propositional logical formula can
+be written with only not and or).
+With setenv you have an or and '!' adds the not.
+To apply statementZ only if X and Y you use &quot;X and Y&quot;&lt;=&gt;&quot;not (not X or not Y)&quot;
+transforming this to bedrc you get
+<PRE>
+context ! X
+setenv dont 1
+context ! Y
+setenv dont 1
+context ! dont 1
+statementZ
+</PRE>
+
+<A NAME="lbAV">&nbsp;</A>
+<H3>Color</H3>
+
+Colors can also be changed in the configuration file. There are around 17 screen
+elements which you can give a foreground and background color and a list of
+attributes (standout, underline, etc).
+<BR>
+
+The format is:
+<BR>
+
+<P>
+<BR>
+
+color screen-element [foreground background] [attr,attr...]
+<BR>
+
+<P>
+<BR>
+
+You can give only attributes or both the foreground and the background color and
+any number of attributes.
+<BR>
+
+<P>
+<BR>
+
+The screen parts are the following:
+<BR>
+
+TEXT: The color the text is showed in. It is better not to give this a color because this
+makes the screen updating much slower (some feature of ncurses)
+<BR>
+
+COMMAND: the command line
+<BR>
+
+SELECTION: selection
+<BR>
+
+CURSOR: cursor in active datatype
+<BR>
+
+CURSORPAS: cursor in passive datatype
+<BR>
+
+SELCURSOR: cursor during selection
+<BR>
+
+BAR: the menubar
+<BR>
+
+BARKEY: Key highlighting in the menubar
+<BR>
+
+MENU: Opened menu's
+<BR>
+
+MENUKEY: key highlighting in menu
+<BR>
+
+MENUSEL: color of menu element which is selected
+<BR>
+
+OPENTITLE: title of file manager
+<BR>
+
+OPENKEY: key highlighting of key manager
+<BR>
+
+OPENNORMAL: background key manager
+<BR>
+
+OPENLIST: color of non active items of list
+<BR>
+
+OPENLISTSEL: color of active item
+<BR>
+
+OPENLISTACT: color of active item when this piece is used
+<BR>
+
+SHOWBACK: Search/replace window
+<BR>
+
+SPACEAFTER: color of space before and between datatypes
+<BR>
+
+<P>
+<BR>
+
+The colors and attributes are just the colors and attributes of ncurses. When they
+don't look the way the name suggests you should send your complains to the makers
+of ncurses.
+<BR>
+
+<P>
+<BR>
+
+Colors: BLACK RED GREEN YELLOW BLUE MAGENTA CYAN WHITE
+<BR>
+
+Attributes: NORMAL STANDOUT UNDERLINE REVERSE BLINK DIM BOLD
+PROTECT INVIS ALTCHARSET CHARTEXT
+<P>
+<BR>
+
+For me only STANDOUT UNDERLINE REVERSE BLINK BOLD have a useful
+meaning.
+<BR>
+
+On example:
+<P>
+<BR>
+
+color BAR WHITE RED blink
+<BR>
+
+<P>
+<BR>
+
+Which makes a blinking white on red menu bar (on my computer it blinks only
+under linux console and not in xterm or rxvt).
+<BR>
+
+<P>
+<BR>
+
+To make the cursor bold and underlined you can do
+<BR>
+
+<P>
+<BR>
+
+color cursor bold underline
+<BR>
+
+<P>
+<BR>
+
+The color lines can be intermixed with the keys lines and can also be specific to a
+context.
+<BR>
+
+<P>
+<BR>
+
+<A NAME="lbAW">&nbsp;</A>
+<H3>Procedures</H3>
+
+When you want to make you own key bindings you need to know the names of
+the procedures you can bind to keys. A selected subset of the procedures can also be assigned by using the name of the key they are normally bound to. There are the following key labels: 
+<I>home</I>
+
+, end, f1, up, down, left, right, pgup, pgdn, stab, delete, backspace and esc. When you assign a key sequence to a key label the meaning in the filemanager, search window  and menu is also changed.
+so 
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>keys 1 = home<BR>
+<BR>
+
+gives Contr-A the home functionality in all this application parts.
+<P>
+For the filemanager and search window this is the only way the change keybindings. Inside the menu you can also change keybindings by putting 
+<I>253</I>
+
+in front of the key numbers. See  <A HREF="#firstmenuitem">firstmenuitem</A>.
+<BR>
+
+What follows are all procedures mentioned in the menu with a description and their
+place in the menu. It is exactly the same information as you get when you press F1
+within the menu.
+<BR>
+
+<p><A NAME="addfile"><b>addfile</b></a><center>
+Open (Alt-f,o)
+
+</center>
+Filemanager:
+Name:
+Alt-n: switch to line were you can write a filename.
+Del,Backspace,C-h,C-u,left,right,home,end,C-a and C-e should work 
+if bed is well configured (see bed.1 for key definitions)
+Files:
+Alt-f: switch to list of files. You can open a file by pressing 
+Enter. Use UP and DOWN to move between files.
+Directories:
+Alt-d: switch to list of directories. Change to directory by 
+pressing Enter.
+<P>
+Tab,Alt-Tab and/or Shift-Tab can be used to jump between File,Directories and
+Name.
+<p><A NAME="dosave"><b>dosave</b></a><center>
+Save (Alt-f,s)
+
+</center>
+Save current file. 
+<p><A NAME="saveas"><b>saveas</b></a><center>
+Save as (Alt-f,a)
+
+</center>
+Save currently active file to a file with another name. 
+<p><A NAME="rewrite"><b>rewrite</b></a><center>
+Refresh (Alt-f,r)
+
+</center>
+Rewrites screen. 
+<p><A NAME="selectprocedure"><b>selectprocedure</b></a><center>
+Procedures (Alt-t,p)
+
+</center>
+Listing of available built-in procedures to bind to keys or use in plugins. 
+You can press return on the name to run the procedure. 
+Press F1 to get help about the procedure.
+<p><A NAME="selectdynprocedure"><b>selectdynprocedure</b></a><center>
+Dynamic (Alt-t,d)
+
+</center>
+Listing of available dynamic procedures (procedures defined in plugins) or
+faked dynamic procedures (plugins compiled in the main program).
+The procedures can be bound to keys, placed in the menu or used in other
+plugins. You can press return on the name to let it work. Press F1 to get 
+help about a procedure.
+<P>
+To load a plugin in bed you should use <A HREF="#opendynlib">Alt-t,l</A> or use a plugin 
+statement in bed's configuration file:
+<P>
+plugin PLUGINFILENAME
+<P>
+Where PLUGINFILENAME is the filename of a plugin (ends with .plug).
+(See the <A HREF="#lbAX">PLUGINS section</A> of bed.1).
+To change the default directory used by bed for looking for plugins use:
+<P>
+plugindir PATH
+<P>
+Where PATH is a unix path (see the <A HREF="#lbAO">CONFIGURATION section</A> of the bed manual).
+<P>
+Bed comes with a certain number of plugins. Some are compiled in the main
+program, others are precompiled dynamic modules and some have to be 
+compiled by the user. Details differ depending on the operating system.
+The MS windows version of bed doesn't currently support dynamic plugins, 
+so to be used a plugin should be compiled in the main program and
+not all plugins (that work under MS windows) are compiled in by default.
+<P>
+Plugins supplied with bed reside in the plugins/examples directory of
+bed support files. To compile all plugins copy the whole bed directory 
+tree to a place were you have write access, goto plugins/examples and
+press make. Depending on you gcc installation you have sometimes to
+use a home compiled bed before you can load a plugin you have 
+compiled yourself.
+<P>
+A description of the plugins is given in plugins/examples/README.
+<P>
+The same descriptions you can get in this procedure listing by pressing F1. 
+You can can also find it in the <A HREF="#lbAW">Procedures subsection</A> of the 
+<A HREF="#lbAO">CONFIGURATION section</A> of the manual page.
+<p><A NAME="closethis"><b>closethis</b></a><center>
+Close (Alt-f,c)
+
+</center>
+Close the current file. 
+<p><A NAME="quit"><b>quit</b></a><center>
+Exit (Alt-f,x)
+
+</center>
+Quit application. For all changed files you are asked to save it. 
+<p><A NAME="undo"><b>undo</b></a><center>
+Undo (Alt-e,u)
+
+</center>
+Undo last change. It can't always undo all changes. Currently restricted
+to the last 5000 changes or how MAXUNDO was otherwise defined during the 
+compilation of bed.
+<p><A NAME="redo"><b>redo</b></a><center>
+Redo (Alt-e,r)
+
+</center>
+After you have undone something with undo, you can redo it with redo.
+Redo is impossibly following a change after the undo.
+<p><A NAME="setselect"><b>setselect</b></a><center>
+Select (Alt-e,s)
+
+</center>
+Turns selection on or off. 
+<p><A NAME="copyselect"><b>copyselect</b></a><center>
+Copy (Alt-e,c)
+
+</center>
+Copies selected part of the file to copy buffer. 
+<p><A NAME="pastselect"><b>pastselect</b></a><center>
+Past (Alt-e,p)
+
+</center>
+Past selection. 
+<p><A NAME="saveselect"><b>saveselect</b></a><center>
+Save selection (Alt-e,a)
+
+</center>
+Save selection or copy buffer. 
+<p><A NAME="replace"><b>replace</b></a><center>
+Replace (Alt-e,e)
+
+</center>
+Regular expression: 
+[1-9] matches characters between 1 and 9
+[^1-9] matches everything except [1-9]
+1{3,5} matches 111 1111 and 11111
+(Linux|Unix) matches Linux and Unix
+\b boundary. \b123 matches 1234589, not 9123458
+\B the reverse. \B123 matches 9123458 not 1234589
+Unit: Match regex expression with single units.
+Align: 
+Multibyte datatypes can be aligned differently. For example a 4
+byte digit can start at offset 0,1,2 or 3 and that will give
+different 4 byte digits. Without checking Boundaries all will
+be returned. With Boundaries checked only bytes aligned in the
+same way as is now shown on the screen are returned.
+Case sensitive: 
+When checked upper and lower case are treated distinctively.
+Forward: 
+When checked the file is searched in the forward
+direction going from lower to higher offsets. When not checked 
+the file is searched backward.
+Edge file: 
+When checked the file is searched from the edge of
+the file. From offset 0 when searching forward, from end of
+file when searching backward.
+Find: Here you type the search pattern
+Replace:
+At the place where the search string is found the 
+replace string is placed. The replace string overwrites the data. 
+When Regular expression is checked you can insert the whole search 
+string by \0 or supexpressions by \1 \2 upto \9. 
+In the search string subexpressions are demarcated by (pattern).
+For example: 
+Find: (FBA041D3) ([^ ]*) (B0300048)
+Replace: \3 \1 \2
+exchanges the position of three digits.
+List: 
+Generates a list of all hits. When compiled with
+CONFIG_THREADS=y you can go on editing while hits are marked
+so you can view them in marklist (<A HREF="#showmarks">Alt-t,d,showmarks</A>).
+Ascii, Digit etc are when checked the current active datatype.
+Base:
+Base of digit. E.g 16 for heximal. 
+Nr bytes: 
+Gives the number of bytes each data item occupies. By
+some datatypes you can change this for example by unsigned integers. 
+Reverse:
+Applied filter Revers: reverse bytes while transforming from shown 
+datatype to file.
+Set: 
+After changing datatype info (base,bytes,type) you press Return
+on Set to make this the search datatype.
+Convert: 
+the same as Set in addition the current search string is converted.
+Ok: search
+Keep: Makes current search options the default.
+Cancel: Cancel
+<p><A NAME="extend"><b>extend</b></a><center>
+Extend file (Alt-e,x)
+
+</center>
+Make the file larger, adding zeros to the end of file. 
+<p><A NAME="truncate"><b>truncate</b></a><center>
+Truncate (Alt-e,t)
+
+</center>
+Truncates file on the right of cursor. 
+<p><A NAME="repeat"><b>repeat</b></a><center>
+Repeat nr (Alt-e,n)
+
+</center>
+Repeats keystrokes a certain number of times. Caveat: Doesn't show 
+dialog screens during recording.
+<p><A NAME="search"><b>search</b></a><center>
+Search (Alt-m,s)
+
+</center>
+You can move through the dialog by pressing Alt in combination with a 
+highlighted character, or by pressing Tab,Shift-Tab or Alt-Tab.
+Press Shift to check options.
+Standard you search within the currently active datatype, but
+you can also use Ascii or Digit (unsigned integers) by selecting them,
+specifying base and bytes and pressing Set.
+Regex: Regular expression 
+[1-9] matches characters between 1 and 9
+[^1-9] matches everything except [1-9]
+1{3,5} matches 111 1111 and 11111
+(Linux|Unix) matches Linux and Unix
+\b boundary. \b123 matches 1234589, not 9123458
+\B the reverse. \B123 matches 9123458 not 1234589
+(\b([ADF]{8}|[0-9]{8})\b ){3} Matches 3 units of 8 characters
+consisting only of the characters A D or F or if digits 0-9 beginning
+and ending on a word boundary followed by space. 
+See <A HREF="https://github.com/google/re2/wiki/Syntax" TARGET="_top">https://github.com/google/re2/wiki/Syntax</A>
+Depending on with what options bed is compiled, regex expressions 
+can be matched with gnu regex-0.13, google re2 or intel hyperscan.
+The main difference is that hyperscan shows only the last position
+of a match and is the fastest, closely followed by re2. Re2 can 
+miss long matches stretching block borders (at least 100 bytes 
+in previous block). When one hit is inside another hit, the
+others can return the first ending and not the first
+starting hit when list is not set. On next search search starts
+after the cursor position, so that it is never returned therafter.
+Unit: Match regex expression with single units. When checked, search runs 
+through the file matching successive datatype units with the regex
+expression. When not checked the regex expression is matched
+with more than one unit in the selected datatype. For example
+8A[^E]{5,100}8E finds A088008A 41100A90 00200882 3108E051, 
+when not checked, but not when unit is checked. 
+When Unit is not checked a space is placed after each number: 
+Searching for '1.' 01 is seen as '01 ' and '1 ' matches '1.'.
+Align: 
+Multibyte datatypes can be aligned differently. For example a 4
+byte digit can start at offset 0,1,2 or 3 and that will give
+different 4 byte digits. Without checking Boundaries all will
+be returned. With Boundaries checked only bytes aligned in the
+same way as is now shown on the screen are returned.
+Case: Case sensitive: When checked upper and lower case are treated 
+distinctively.
+Forward: 
+When checked the file is searched in the forward
+direction going from lower to higher offsets. When not checked 
+the file is searched backward.
+Edge file: 
+When checked the file is searched from the edge of
+the file. From offset 0 when searching forward, from end of
+file when searching backward. If not checked searching starts
+at the current position.
+Find: Here you type the search pattern
+List: 
+Generates a list of all hits. During search for each hit
+hit a mark (<A HREF="#keymark">Alt-k,m</A>) is generated.
+You can view the hits in marklist (<A HREF="#showmarks">Alt-t,d,showmarks</A>).
+If checked [#] you can go on editing while searching
+goes on in the background. If checked [x] searching 
+is in the foreground and marklist is shown thereafter.
+When in multi byte datatypes alignment is not checked,
+hits are not strictly sorted on file position.
+Keep: Makes current search options the default.
+<P>
+Ascii, Digit etc are when checked the current active datatype.
+Base:
+Base of digit. E.g 16 for heximal. 
+Nr bytes: 
+Gives the number of bytes each data item occupies. By
+some datatypes you can change this for example by unsigned integers. 
+Reverse:
+Applied filter Revers: reverse bytes while transforming from shown 
+datatype to file.
+Set: 
+After changing datatype info (base,bytes,type) you press Return
+on Set to make this the search datatype.
+Convert: 
+the same as Set in addition the current search string is converted.
+Ok: search
+Cancel: Cancel
+<p><A NAME="nextsearch"><b>nextsearch</b></a><center>
+Nextsearch (Alt-m,n)
+
+</center>
+Search again for the same search string. 
+<p><A NAME="gettopos"><b>gettopos</b></a><center>
+Position (Alt-m,p)
+
+</center>
+Ask for a file offset and jumps to this offset. 
+Forward: 
+count up
+Edge File: 
+If checked: count from begin (forward) or end (backward) file. 
+If not checked you count from the cursor position.
+Align: 
+If checked: In multibyte units the screen is aligned at the current 
+alignment (boundary) after changing position.
+Position:
+Offset to jump to.
+You can specify in what format to specify the offset. 
+All: specify offset with 0x for hex and 0 for oct. Numbers not starting with 0
+are decimal numbers.
+Hex,Dec,Oct: type of number without need to use 0x or 0 
+<P>
+<p><A NAME="keymark"><b>keymark</b></a><center>
+Make (Alt-k,m)
+
+</center>
+Set mark 
+<p><A NAME="tomark"><b>tomark</b></a><center>
+Goto (Alt-k,g)
+
+</center>
+Goto mark. You are asked to type the corresponding key. 
+<p><A NAME="nextmark"><b>nextmark</b></a><center>
+Next (Alt-k,x)
+
+</center>
+Goto next mark 
+<p><A NAME="prevmark"><b>prevmark</b></a><center>
+Previous (Alt-k,p)
+
+</center>
+Goto previous mark. 
+<p><A NAME="showmarks"><b>showmarks</b></a><center>
+</center>
+Shows list of all marks. Press Return to jump to the file offset of the 
+selected mark.
+<p><A NAME="deletemark"><b>deletemark</b></a><center>
+Delete (Alt-k,t)
+
+</center>
+Delete mark. You get an overview of current marks. Press return to delete
+the currently selected mark.
+<p><A NAME="clearmarks"><b>clearmarks</b></a><center>
+Clear (Alt-k,c)
+
+</center>
+Delete all marks.
+<p><A NAME="savemarks"><b>savemarks</b></a><center>
+Save (Alt-k,s)
+
+</center>
+Save marks to file.
+<p><A NAME="readmarks"><b>readmarks</b></a><center>
+Read (Alt-k,r)
+
+</center>
+Read saved marks.
+<p><A NAME="sortmarks"><b>sortmarks</b></a><center>
+Sort (Alt-k,o)
+
+</center>
+Reorder marks so they increase in offset.
+<p><A NAME="subtractmarks"><b>subtractmarks</b></a><center>
+Subtract (Alt-k,u)
+
+</center>
+Removes marks with the same position as one of the marks saved with
+<A HREF="#savemarks">Alt-k,s</A>. Asks for such a file.
+<p><A NAME="postotop"><b>postotop</b></a><center>
+Top (Alt-i,t)
+
+</center>
+Moves file display so that the file offset at the cursor position 
+is shifted to the upper left corner of the file display.
+<p><A NAME="beginfile"><b>beginfile</b></a><center>
+Begin file (Alt-m,b)
+
+</center>
+Goto the beginning of file. 
+<p><A NAME="endfile"><b>endfile</b></a><center>
+End file (Alt-m,e)
+
+</center>
+Goto end of file.
+<p><A NAME="beginpage"><b>beginpage</b></a><center>
+Begin Pg (Alt-m,i)
+
+</center>
+To the top of page.
+<p><A NAME="endpage"><b>endpage</b></a><center>
+End Pg (Alt-m,d)
+
+</center>
+Goto end of page 
+<p><A NAME="middlepage"><b>middlepage</b></a><center>
+Middle Pg (Alt-m, )
+
+</center>
+Goto the middle of the page. 
+<p><A NAME="nextmode"><b>nextmode</b></a><center>
+Next (Alt-d,n)
+
+</center>
+Goto the data type on the right of this data type. 
+<p><A NAME="prevmode"><b>prevmode</b></a><center>
+Prev (Alt-d,v)
+
+</center>
+Goto the data type shown on the left of current active data screen.
+<p><A NAME="removemode"><b>removemode</b></a><center>
+Remove (Alt-d,r)
+
+</center>
+Closes data type screen part. 
+<p><A NAME="zoommode"><b>zoommode</b></a><center>
+Full (Alt-d,f)
+
+</center>
+Zooms current data type (For example ASCII). 
+<p><A NAME="addprev"><b>addprev</b></a><center>
+Add Prev (Alt-w,d)
+
+</center>
+Adds previous file to the screen 
+<p><A NAME="addnext"><b>addnext</b></a><center>
+Add Next (Alt-w,a)
+
+</center>
+Adds the next file to the screen. 
+<p><A NAME="prevfile"><b>prevfile</b></a><center>
+Prev (Alt-w,p)
+
+</center>
+Goto previous file. Zooming the file. 
+<p><A NAME="nextfile"><b>nextfile</b></a><center>
+Next (Alt-w,n)
+
+</center>
+Goto next file. 
+<p><A NAME="firstfile"><b>firstfile</b></a><center>
+First (Alt-w,f)
+
+</center>
+Goto the first opened buffer. 
+<p><A NAME="lastfile"><b>lastfile</b></a><center>
+Last (Alt-w,t)
+
+</center>
+Goto last opened file. 
+<p><A NAME="zoomwindow"><b>zoomwindow</b></a><center>
+Zoom (Alt-w,z)
+
+</center>
+Zooms current window 
+<p><A NAME="hidewindow"><b>hidewindow</b></a><center>
+Hide (Alt-w,h)
+
+</center>
+Get opened file from the screen without closing it 
+<p><A NAME="listfiles"><b>listfiles</b></a><center>
+List (Alt-w,l)
+
+</center>
+List opened files. Press Enter to edit selected file.
+<p><A NAME="askbase"><b>askbase</b></a><center>
+Offset (Alt-t,o)
+
+</center>
+Changes the file offset number type. Offsets can be shown as decimal,
+hexadecimal or octal numbers. You can also turn of the display of
+offsets.
+<p><A NAME="consoleresize"><b>consoleresize</b></a><center>
+</center>
+This operation makes it possible to resize the console in the usual way.
+For example with the mouse or windows Alt-Space menu. At start up bed equals
+the screen buffer size with the window size. The current operation temporally
+sets the screen buffer back to a previous size, so you can resize the window up
+to that size. If you want another size, you should use Alt-Space,Properties,
+Layout to change the Screen buffer size.
+<P>
+(MS Windows Consoles only)
+<p><A NAME="switchmessage"><b>switchmessage</b></a><center>
+Messageline (Alt-t,m)
+
+</center>
+Show the message line only when a new message arrives and letting it override with 
+displayed data, or keep it always on (default).
+<p><A NAME="switchmenu"><b>switchmenu</b></a><center>
+Menu (Alt-t,u)
+
+</center>
+Hides or shows menu bar.
+<p><A NAME="switchcommand"><b>switchcommand</b></a><center>
+Commandmode(on/off) (Alt-t,c)
+
+</center>
+Switches command mode on or off. In command mode procedures are bound
+to normal characters as in pagers like 'less' and 'more' and in vi's 
+command mode.
+Some of less's and vi's keys are already bound in the configuration file.
+If you like some more you should add them to the configuration file.
+You can mail them to me if you like to help others.
+<p><A NAME="backchar"><b>backchar</b></a><center>
+</center>
+Left
+<P>
+Go back one character.
+<p><A NAME="beginline"><b>beginline</b></a><center>
+</center>
+Go to begin line (Home).
+<p><A NAME="endline"><b>endline</b></a><center>
+</center>
+Goto end line (End).
+<p><A NAME="fileinfo"><b>fileinfo</b></a><center>
+</center>
+Show the name and size of file in the message line. (No key binding).
+<p><A NAME="firstmenuitem"><b>firstmenuitem</b></a><center>
+</center>
+Goto the first menu element. (Home).
+<P>
+Only applies within an opened menu. You have to put 253 immediately after
+the keys keyword. So for example:
+<P>
+keys 253 1 = firstmenuitem
+<P>
+makes that within an opened menu contr-a jumps to the first menu item.
+<p><A NAME="lastmenuitem"><b>lastmenuitem</b></a><center>
+</center>
+Goto last menu element. See <A HREF="#firstmenuitem">firstmenuitem</A> for more information. (End).
+<p><A NAME="fromcommand"><b>fromcommand</b></a><center>
+</center>
+Turns command mode off.
+<p><A NAME="linedown"><b>linedown</b></a><center>
+</center>
+Down one line (Down).
+<p><A NAME="lineup"><b>lineup</b></a><center>
+</center>
+Up one line (Up).
+<p><A NAME="nextchar"><b>nextchar</b></a><center>
+</center>
+Next character. (Right).
+<p><A NAME="nextmenu"><b>nextmenu</b></a><center>
+</center>
+Goto next opened menu. (Right). Only applies in the context of the menu.
+See <A HREF="#firstmenuitem">firstmenuitem</A> for more information,
+<p><A NAME="nextmenuitem"><b>nextmenuitem</b></a><center>
+</center>
+Goto next menu item. (Down). See <A HREF="#firstmenuitem">firstmenuitem</A> for more information.
+<p><A NAME="nop"><b>nop</b></a><center>
+</center>
+Does nothing.
+<p><A NAME="pagedown"><b>pagedown</b></a><center>
+</center>
+Page down. (Pgdn).
+<p><A NAME="pageup"><b>pageup</b></a><center>
+</center>
+Page up. (Pgup).
+<p><A NAME="prevmenu"><b>prevmenu</b></a><center>
+</center>
+Goto previous menu. (Left). See <A HREF="#firstmenuitem">firstmenuitem</A> for more information.
+<p><A NAME="prevmenuitem"><b>prevmenuitem</b></a><center>
+</center>
+Goto previous menuitem (Up). See <A HREF="#firstmenuitem">firstmenuitem</A> for more information.
+<p><A NAME="tocommand"><b>tocommand</b></a><center>
+</center>
+Turns command mode on.
+<p><A NAME="tosubscreen"><b>tosubscreen</b></a><center>
+</center>
+Goto the data screen corresponding to the number you type after this command. 
+0 is the first from the left, 1 the second etc. (No key binding).
+<p><A NAME="emptyfile"><b>emptyfile</b></a><center>
+New (Alt-f,n)
+
+</center>
+Opens new document filled with zeros. You can enlarge the document with <A HREF="#extend">Alt-e,x</A>. 
+Shrink it with <A HREF="#truncate">Alt-e,t</A>.
+<p><A NAME="filedata"><b>filedata</b></a><center>
+Fileinfo (Alt-f,f)
+
+</center>
+Displays information about current file.
+<p><A NAME="checkchanged"><b>checkchanged</b></a><center>
+Modified? (Alt-f,m)
+
+</center>
+Checks if current file is modified by comparing changed parts with the
+original file. 
+<p><A NAME="shell"><b>shell</b></a><center>
+Shell (Alt-f,h)
+
+</center>
+Starts a new shell or cmd.com.
+<P>
+If a new shell is evoked, it uses the SHELL environmental variable 
+to decide which shell to use. You can also set environmental
+variables in beds configuration file (see manual bed.1).
+<p><A NAME="input"><b>input</b></a><center>
+Input (Alt-e,i)
+
+</center>
+Modifies current data item. 
+With this procedure you edit the current item and only after 
+pressing Enter the modifications are inserted.
+Certain datatypes you can't edit without this procedure (e.g.
+Float and Time_t).
+If you don't use this procedure, then the data item is converted to
+and from binary format after every key you press.
+<p><A NAME="editdata"><b>editdata</b></a><center>
+Edit (Alt-e,d)
+
+</center>
+Evokes text editor to edit selected data in active datatype.
+<P>
+If the environmental variable EDITOR is set to the full path 
+of an editor that editor is used.
+You can set environmental variables in beds configuration file 
+with the following command:
+<P>
+setenv name [val]
+<P>
+Leaving out val means unsetenv.
+<P>
+See manual page bed.1 or bed -h for more information.
+<p><A NAME="selectstandout"><b>selectstandout</b></a><center>
+Select Standout (Alt-e,o)
+
+</center>
+Select standout. Search and goto mark can show the hit in a different
+color. You can make this coloring the selection.
+<p><A NAME="select"><b>select</b></a><center>
+</center>
+Turn on or off selection. Selections can be copied and pasted, saved,
+edited etc.
+<p><A NAME="saveshown"><b>saveshown</b></a><center>
+Save Shown (Alt-e,v)
+
+</center>
+Save selection in the active datatype as shown on the screen.
+So the selected data is first converted to the active datatype and
+then saved to a file.
+<p><A NAME="readshown"><b>readshown</b></a><center>
+Insert shown (Alt-e,h)
+
+</center>
+Insert file content within active datatype. The content of the
+file is interpreted as consisting of data in the active datatype.
+<p><A NAME="gotolastsearchpos"><b>gotolastsearchpos</b></a><center>
+Last searched (Alt-m,l)
+
+</center>
+Jumps to file offset last searched. Useful if you interrupted
+searching or are searching on the background and want to know
+where search was left.
+<p><A NAME="nextitem"><b>nextitem</b></a><center>
+Next Item (Alt-m,x)
+
+</center>
+Moves one item forwards. Item is the active datatype unit.
+<p><A NAME="backitem"><b>backitem</b></a><center>
+Back Item (Alt-m,a)
+
+</center>
+Moves one item backwards. Item is the active datatype unit.
+<p><A NAME="prevpos"><b>prevpos</b></a><center>
+Undo move (Alt-m,m)
+
+</center>
+Go to previous file offset.
+<p><A NAME="nextpos"><b>nextpos</b></a><center>
+Redo move (Alt-m,v)
+
+</center>
+Go again to file offset before undo move.
+<p><A NAME="scrollup"><b>scrollup</b></a><center>
+Up (Alt-i,u)
+
+</center>
+Scrolls file up. The second line is scrolled up to the first line position.
+<p><A NAME="edscholldown"><b>edscholldown</b></a><center>
+Down (Alt-i,w)
+
+</center>
+Scrolls file down. The first line is scrolled down to the second line position.
+<p><A NAME="scrollitem"><b>scrollitem</b></a><center>
+Left item (Alt-i,l)
+
+</center>
+Shift left one item. The second item is shifted leftwards to the first item position.
+<p><A NAME="scrollbackitem"><b>scrollbackitem</b></a><center>
+Right item (Alt-i,r)
+
+</center>
+Shift right one item. The first item is shifted rightwards to the second item position.
+<p><A NAME="scrollbyte"><b>scrollbyte</b></a><center>
+Left byte (Alt-i,f)
+
+</center>
+Shift left one byte. The second byte is shifted leftwards to the second byte position.
+<p><A NAME="scrollbackbyte"><b>scrollbackbyte</b></a><center>
+Right byte (Alt-i,g)
+
+</center>
+Shift right one byte. The first byte is shifted rightwards to the first byte position.
+<p><A NAME="addunsigned"><b>addunsigned</b></a><center>
+Unsigned (Alt-d,i)
+
+</center>
+Create unsigned integer datatype. You can select bases from 2 to 36. 
+The number of bytes per unit range from 1 to some unknown limit 
+depending on hardware speed.
+You can start a separate datatype or add a field to an existing
+datatype.
+In the last case where in the existing datatype the new field is 
+placed depends on the cursor position:
+- At the end of the existing datatype if the cursor is at the end of
+the screen
+- At the beginning of the existing datatype if the cursor is at the
+beginning of the screen
+- Otherwise at the place closest to the cursor.
+- After the cursor position if the distances are equal
+<p><A NAME="naarASCII"><b>naarASCII</b></a><center>
+Ascii (Alt-d,a)
+
+</center>
+Create ascii datatype.
+No print: 
+character to show if byte is not printable. 
+You can also decide which byte values are interpreted as printable
+characters. Strict is ascii only, +161-255 adds byte value 161-255 
+etc. 
+It is possible to make units of more then one character. The meaning of 
+separete/add field is explained under unsigned integer help (<A HREF="#addunsigned">Alt-d,i</A>).
+<p><A NAME="emptycontain"><b>emptycontain</b></a><center>
+Empty (Alt-d,y)
+
+</center>
+Skip empty parts within a composed datatype.
+Useful if a file contains records with parts you are not interested in.
+<p><A NAME="copymode"><b>copymode</b></a><center>
+Clone (Alt-d,c)
+
+</center>
+Create a datatype that is identical to the active (sub) datatype.
+<p><A NAME="addSigned"><b>addSigned</b></a><center>
+Signed (Alt-d,s)
+
+</center>
+Create signed integer datatype. See unsigned integer help (<A HREF="#addunsigned">Alt-d,i</A>) for 
+more information.
+<p><A NAME="addFloat"><b>addFloat</b></a><center>
+Float (Alt-d,o)
+
+</center>
+Create float datatype:
+4 bytes: float
+8 bytes: double
+12 bytes: long double
+<P>
+It is not possible to use normal search in the float datatype,
+you need to use regex search. Normal search translates
+the search string from the datatype format back to raw bytes and
+searches for these raw bytes. This is not possible because float as
+displayed has not a perfect precision so that that the float
+that is displayed can correspondent to more then one raw byte array.
+<p><A NAME="addBitFlags"><b>addBitFlags</b></a><center>
+BitFlags (Alt-d,b)
+
+</center>
+Create bitflags. Give every bit a label which is shown if that bit
+has value 1. 
+Not char:
+If that bit is zero, the value of Not char is shown.
+Add:
+Bit-label correspondences are assigned by typing a bit number after 
+Bit and the corresponding label after Label and pressing return on 
+Add. Bits are numbered from 0 to (8*bytenr-1). With the lowest bit 
+having number 0.
+This creates a list of bit-label correspondences under Flags.
+Flags:
+You can edit one such correspondence by pressing Alt-f followed by
+selecting the correspondence and pressing return. You change the
+Bit and label values and again press Return at Add.
+Del:
+If you press on delete the selected correspondence is deleted.
+Between:
+What to write between bytes. Default: nothing.
+Order:
+When editing a file in bitflags every item is shown as some flags.
+If you want to set a certain flag you write the label. If order is
+set this is only possible if you are above the position of this
+label. If order is not set you can set the label at every position.
+Example:
+If the flags are zyx and order is set you can change --- in --x only
+by pressing x at position 0, without order you can press x
+also at position 1 or 2.
+<p><A NAME="bitfielder"><b>bitfielder</b></a><center>
+Bitfield (Alt-d,e)
+
+</center>
+This is a record/struct in which you specify the number of bits
+for every field. After making a bitfield around a datatype it works like
+a normal composed datatype. You just add the other fields. 
+You change the number of bits of a certain field by setting the cursor 
+on that field and selecting again <A HREF="#bitfielder">Alt-d,e</A> but now you press 'Change Bits'.
+Another way is to make the bitfield the active datatype by pressing <A HREF="#uplevel">Alt-y,t</A>
+(Parent) and then selecting Config (<A HREF="#datatypeconfig">Alt-y,g</A>).
+<p><A NAME="translate"><b>translate</b></a><center>
+Translate (Alt-d,l)
+
+</center>
+Translate assigns labels to values of another datatype. You can use it when numbers
+have a certain meaning.
+After selecting 'New' or 'Change':
+Type:
+The To datatype is what is shown on the screen (usually Ascii).
+For certain values of the 'From' datatype you specify what should be 
+shown in the To datatype.
+Add:
+After specifiying the To and From datatypes, you specify the From 
+and To values and press Add. 
+Default:
+If there is no assignment Default is shown.
+Assignments:
+After pressing Alt-g you can select a certain existing assignment.
+Pressing Return makes it editable, pressing Del deletes it.
+<P>
+After selecting 'Use;
+Select label and press return to insert this value.
+<p><A NAME="listtypes"><b>listtypes</b></a><center>
+List (Alt-d,t)
+
+</center>
+List of all datatypes. Use movement keys to select one of them and press 
+Return to create it.
+<p><A NAME="reorderunit"><b>reorderunit</b></a><center>
+Reorder (Alt-y,o)
+
+</center>
+One of the filters that is transforms the data when read from the file and
+before interpreted by the datatype.
+Reorders bytes within item. Unit gives the number of bytes to keep together.
+If the bytes are 'abcdef', reorder with unit=1 gives 'fedcba', with unit=2 
+gives 'efcdab', with unit=3 gives 'defabc'.
+<p><A NAME="duplicate"><b>duplicate</b></a><center>
+Duplicate (Alt-y,i)
+
+</center>
+Useful if you like to use the same data more than once in a composed
+datatype. It acts like an union in c. 
+Filter that duplicates bytes before being interpret by the active (sub-)
+datatype. You have to specify how many times it is duplicated (dubnr).
+The active (sub) datatype consists of a certain number of bytes (size).
+usenr=(size/dubnr) gives the number of bytes used for every item.
+dubnr times the same usenr bytes are appended and given to the datatype.
+Example:
+You use ascii/4 (ascii consisting of 4 bytes). You say duplicate 2 
+and the file consists of abcdefghijkl.
+Before applying the filter this was displayed as abcd efgh ijkl.
+After applying the duplicate filter it becomes abab cdcd efef ghghe ijij klkl.
+<p><A NAME="addskip"><b>addskip</b></a><center>
+Skip (Alt-y,k)
+
+</center>
+Filter to skips a certain number of bytes.
+You have to specify after how many bytes and how many bytes are to be
+skipped. This is then repeatedly applied to every unit of the active (sub-)
+datatype.
+Example:
+The active datatype is ascii/4. The file contains 'abcdefghijkl'. 
+abcd efgh ijkl is displayed. 
+Applying Skip with After=2 and Skip=1 gives: abde ghjk.
+After ab c is skipped after de f is skipped and after jk l is skipped.
+It is not possible to use normal search in a datatype were Skip is
+applied. You need to use regex search. Normal search translates
+the search string from the datatype format back to raw bytes and
+searches for that string. This is not possible when Skip is applied
+because one search string can correspondent to more then one
+raw content bytes string.
+<p><A NAME="rmlastfilter"><b>rmlastfilter</b></a><center>
+Rm filter (Alt-y,m)
+
+</center>
+Removes last filter (Reorder, Duplicate, Skip or some other filter
+defined in a plugin).
+<p><A NAME="repeatcontain"><b>repeatcontain</b></a><center>
+Repeat (Alt-y,p)
+
+</center>
+Repeats active (sub-)datatype a certain number of times. It behaves the same
+as a composed datatype with multiple version of the current active (sub-)
+datatype.
+<p><A NAME="datatypeconfig"><b>datatypeconfig</b></a><center>
+Config (Alt-y,g)
+
+</center>
+Modify parameters of active (sub-) datatype. Things like number of bytes
+and the base of Integers.
+<p><A NAME="dataconfig"><b>dataconfig</b></a><center>
+Misc (Alt-y,s)
+
+</center>
+Modify some general display parameters of datatype. 
+Label: 
+Name for datatype shown on the message line
+Apart: 
+number of spaces between items of this datatype
+Spaceafter: 
+number of spaces between this datatype and an other datatype 
+or the offset numbers.
+Conf:
+Configuration string every datatype has. Usually you don't need
+to change this.
+<p><A NAME="savedatatype"><b>savedatatype</b></a><center>
+Write Type (Alt-y,w)
+
+</center>
+Save datatype to file so you don't have to recreate complex datatype 
+everytime you need them.
+<p><A NAME="readcontain"><b>readcontain</b></a><center>
+Read Type (Alt-y,d)
+
+</center>
+Read saved datatype. So that the current file is displayed in that format.
+<p><A NAME="record"><b>record</b></a><center>
+Record (Alt-t,r)
+
+</center>
+Start recording. Keystrokes are recorded until you press C-t. You
+can save recorded keystrokes to replay them at some other moment.
+<P>
+Take notice of the fact that RAW keystrokes are saved. This means that
+the recorded keystrokes are very unportable. They are not portable between
+operating systems but also not portable between terminals and configurations.
+What's is recorded within xterm does not necessarily work with rxvt or
+with linux console. You can use more portable keystrokes by using
+only Alt-char and Control-char keys. The movement and function keys are
+very unportable and also combinations of Alt or Control that make use of
+non alphabetic characters.
+<p><A NAME="saverecord"><b>saverecord</b></a><center>
+Save Recorded (Alt-t,s)
+
+</center>
+Save recorded keystrokes to file.
+<p><A NAME="playkeysfile"><b>playkeysfile</b></a><center>
+Play file (Alt-t,y)
+
+</center>
+Play saved keystrokes (recorded with Record). 
+The program runs like the keystrokes are pressed by the user, except when 
+other programs are evoked from bed.
+<p><A NAME="playrecord"><b>playrecord</b></a><center>
+Play Recorded (Alt-t,a)
+
+</center>
+If you have recorded keystrokes after program startup you can play them
+off with this procedure.
+<p><A NAME="opendynlib"><b>opendynlib</b></a><center>
+Load plugin (Alt-t,l)
+
+</center>
+Load plugin in program. The plugin can contain datatypes or procedures.
+Procedures you can view under Dynamic (<A HREF="#selectdynprocedure">Alt-t,d</A>), datatypes under <A HREF="#listtypes">Alt-d,t</A>.
+<p><A NAME="showprocedure"><b>showprocedure</b></a><center>
+Key binding (Alt-t,k)
+
+</center>
+Shows which procedure is bounded to a key sequence in the format used in 
+bed's configuration file (bedrc).
+You are asked to press a key sequence.
+<P>
+Besides the procedure is shown what you need to write in the
+configuration file to declare this key-procedure binding.
+<P>
+Examples 
+After <A HREF="#showprocedure">Alt-t,k</A>, you press F12 and get
+keys 27 91 50 52 126 = makeselection
+<P>
+The procedure is makeselection which is bounded to escape 
+sequence: 27 91 50 52 126
+If you like to bind makeselection to an other key sequence, you
+press after <A HREF="#showprocedure">Alt-t,k</A> the key sequence you want to bind it to. 
+You could for example press C-a get 1 as answer and replace '27 91 50 52 126' 
+in the previous keys statement with 1.
+So you could add keys 1 = makeselection to the end of ~/.bedrc
+<P>
+To know a procedure bounded to the menu, you press the key sequence needed
+to operate the menu using only the highlighted characters. 
+After <A HREF="#showprocedure">Alt-t,k</A> you press <A HREF="#quit">Alt-f,x</A> and get
+<P>
+menuitem 0 &quot;E~xit&quot; &quot;M-x&quot; 12 = quit
+<P>
+Procedure quit is bounded to a menuitem. The menu item is in menu 0
+(the first menu) has label 'E~xit' and had keylabel 'M-x' and is the
+twelves menuitem in the menu (starting with 0 and counting empty places).
+<P>
+If you like to change to name from 'E~xit' to '~Quit' you can add
+menuitem 0 &quot;~Quit&quot; &quot;M-x&quot; 12 = quit 
+to the end of ~/.bedrc
+<P>
+See manual page bed.1 for more details about assigning procedures
+to menu items and keys.
+<p><A NAME="newcontain"><b>newcontain</b></a><center>
+Sub (Alt-y,u)
+
+</center>
+With this function you can create a composed datatype within another
+composed datatype. First make a element of a composed datatype
+the active datatype and then use this function (<A HREF="#newcontain">Alt-y,u</A>)
+to make a sub composed datatype around the active datatype.
+After this you can add more datatypes to this sub composed datatype, 
+by using the &quot;Add field&quot; option while starting a new datatype or 
+by using <A HREF="#stretchcontain">Alt-y,r</A>. New datatypes created with add field
+are always added to the lowest composed datatype in which the active
+datatype is contained. The message line shows what datatype is active.
+Use <A HREF="#uplevel">Alt-y,t</A> and <A HREF="#downlevel">Alt-y,c</A> to change to the datatype
+this datatype is contained in and back again. You can also make the
+composed datatype the active datatype by placing the cursor between
+two of it's member (child) datatypes.
+Subcomposed datatypes can be useful if you want to use a filter for only
+a subset of the members of a composed datatype.
+For example a file consists of records of three ascii strings and you
+like to exchange the position of the first two strings.
+After creating three ascii strings of 10 in one record (composed datatype),
+you set the cursor on the first field and press <A HREF="#newcontain">Alt-y,u</A>. This
+makes a subcomposed datatype around this field. To add the second field
+to this composed datatype you set the cursor at the second field and
+press <A HREF="#stretchcontain">Alt-y,r</A>. Now you set the cursor between the first two 
+fields (or you press <A HREF="#uplevel">Alt-y,t</A>) and you reorder with unit 10 using 
+<A HREF="#reorderunit">Alt-y,o</A>.
+<p><A NAME="stretchcontain"><b>stretchcontain</b></a><center>
+Stretch (Alt-y,r)
+
+</center>
+Used to handle nested composed datatypes (made with <A HREF="#newcontain">Alt-y,u</A>).
+If you have made a composed (struct/record) datatype for 
+example: {{a,b,c},d,g}
+Here the letters are datatypes and {..} is one composed datatype.
+{a,b,c} is a nested (or sub) composed datatype.
+If you put the cursor on d and apply this function, you can add d to
+this sub composed datatype. So you get then {{a,b,c,d},g}.
+<p><A NAME="levelout"><b>levelout</b></a><center>
+Levelout (Alt-y,v)
+
+</center>
+Applies if active datatype is a composed/record datatype.
+With this function the composed datatype is removed so that the item(s)
+endup at a higher level.
+It can be used in two cases:
+1. a nested composed;
+2. a composed containing only one datatype.
+<p><A NAME="uplevel"><b>uplevel</b></a><center>
+Parent (Alt-y,t)
+
+</center>
+Parent datatype. Make active datatype the datatype in which the current
+datatype is contained. 
+<p><A NAME="downlevel"><b>downlevel</b></a><center>
+Child (Alt-y,c)
+
+</center>
+If applied to a composed datatype, this makes the current active datatype
+the member of the composed datatype the cursor is on.
+<p><A NAME="goto1"><b>goto1</b></a><center>
+</center>
+Goto the first open file.
+<p><A NAME="toclipboard"><b>toclipboard</b></a><center>
+</center>
+Puts selection in active datatype in MS Windows clipboard.
+<p><A NAME="pastclipboard"><b>pastclipboard</b></a><center>
+</center>
+Insert MS Windows clipboard in active datatype.
+<p><A NAME="selectdisk"><b>selectdisk</b></a><center>
+Disk (Alt-f,d)
+
+</center>
+Raw edit of disk drives.
+<P>
+Select a device to edit like a large file.
+When you make changes keep in mind that bed saves information in 
+blocks (of something like 512, 1024 or 4096 bytes long). So with the 
+changes you make, you also write back the old content around the 
+change. If another process changed something there, you will write old 
+information back.
+<p><A NAME="filetype"><b>filetype</b></a><center>
+</center>
+Uses the unix program file to guess the filetype of the data starting at
+the current cursor position. It can be used when the cursor is on the
+first byte of a file or when searching for files inside a harddrive device.
+plugin file.cpp
+<p><A NAME="filter"><b>filter</b></a><center>
+</center>
+Gives the content of the selection as input to a user specified command
+(e.g. grep '^X'|sort|uniq) and places the output of that command in the
+copy buffer.
+plugin filter.cpp
+<p><A NAME="disassembler"><b>disassembler</b></a><center>
+</center>
+File content at cursor position is translated to assembler code.
+Makes use of gdb. Use nextdisassem to jump to the next machine code.
+Use gotosymol (elftables.plug) to jump to procedure using its
+procedure name
+plugin disass.cc
+<p><A NAME="nextdisassem"><b>nextdisassem</b></a><center>
+</center>
+Jumps to next machine code instruction and disassembles it:
+The cursor position is moved the length of the current machine code
+statement further and the disassembler is called.
+plugin disass.cc
+<p><A NAME="undoall"><b>undoall</b></a><center>
+</center>
+undoall
+<P>
+Repeatedly calls undo (Alt-e,u)
+plugin undoall.cpp
+<p><A NAME="redoall"><b>redoall</b></a><center>
+</center>
+redoall
+<P>
+Repeatedly calls redo (Alt-e,r)
+plugin undoall.cpp
+<p><A NAME="backward"><b>backward</b></a><center>
+</center>
+Adds the backward filter.
+This filter tries to reverse the direction of the last applied filter.
+plugin backward.cc
+<p><A NAME="compare"><b>compare</b></a><center>
+</center>
+Compares last made selection with current file at current cursor
+position for the length of that selection.
+Bed itself has no limit on selection size, but some Xwindows programs force
+such limits on others. See the help of makeselection.
+plugin searchclip.cc
+<p><A NAME="searchclip"><b>searchclip</b></a><center>
+</center>
+Searches in current file for the content of bed's copy buffer.
+It takes over some search settings (Direction) of Alt-m,s.
+And sets others: Case sensitive, Non-Regex, non-aligned, from cursor position, not within Units.
+Currently it repeatedly searches for the first block of the copy buffer
+and then compares it with the whole copy buffer.
+plugin searchclip.cc
+<p><A NAME="tryinstall1"><b>tryinstall1</b></a><center>
+</center>
+Installs Float with installpart/1 and getFLoat
+plugin install.cc
+<p><A NAME="tryinstall2"><b>tryinstall2</b></a><center>
+</center>
+Installs Digit with installpart(part,0) and getDigit
+plugin install.cc
+<p><A NAME="datatypeinfo"><b>datatypeinfo</b></a><center>
+</center>
+Gives information on active datatype.
+plugin datatypeinfo.cc
+<p><A NAME="cutselect"><b>cutselect</b></a><center>
+</center>
+Standard cut: selection is put in copy buffer, file after selection
+is moved to begin selection and rest file is truncated
+plugin cut.cc
+<p><A NAME="insertpast"><b>insertpast</b></a><center>
+</center>
+Standard past: file is extended and content after current file
+position moved so that copy buffer content can be inserted
+plugin cut.cc
+<p><A NAME="index2table"><b>index2table</b></a><center>
+</center>
+index2table
+<P>
+index2table interprets the file content as long's (4 bytes)
+which are indexes in a table at some offset in the current file.
+Instead of the index number it displays the content of that table
+at that position. index2table is a filter that should be applied
+to a datatype appropriate for the data in the table. For this
+purpose this procedure asks to specify at what offset in the file
+the labels start, with what index the table starts and table length.
+Index2table is for example used to show the names of procedures
+in a symbol table. index2table is then applied to
+ascii strings that shows this label instead of the index.
+dynsym and symtab are sub classes of index2table.
+They are used by misc/dynsym.bedda and misc/symtab.bedda.
+Because of this use index2table was previously called symtable.
+plugin index2table.cc
+<p><A NAME="section"><b>section</b></a><center>
+</center>
+Used by composed datatype file sectionheader.bedda to show
+labels of names in section header
+plugin elftables32.cc
+<p><A NAME="dynsym"><b>dynsym</b></a><center>
+</center>
+Used by composed datatype file dynsym.bedda to show the procedure
+names in dynsym (dynamische) symbol table.
+plugin elftables32.cc
+<p><A NAME="symtab"><b>symtab</b></a><center>
+</center>
+Used by composed datatype file symtab.bedda to show the procedure
+names in symtab (statische) symbol table.
+plugin elftables32.cc
+<p><A NAME="gotosymbol"><b>gotosymbol</b></a><center>
+</center>
+Procedure searches in symbol tables symtab and dynsym for a given
+symbol. It sets the cursor to its fileoffset and starts a better fitting
+datatype. It shows the offset and its size in the message line.
+plugin elftables32.cc
+<A NAME="lbAX">&nbsp;</A>
+<H2>PLUGINS</H2>
+
+<A NAME="lbAY">&nbsp;</A>
+<H3>Introduction</H3>
+
+Bed has the possibility to call C++ functions from within bed and to access some of the
+data of bed.
+<BR>
+
+Here is an example:
+<PRE>
+/*Begin example1.cpp */
+#ifdef GLOBAL
+<xxx>#endif
+#ifdef EDITOR
+int  example1(void) {
+        message(&quot;Hello world!!!&quot;);
+        }
+<xxx>#endif
+call(example1)
+/* End example1 */
+</PRE>
+
+Everything in the area in which GLOBAL is defined is code outside of the EDITOR
+class. Everything inside the area in which EDITOR is defined is inside the Editor
+class and at the end of the files are the names of the procedures which should be
+bounded to a key in bed.
+<BR>
+
+In this example the procedure example1 uses an function of bed which writes a
+message to the messageline and call(example1) says that the function example1
+should be accessible by bed.
+<BR>
+
+This function example1 you can bound to a key the same way as bed's own procedures . For example
+<BR>
+
+keys 1 = example1
+<BR>
+
+to bind contr-A to example1.
+<BR>
+
+To compile the example you need just to do 
+<BR>
+
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>make example1.plug <BR>
+<BR>
+
+in the plugings/examples directory. Which assumes that there is the original Makefile
+and the make variable PLUGINDIR is assigned to the directory in which plugin.cpp,
+faked.h and mainprocedures.h reside.
+<BR>
+
+Ones compiled you have to put the line
+<BR>
+
+plugin ABSOLUTEFILENAME
+<BR>
+
+in ~/.bedrc before you bind a key to the corresponding functions.
+<BR>
+
+So in for this example you can add
+<BR>
+
+plugin /data/local/tmp/nontmp/share/bed/plugins/example1.plug
+<BR>
+
+keys 1 = example1
+<BR>
+
+in ~/.bedrc to enjoy the pleasure of getting &quot;Hello world!!&quot; when you press Contr-A.
+<BR>
+
+In the procedures you write you can use all the procedures which can bounded to
+keys (which have the format int name(void)), plus some extra procedures I am going to describe now.
+<P>
+
+Bed running the Fedora 10 version of Linux doesn't load plugins. 
+It has something to do with NSA Security-Enhanced Linux (SELinux).
+See 
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=8&topic=selinux" TARGET="_top">selinux</A></B>(8)
+
+<BR>
+
+If the command 
+
+<PRE>
+
+        getenforce
+
+</PRE>
+
+
+returns Enforcing, your installation has this problem.
+If you have root permissions you can turn it of with the command
+
+<PRE>
+
+        setenforce 0
+
+</PRE>
+
+
+To keep it disabled after a reboot you have to make the following changes in /etc/selinux/config:
+
+<PRE>
+
+        Remove:
+                set SELINUX=enforcing 
+        Add:
+                set SELINUX=disabled 
+</PRE>
+
+
+<P>
+For more information follow
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=setenforce" TARGET="_top">setenforce</A></B>(1)
+
+<P>
+
+You can also keep SELinux enforcing and do the following:
+
+<PRE>
+
+        chcon -t textrel_shlib_t *.plug
+
+        for bedplug in  *.plug;  do semanage fcontext -a -t textrel_shlib_t $bedplug ;done
+</PRE>
+
+
+<A NAME="lbAZ">&nbsp;</A>
+<H3>Editor</H3>
+
+The following functions are inside class Editor:
+<P>
+
+<B>int topos(OFFTYPE pos)
+<BR>
+
+</B>
+<BR>
+
+Go to offset pos in the current file. pos is rounded down to
+boundaries of active datatype.
+<P>
+
+<B>int toborderpos(OFFTYPE pos)
+<BR>
+
+</B>
+<BR>
+
+Go to offset pos in the current file.
+<P>
+
+<B>OFFTYPE dosearch(char *str, int len)
+<BR>
+
+</B>
+<BR>
+
+Search for str with length len in the current document
+<BR>
+
+<P>
+<BR>
+
+<B>OFFTYPE getfilepos()
+<BR>
+
+</B>
+<BR>
+
+Get the offset of the first byte on the screen.
+<BR>
+
+<P>
+<BR>
+
+<B>int geteditpos()
+<BR>
+
+</B>
+<BR>
+
+Get the offset of the cursor in the current screen.
+The offset of the cursor in the file is getfilepos()+geteditpos()
+<BR>
+
+<P>
+<BR>
+
+<B>OFFTYPE getmem(OFFTYPE pos,char *buf,OFFTYPE len)
+<P>
+<BR>
+
+</B>
+<BR>
+
+Get from position pos a piece of the current file with length len.
+Returns OFFTYPEINVALID
+on error, otherwise len;
+<BR>
+
+<P>
+<BR>
+
+<B>OFFTYPE putmem(OFFTYPE pos,char *buf,OFFTYPE len)
+<BR>
+
+</B>
+<BR>
+
+Put at position pos the array buf of length len. Returns OFFTYPEINVALID
+on error, otherwise len;
+<BR>
+
+<BR>
+
+<B>int getselbuf(char **buf) 
+</B>
+<BR>
+
+Put a pointer to the cutbuffer in *buf and returns the length of the cutbuffer. Returns negative on error;
+<BR>
+
+<P>
+
+<B>int putselbuf(char *buf,int len)
+<BR>
+
+</B>
+Puts buf with length len in the cutbuffer. 
+<P>
+
+<B>OFFTYPE getselect(void) 
+<BR>
+
+</B>
+<B>OFFTYPE setselect(OFFTYPE pos)
+<BR>
+
+</B>
+<BR>
+
+getselect returns the starting position of the current selection or OFFTYPEINVALID if there is no
+selection. Putselect put's the starting position of the selection or with OFFTYPEINVALID unselects.
+<BR>
+
+(The end position is the cursor position).
+<P>
+
+<B>OFFTYPE Editor::getselregion(OFFTYPE *start)</B> 
+<BR>
+
+Returns length of selection and puts start position in start. 
+start has to point to an OFFTYPE.
+<P>
+
+<B>int screensize()
+<BR>
+
+</B>
+<BR>
+
+Get the number of bytes currently on the screen.
+<BR>
+
+<P>
+<BR>
+
+<B>char *getfilename(char *buf)
+<BR>
+
+</B>
+<BR>
+
+The current filename is copied to buf.
+<BR>
+
+<P>
+<BR>
+
+<B>int message(char *format ...) 
+<BR>
+
+</B>
+<BR>
+
+Write to messageline. Same format as printf.
+<BR>
+
+<P>
+<BR>
+
+<B>int getkeyinput(char *format ...)
+<BR>
+
+</B>
+<BR>
+
+Ask in the same format as printf. And get an key as answer.
+<BR>
+
+<P>
+<BR>
+
+<B>int inputget(char *answer,const char *format,...)
+<BR>
+
+</B>
+<BR>
+
+Ask in the same format as printf and get an answer in answer (should hold enough
+memory).
+<BR>
+
+<P>
+<BR>
+
+<B>OFFTYPE filesize(void) 
+<BR>
+
+</B>
+<BR>
+
+Get filesize.
+<BR>
+
+<P>
+<BR>
+
+<B>int toscreen(void) 
+<BR>
+
+</B>
+<BR>
+
+Makes that the effect of previous operations is shown on the screen.
+<BR>
+
+<BR>
+
+<B>void filesup(void) 
+<BR>
+
+</B>
+When a newwin (of ncurses) is used you can with filesup get the file windows of bed
+again on top.
+<A NAME="lbBA">&nbsp;</A>
+<H3>Global</H3>
+
+<B>extern Editor *editfile(const char *file)
+<BR>
+
+</B>
+<BR>
+
+Open a new file. When you want to do operations on this file you should hold in
+mind that the previous functions are part of the class Editor. So when you can do
+for example:
+<PRE>
+/*start stupid.cpp
+#compile with make stupid.plug
+#put in ~/.bedrc
+plugin /data/local/tmp/nontmp/share/bed/plugins/stupid.plug
+keys 1 stupid
+# and call contr-A in bed
+*/
+#ifdef EDITOR
+int another(void) {
+        topos(400);
+        toscreen();
+        getkeyinput(&quot;I am going to delete everyting O.K. &quot;);
+        putmem(0,&quot;Hello&quot;,5);
+        }
+
+int stupid(void) {
+        Editor *ed=editfile(&quot;/boot/zimage&quot;);
+        return ed-&gt;another();
+        }
+<xxx>#endif
+call(stupid)
+/*end stupid.c */
+</PRE>
+
+<P>
+
+<B>call(proc)
+<BR>
+
+</B>
+Determines that proc can by used to bind keys to, add to menu and is seen
+in <A HREF="#selectdynprocedure">Alt-t,d</A> (Dynamic).
+proc is a procedure of the form int Editor::proc(void). A call(proc) should not ended with ';'.
+<P>
+
+<B> call_on_start(proc)
+</B>
+<B> call_on_open(proc)
+</B>
+<B> call_on_switch(proc)
+</B>
+call proc once after program start, everytime a file is opened or everytime the program switches to a file.
+<P>
+
+<B>sethelp(proc,text)
+<BR>
+
+</B>
+Adds helptext text to procedure. Shown on pressing F1 in Dynamic procedure listing (<A HREF="#selectdynprocedure">Alt-t,d</A>) and in menu if procedure is added to menu with menuitem statement.
+<P>
+
+<B>extern Editor *newfile(void);
+<BR>
+
+</B>
+Opens empty file.
+<P>
+
+<B>extern editor *getactive(void)
+<BR>
+
+</B>
+Get the currently active Editor.
+<P>
+<BR>
+
+<B>extern void rewriteall(void) 
+<BR>
+
+</B>
+Rewrites everything on the screen.
+<BR>
+
+<P>
+<BR>
+
+Some examples of plugins are put in plugins/examples: one shows the assembler labels of the bytes starting with the cursor
+(gdb.plug), one shows the file type (when the cursor is on the first byte of a file)
+(file.plug) and and one filters what's selected through an other program (filter.plug).
+<BR>
+
+A new syntax uses class Editor {} instead of the defines. If you use the old syntax the file name should end at .cpp, when using the new syntax at .cc.
+In the new syntax you should put the following statements above any code:
+<PRE>
+#include &quot;global.h&quot; 
+BEDPLUGIN
+</PRE>
+
+Instead of #ifdef EDITOR ... #endif you write
+<PRE>
+class Editor {
+public:
+#include &quot;faked.h&quot;
+int proc(void) {
+        }
+};
+call(proc)
+</PRE>
+
+and put you procedures under #include &quot;faked.h&quot;
+the call statements you place under the '}'.
+<P>
+<B>WARNING!!</B>
+<BR>
+
+You should NEVER define any variables within class Editor (or between #ifdef EDITOR and its #endif. You should also never try access variables of the main program (relating to class Editor) directly. With this version of gcc it is possible to distribute the procedures of a class over different files, but not it's data.
+<BR>
+
+<A NAME="lbBB">&nbsp;</A>
+<H3>Datatypes</H3>
+
+<P>
+
+<B>int Editor::installpart(ScreenPart *part,int field);</B>
+<P>
+
+Installs datatype part, which means that this datatype is used to display the curent file.
+If field is zero this becomes a separate datatype, otherwise it is added to the active datatype. It uses the default settings and doesn't ask the user any questions.
+<P>
+
+<B>int Editor::installpart(ScreenPart *part);</B>
+<P>
+
+Installs datatype part, which means that this datatype is used to display the curent file.
+The user is presented with an configuration screen to set some options.
+<P>
+
+<B>extern ScreenPart* getAscii(Editor *ed)
+<BR>
+
+extern ScreenPart* getDigit(Editor *ed)
+<BR>
+
+extern ScreenPart* getFloat(Editor *ed)</B>
+<P>
+
+For every datatype X there is a getX(Editor *ed) function that returns an instance of this datatype. You can use it by the command installpart(part).
+In plugins you can define new datatypes.
+<P>
+
+<B>ScreenPart *Editor:activemode(void);</B>
+<P>
+
+Returns curently active datatype.
+<P>
+
+<B>char *ScreenPart::getname()</B> 
+<P>
+
+Returns name of the class of this datatype. It is a string shared by 
+all instances of this class. 
+<P>
+
+<B>int ScreenPart::equal(ScreenPart *part)</B>
+<P>
+
+Test if part is equal to this datatype. Equal means a different instance, 
+but no differences in behaviour. Not only the class is identical, but
+also its parameters like bytes, filters and base.
+<P>
+
+<B>int ScreenPart::datbytes(int b=-1)</B> 
+<P>
+
+Returns the number of bytes of one item of this datatype.
+If b different from -1 the number of bytes is changed to this number.
+<P>
+
+<B>int ScreenPart::getbytes()</B> 
+<P>
+
+Returns the number of bytes one item correspondence to on the file. This
+can be different then what is returned by datbytes() when filters like
+Skip (<A HREF="#addskip">Alt-y,k</A>) or Duplicate (<A HREF="#duplicate">Alt-y,i</A>) are applied.
+<P>
+
+<B>ScreenPart *ScreenPart::getchild(int &amp;forstart,int &amp;binstart,int pos)</B>
+<P>
+
+If the datatype (ScreenPart) upon which is procedure is applied is a composed
+or Repeat it returns the child datatype under the cursor, otherwise it returns the current datatype.
+<P>
+
+<B> ScreenPart *ScreenPart::getsubpart()</B>
+<P>
+
+Repeatedly applies getchild until is finds a datatype without children.
+<P>
+
+<B>ScreenPart *ScreenPart::getparent() </B>
+<P>
+
+Returns contain current Screenpart is contained in, or NULL when there is not sucn thing.
+<P>
+
+<B>ScreenPart *ScreenPart::getsuperpart(void)</B>
+Repeatedly applies getpartent until is finds a datatype without parent.
+<P>
+
+<B>int ScreenPart::calcsizes(void)</B>
+<P>
+
+Calculate sizes of ScreenPart. Should sometimes be called after changing 
+some parameter of a datatype or adding a filter.
+<P>
+
+<B>Write you own datatypes:</B>
+<BR>
+
+You define a class as a subclass of ScreenPart or one existing datatype (Digit,Ascii, Signed, Float etc). Lets start with an example:
+<PRE>
+#include &lt;<A HREF="file:/usr/include/stdio.h">stdio.h</A>&gt;
+#include &lt;<A HREF="file:/usr/include/limits.h">limits.h</A>&gt;
+#include &lt;<A HREF="file:/usr/include/ctype.h">ctype.h</A>&gt;
+#include &quot;global.h&quot;
+BEDPLUGIN
+#include &quot;screenpart.h&quot;
+class char2 : public ScreenPart {
+public: 
+declareparent
+char2 ( Editor *ed): ScreenPart( ed, 1 ,256, 2 )  {
+apart=0;
+};
+int form2bin(char *formal, unsigned char *bin, int &amp;len) {
+bin[0]=formal[0];
+return 2;
+}
+ScreenPart *newone(void) {return new char2(*this);}
+int bin2formal(unsigned char *bin, char *formal, int len) {
+        if(isprint(bin[0]))
+                formal[0]=bin[0];
+        else
+                formal[0]='.';
+        return 0;       }
+  int isel(int ch) {return isprint(ch);}
+        };
+datatype(char2)
+parentd(ScreenPart,char2)
+</PRE>
+
+<P>
+
+After 
+<PRE>
+#include &quot;global.h&quot;
+BEDPLUGIN
+</PRE>
+
+<P>
+
+which is included in every plugin,
+<PRE>
+#include &quot;screenpart.h&quot;
+</PRE>
+
+is included because we need to become a sub class of ScreenPart.
+<BR>
+
+<P>
+class char2 the new datatype.
+<DL COMPACT><DT><DD>
+<P>
+
+declareparent
+</DL>
+
+<P>
+
+Is a statement what should be included in every datatype class. In combination with parentd it is used to determine the parent child relations between classes.
+<DL COMPACT><DT><DD>
+<P>
+
+char2 ( Editor *ed): ScreenPart( ed, 1 ,256, 2 )  {
+</DL>
+
+<P>
+
+every datatype class should also contain a contructer with as first argument Editor *ed and it should call the parent constructor.
+ScreenPart takes as first argument ed, as second the numbers of characters every item needs to be displayed on the screen. As third argument the base of the datatype (or something arbritary if this datatype has no base) and ad fourth argument the number of bytes of the screen this datatype uses.
+<DL COMPACT><DT><DD>
+<P>
+
+apart=0
+</DL>
+
+<P>
+
+States that the items are zero space apart of each other on the screen. The default is 1 space between items.
+int form2bin(char *formal, unsigned char *bin, int &amp;len) {      
+form2bin comes from format to bin. It transforms formatted input to binary form (the raw form in the file).
+formal contains the formatted input, bin is filled with its binary form. len is a reference to the length of formal and should be set to the length of formal that is actually used. form2bin should return the number of bytes placed in bin.
+<DL COMPACT><DT><DD>
+<P>
+
+int bin2formal(unsigned char *bin, char *formal, int len) {
+<P>
+
+</DL>
+
+bin2formal transforms binary input to formatted output.
+bin contains the binary input, in formal the formatted output is placed.
+len contains the length of bin. It should return 0 on success and -1 on error.
+<DL COMPACT><DT><DD>
+<P>
+
+<BR>&nbsp;int&nbsp;isel(int&nbsp;ch)
+</DL>
+
+<P>
+
+isel determines what character input (e.g. keyboard) input this datatype can handle. Unsigned decimal integers can handle for example 0-9 (isdigit(ch)).
+It should return nonzero when it can handle the input and 0 when not.
+<P>
+
+<DL COMPACT><DT><DD>
+datatype(char2)
+</DL>
+
+<P>
+
+The datatype statement makes the datatype known to bed, it adds this datatype to the datatype list so that it is seen with <A HREF="#listtypes">Alt-d,t</A> and you can use it in saved datatypes. You can use ScreenPart *getchar2(Editor *ed) to get char2.
+<P>
+
+<DL COMPACT><DT><DD>
+parentd(ScreenPart,char2)
+</DL>
+
+<P>
+
+Also a obligatory statement, stating that char2 is a child of ScreenPart.
+<BR>
+
+<P>
+
+Other statements functions which can be defined in datatypes (ScreenPart's):
+<P>
+
+<B>int chbytes(int byt)</B>
+<BR>
+
+Changes the number of bytes the datatype uses (used by <A HREF="#datatypeconfig">Alt-y,g</A>).
+If byt=-1 is should return a number greeter then 0 if the number of bytes can be changed. If bytes&gt;0 is should change its number of bytes to this value and return the number of bytes it occupies. On error is should return -1.
+<P>
+
+<B>int chbase(int base)</B>
+<BR>
+
+Returns the current base (ScreenPart::type) with b==-1, returns -type if b==0.
+Returns -1 if base can't be set and changes to base base otherwise returning the base.
+<P>
+
+<B>char *getconvstr(void)</B>
+<P>
+
+A procedure that can be defined to return a string describing some extra 
+options set in the current instance of this datatype. When saving datatypes 
+this string will also be saved and when the datatype is recreated from the
+saved datatype it will be given to the curresponding procedure setconvstring 
+to set these options.
+The string can be a static string if you like; it will not be freed by the main program.
+<P>
+
+<B>int setconvstr(char *str)</B>
+<P>
+
+Procedure that can be defined to set the options of a string this datatype
+returned with getconvstr. It should return -1 on error, otherwise it should
+return 0.
+<P>
+
+<B>userconfig(int modify)</B>
+<P>
+
+Procedure that can be defined to create your own dialog presented to the
+user to configure the datatype
+If modify=1 the datatype is already shown on the screen, as when it is called by <A HREF="#datatypeconfig">Alt-y,g</A>.
+If modify=0 useconfig is called on creation of the datatype. In the last case usrconfig should call installpart(sub,separ) to add this datatype to the screen.
+<P>
+
+Most datatype classes would also contain a copy constructor <B>Datatype(Datatype &amp;fl)</B>
+<P>
+
+For additions and modifications you can look at the example plugins or in faked.h or the Tools menu inside bed (Key binding and Procedures).
+<A NAME="lbBC">&nbsp;</A>
+<H3>Filters</H3>
+
+<P>
+<B>int ScreenPart::addfilter(Filter *fil)</B>
+<P>
+
+Adds Filter fil to the filters of current datatype. Returns -1 on failure.
+Otherwise it returns the number of filters.
+<P>
+
+<B>int ScreenPart::rmlastfilt(char *name=NULL)</B>
+<P>
+
+Removes last filter. If name!=NULL it only removes this filter if name is the name of the the last filter. Name is for example Duplicate, Reorder, Skip etc.
+<P>
+
+Filter *ScreenPart::getlastfilter(void)
+<P>
+
+Get the last applied filter if it exist, otherwise it returns NULL.
+<P>
+
+<B>Creating filters</B>
+<P>
+
+A filter sits between the datatype and the file and transforms the data.
+It is a sub class of Filter (lets call it SubFilter).
+<P>
+
+Filter contains the following variables:
+<BR>
+
+char *name; /*All references to this name should contain the same pointer. set by name=filtername(SubFilter) (without &quot;&quot;) extern char *filtername(SubFilter); should be defined above the class. */
+<P>
+<BR>
+
+int bytesfile; /*Number of bytes of each unit at the file side of this filter */
+<BR>
+
+int bytesscreen; /*Number of bytes of each unit at the screen side */
+<BR>
+
+int err; /*set this if an error occured, that makes the filter unusable*/
+<BR>
+
+Screen side and file side doesn't mean that this is also the number of bytes per bytes on respectively the screen or the file. Other filters before or after can change this.
+<P>
+
+It contains the procedure fromfile which transfroms the data from the file to the datatype (ScreenPart):
+<P>
+
+<B>virtual int fromfile(unsigned char *input,int &amp;len,unsigned char *output)</B> 
+<P>
+
+Input: contains the input, len the length of the input. If less bytes are used len is set to the acually used length. output points to a array in which the output is written. The function returns the length of the output.
+<P>
+
+<B>virtual int tofile(unsigned char *input,int &amp;inplen,unsigned char *output)</B>
+<P>
+
+To file is identical except that now the direction is from the datatype to the file.
+<P>
+
+Beside these, it should contain the following procedures:
+<P>
+
+<B>SubFilter(int filebytes,int screenbytes,char *conf)</B>
+<P>
+
+Constructor with as arguments the number of bytes at the file side of the filter (filebytes), the number of bytes at the screen side of the filter (screenbytes) and a config string (conf). conf is a string returned by convstr of the same filter class and is used to save settings of the filter when saving datatypes.
+<P>
+
+<B>char *convstr(void)</B>
+<P>
+
+Procedure that returns a configuration string used to set options while recreating this filter.
+<P>
+
+<B>SubFilter(Filter &amp;rev)</B>
+<P>
+
+A copy contructor.
+<P>
+
+<B>Filter *newone(void)</B>
+<P>
+
+Returns a new copy of this filter
+<P>
+
+<B>int chbytes(int b)</B>
+<P>
+
+Changes the number of bytesfile to b. Returns -1 on failure, otherwise returns bytesscreen (after having recalculated it's value).
+<P>
+
+<B>int chbytesback(int b)</B>
+<P>
+
+Changes the number of bytesscreen to b. Returns -1 on failure, otherwise returns bytesfile (after having recalculated it's value).
+<P>
+
+<B>int  equal(Filter *fil)</B>
+<P>
+
+Returns 1 if fil is equal to this filter, 0 otherwise. 
+<P>
+
+<B>virtual int screen2filepos(int pos)</B>
+<P>
+
+Can be defined to return the byte position on the fileside given a position on the screenside.
+<P>
+
+<B>virtual int file2screenpos(int pos) </B>
+
+
+<P>
+
+The same as screen2filepos in the opposide direction.
+<P>
+
+Outside of the class you should register the filter with <B>registerfilterclass</B>(SubFilter). Needed for example to use this filter while reading saved datatypes.
+<P>
+
+Currently you should write your own procedure to add a filter to a datatype.
+The most simple procedure is the following: 
+<P>
+<PRE>
+#include &quot;global.h&quot;
+#include &quot;screenpart.h&quot;
+#include &quot;reverse.h&quot;
+BEDPLUGIN
+class Editor {
+public:
+#include &quot;faked.h&quot;
+int addFilter(void) {
+        ScreenPart *part=activemode();
+        int byt=part-&gt;datbytes();
+                Reverse *sub=new Reverse(byt,byt,&quot;1&quot;);
+                if(sub-&gt;error()) {
+                        message(&quot;cant add filter&quot;);
+                        return -1;
+                }
+                   addfilter(sub);
+        return 0;                                               
+        }
+};
+call(addFilter)
+</PRE>
+
+You should Reverse change in the name of the Filter and &quot;1&quot; to the config string.
+<A NAME="lbBD">&nbsp;</A>
+<H2>ENVIRONMENT</H2>
+
+<DL COMPACT>
+<DT><FONT SIZE="-1"><B>BEDRC</B>
+
+</FONT>
+<DD>
+Absolute filename of configuration file.
+<DT><FONT SIZE="-1"><B>EDITOR</B>
+
+</FONT>
+<DD>
+Preferred editor 
+<BR>
+
+unix: export EDITOR=vi
+<BR>
+
+windows: set EDITOR=notepad
+<DT><FONT SIZE="-1"><B>PAGER</B>
+
+</FONT>
+<DD>
+Preferred pager used to show context sensitive help in bed. 
+If the pager returns immediately, bed refreshes its screen, so you can't use
+more.
+<DT><FONT SIZE="-1"><B>LINES_USE_PAGER</B>
+
+</FONT>
+<DD>
+The pager set by PAGER is only used when the help text is larger (in lines) 
+then LINES_USE_PAGER. Otherwise an internal pager is used.
+<DT><FONT SIZE="-1"><B>SHELL</B>
+
+</FONT>
+<DD>
+Preferred shell. Use unix like / to separate dirs
+<DT><FONT SIZE="-1"><B>TMPDIR (unix) or TMP or TEMP (win95) </B>
+
+</FONT>
+<DD>
+Directory for temporary files
+<DT><FONT SIZE="-1"><B>TERMINFO </B>
+
+</FONT>
+<DD>
+Terminfo directory.
+<DT><FONT SIZE="-1"><B>MAGIC</B>
+
+</FONT>
+<DD>
+If magic.plug is loaded or linked in (procedure filetype): database file used to determine filetype.
+Default: /usr/share/misc/magic
+<DT><FONT SIZE="-1"><B>NCURSESDELAY</B>
+
+</FONT>
+<DD>
+Only applicable to the MS Windows version running in cmd.com.
+Can be to a number larger then 0.
+Normally &quot;set NCURSESDELAY=1&quot; should be the right value.
+Once this gave problems, that were solved by setting it to 5,
+but that made the responses to ESC 5 times slower (500 ms 
+instead of 100 ms).
+<DT>It is possible to set environmental variables in the configuration file:<DD>
+<DT><B>setenv</B> name [val]<DD>
+<BR>
+
+Leaving out val means unsetenv.
+</DL>
+<A NAME="lbBE">&nbsp;</A>
+<H2>FILES</H2>
+
+<DL COMPACT>
+<DT><B>/sdcard/.bedrc</B><DD>
+Individual configuration.
+<DT><B>/data/local/tmp/nontmp/share/bed/bedrc</B><DD>
+System wide configuration.
+<DT><B>/data/local/tmp/nontmp/share/bed/plugins/*</B><DD>
+Files needed to compile plugins: plugin.cpp faked.h mainprocedures.h Makefile
+</DL>
+<A NAME="lbBF">&nbsp;</A>
+<H2>PORTABILITY</H2>
+
+Binaries available for: Linux x86-64, arm64 android8 and  Windows 10 x86-64 .
+<BR>
+
+Previous versions compiled also under win95, cygwin32/64, FreeBSD32, FreeBSD64, and OpenSolaris 32 bit.
+<BR>
+
+See <A HREF="#lbAK">TERMINALS section</A> for terminal requirements
+<BR>
+
+<A NAME="lbBG">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+<BR>
+
+Jaap Korthals Altes
+<P>
+
+E-Mail:  <A HREF="mailto:binaryeditor@gmx.com">binaryeditor@gmx.com</A>
+<A NAME="lbBH">&nbsp;</A>
+<H2>HOMEPAGE</H2>
+
+<A HREF="https://j-kaltes.github.io/bed" TARGET="_top">https://j-kaltes.github.io/bed</A>
+<BR>
+
+<A HREF="http://binaryeditor.sourceforge.io" TARGET="_top">http://binaryeditor.sourceforge.io</A>
+<A NAME="lbBI">&nbsp;</A>
+<H2>DOWNLOAD</H2>
+
+<A HREF="http://sourceforge.net/projects/binaryeditor/files/" TARGET="_top">http://sourceforge.net/projects/binaryeditor/files/</A>
+<P>
+
+To compile bed for win64 you need:
+<BR>
+
+- gcc,binutils,gnu make,grep, sed,textutils,findutils,fileutils,diffutils,which and probably some other utilities from <A HREF="https://www.msys2.org/" TARGET="_top">https://www.msys2.org/</A>
+<BR>
+
+- GNU regex (no longer included): e.g.  <A HREF="http://ftp.gnu.org/old-gnu/regex/regex-0.12.tar.gz" TARGET="_top">http://ftp.gnu.org/old-gnu/regex/regex-0.12.tar.gz</A>
+<BR>
+
+- pdcurses source <A HREF="http://pdcurses.sourceforge.net" TARGET="_top">http://pdcurses.sourceforge.net</A>
+<BR>
+
+<A NAME="lbBJ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<P>
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=3&topic=printf" TARGET="_top">printf</A></B>(3),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=3&topic=scanf" TARGET="_top">scanf</A></B>(3),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=strings" TARGET="_top">strings</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=grep" TARGET="_top">grep</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=dd" TARGET="_top">dd</A></B>(1)
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=head" TARGET="_top">head</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=tail" TARGET="_top">tail</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=7&topic=regex" TARGET="_top">regex</A></B>(7),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=3&topic=ncurses" TARGET="_top">ncurses</A></B>(3),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=od" TARGET="_top">od</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=hexdump" TARGET="_top">hexdump</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=beav" TARGET="_top">beav</A></B>(1),
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=bvi" TARGET="_top">bvi</A></B>(1)
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=5&topic=terminfo" TARGET="_top">terminfo</A></B>(5)
+
+<B><A HREF="http://www.tin.org/bin/man.cgi?section=1&topic=readelf" TARGET="_top">readelf</A></B>(1)
+
+<P>
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">Interface</A><DD>
+<DT><A HREF="#lbAF">Data types</A><DD>
+<DT><A HREF="#lbAG">Search</A><DD>
+<DT><A HREF="#lbAH">Replace</A><DD>
+<DT><A HREF="#lbAI">Tools</A><DD>
+</DL>
+<DT><A HREF="#lbAJ">OPTIONS</A><DD>
+<DT><A HREF="#lbAK">TERMINALS</A><DD>
+<DL>
+<DT><A HREF="#lbAL">Linux</A><DD>
+<DT><A HREF="#lbAM">FreeBSD</A><DD>
+<DT><A HREF="#lbAN">MS Windows</A><DD>
+</DL>
+<DT><A HREF="#lbAO">CONFIGURATION</A><DD>
+<DL>
+<DT><A HREF="#lbAP">Commandline Options</A><DD>
+<DT><A HREF="#lbAQ">Path</A><DD>
+<DT><A HREF="#lbAR">Keys</A><DD>
+<DT><A HREF="#lbAS">Menu</A><DD>
+<DT><A HREF="#lbAT">Call_on</A><DD>
+<DT><A HREF="#lbAU">Context</A><DD>
+<DT><A HREF="#lbAV">Color</A><DD>
+<DT><A HREF="#lbAW">Procedures</A><DD>
+</DL>
+<DT><A HREF="#lbAX">PLUGINS</A><DD>
+<DL>
+<DT><A HREF="#lbAY">Introduction</A><DD>
+<DT><A HREF="#lbAZ">Editor</A><DD>
+<DT><A HREF="#lbBA">Global</A><DD>
+<DT><A HREF="#lbBB">Datatypes</A><DD>
+<DT><A HREF="#lbBC">Filters</A><DD>
+</DL>
+<DT><A HREF="#lbBD">ENVIRONMENT</A><DD>
+<DT><A HREF="#lbBE">FILES</A><DD>
+<DT><A HREF="#lbBF">PORTABILITY</A><DD>
+<DT><A HREF="#lbBG">AUTHOR</A><DD>
+<DT><A HREF="#lbBH">HOMEPAGE</A><DD>
+<DT><A HREF="#lbBI">DOWNLOAD</A><DD>
+<DT><A HREF="#lbBJ">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://gittup.org/cgi-bin/man/man2html" TARGET="_top">man2html</A>,
+using the manual pages.<BR>
+Time: 15:21:39 GMT, November 11, 2021
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.4.2.3 (Linux)"/>
+	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
+	<meta name="changed" content="2022-11-19T22:07:09.576562106"/>
+	<style type="text/css">
+		@page { margin: 0.79in }
+		td p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h1 { margin-bottom: 0.08in }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt }
+		h1.ctl { font-family: "Mangal"; font-size: 18pt }
+		p { margin-bottom: 0.1in }
+		h4.western { font-family: "Liberation Sans", sans-serif; font-size: 13pt; font-style: italic }
+		h4.cjk { font-family: "Noto Sans CJK SC"; font-size: 13pt; font-style: italic }
+		h4.ctl { font-family: "Mangal"; font-size: 13pt; font-style: italic }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace }
+		pre.ctl { font-family: "Liberation Mono", monospace }
+		h3.cjk { font-family: "Droid Sans Fallback" }
+		h3.ctl { font-family: "Droid Sans Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Add
+Watch</b></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in">Making a new watch
+app to receive glucose values from Juggluco can in different ways. To
+display the most recent glucose values on a watch, it should be sent
+to the watch immediately when it becomes available. This the way
+Kerfstok works. When using an xDrip web server, values are only send
+to the watch when the watch app asks for them.</p>
+<h1 class="western">Modify Kerfstok</h1>
+<p style="line-height: 100%; margin-bottom: 0in">The source of the
+Garmin watch app <i>Kerfstok</i> can be downloaded from
+<a href="http://jkaltes.byethost16.com/Kerfstok/Kerfstok-source.html">http://jkaltes.byethost16.com/Kerfstok/Kerfstok-source.html</a>
+and you are allowed to modify it to satisfy your taste.</p>
+<h1 class="western">Glucose broadcast</h1>
+<p>The phone version of Juggluco can send every minute a broadcast
+with the current glucose value. Every Android app on that phone can
+receive that broadcast. This can be used to send this glucose value
+to a smartwatch. <a href="glucosebroadcast.html">More
+Information</a>.</p>
+<p>Future versions of the Juggluco for WearOS  will also contain
+these broadcasts. This will make it possible to use a different watch
+face with the WearOS version of Juggluco without having to take your
+phone with your.</p>
+<h1 class="western">Add to Juggluco</h1>
+<p style="line-height: 100%; margin-bottom: 0in">If you like to add
+support for a watch to Juggluco you can do so. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can supply the
+following: 
+</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">A static
+	initialization procedure called at start of Juggluco. 
+	</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">A static
+	function to be called very minute when a new glucose value arrives.
+	The arguments of this function can be 
+	</p>
+	<ul>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Application, 
+		</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Serial Number
+		of sensor, 
+		</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Glucose in
+		mg/dL, 
+		</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">glucose in the
+		unit set be the user (mg/dL or mmol/L), 
+		</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">the rate of
+		change, 
+		</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">alarm
+		indicator,</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">time in msec
+		since 1 January 1970 GMT. 
+		</p>
+	</ul>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The meaning of rate
+of change:</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="background: transparent">
+	<col width="128*"/>
+
+	<col width="128*"/>
+
+	<tr style="background: transparent" valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p><b>Abbott
+			Librelink arrow </b>
+			</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p><b>Rate of
+			change</b></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Falling
+			Quickly</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>&lt;=-2</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Falling</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>Between -2
+			and -1</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Steady</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>-1 to 1</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Rising</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>1 to 2</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Rising
+			Quickly</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>&gt;=2</p>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 100%; margin-bottom: 0in">The meaning of the
+alarm indicator:</p>
+<table width="100%" cellpadding="0" cellspacing="0">
+	<col width="128*"/>
+
+	<col width="128*"/>
+
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p><b>Alarm type</b></p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p><b>Value of
+			alarm</b></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Too high</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>6 (+8 if
+			alarm should go off)</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Too low</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>7 (+8 if
+			alarm should go off)</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Again a value
+			after scanning impossible</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>3</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Above highest
+			measurable e.g. 500 mg/dL</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>4 (+8 if
+			alarm should go off)</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="50%" style="border: none; padding: 0in"><p>Below lowest
+			measurable e.g. 40 mg/dL</p>
+		</td>
+		<td width="50%" style="border: none; padding: 0in"><p>5 (+8 if
+			alarm should go off)</p>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 100%; margin-bottom: 0in">You should test
+yourself if you initialization was successful, before using the
+glucose values.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can also supply
+a name to be used in settings to describe the watch and a short
+description to be added to the help menu.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Example of defined
+functions:</p>
+<pre class="western">public class myclass {
+static public void initmywatch(Application app);
+
+static public void  glucosetowatch(Application app,String SerialNumber,int mgdl,float myunits,float rate,int alarm,long timemsec);
+};
+Both glucosetowatch doesn't run on the main thread.
+If you need to run on the main thread, you can use:
+static public void Applic.RunOnUiThread(Runnable action);
+(All these functions are Java).</pre><p>
+Send the code plus instruction what to do with it to
+jaapkorthalsaltes@gmail.com. If I think the code is o.k. I will put
+it in Juggluco and send you an apk of Juggluco with that code added.
+If you test it o.k. I it will come in the next version of Juggluco at
+Google Play.</p>
+<h1 class="western">xDrip web server</h1>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco
+incorporates besides this a xDrip web server. The watch app will only
+receive glucose value when it asks for them, so often later.</p>
+<p style="line-height: 100%; margin-bottom: 0in">This way you can
+receive glucose values via <a href="http://127.0.0.1:17580/sgv.json">http://127.0.0.1:17580/sgv.json</a>
+on the devices running Juggluco. Turn the server on in Juggluco under
+left menu, watch.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco recognizes
+the following <a href="https://github.com/NightscoutFoundation/xDrip/blob/master/Documentation/technical/Local_Web_Services.md">xDrip
+server options</a>:</p>
+<h4 class="western">count=nr</h4>
+<p style="line-height: 100%; margin-bottom: 0in">Give nr values,
+instead of 24.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For example to
+receive 10 values use:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=10">http://127.0.0.1:17580/sgv.json?count=10</a></p>
+<h4 class="western">brief_mode=Y</h4>
+<p style="line-height: 100%; margin-bottom: 0in">Display less
+information. For example:</p>
+<p><a href="http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y">http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y</a></p>
+<h4 class="western">sensor=Y</h4>
+<p style="line-height: 100%; margin-bottom: 0in">Give sensor start
+date and age. For example:</p>
+<p><a href="http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y">http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y</a></p>
+<h4 class="western">all_data=Y</h4>
+<p style="line-height: 100%; margin-bottom: 0in">If necessary also
+displays values of previous sensors.</p>
+<h4 class="western">no_empty=Y</h4>
+<p style="line-height: 100%; margin-bottom: 0in">Displays nothing
+instead of [] when no data is available.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco added the
+following option:</p>
+<h4 class="western">interval=seconds</h4>
+<p style="line-height: 100%; margin-bottom: 0in"><i>interval</i>
+gives the minimal number of seconds between values. If not specified,
+it is set to 270 seconds (4.5 minutes) to keep in line with xDrip.
+This means that if multiple values are given they are spaced at least
+270 seconds apart (the first is always the most recent value). If you
+like to receive values spaced more closely in time, you can specify a
+smaller number.</p>
+<p style="line-height: 100%; margin-bottom: 0in">for example:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90">http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">To receive 100
+glucose values spaced 90 seconds apart. In reality this will be
+around 2 minutes apart.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Another possibility
+could be to round values instead of skipping them. But averaging the
+last values makes the measurement older. If the last value is the
+average of the last 5 values, the average of its age will be 2 to 3
+minutes. Because the measurement location is already physiologically
+distance from the blood, there is more to say for extrapolating
+instead of averaging the values. Thus, if you have for the last 5
+minutes 10,9,8,7 and 6 mmol/L you should return 5 mmol/L instead of
+7.6 mmol/L.</p>
+<h3 class="western">SSL</h3>
+<p style="line-height: 100%; margin-bottom: 0in">I also made an SSL
+encrypted version (https) of this xDrip web server, but it didn't
+seem to be of any use without a certificate signed by a certificate
+authority. If someone knows some use for it, I can turn it on. I put
+it in the source of a <a href="http://jkaltes.byethost16.com/Juggluco/cmdline/index.html">command
+line program</a> that can be used to exchange data with Juggluco, so
+you can see how useless it is or you can add a certificate. On the
+computer on which it is running you can ask for data with:
+<a href="https://127.0.0.1:17581/sgv.json">https://127.0.0.1:17581/sgv.json</a>
+</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
+</html>

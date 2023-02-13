@@ -1,0 +1,11 @@
+$(function() {
+    $.getJSON('http://smart-ip.net/geoip-json?callback=?', function(data) {
+        if (data.countryCode == 'PK') {
+            $('#ad_banner').show();
+            $('body').text('You are from Pakistan');
+        }else{
+            $('#ad_banner').hide();
+            $('body').text('You are from ' + data.countryName);
+        }
+    });
+});

@@ -1,0 +1,1028 @@
+Delivered-To: jaapkorthalsaltes@gmail.com
+Received: by 2002:a05:7022:323:b0:45:5cb0:416e with SMTP id 35csp3548820dld;
+        Tue, 18 Oct 2022 13:49:28 -0700 (PDT)
+X-Received: by 2002:a05:6e02:20e3:b0:2fa:3db:3585 with SMTP id q3-20020a056e0220e300b002fa03db3585mr2964796ilv.238.1666126168763;
+        Tue, 18 Oct 2022 13:49:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1666126168; cv=none;
+        d=google.com; s=arc-20160816;
+        b=NUF519IR9k6a5Qu/qKzVaETjkmQE1StVD9dUQAZwaPNWdlSkDiBM4o/TACoLliw4Je
+         fEvTeoAeZ1TxKzozR7MpVBduC14xjX0J5+bEOS0tSo3Te5o+d8XpITiA6rTPp4BkHEwt
+         58PVpFbp/WeKvbswJcgZcB42p6NrftPpalIctJUySE7aKE++E1KlBkRV2kB26zCIRcrT
+         mtpeeljb6Ut1uH25FC82E59SBywCmSrSdMxq2MVkZe0bgqZR93/+Wzp4MX6lE1VZYzkP
+         ++P10WNlA7uoCIFUFpTCBwtliFRCPdvNsrIgZi8z1OrWO22vUy9em37dVF6Io5isDe7w
+         PBpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:dkim-signature;
+        bh=jyOTgTfU2dOkkxv/aflAgdtb0kxUIrKfyBQLwqh2OdY=;
+        b=oCYTraJW/HS16G4NagX6cs1B5RuZueoaGRxL4i70HFI6fzTNSQD6gleM8qFgGxkC17
+         2NM+2LKxQYCakiSsULF1X1vgXk2tPTmvmkrG+S5oAnn/FvN9Yo4fOmsPKqCH74oRkr+h
+         RMMR+QfkpZd25etmOoTU8C/xzCZlBqKrHBLBe/wPQJKHO3AhMUbtOTaxWWut0MB0NVAp
+         yp4Dl66Wm8kTdrnM5JjzhSvCoFhIMBxfTxd+XVpy8wc29ZIoeKXpcXY120XfguXZcxCD
+         leRbmpqwCEyL5OuCUCBMZw5YEJMzdaOZjW3k0LRIZSnw3eOKh7PsYIPOaqIqMANxJmgP
+         liUg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=jOYFrdEk;
+       spf=pass (google.com: domain of 3wbfpyx0kancgh-k7ier-9hh9e7ie3r-67o7ehi7k9hh9e7.5hf@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3WBFPYx0KANcGH-K7IER-9HH9E7IE3R-67O7EHI7K9HH9E7.5HF@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <3WBFPYx0KANcGH-K7IER-9HH9E7IE3R-67O7EHI7K9HH9E7.5HF@scoutcamp.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id d11-20020a02604b000000b0033c0e3714e5sor5521722jaf.95.2022.10.18.13.49.28
+        for <jaapkorthalsaltes@gmail.com>
+        (Google Transport Security);
+        Tue, 18 Oct 2022 13:49:28 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 3wbfpyx0kancgh-k7ier-9hh9e7ie3r-67o7ehi7k9hh9e7.5hf@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=jOYFrdEk;
+       spf=pass (google.com: domain of 3wbfpyx0kancgh-k7ier-9hh9e7ie3r-67o7ehi7k9hh9e7.5hf@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3WBFPYx0KANcGH-K7IER-9HH9E7IE3R-67O7EHI7K9HH9E7.5HF@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=jyOTgTfU2dOkkxv/aflAgdtb0kxUIrKfyBQLwqh2OdY=;
+        b=jOYFrdEkqRE69gIB1gVtnnsp9xCg6YXjhtMOBG2oBondvNBltYNqDG6sTsz/NBdVOe
+         JvVnTsMjYB0cBhTqllo55AS4FvQZls0iTZmmqt20lkjx0+qPhWjtNQiVu5yQi9j+gKDC
+         fhG7VPYh8y0aVnn1HNgMHz69BO9LJfEAJTbv5ZflZmGZpuFKxQIScW919fqn9NvnV7Ky
+         1fmJzNbnQGjNcdCcdHh1jYY18HoNI9D7Z1HXcmIU+PMWqxu37IMvjuQ5P8N/7enhHxOS
+         DFjCMTZFb+Ibx6mWevrCZdeIHHkY9ppfDHj3VsFHaVo+kQubYzgTI0EAscwEouMDOBiP
+         Pqrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jyOTgTfU2dOkkxv/aflAgdtb0kxUIrKfyBQLwqh2OdY=;
+        b=haFalnqsTrZfNS65Eb0UbkbAd8kLdLl7M931cVocOByccWZBfJzqKOQkGPbz0JSR1W
+         PZb3ujoZhcUlTPq3jvPcUmRQRAZy/mkvn+94uaubs94ruto+Vjy0a86wiagtRCi04Ddk
+         Vq1wOn3S8vd40b2uitbyphNgtJtYQw5wrET1fioXgcAEMxCt/FZbGJ38iod+OmhUteug
+         6trvYe8SsrDXOruLURGLuK3gzAUA1NYbfMZUiU3Eyd4ZGWy2G+yjmuYMO6E5ZOx358Af
+         wfZjG5KbGKYTo+uS9b8POdSh/APgdDtPl7sFKSaDXQLU3f1csjAyI/o/HdkMilV2wZoq
+         +uqA==
+X-Gm-Message-State: ACrzQf0VSZyvvTyGvcDpXwCwkhDdskpQ4ebveKyUjp4k7vso2P+Fd+O/
+	ACQBPx7hTiPrsaI=
+X-Google-Smtp-Source: AMsMyM5To5MAQxZla8+xIiXV3DD0BUEyWU/2/IhGcdFcBbHrPrlnlJFrQSVG2JCjuzWsPP12FpH5N4Q=
+MIME-Version: 1.0
+X-Received: by 2002:a05:6638:2646:b0:365:c51a:b1c6 with SMTP id
+ n6-20020a056638264600b00365c51ab1c6mr3497616jat.187.1666126168210; Tue, 18
+ Oct 2022 13:49:28 -0700 (PDT)
+Date: Tue, 18 Oct 2022 13:49:28 -0700
+Reply-To: Google Play Support <no-reply-googleplay-developer@google.com>
+X-Google-Id: 310751
+Feedback-ID: P-70-0:C20097810:M110242748-en:gamma
+X-Notifications: GAMMA:<bdf481124dbb4ce33023e3586f6bfec1f3334705-20097810-110619858@google.com>
+X-Notifications-Bounce-Info: AT2jwkbLvS3NUsSJ1MqMO_hMkSl6AFAcflPQdrIU_ONoi0wBS2gUn7W5NVGDdhX0_l6CB3h_MChE__ppfhcTuHaycA_-Ho_vp8W0z4MG80DL8CnUUgOxLvBf40lLD7spI4HyGCQQo-pOp6F0A0RsM35ZmnvjpaOIiQjExgY-zNJR4Q-9hQXO4XPXM9DSDBs8N1YoOyj07jlB695R8rCkT2Xxyk5BcNgPQ4anX7BwU_D2Jz4sQtGt9AFyCHJ2u0_b6zmp5ycZYYxpbJwy4h4jr_h4hZ8OvcPPZoPdqFwxbQmBDC9o8KK7sEJsZoku1jm8e1WHIrdcS3W4oGvhNjAwNjA0MDQxNTM1NTk2OTMzMg
+Message-ID: <bdf481124dbb4ce33023e3586f6bfec1f3334705-20097810-110619858@google.com>
+Subject: Notification from Google Play about Juggluco
+From: Google Play Support <no-reply-googleplay-developer@google.com>
+To: jaapkorthalsaltes@gmail.com
+Content-Type: multipart/alternative; boundary="00000000000068413805eb553a16"
+
+--00000000000068413805eb553a16
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+R29vZ2xlIFBsYXkgRGV2ZWxvcGVyIHVwZGF0ZQ0KDQoNCg0KDQpIaSBEZXZlbG9wZXJzIGF0IEph
+YXAgS29ydGhhbHMgQWx0ZXMsDQoNCkFmdGVyIGEgcmVjZW50IHJldmlldywgSnVnZ2x1Y28gKHRr
+LmdsdWNvZGF0YSkgaGFzIGJlZW4gcmVtb3ZlZCBmcm9tIEdvb2dsZSAgDQpQbGF5Lg0KDQoNCg0K
+DQoNClB1Ymxpc2hpbmcgU3RhdHVzDQoNClB1Ymxpc2hpbmcgc3RhdHVzOiBTdXNwZW5kZWQNCg0K
+WW91ciBhcHAgaGFzIGJlZW4gc3VzcGVuZGVkIGFuZCByZW1vdmVkIGR1ZSB0byBhIHBvbGljeSB2
+aW9sYXRpb24uDQoNCg0KDQoNCg0KUmVhc29ucyBvZiB2aW9sYXRpb24NCg0KRWxpZ2liaWxpdHkg
+SXNzdWUgYnkgdmVyc2lvbnMNCg0KDQoNClZlcnNpb24ocykgRWxpZ2liaWxpdHkgSXNzdWUNCg0K
+QXBwIEJ1bmRsZToyNTIgREVWSUNFIEFORCBORVRXT1JLIEFCVVNFDQpZb3VyIGFwcCBpcyBub3Qg
+Y29tcGxpYW50IHdpdGggdGhlIERldmljZSBhbmQgTmV0d29yayBBYnVzZSBwb2xpY3kuDQoNCkFu
+IGFwcCBkaXN0cmlidXRlZCB2aWEgR29vZ2xlIFBsYXkgbWF5IG5vdCBtb2RpZnksIHJlcGxhY2Us
+IG9yIHVwZGF0ZSAgDQppdHNlbGYgdXNpbmcgYW55IG1ldGhvZCBvdGhlciB0aGFuIEdvb2dsZSBQ
+bGF5J3MgdXBkYXRlIG1lY2hhbmlzbS4gIA0KTGlrZXdpc2UsIGFuIGFwcCBtYXkgbm90IGRvd25s
+b2FkIGV4ZWN1dGFibGUgY29kZSAoZWcgZGV4LCBKQVIsIC5zbyBmaWxlcykgIA0KZnJvbSBhIHNv
+dXJjZSBvdGhlciB0aGFuIEdvb2dsZSBQbGF5LiBUaGlzIHJlc3RyaWN0aW9uIGRvZXMgbm90IGFw
+cGx5IHRvICANCmNvZGUgdGhhdCBydW5zIGluIGEgdmlydHVhbCBtYWNoaW5lIG9yIGFuIGludGVy
+cHJldGVyIHdoZXJlIGVpdGhlciBwcm92aWRlcyAgDQppbmRpcmVjdCBhY2Nlc3MgdG8gQW5kcm9p
+ZCBBUElzIChzdWNoIGFzIEphdmFTY3JpcHQgaW4gYSB3ZWJ2aWV3IG9yICANCmJyb3dzZXIpLg0K
+DQpBcHBzIG9yIHRoaXJkLXBhcnR5IGNvZGUgKGVnLCBTREtzKSB3aXRoIGludGVycHJldGVkIGxh
+bmd1YWdlcyAoSmF2YVNjcmlwdCwgIA0KUHl0aG9uLCBMdWEsIGV0Yy4pIGxvYWRlZCBhdCBydW4g
+dGltZSAoZWcsIG5vdCBwYWNrYWdlZCB3aXRoIHRoZSBhcHApIG11c3QgIA0Kbm90IGFsbG93IHBv
+dGVudGlhbCB2aW9sYXRpb25zIG9mIEdvb2dsZSBQbGF5IHBvbGljaWVzLg0KDQoNCg0KDQpOZXh0
+IHN0ZXBzOiBQdWJsaXNoIGEgbmV3IGNvbXBsaWFudCB2ZXJzaW9uIG9mIHlvdXIgYXBwDQoNCg0K
+DQoNCg0KMS4gUmV2aWV3IHRoZSBJc3N1ZXMgYW5kIGFueSBwb2xpY3kgcGFnZShzKSBzaG93biBh
+Ym92ZS4NCg0KMi4gTWFrZSBhcHByb3ByaWF0ZSBjaGFuZ2VzIHRvIHlvdXIgYXBwLCBhbmQgYmUg
+c3VyZSB0byBhZGRyZXNzIHRoZSBpc3N1ZXMgIA0KaWRlbnRpZmllZCBhYm92ZS4gSW4gYWRkaXRp
+b24gdG8geW91ciBQcm9kdWN0aW9uIHJlbGVhc2UsIGlmIHlvdSBoYXZlIG90aGVyICANCnJlbGVh
+c2UgdHlwZXMgdGhhdCB5b3UgdXNlIGZvciB0ZXN0aW5nIGFuZC9vciBxdWFsaXR5IGFzc3VyYW5j
+ZSBjaGVja3MgKGVnICANCkludGVybmFsIHRlc3QsIENsb3NlZCwgT3BlbiksIHBsZWFzZSBtYWtl
+IHN1cmUgdG8gdXBkYXRlIHRob3NlIHRyYWNrcyBhcyAgDQp3ZWxsLg0KDQozLiBDaGVjayB0aGF0
+IHlvdXIgYXBwIGlzIGNvbXBsaWFudCB3aXRoIGFsbCBvdGhlciBEZXZlbG9wZXIgUHJvZ3JhbSAg
+DQpQb2xpY2llcy4NCg0KNC4gU2lnbiBpbiB0byB5b3VyIFBsYXkgQ29uc29sZSBhbmQgc3VibWl0
+IHRoZSBwb2xpY3kgY29tcGxpYW50IGFwcCB1c2luZyBhICANCm5ldyBwYWNrYWdlIG5hbWUgYW5k
+IGEgbmV3IGFwcCBuYW1lLg0KDQoNCg0KDQoNCkFkZGl0aW9uYWwgc3VzcGVuc2lvbnMgb2YgYW55
+IG5hdHVyZSBtYXkgcmVzdWx0IGluIHRoZSB0ZXJtaW5hdGlvbiBvZiB5b3VyICANCmRldmVsb3Bl
+ciBhY2NvdW50LCBhbmQgaW52ZXN0aWdhdGlvbiBhbmQgcG9zc2libGUgdGVybWluYXRpb24gb2Yg
+cmVsYXRlZCAgDQpHb29nbGUgYWNjb3VudHMuIElmIHlvdXIgYWNjb3VudCBpcyB0ZXJtaW5hdGVk
+LCBwYXltZW50cyB3aWxsIGNlYXNlIGFuZCAgDQpHb29nbGUgbWF5IHJlY292ZXIgdGhlIHByb2Nl
+ZWRzIG9mIGFueSBwYXN0IHNhbGVzIGFuZC9vciB0aGUgY29zdCBvZiBhbnkgIA0KYXNzb2NpYXRl
+ZCBmZWVzIChzdWNoIGFzIGNoYXJnZWJhY2tzIGFuZCB0cmFuc2FjdGlvbiBmZWVzKSBmcm9tIHlv
+dS4NCg0KQ29udGFjdCBzdXBwb3J0DQoNCklmIHlvdSd2ZSByZXZpZXdlZCB0aGUgcG9saWN5IGFu
+ZCBmZWVsIG91ciBkZWNpc2lvbiBtYXkgaGF2ZSBiZWVuIGluIGVycm9yLCAgDQpwbGVhc2UgcmVh
+Y2ggb3V0IHRvIG91ciBwb2xpY3kgc3VwcG9ydCB0ZWFtLiBXZSdsbCBnZXQgYmFjayB0byB5b3Ug
+d2l0aGluIDIgIA0KYnVzaW5lc3MgZGF5cy4NCg0KTGVhcm4gbW9yZQ0KDQpWaXNpdCB0aGUgQW5k
+cm9pZCBEZXZlbG9wZXJzIEJsb2cgdG8gbGVhcm4gbW9yZSBhYm91dCBmcmVlIHRvb2xzIGFuZCAg
+DQpyZXNvdXJjZXMgZm9yIGJ1aWxkaW5nIHNhZmUgYW5kIHN1Y2Nlc3NmdWwgYXBwcy4NCg0KVGhh
+bmtzIGZvciB5b3VyIGNvbnRpbnVlZCBzdXBwb3J0IGluIGhlbHBpbmcgdG8gbWFrZSBHb29nbGUg
+UGxheSBhIHBvc2l0aXZlICANCmV4cGVyaWVuY2UgZm9yIGJvdGggZGV2ZWxvcGVycyBhbmQgY29u
+c3VtZXJzLiBXZSBsb29rIGZvcndhcmQgdG8gc2VlaW5nIGFuICANCnVwZGF0ZWQgdmVyc2lvbiBv
+ZiB5b3VyIGFwcCBvbiBHb29nbGUgUGxheS4NCg0KUGxlYXNlIGhlbHAgdXMgaW1wcm92ZSB0aGUg
+ZGV2ZWxvcGVyIGV4cGVyaWVuY2UgYnkgY29tcGxldGluZyB0aGlzIHR3byAgDQpxdWVzdGlvbiBz
+dXJ2ZXkuDQoNCg0KDQoNCg0KVGhlIEdvb2dsZSBQbGF5IFRlYW0NCg0KDQoNCg0KDQoNCg0KDQoN
+CsKpIDIwMjIgR29vZ2xlIExMQyAxNjAwIEFtcGhpdGhlYXRyZSBQYXJrd2F5LCBNb3VudGFpbiBW
+aWV3LCBDQSA5NDA0Mw0KDQoNCkNsaWNrIGhlcmUgdG8gY29uZmlndXJlIHlvdXIgbm90aWZpY2F0
+aW9uIHByZWZlcmVuY2VzLg0KDQpUaGlzIG1lc3NhZ2Ugd2FzIHNlbnQgdG8gaW5mb3JtIHlvdSBh
+Ym91dCBpbXBvcnRhbnQgdXBkYXRlcyB0byB5b3VyIEdvb2dsZSAgDQpQbGF5IGRldmVsb3BlciBh
+Y2NvdW50Lg0KDQoNCg0KDQoNCg==
+--00000000000068413805eb553a16
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><style>body {
+  font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #000000;
+  -webkit-text-size-adjust: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -ms-text-size-adjust: none !important;
+
+}
+
+table, tr, td {
+  border-collapse: collapse;
+  mso-table-lspace: 0pt;
+  mso-table-rspace: 0pt;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.appleLinks a {
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+strong {
+  font-weight: bold !important;
+}
+
+em {
+  font-style: italic !important;
+}
+
+.yshortcuts a span {
+  color: inherit !important;
+  border-bottom: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: 100%;
+}
+
+.header_bar {
+  background-color: #ffffff;
+  background-image: linear-gradient(#304ffe, #304ffe);
+  background-repeat: no-repeat;
+  background-size: 100% 70px;
+  text-size-adjust: none;
+  vertical-align: top;
+}
+
+.ReadMsgBody {
+  width: 100%;
+}
+
+.ExternalClass {
+  width: 100%;
+}
+
+.ExternalClass * {
+  line-height: 100%
+}
+
+td {
+  -webkit-text-size-adjust: none;
+}
+
+a[href^=3Dtel] {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mob-hide {
+  display: none !important;
+}
+
+div, p, a, li, td {
+  -webkit-text-size-adjust: none;
+}
+
+td {
+  text-decoration: none !important;
+}
+
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+@media screen yahoo {
+  .mob-hide-back2 {
+    display: none !important;
+  }
+
+  .mob-block-back2 {
+    display: block !important;
+  }
+
+  .width_star {
+    width: 200px !important;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .table {
+    width: 360px !important;
+  }
+
+  .table-main-gmail { /* Forces Gmail to display Desktop view */
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .table-l {
+    width: 90% !important;
+  }
+
+  .table-m {
+    width: 80% !important;
+  }
+
+  .table-s {
+    width: 70% !important;
+  }
+
+  .img {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .nopad {
+    padding: 0px 0px 0px 0px !important;
+  }
+
+  .centertext {
+    text-align: center !important;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
+  .noline {
+    border-top: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+    width: 100% !important;
+    max-height: none !important;
+    color: #000000 !important;
+    font-size: 32px !important;
+  }
+
+  .width60 {
+    width: 60px !important;
+    max-width: 60px !important;
+  }
+
+  .padr25 {
+    padding-right: 25px !important;
+  }
+
+  .padr15_left {
+    padding-left: 15px !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+
+  .top_heading {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  .top_heading2 {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .top_sub-heading {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  .top_sub-heading2 {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+
+  .padl25 {
+    padding-left: 30px !important;
+  }
+
+  .font-30 {
+    font-size: 30px !important;
+  }
+
+  .mob-show {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .mob-hide-back {
+    display: none !important;
+  }
+
+  .mob-block-back {
+    display: block !important;
+  }
+
+  .pd_left10 {
+    padding-left: 10px !important;
+  }
+
+  .pd_left0 {
+    padding-left: 0px !important;
+  }
+
+  .pd_right_none {
+    padding-right: 0px !important;
+  }
+
+  .pd_top0 {
+    padding-top: 0px !important;
+  }
+
+  .pd_top20 {
+    padding-top: 20px !important;
+  }
+
+  .pd_bottom0 {
+    padding-bottom: 0px !important;
+  }
+
+  .pd_top20 {
+    padding-top: 20px !important;
+  }
+
+  .pd_all_none {
+    padding: 0px !important;
+  }
+
+  .pd_top_bottom0 {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+
+  .pd_top_bottom24 {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .pd_top_bottom15 {
+  }
+
+  .pd_left_15_f {
+    padding-left: 15px !important;
+  }
+
+  .pd_right_15_f {
+    padding-right: 15px !important;
+  }
+
+  .pd_top_bottom152 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+
+  .pd_top_bottom153 {
+    padding-bottom: 15px !important;
+    padding-top: 0px !important;
+  }
+
+  .pd_top_bottom151 {
+    padding-bottom: 15px !important;
+    padding-top: 5px !important;
+  }
+
+  .pd_right10 {
+    padding-right: 10px !important;
+  }
+
+  .hegt {
+    height: 84px !important;
+  }
+
+  .boder_top_bottom0 {
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+  }
+
+  .logo_width {
+    width: 130px !important;
+    max-width: 130px !important;
+  }
+
+  .top_image_width {
+    width: 220px !important;
+    max-width: 220px !important;
+  }
+
+  .three_image_width {
+    width: 100px !important;
+    max-width: 100px !important;
+  }
+
+  .email_image_width {
+    width: 80px !important;
+    max-width: 80px !important;
+  }
+
+  .image_container_width {
+    width: 260px !important;
+  }
+
+  .text_container_width {
+    width: 100% !important;
+  }
+
+  .twobox_container_width {
+    width: 100% !important;
+  }
+
+  .pd_all {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .pd_fifteen {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .pd_all10 {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+
+  .pd_lr0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .center {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .listpadd {
+    padding-bottom: 20px !important;
+    padding-left: 40px !important;
+    padding-right: 20px !important;
+  }
+
+  .width320 {
+    width: 320px !important;
+  }
+
+  .width {
+    width: 300px !important;
+  }
+
+  .width110 {
+    width: 110px !important;
+  }
+
+  .widthsocial {
+    width: 115px !important;
+  }
+
+  .widthstar {
+    width: 165px !important;
+  }
+
+  .mar {
+    margin: 0 auto !important;
+  }
+
+  .mar2 {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .block {
+    display: block !important;
+  }
+
+  .font_13 {
+    font-size: 13px !important;
+  }
+
+  .font_sixteen {
+    font-size: 16px !important;
+    line-height: 25px !important;
+  }
+
+  .font_18 {
+    font-size: 18px !important;
+    line-height: 28px !important;
+  }
+
+  .text_align {
+    text-align: center !important;
+  }
+
+  .fullwidth {
+    width: 100% !important;
+    display: inline-block !important;
+  }
+
+  .pad_top {
+    padding-top: 20px !important;
+  }
+
+  .pad_bottom_0 {
+    padding-bottom: 0px !important;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .img_icon {
+    width: 28px !important;
+  }
+
+  .cont {
+    width: 58px !important;
+  }
+}
+</style></head><body>
+
+<p align=3Dcenter style=3Dpadding-top:0;font-size:0px;line-height:0px;color=
+:#ffffff;background-color:#ffffff>=C2=A0</p>
+
+
+<table align=3Dcenter border=3D0 cellpadding=3D0 cellspacing=3D0 style=3D"m=
+argin:0 auto;max-width:800px" width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter valign=3Dtop>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter style=3D"font-family:Roboto,Helvetica,Arial,sans-serif;=
+font-size:10px;color:#757575;line-height:14px;padding-right:10px;padding-bo=
+ttom:10px;border-bottom:#f5f5f5 1px solid;padding-top:10px" valign=3Dmiddle=
+>=C2=A0</td>
+ </tr>
+=20
+ <tr>
+ <td align=3Dleft bgcolor=3D#ffffff style=3Dfont-family:Roboto,Helvetica,Ar=
+ial,sans-serif;font-size:13px;color:#757575;padding-top:20px;padding-bottom=
+:20px valign=3Dtop>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft style=3Dpadding-left:20px valign=3Dmiddle width=3D200><a =
+href=3Djavascript:void(0); style=3Dcolor:#999999;text-decoration:none;displ=
+ay:block><img alt=3D"Google Play" class=3Dlogo_width src=3Dhttps://services=
+.google.com/fh/files/emails/google_play_dev_logo_5.png style=3Dvertical-ali=
+gn:middle title=3D"Google Play" width=3D150></a></td>
+ <td align=3Dright style=3Dfont-family:Roboto,Helvetica,Arial,sans-serif;fo=
+nt-size:10px;color:#757575;line-height:14px;width:260px;padding-right:20px;=
+padding-top:5px valign=3Dmiddle>Developer update</td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+
+<table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#ffffff valign=3Dtop>
+ <table align=3Dcenter border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D1=
+00%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter valign=3Dtop>
+ <table align=3Dcenter border=3D0 cellpadding=3D0 cellspacing=3D0 style=3D"=
+margin:0 auto" width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#ffffff class=3Dheader_bar height=3D70 valign=
+=3Dtop>
+ <div style=3Dpadding-left:10px;padding-right:10px>
+ <table align=3Dcenter border=3D0 cellpadding=3D0 cellspacing=3D0 style=3D"=
+margin:0 auto;max-height:580px;max-width:800px" width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft bgcolor=3D#304FFE height=3D18 style=3Dborder-collapse:col=
+lapse;line-height:18px valign=3Dtop>=C2=A0</td>
+ </tr>
+=20
+ </tbody>
+ </table>
+=20
+
+ <table align=3Dcenter border=3D0 cellpadding=3D0 cellspacing=3D0 style=3D"=
+margin:0 auto;border-left:1px solid #f5f5f5;border-right:1px solid #f5f5f5;=
+max-width:800px" width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter class=3Dwidth style=3D"margin:0 auto">
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td bgcolor=3D#ffffff style=3Dpadding-left:40px;padding-right:40px;padding=
+-bottom:30px;padding-top:40px valign=3Dbottom>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 class=3Dtext_container_w=
+idth style=3Ddisplay:inline-table;vertical-align:middle width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft style=3Dfont-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:18px;color:#3a3a3a;line-height:23px valign=3Dtop>Hi Developers at Ja=
+ap Korthals Altes,</td>
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-top:10px;paddin=
+g-bottom:15px valign=3Dtop>After a recent review, Juggluco (tk.glucodata) h=
+as been removed from Google Play.</td>
+ </tr>
+=20
+ <tr>
+ <td>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td bgcolor=3D#ffffff class=3Dpd_all_none style=3D"border:#d8d8d8 2px soli=
+d">
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter style=3D"border-bottom:#d8d8d8 2px solid" valign=3Dmidd=
+le>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter class=3D"fullwidth pad_top table" style=3D"border-right=
+:2px solid #d8d8d8" valign=3Dmiddle width=3D100><a href=3Djavascript:void(0=
+);><img alt=3D"Publishing Status" class=3Dimg_icon height=3Dauto src=3Dhttp=
+s://www.gstatic.com/images/icons/material/system/2x/error_red_24dp.png styl=
+e=3Ddisplay:block;width:100%;max-width:48px;height:auto title=3D"Publishing=
+ Status" width=3D48></a></td>
+=20
+ <td align=3Dleft class=3D"fullwidth table" valign=3Dmiddle>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft class=3D"font_sixteen pad_top" style=3Dpadding:10px;paddi=
+ng-bottom:0px;padding-top:15px;font-size:18px;line-height:23px;font-family:=
+Roboto,Helvetica,Arial,sans-serif;color:#2c2c2c valign=3Dmiddle>Publishing =
+status: <span style=3Dcolor:#ff3821>Suspended</span></td>
+ </tr>
+ <tr>
+ <td style=3D"padding:10px 10px 15px;font-family:Roboto,Helvetica,Arial,san=
+s-serif;font-size:13px;color:#4a4a4a;line-height:21px" valign=3Dmiddle>Your=
+ app has been suspended and removed due to a policy violation.</td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+=20
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#eeeeee style=3D"border-bottom:#d8d8d8 0px so=
+lid" valign=3Dmiddle>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter class=3D"fullwidth pad_top table" style=3D"border-right=
+:2px solid #d8d8d8" valign=3Dmiddle width=3D100><a href=3Djavascript:void(0=
+);><img alt=3D"Reasons of violation" class=3Dimg_icon src=3Dhttps://www.gst=
+atic.com/images/icons/material/system/2x/build_grey600_24dp.png style=3Ddis=
+play:block;width:100%;max-width:48px title=3D"Reasons of violation"></a></t=
+d>
+=20
+ <td align=3Dleft class=3D"fullwidth table" valign=3Dmiddle>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft class=3D"font_sixteen pad_top" style=3Dpadding:10px;paddi=
+ng-bottom:0px;padding-top:15px;font-size:18px;line-height:23px;font-family:=
+Roboto,Helvetica,Arial,sans-serif;color:#2c2c2c valign=3Dmiddle>Eligibility=
+ Issue by versions</td>
+ </tr>
+=20
+ <tr>
+ <td style=3D"padding:10px 10px 15px;font-size:13px;line-height:21px;font-f=
+amily:Roboto,Helvetica,Arial,sans-serif;color:#4a4a4a" valign=3Dmiddle><tab=
+le style=3Dborder-collapse:collapse>  <thead>    <tr>      <th style=3D"pad=
+ding:4px 10px;border:solid 1px #ccc;background-color:#f5f5f5">       Versio=
+n(s)</th>      <th style=3D"padding:4px 10px;border:solid 1px #ccc;backgrou=
+nd-color:#f5f5f5;width:85%">        Eligibility Issue</th>    </tr>  </thea=
+d>  <tbody>    <tr><td style=3D"padding:4px 10px;border:solid 1px #ccc">App=
+ Bundle:252</td><td style=3D"padding:4px 10px;border:solid 1px #ccc"><stron=
+g>DEVICE AND NETWORK ABUSE</strong><br>
+Your app is not compliant with the <a href=3Dhttps://notifications.google.c=
+om/g/p/AKWoLQgH2G36l9Dy5uzsbWE12c_TOHWZgisY7MnjrmQlb-lCQlvGeoG9q7t8pEDMMFhy=
+495F7V9woSoRzcGH5uqoxSj9AdxgNG51YK9dz-5MYA3Yho1lmI21b1ZrtqtdcJcPGvn3XR4fAMu=
+zLlJfCIhZgw7p6Q rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff t=
+arget=3D_blank>Device and Network Abuse policy</a>.<br>
+<br>
+An app distributed via Google Play may not modify, replace, or update itsel=
+f using any method other than Google Play&#39;s update mechanism. Likewise,=
+ an app may not download executable code (e.g. dex, JAR, .so files) from a =
+source other than Google Play. This restriction does not apply to code that=
+ runs in a virtual machine=C2=A0or an interpreter where either provides ind=
+irect access to Android APIs (such as JavaScript in a webview or browser).<=
+br>
+<br>
+Apps or third-party code (e.g., SDKs) with interpreted languages (JavaScrip=
+t, Python, Lua, etc.) loaded at run time (e.g., not packaged with the app) =
+must not allow potential violations of Google Play policies.</td></tr>  </t=
+body></table></td>
+ </tr>
+=20
+ </tbody>
+ </table>
+ </td>
+=20
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+=20
+ <tr>
+ <td align=3Dcenter bgcolor=3D#ffffff valign=3Dmiddle>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft class=3D"font_sixteen pad_top" style=3Dpadding:0px;paddin=
+g-top:15px;padding-bottom:0px;font-size:18px;line-height:23px;font-family:R=
+oboto,Helvetica,Arial,sans-serif;color:#2c2c2c valign=3Dmiddle><span>Next s=
+teps: Publish a new compliant version of your app</span></td>
+ </tr>
+ <tr>
+ <td align=3Dcenter valign=3Dtop>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft style=3Dpadding:10px;padding-bottom:0;padding-left:15px v=
+align=3Dtop>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial=
+,sans-serif;line-height:21px;color:#4a4a4a valign=3Dtop width=3D30>1.</td>
+ <td style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial,sans-serif;l=
+ine-height:21px;color:#4a4a4a valign=3Dtop>Review the Issues and any policy=
+ page(s) shown above.</td>
+ </tr>
+=20
+ <tr>
+ <td align=3Dleft style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial=
+,sans-serif;line-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop wi=
+dth=3D30>2.</td>
+ <td style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial,sans-serif;l=
+ine-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop>Make appropriat=
+e changes to your app, and be sure to address the issues identified above. =
+In addition to your Production release, if you have other release types tha=
+t you use for testing and/or quality assurance checks (e.g. Internal test, =
+Closed, Open), please make sure to update those tracks as well.</td>
+ </tr>
+ <tr>
+ <td align=3Dleft style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial=
+,sans-serif;line-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop wi=
+dth=3D30>3.</td>
+ <td style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial,sans-serif;l=
+ine-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop>Check that your=
+ app is compliant with all other <a href=3Dhttps://notifications.google.com=
+/g/p/AKWoLQiKnYsOGBC-iGqxzq3EIWYErS-O979XlQyw3LGMXhOikUVEt1cO-EoKGRdupVwSXX=
+3h-NqQho-88mU2Q9jI6KraMj1DD6S91vOB7SCzn-QkgdhBNdHbH9XJmkoNCqM6E_3mFxtpI48 r=
+el=3Dnoopener style=3Dtext-decoration:none;color:#448aff target=3D_blank>De=
+veloper Program Policies</a>.</td>
+ </tr>
+=20
+ <tr>
+ <td align=3Dleft style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial=
+,sans-serif;line-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop wi=
+dth=3D30>4.</td>
+ <td style=3Dfont-size:13px;font-family:Roboto,Helvetica,Arial,sans-serif;l=
+ine-height:21px;color:#4a4a4a;padding-top:10px valign=3Dtop>Sign=C2=A0in to=
+ your <a href=3Dhttps://notifications.google.com/g/p/AKWoLQgUNJqnvoHoBgtt7H=
+ip76nTiJBMTbj673mUZtJFt7J_0qQXH3D8E0cEsakcV3lGzhpGiuwzhmpw5ah2gk_HoGoF4aB9o=
+sWZ5kFs7rxJOML05w rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff=
+ target=3D_blank>Play Console</a> and submit the policy compliant app using=
+ a new package name and a new app name.</td>
+ </tr>
+=20
+ </tbody>
+ </table>
+ </td>
+=20
+ </tr>
+ </tbody>
+ </table>
+ </td>
+=20
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-top:10px valign=
+=3Dtop>Additional suspensions of any nature may result in the termination o=
+f your developer account, and investigation and possible termination of rel=
+ated Google accounts. If your account is terminated, payments will cease an=
+d Google may recover the proceeds of any past sales and/or the cost of any =
+associated fees (such as chargebacks and transaction fees) from you.</td>
+ </tr>
+ <tr>
+ <td align=3Dleft class=3D"font_sixteen pad_top" style=3Dpadding:0px;paddin=
+g-top:15px;padding-bottom:0px;font-size:18px;line-height:23px;font-family:R=
+oboto,Helvetica,Arial,sans-serif;color:#2c2c2c valign=3Dmiddle><span>Contac=
+t support </span></td>
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-top:10px valign=
+=3Dtop>If you=E2=80=99ve reviewed the policy and feel our decision may have=
+ been in error, please reach out to our <a href=3Dhttps://notifications.goo=
+gle.com/g/p/AKWoLQi1BbpO1oAwm3ZEGNVOlBJCFLyOJCrcYp-ReI4hECY-rnSNE59sR9BIIWD=
+VN1hFQL9VhLi5rwXb0M6retva-vckGD_ZILc1S6cI4AbAZbLHYk7H79iFmKDQJ1eDS6AKvEtzzd=
+fOdMZnoTu7w0y6s1IA2PmlzpF3nUpHr3sanL1_6lgvVdX0cCN-921aoqu22wlQIOs8tiR5fvQGo=
+QW8FQTdlqpBShvhJ4LxivU490c-fPxlx3g rel=3Dnoopener style=3Dtext-decoration:n=
+one;color:#448aff target=3D_blank>policy support team</a>. We=E2=80=99ll ge=
+t back to you within 2 business days.</td>
+ </tr>
+ <tr>
+ <td align=3Dleft class=3D"font_sixteen pad_top" style=3Dpadding:0px;paddin=
+g-top:15px;padding-bottom:0px;font-size:18px;line-height:23px;font-family:R=
+oboto,Helvetica,Arial,sans-serif;color:#2c2c2c valign=3Dmiddle>Learn more</=
+td>
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-top:10px valign=
+=3Dtop>Visit the <a href=3Dhttps://notifications.google.com/g/p/AKWoLQhWqIb=
+mQiCp1fH8qnDM5pvnka1C7rJpqgHdjw_WiYU3Pzt8To1gFQmQb276Z8ZDb-mWSgiuFjus7HOdpY=
+cFc6no-wMLfaeZoq297DVRDvktgl7sUZyzN8u4X3ZPeef41QGp13pXTWg1C63mOwKh9zXo5ES2t=
+LtwY3knN-NFNh5-a-1V rel=3Dnoopener style=3Dtext-decoration:none;color:#448a=
+ff target=3D_blank>Android Developers Blog</a> to learn more about free too=
+ls and resources for building safe and successful apps.</td>
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-top:10px valign=
+=3Dtop>Thanks for your continued support in helping to make Google Play a p=
+ositive experience for both developers and consumers. We look forward to se=
+eing an updated version of your app on Google Play.</td>
+ </tr>
+ <tr>
+ <td class=3Dpd_right_none style=3Dfont-family:Roboto,Helvetica,Arial,sans-=
+serif;font-size:13px;color:#4a4a4a;line-height:21px;padding-bottom:20px;pad=
+ding-top:10px valign=3Dtop><em>Please help us improve the developer experie=
+nce by completing this <a href=3Dhttps://notifications.google.com/g/p/AKWoL=
+QimMIVo4nyRP1QOBeQObr3gLyDOB7el4GydN-40PXGC4kAeWzTeAkX-jDWzUfZ6EsFQJKTBX69m=
+x3Bi1o7ApgmYuZfWn2QVFts4oGqRCqVvCiM920Re2BD4_DzXS--yiZwU3weLl0bZ0o4u3TCekm2=
+QuAddE8cB4rMfDdVuMU6GXh4d7fvxWkyNmaxGjIhVI3YKepwR5gAFBpuXVeS0RovLQNX6DWXFeQ=
+ rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff target=3D_blank>=
+two question survey</a>.</em></td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#ffffff class=3Dpd_fifteen style=3Dbackground=
+-color:#ffffff;padding-left:40px;padding-right:40px>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dleft style=3Dfont-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:18px;color:#4a4a4a;line-height:22px valign=3Dtop>The Google Play Tea=
+m</td>
+=20
+ </tr>
+ <tr>
+ <td align=3Dleft height=3D30 style=3D"border-collapse:collapse;line-height=
+:30px;border-bottom:1px solid #f5f5f5" valign=3Dtop></td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <td align=3Dcenter class=3D"fullwidth table" style=3Dpadding:0px;padding-t=
+op:10px;padding-bottom:10px valign=3Dtop><a href=3Dhttps://notifications.go=
+ogle.com/g/p/AKWoLQi81T8UvBok2LCuBYvn_opZ5V9FpL9iWCHd3-v9U-QT1PvvkWR1b8jTPT=
+1_mBtf2u3zj4baauI_i4wazQLHvLXkb_zmb_QV38IQ4F_ujguU7hm2HiPTA2gJkDCfbAMBOc2BY=
+NTIr6Qj0to9FNOyBRyeXRAlBsGNZTHjvUJppj6HcAp8vM5y3WCLjaAo3kZGtQyduw-3RY_B_CWi=
+wcWTC7SagPtXy81ACyb-6Q0YoSRBNMjLzwKm2pXR3d5u2A rel=3Dnoopener style=3Dtext-=
+decoration:none;color:#448aff target=3D_blank><img src=3Dhttps://services.g=
+oogle.com/fh/files/emails/gpacademy_email_policy.png style=3Ddisplay:block;=
+width:100% title=3D"Play academy"></a></td>
+ </tr>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#F5F5F5 style=3Dpadding-bottom:20px valign=3D=
+top>
+ <table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D100%>
+ <tbody>
+ <tr>
+ <td align=3Dcenter bgcolor=3D#F5F5F5 style=3Dcolor:#9b9b9b;font-family:Rob=
+oto,Helvetica,Arial,sans-serif;font-size:10px;line-height:14px;padding-left=
+:25px;padding-right:25px;padding-top:28px valign=3Dtop>=C2=A9 2022 <a href=
+=3Djavascript:void(0); style=3Dtext-decoration:none;color:#9b9b9b>Google LL=
+C 1600 Amphitheatre Parkway, Mountain View, CA 94043</a></td>
+ </tr>
+=20
+ <tr>
+ <td align=3Dcenter bgcolor=3D#F5F5F5 style=3Dcolor:#9b9b9b;font-family:Rob=
+oto,Helvetica,Arial,sans-serif;font-size:10px;line-height:14px;padding-left=
+:35px;padding-right:35px;padding-top:15px;padding-bottom:15px valign=3Dtop>
+ <p>Click <a href=3Dhttps://notifications.google.com/g/p/AKWoLQgl6gipGzG9HF=
+_Yl8e9L12Me95OCt6MSHd2vi8l4EbNGCvch_DjoVXLlq21dcqDAriRcNJsMfQibj3hrwtea1EQ0=
+EFxqg1mqxg7XpFRNYPVwI3RkVTWF43WWsx7NpQG3UeCc7lwdy_Hmx2RGVuHoOHWLYY-4XI rel=
+=3Dnoopener style=3Dtext-decoration:none;color:#448aff target=3D_blank>here=
+</a> to configure your notification preferences.</p>
+
+ <p>This message was sent to inform you about important updates to your Goo=
+gle Play developer account.</p>
+ </td>
+ </tr>
+=20
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ </tbody>
+</table><img alt=3D"" height=3D1 width=3D3 src=3Dhttps://notifications.goog=
+le.com/g/img/AKWoLQi9cg-sXfRn98SIY8h81YGCHDk0VXxcDiv0urLrXHBY0DJTXOgoPqR0Aw=
+.gif></body></html>
+--00000000000068413805eb553a16--

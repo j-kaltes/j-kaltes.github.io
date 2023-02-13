@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="arrow.png">
+	<title>Juggluco versions</title>
+	<meta name="generator" content="LibreOffice 7.2.6.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2022-04-25T11:31:29.991530639"/>
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		h2.cjk { font-family: "Noto Serif CJK SC" }
+		h2.ctl { font-family: "Mangal" }
+		a.western:link { so-language: en-US }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><p><span lang="en-US">For people who
+want to install multiple instances on one device there is also a
+<a class="western" href="https://j-kaltes.github.io/Juggluco/dub">Juggluco
+with a different Application ID</a> .</span></p>
+<h1>Juggluco versions 
+</h1>
+    <p>Version 2.9.8:</p>
+    <p>Android: <span lang="en-US"><a class="western" href="https://apkfab.com/juggluco/tk.glucodata/apk?h=4325e8a987dc81e46ce48cfea84dae70a212625b84023471b19e78e2835727b9">Juggluco2.9.8-248.apk</a>
+      </span></p>
+    <p>WearOS: <span lang="en-US"><a class="western" href="https://drive.google.com/file/d/1AwTWwOHe9ee1AFoUg4iehD7NlMEKFAT1/view?usp=sharing">Juggluco2.9.8-wear249.apk</a></span></p>
+<p><span lang="en-US"><a class="western" href="https://apkfab.com/juggluco/tk.glucodata/apk?h=a4cbbcec845ca32cf211ea97c2965bb71ef46ee357b8136f173afd96e9d94f70">9.6M Juggluco2.9.3.apk</a> 
+</p>
+<h2 class="western"><a class="western" href="https://j-kaltes.github.io/JugglucoWearOS">Juggluco
+Wear OS</a> 
+</h2>
+<p>Juggluco2.3.13-wear.apk: <br/>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.13-wearaa">Juggluco2.3.13-wearaa</a>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.13-wearab">Juggluco2.3.13-wearab</a>
+<p>
+(Use cat or copy as shown below to make one apk out of these
+files.) 
+As far as I know you can only install an apk on a WearOS watch by using adb from a computer. In Developer options of your watch you should enable "ADB debugging" and probably "Debug over WIFI". And on you phone press something like (and confirming the connection on you watch screen);
+<pre>
+adb connect YOUR_WATCH_IP:5555
+
+adb -s YOUR_WATCH_IP:5555 install Juggluco2.3.13-wear.apk
+</pre>
+</p>
+<p>You can also install Juggluco for WearOS via Google Play. At least, I can find Juggluco by searching for <i>Juggluco</i> in Google Play on my watch. 
+</p>
+<p>This is a version of Juggluco that can run on Wear Os. After installation on
+a Wear Os, Juggluco on a mobile phone should initiate the app by
+sending the sensor data to the watch. There are two possibilities: 
+</p>
+<p>1. The sensor keeps contact with the smartphone and glucose values
+are sent to the watch by IP/TCP.<br/>
+2. The direction is changed
+after the data are sent to the watch.<br/>
+<br/>
+All can be done
+under Left Menu-&gt; Watch -&gt; Wear Os in the mobile phone version
+of Juggluco. <br/>
+First time sending of all data to the watch takes
+a lot of time. 
+</p>
+<p>On my Samsung galaxy watch4 you can turn off &quot;mobile battery
+saver&quot; in the developer options, which are normally hidden. To
+see them you have to go to &quot;About Watch&quot;-&gt; Software-&gt;
+&quot;Software version&quot; and tap 7 times on &quot;Software
+version&quot;. Thereafter, you can find &quot;developer options&quot;
+in the settings above &quot;Software update&quot;. I don't know if it
+has any effect.</p>
+<h2 class="western">Smartphone versions:</h2>
+<p>Juggluco2.3.19.apk <br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.19aa">Juggluco2.3.19aa</a>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.19ab">Juggluco2.3.19ab</a>
+<br/>
+<p>Juggluco2.3.13.apk <br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.13aa">Juggluco2.3.13aa</a>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.13ab">Juggluco2.3.13ab</a>
+<br/>
+<p>Juggluco2.3.4.apk <br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.4aa">Juggluco2.3.4aa</a>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.4ab">Juggluco2.3.4ab</a>
+<br/>
+- Adds possibility of an active receiver that is also a sender</br>
+- Display changes
+<p>Juggluco2.3.1.apk <br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.1aa">Juggluco2.3.1aa</a>
+<br/>
+<a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.3.1ab">Juggluco2.3.1ab</a>
+<br/>
+- create Juggluco2.3.1.apk with: <br/>
+Linux <br/>
+cat
+Juggluco2.3.1aa Juggluco2.3.1ab &gt; Juggluco2.3.1.apk <br/>
+Windows
+<br/>
+copy /B Juggluco2.3.1aa+Juggluco2.3.1ab Juggluco2.3.1.apk 
+</p>
+<p>- Connects with Juggluco for Wear Os 
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.2.7.apk">9.6M
+Juggluco2.2.7.apk</a> <br/>
+- Made nfc scan timeout longer;<br/>
+-
+Android backup killed Juggluco, so set android:allowBackup=&quot;false&quot;;<br/>
+-
+Alarms stop better;<br/>
+- Xdrip server stays off better if set so. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.2.3.apk">9.5M
+Juggluco2.2.3.apk</a> <br/>
+Removed US Freestyle Libre 2 sensor
+end-of-life bug. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.2.2.apk">9.5M
+Juggluco2.2.2.apk</a> <br/>
+Version 2.2.1 with US Freestyle Libre 2
+sensors crashed if it detected root. 2.2.2 doesn't on arm64. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.2.1.apk">9.5M
+Juggluco2.2.1.apk</a> <br/>
+Now works with US Freestyle libre 2
+sensors. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.1.4.apk">8,8M
+Juggluco2.1.4.apk</a> <br/>
+No longer excessive battery power
+consumption of web server for xDrip watch apps. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.1.3.apk">8,8M
+Juggluco2.1.3.apk</a> <br/>
+Incorporates a web server for xDrip
+watches. Because xDrip only shows a new glucose value every 5 minutes
+and Juggluco every minute, a direct connection of Juggluco with xDrip
+watches gives more recent glucose values. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.11.apk">8,8M
+Juggluco2.0.11.apk</a> <br/>
+Enabling streaming Bug fix. Under a
+certain, improbable condition, the device address was not assigned
+without location permission. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.10.apk">8,8M
+Juggluco2.0.10.apk</a> <br/>
+- Removes old state files; <br/>
+- Added
+the possibility not to turn off alarm by touching view. <br/>
+- Use
+alarm to get phone out of sleep to get connection going. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.8.apk">8,8M
+Juggluco2.0.8.apk</a><br/>
+- Removes old state files;<br/>
+- Added
+the possibility not to turn off alarm by touching view. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.7.apk">9,1M
+Juggluco2.0.7.apk</a> </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.6.apk">8,8M
+Juggluco2.0.6.apk</a><br/>
+- Less harsh on regex syntax errors;<br/>
+-
+A meal bug removed;<br/>
+- Doesn't ask for Camera permission when
+using Flash anymore. If Juggluco crashes without it, you can still
+turn it on. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.5.apk"><span lang="en-US">9,1M
+Juggluco2.0.5.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.4.apk">8,7M
+Juggluco2.0.4.apk</a><br/>
+Some minor changes:<br/>
+- It now possible
+to connect to localhost with WIFI and data connection turned off;<br/>
+-
+Added some more checks on Nearby devices permission; </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.3.apk">8,7M
+Juggluco2.0.3.apk</a> <br/>
+- Turned on asking for connect with
+devices permission on Android 12. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco2.0.1.apk">8,7M
+Juggluco2.0.1.apk</a> <br/>
+- Doesn't need location permission
+anymore. But I don't know if this works with all phones or sensors,
+so it can be turned on and is still asked for on phones running
+Android 6 to 7.1; <br/>
+- NFC scanning different in the hope to make
+it work with US-sensors. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.8.apk"><span lang="en-US">8,7M
+Juggluco1.5.8.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.7.apk">8,7M
+Juggluco1.5.7.apk</a> <br/>
+- Sensor &quot;Sensor via Bluetooth&quot;
+automatically turned off when Stream input arrives via IP/TCP; <br/>
+-
+Wake sender on loss of signal alarm when 'Sensor via Bluetooth' is
+turned off; <br/>
+- With very large font and android status bar
+shown, watch status didn't fit on the screen and was not shown.
+Changed. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.6.apk">9,1M
+Juggluco1.5.6.apk</a> <br/>
+- Network connection changes; <br/>
+-
+Paging starts now only when tapping more to the right or left of
+screen; <br/>
+- Added Glucose-axis numbers left setting. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.5.apk">9,1M
+Juggluco1.5.5.apk</a> <br/>
+- Network connection changes </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.4.apk">8,7M
+Juggluco1.5.4.apk</a> <br/>
+- Network changes <br/>
+- Change of
+Garmin watch changes </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.2.apk">8,7M
+Juggluco1.5.2.apk</a> <br/>
+- Synchronize flash stop <br/>
+- Added
+KEEP_ALIVE tcp option <br/>
+- Test play ringtone stopped upon close
+dialog </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.1.apk">8,7M
+Juggluco1.5.1.apk</a> <br/>
+- Managed to make spinners open somewhat
+faster; <br/>
+- NFC sound options in settings; <br/>
+- Better
+handling of wrong number format; <br/>
+- Added settings option to
+send glucose values to Xdrip+. Just to try out Xdrip+, otherwise I
+needed a fresh sensor. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.5.0.apk"><span lang="en-US">8,7M
+Juggluco1.5.0.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.26.apk">9,0M
+Juggluco1.4.26.apk</a> <br/>
+- Switched off notification grouping. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.24.apk">9,0M
+Juggluco1.4.24.apk</a> <br/>
+- Summary graph ends now at 00:30 to
+make the graph around 00:00 clearer; <br/>
+- On some devices Android
+automatically groups notifications under an old icon. Made harmless. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.22.apk"><span lang="en-US">8,7M
+Juggluco1.4.22.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.21.apk"><span lang="en-US">8,7M
+Juggluco1.4.21.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.20.apk">8,7M
+Juggluco1.4.20.apk</a> <br/>
+TimePicker was not shown on screen with
+low height and visible status bar. Changed. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.19.apk"><span lang="en-US">8,7M
+Juggluco1.4.19.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.18.apk">8,7M
+Juggluco1.4.18.apk</a> <br/>
+I was this time generous and created a
+status bar icon for every glucose value. The size of the app has
+nearly doubled. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.17.apk"><span lang="en-US">5,3M
+Juggluco1.4.17.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.16.apk"><span lang="en-US">5,3M
+Juggluco1.4.16.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.15.apk">5,3M
+Juggluco1.4.15.apk</a> <br/>
+- Alarm stops now when the user switches
+to Juggluco or touches the screen in Juggluco. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.14.apk">8,4M
+Juggluco1.4.14.apk</a> <br/>
+- Flash alarm now always stops
+automatically. <br/>
+- Removed a list of urls at startup because of
+Google Play <br/>
+- Added DeleteLocalRef </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.13.apk">5,3M
+Juggluco1.4.13.apk</a> <br/>
+- Flash alarm flashes less frequently
+and sometimes much shorter. <br/>
+- Removed a list of urls at startup
+because of Google Play <br/>
+- Added DeleteLocalRef </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.12.apk">5,3M
+Juggluco1.4.12.apk</a> <br/>
+- Flash light alarm, which needs camera
+permission when used <br/>
+- Interface changes </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.11.apk"><span lang="en-US">5,3M
+Juggluco1.4.11.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.10.apk"><span lang="en-US">5,3M
+Juggluco1.4.10.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.9.apk"><span lang="en-US">5,3M
+Juggluco1.4.9.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.8.apk"><span lang="en-US">5,3M
+Juggluco1.4.8.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.7.apk"><span lang="en-US">5,3M
+Juggluco1.4.7.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.6.apk"><span lang="en-US">5,3M
+Juggluco1.4.6.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.5.apk"><span lang="en-US">5,3M
+Juggluco1.4.5.apk</span></a></p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.4.apk"><span lang="en-US">5,5M
+Juggluco1.4.4.apk</span></a></p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.4.3.apk">5,3M
+Juggluco1.4.3.apk</a> <br/>
+- Mirror with passive sender and active
+receiver now also possible; <br/>
+- Bug fixes. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.3.5.apk">5,3M
+Juggluco1.3.5.apk</a> <br/>
+- Possibility to specify identifier of
+Garmin watch app, so that people who modify the source of Kerfstok
+(or make something new) don't need to use the ID of Kerfstok to
+communicate with Juggluco. <br/>
+- Version 1.3.5 tried for too long
+to use finished sensors via Bluetooth, this is corrected. <br/>
+- If
+you set System UI, it stays on until you turn it off or restart. </span>
+</p>
+<p><span lang="en-US"><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.3.3.apk">5,3M
+Juggluco1.3.3.apk</a> <br/>
+- Watch shortcut setting functions; <br/>
+-
+Alarms and notifications also evoked if glucose values are received
+from Juggluco on another device over IP/TCP <br/>
+- Alarms in
+separate dialog; <br/>
+- IP/TCP implementation changes. </span>
+</p>
+<p><a class="western" href="https://j-kaltes.github.io/Juggluco/Juggluco1.2.2.apk"><span lang="en-US">5,3M
+Juggluco1.2.2.apk</span></a></p>
+</body>
+</html>

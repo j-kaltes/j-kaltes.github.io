@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.2.2.2 (Linux)"/>
+	<meta name="created" content="2021-11-29T17:23:45.546326527"/>
+	<meta name="changed" content="2021-11-30T22:04:42.735785408"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h1 { margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Mangal"; font-size: 18pt; font-weight: bold }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Mirror
+Juggluco</b></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in">To connect two
+devices running Juggluco directly with each other, at least one of
+them should listen on a network port. How to do that, you can see in
+the help menu of the Android version of Juggluco (left middle
+menu-&gt;Mirror-&gt;add Connection).</p>
+<p style="line-height: 100%; margin-bottom: 0in">Some mobile data
+connections don't have a non-shared IP where an Android device can
+listen on a port.  Connecting two of these phones is still possible
+by placing a computer in the middle running command line juggluco.
+Download it from: 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">One possibility is
+to run a computer yourself connected to a modem; a cheaper
+possibility is to run command line juggluco on Amazon Aws.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The current
+description only applies to Juggluco 1.4.0 or above.</p>
+<h1 class="western">PC</h1>
+<p style="line-height: 100%; margin-bottom: 0in">Place juggluco in
+your current directory and make it executable:</p>
+<pre class="western">chmod a+x ./juggluco</pre><p style="line-height: 100%; margin-bottom: 0in">
+Try if it works with:</p>
+<pre class="western">./juggluco -h</pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">In the following
+example I have a Sony smartphone connected to the sensor and a Huawei
+tablet receiving data from the Sony smartphone.</p>
+<p style="line-height: 100%; margin-bottom: 0in">So the Sony
+Smartphone is the sender of data. In left middle Menu-&gt;Mirror-&gt;Add
+Connection we specify it as an active only sender:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">T<img src="connectviacomputer_html_17b9de8d712d841.png" name="Image1" align="left" width="643" height="361" border="0"/>
+he
+label is &quot;sony&quot; and the password &quot;123456789&quot;, it
+connects to a PC  with IP 3.22.240.59 and port 8795.</p>
+<p style="line-height: 100%; margin-bottom: 0in">On this PC we
+specify the corresponding receiver as:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<pre class="western">./juggluco  -riP -L sony -w 123456789
+
+-r: receiver
+-i: ignore ip
+-P: passive only
+-L sony: test on label 'sony'
+-w 123456789: decrypt with password 123456789.</pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">To get the data from
+the PC to the Huawei tablet, we add to the <b>Add connection</b>
+screen on the Huawei Tablet the following:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><img src="connectviacomputer_html_6edfe18e28cf91dd.jpg" name="Image2" align="left" width="643" height="402" border="0"/>
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">On the PC we specify
+the corresponding sender:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<pre class="western">./juggluco  -nsbiP -L huawei -w 987654321</pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<pre class="western">-n: <i>send numbers</i>
+-s: <i>send scans</i>
+-b: <i>send bluetooth glucose values</i>
+-i: <i>ignore IP</i>
+-P: <i>passive</i><i> </i><i>only</i>
+-L huawei: <i>test on label huawei</i>
+-w 987654321: <i>encrypt with password </i><i>987654321</i></pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">By pressing</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<pre class="western"> ./juggluco</pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">the command line
+juggluco should now be ready for connections from Sony to receive
+data and from Huawei to send data to.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<h1 class="western">Remote computer</h1>
+<p style="line-height: 100%; margin-bottom: 0in">Exactly the same you
+can do on a remote host you connect to over the Internet. For example
+Amazon AWS EC2. After paying one dollar with credit card, you can use
+it for one year.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Thereafter, you have
+maybe to pay 30 to 45 dollars a year. I don't know.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">An introduction with
+Chinese links:
+<a href="https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/">https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">The following howto
+has US links, but doesn't say how to connect with ssh under Linux:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.howtoforge.com/tutorial/how-to-setup-linux-server-with-aws/">https://www.howtoforge.com/tutorial/how-to-setup-linux-server-with-aws/</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">If you have a
+virtual machine running and can login with ssh using mykey.pem, you
+can put juggluco on the machine with scp or sftp. On your Linux home
+computer:</p>
+<pre class="western">scp -i mykey.pem file ec2-user@myaws:/home/ec2-user</pre><p style="line-height: 100%; margin-bottom: 0in">
+Here myaws is the ip or hostname of the aws machine.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You also need to
+open the 8795 port.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Goto
+<a href="http://console.aws.amazon.com/">https://console.aws.amazon.com</a>
+to find the Security group your VPC is using. Press 'Edit inbound
+rule&quot;. Here you should see a rule for ssh with port 22. Press
+&quot;Add rule&quot; and add a custom TCP with port 8795  source
+anywere IP4.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><img src="connectviacomputer_html_81b28346aa745cd9.png" name="Image3" align="left" width="643" height="353" border="0"/>
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">If you have uploaded
+juggluco to the AWS machine, you can do exactly the same as on the
+PC. If you don't look at the other settings, it is all very simple.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
+</html>

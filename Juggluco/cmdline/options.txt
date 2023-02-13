@@ -1,0 +1,53 @@
+Command line program to create a Juggluco backup on a desktop computer.
+Juggluco is an android applet that connects with Freestyle libre 2 sensors
+and allows one to add diabetes diary data, see:
+https://play.google.com/store/apps/details?id=tk.glucodata
+Within a certain directory (-d dir) backup and connection data is saved.
+With this program, you can specify the connections the program
+should receive data from and send data to.
+Usages: ./juggluco -d dir : save data in directory dir
+        ./juggluco [-d dir] -p port : listen on port port
+        ./juggluco [-d dir] -l : list configuration data
+        ./juggluco [-d dir] -c : clear configuration data
+        ./juggluco [-d dir] -N filename: export nums 
+	./juggluco [-d dir] -S filename: export scans 
+	./juggluco [-d dir] -B filename: export stream 
+	./juggluco [-d dir] -H filename: export history 
+	./juggluco [-d dir] -m filename: export meals 
+	./juggluco [-d dir] -M : mmol/L
+	./juggluco [-d dir] -G : mg/dL
+	./juggluco [-d dir] -R n : remove n-th connection
+
+
+	./juggluco [-d dir] OPTIONS IP1,IP2 ...  : Specify connection with IP(s).
+OPTIONS:
+	-r: receive from host
+	-a: automatically detect IP the first time
+	-g: signal reconnect 
+
+	-n: send nums (amounts)
+	-s: send scans (via NFC received data)
+	-b: send stream (via bluetooth received data)
+
+	-w password: encrypt communication with password
+	-p port:  connect to port (default: 8795)
+
+example:
+
+./juggluco -d mydir -r  192.168.1.64
+
+Receive data from host 192.168.1.64 (an ip shown in backup screen android app)
+In the juggluco android applet you can in "backup, add connection"
+specfiy send to amounts, scans and stream and specify port 8795 and
+an ip of this computer (e.g 192.168.1.71)
+
+./juggluco -d mydir -nsb  192.168.1.69
+
+Send the amounts, scans and stream data to 192.168.1.69 on the default port (8795)
+In the android applet you can in the "add connection" dialog, specify 
+an ip of this computer (192.168.1.71) check "Receive from" and specify as port 8795
+(the port specified earlier for this computer)
+
+./juggluco -d mydir
+
+Starts the program with this configuration.

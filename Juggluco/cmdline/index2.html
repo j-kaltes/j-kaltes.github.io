@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Account Active!</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700"  rel="stylesheet" type="text/css">
+
+<style>
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 200%;
+}
+</style>
+
+
+</head>
+<body>
+<center>
+<br><br>
+Congratulations! Your free hosting account has been activated.<br>
+<span style="font-style: italic;">You can now use FTP or the file manager in your cPanel to upload your site.</span><br>
+<br>
+<br>
+
+<div style="text-align: center;"><b>Need more power than free hosting ?<br>We would recommend using <br><a class="btn btn-success btn-xl" href="https://ifastnet.com/portal" target ="_blank">Premium Web Hosting</a></b></div>
+<br>
+
+
+<div style="text-align: center;">Would you like to start your own free hosting company?<br><a class="btn btn-success btn-xl" href="http://myownfreehost.net" target ="_blank">Click here to find out how!</a></div>
+<br>
+<div style="text-align: center;"><b><iframe src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Ffree.byethost&amp;width=570&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=270" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:570px; height:270px;" allowTransparency="true"></iframe><br><a href="https://ifastnet.com/portal/sharedhosting.php" target="_blank" ><img src="http://ifastnet.com/byet-728x90-ultimate-blue3.gif" width="768" height="90" alt="Paid Hosting Premium Hosting"></a><br></div>
+</body>
+</html>

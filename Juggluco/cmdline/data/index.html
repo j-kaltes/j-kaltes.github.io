@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="generator" content="LibreOffice 7.3.4.2 (Linux)">
+    <meta name="created" content="2022-07-11T15:44:05.481973229">
+    <meta name="changed" content="2022-07-11T18:07:02.875152334">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent; background: transparent }
+		pre { background: transparent; background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		h1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Mangal"; font-size: 18pt; font-weight: bold }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
+    <h1 class="western">Data formats</h1>
+    <p>Data from each sensor is saved in sensors/E007-SensorID for example
+      sensors/E007-3MH003ZM0QH. To see how the data
+      is saved you can use a hex editor. In <a href="https://bedlinux.tripod.com">bed</a>
+      you can see the saved data in a
+      spreadsheet like fashion. </p>
+    <h2>Stream and Scans</h2>
+    <figure> <img src="stream.png" alt="Stream" style="object-fit:contain;
+		    width:25cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Stream
+          data of polls.dat shown with current.bedda</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">The data for the
+      scans is saved in current.dat. The data for the stream glucose value
+      in polls.dat.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">The data format of
+      the scan and stream glucose values is saved in the file
+      <a href="current.bedda">current.bedda</a>. </p>
+    <p style="line-height: 100%; margin-bottom: 0in">The data format can
+      be loaded by Alt-y,r and opening <a href="current.bedda">current.bedda</a>.
+      The data type should
+      be aligned with the begin position of the file. This shows one item:</p>
+    <pre class="western" style="margin-bottom: 0.2in">000300 Mon Mar 15 16:54:26  2021 0000000122 0000000082 000004.555555 FALLING_QUICKLY -000000002.34</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">The meaning of the
+      item at the position of the cursor is shown in the status bar at the
+      bottom of the screen.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">000300 is the offset
+      in the file.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">There after is the
+      time and date of the measurement. </p>
+    <p style="line-height: 100%; margin-bottom: 0in">122 are the minutes
+      since the start of the sensor.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">82 is glucose value
+      in mg/dL</p>
+    <p style="line-height: 100%; margin-bottom: 0in">4.555555 is the
+      glucose value in mmol/L.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">FALLING_QUICKLY is
+      the trend, displayed in Librelink as a downwards directed arrow.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">-000000002.34 is the
+      rate of change in the form of a number.</p>
+    <h3>Search</h3>
+    <p style="line-height: 100%; margin-bottom: 0in">You can also search
+      for items in the displayed format. This is only possible in regex
+      search; the other kinds of search, search in the underlying binary
+      representation.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">You should pay
+      attention to level you are searching: in the whole datatype or only a
+      sub-datatype. For example in the whole item, or only the mg/dL part
+      of it. Also the alignment matters. If you don't check <i>align</i> it
+      will also return hits not aligned with how the data are currently
+      aligned on the screen. For example if data starts at 0 and is 20
+      bytes long, unaligned search will also find hits starting at byte 25
+      or 27. Aligned only at 0,20 and 40 etc. <i>Unit</i> makes that regex
+      is only matched within one item, not that one part of the regex is
+      matched in one item, and the rest in the following item.</p>
+    <h2>History</h2>
+    <figure> <img src="history.png" alt="History" style="object-fit:contain;
+		    width:25cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">History
+          data of data.dat shown with history.bedda</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">The history data is
+      shown in data.dat. The datatype for this file is saved in <a href="history.bedda">history.bedda</a>.
+      For sensors initialized with Juggluco 2.5.7 or later you should remove the
+      last two items of the data type, by setting the cursor between the last
+      two items and selecting Alt-d,r, so that each item uses 12 bytes of memory
+      instead of 14 bytes.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Both the Raw history
+      data and the results of Abbotts Apollo algorithms are saved. Only the
+      last is displayed in Juggluco. In this datatype I have somehow named
+      it Sputnik instead of Apollo. (Originally I considered alternative
+      algorithms and reserved space for their values, but with FreeStyle Libre 2
+      history became unimportant.)</p>
+    <p style="line-height: 100%; margin-bottom: 0in">In data.dat, glucose
+      values are saved in 10*mg/dL (thus mg/L). In the datatype they are
+      shown in this unit and mmol/L beside each other.</p>
+    <h2>Amounts</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">The amounts are
+      saved in two files:</p>
+    <figure> <img src="amounts.png" alt="Amounts" style="object-fit:contain;
+		    width:25cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Amounts
+          in nums/here/nums0 shown with amounts.bedda</span></figcaption> </figure>
+    <ul>
+      <li>
+        <p style="line-height: 100%; margin-bottom: 0in">nums/here/nums0 for the
+          Amounts entered in Juggluco and </p>
+      </li>
+      <li>
+        <p style="line-height: 100%; margin-bottom: 0in">nums/watch/nums-1 for
+          the amounts entered in Kerfstok on a Garmin watch if you make use of
+          it.</p>
+      </li>
+    </ul>
+    <p style="line-height: 100%; margin-bottom: 0in">The bed datatype is
+      saved in <a href="amounts.bedda">amounts.bedda</a>. The dataitems start
+      at offset 256.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">You should change
+      the labels to what you are using: You can add and delete them by
+      setting the cursor on a label and press the keys Alt-d,l,Alt-c,Enter.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">You can save the
+      modified datatype with Alt-y,w.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">
+      For the start of the amounts data and for the other files Juggluco saves
+      there are also bed datatype files.
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p></p>
+    <p></p>
+    <p></p>
+  </body>
+</html>

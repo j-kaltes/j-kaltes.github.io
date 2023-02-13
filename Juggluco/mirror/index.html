@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="icon" href="../arrow.png">
+    <title>Get Glucose values on Android device without NFC</title>
+    <meta name="generator" content="LibreOffice 7.4.0.3 (Linux)">
+    <meta name="created" content="2022-09-30T11:40:51.585588942">
+    <meta name="changed" content="2022-09-30T12:14:33.935452106">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		a:link { color: #000080; text-decoration: underline }
+figure {
+    display: inline-block;
+}
+
+        h3{text-align: right;}
+        h4{text-align: center;}
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
+    <h1>Get Glucose values on Android device without NFC</h1>
+    <p style="line-height: 100%; margin-bottom: 0in"> It is possible to use <a
+        href="https://j-kaltes.github.io/Juggluco">Juggluco</a> on a phone
+      without NFC to display glucose values received via Bluetooth. This can in
+      two ways:</p>
+    <ol>
+      <li>
+        <p style="line-height: 100%; margin-bottom: 0in">An other phone has a
+          Bluetooth connection with the sensor and sends it to Juggluco on the
+          phone without NFC (<a href="https://j-kaltes.github.io/Juggluco/phones/index.html">how to do it over the internet</a>);</p>
+      </li>
+      <li>
+        <p style="line-height: 100%; margin-bottom: 0in">A phone with NFC first
+          sends data to the phone without NFC (as in 1) and thereafter the phone
+          without NFC forms a Bluetooth connection with the sensor and the one
+          with NFC stops having a connection with the sensor.</p>
+      </li>
+    </ol>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <figure> <img src="NFCoverview.png" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">A:
+          Phone <b>with</b> NFC: Mirror overview</span></figcaption> </figure>
+    <figure> <img src="NonNFCAddConnection.png" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">B:
+          Phone <b>without</b> NFC: Add connection with IP and Port of phone
+          with NFC (previous screen)</span></figcaption> </figure>
+    <figure> <img src="nonNFCoverview.png" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">C:
+          Phone <b>without</b> NFC: Mirror overview showing the wlan IP and
+          port</span></figcaption> </figure>
+    <figure> <img src="NFCaddconnection.png" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">D:
+          Phone <b>with</b> NFC: Add connection with IP end Port of phone
+          without NFC (previous screen)</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">First get Juggluco running
+      on the device with NFC. Thereafter install Juggluco on the device without
+      NFC.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">First go to the device <b>with</b>
+      NFC left middle menu-&gt; mirror and write notice the IP after wlan and
+      the port after port (Figure A).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Now go to the device
+      <b> without</b> NFC and open left middle menu-&gt;Mirror and press Add
+      Connection (Figure B).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Fill in the remembered port
+      after Port and the IP after IPS. Check <i>Test Label</i> and fill in a
+      label for example "alabel". Check Receive from and fill in a password if
+      you want.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Hereafter press <i>Save</i>.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Now notice in the overview
+      screen the IP of the device <b>without</b> NFC after wlan and the port
+      after Port (Figure C).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Go to the device <b>with</b>
+      NFC, and press left middle menu-&gt;Mirror-&gt;Add Connection (Figure D).
+      Fill in the Port after Port and the IP after IPs. Set <i>Test Label</i>
+      and fill in the previous label "alabel". Check Amounts, Scans and Stream.
+      Fill in the same password as above. Press on Save.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Press on Sync. And wait a
+      few minutes. If nothing arrives you can try to turn off and on WiFi, press
+      re-init or sync. If that doesn't work check again if you filled in
+      everything correctly.</p>
+    <h2 style=" line-height: 100%; margin-bottom: 0in">Directly connect phone
+      without NFC</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">First you should do
+      something with the network connection between the phones. You can delete
+      the connection on both sides or reverse the direction of the stream
+      values:</p>
+    <p style="line-height: 100%; margin-bottom: 0in">- On the phone with NFC go
+      to left middle menu-&gt;mirror and touch the connection you created
+      before. Here you unset Stream and set "Receive from" and save.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">- On the phone without NFC,
+      you go to left middle menu-&gt;mirror touch the created connection and set
+      Stream and save.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">To connect the one without
+      NFC directly with the sensor via Bluetooth, you should in left
+      menu-&gt;Sensor turn <b>OFF</b>&nbsp; "<b>Use Bluetooth</b>" in the one
+      with NFC and turn it <b>ON</b> in the one <b>without</b> NFC. </p>
+    <p style="line-height: 100%; margin-bottom: 0in">To get rid of interference
+      of the phone without NFC, you can power it off or at least turn off
+      Bluetooth. When the phone without NFC receives glucose values over
+      Bluetooth, you can put it on again.</p>
+    <figure> <img src="StreamOFFinPHONEWITHNFC.jpg" alt="Turn stream off in phone &lt;b&gt;with&lt;/b&gt; NFC"
+        style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Turn
+          stream off in phone <b>with</b> NFC </span></figcaption> </figure>
+    <figure> <img src="StreamONinPHONE_WITHOUT_NFC.png" alt="Turn stream ON in phone &lt;b&gt;without&lt;/b&gt; NFC"
+        style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Turn
+          stream ON in phone <b>without</b> NFC </span></figcaption> </figure>
+    <figure> <img src="Sensorscreen.png" alt="Turn 'Use Bluetooth' On" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Turn
+          ON "Use Bluetooth" in phone <b>without</b> NFC and OFF in phone with</span></figcaption>
+    </figure>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+  </body>
+</html>

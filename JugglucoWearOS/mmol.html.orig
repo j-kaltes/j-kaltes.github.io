@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <link rel="icon" href="http://jkaltes.byethost16.com/Juggluco/arrow.png">
+    <title>Juggluco for WearOS</title>
+    <meta name="generator" content="LibreOffice 7.2.6.2 (Linux)">
+    <meta name="created" content="2022-04-21T22:00:25.718610635">
+    <meta name="changed" content="2022-04-21T22:11:58.106188702">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		a:link { color: #000080; text-decoration: underline }
+figure {
+    display: inline-block;
+}
+
+        h3{text-align: right;}
+        h4{text-align: center;}
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US"> <a href="http://jkaltes.byethost16.com/JugglucoWearOS/mgdL/index.html">mg/dL
+      version</a>
+    <h1 class="western"> Juggluco for Wear OS</h1>
+    <figure> <img src="Jugglucommol.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+          for WearOS</span></figcaption> </figure>
+    <figure> <img src="watchface2.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Watch
+          face with one complication</span></figcaption> </figure>
+    <figure> <img src="watchfacemmol2.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Watch
+          face with three complications</span></figcaption> </figure>
+    <figure> <img src="full.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Watch
+          face with four complications</span></figcaption> </figure>
+    <p><a href="http://jkaltes.byethost16.com/Juggluco/mmol.html">Juggluco</a>
+      is now ported to Wear OS. It consists of an adaptation of the smartphone
+      version to the smaller screen of the watch and a watch face that shows the
+      time, the current glucose value received every minute and four
+      complication slots.</p>
+    <figure> <img src="menu1.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left
+          menu of Juggluco Wear</span></figcaption> </figure>
+    <figure> <img src="menu2.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Right
+          menu of Juggluco Wear</span></figcaption> </figure>
+    <figure> <img src="watchface3.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Watch
+          face with one complication and music playing</span></figcaption> </figure>
+    <figure> <img src="value.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+          Wear</span></figcaption> </figure>
+    <p>Every sensor has to be initialized by the smartphone version of Juggluco,
+      that sends the sensor data to the watch version. Thereafter, there are two
+      possibilities:</p>
+    <ul>
+      <li>
+        <p>Keep the sensor connected with the smartphone and sends the data from
+          the smartphone to the watch by TCP;</p>
+      </li>
+      <li>
+        <p>If you have a watch with good functioning Bluetooth, you can also try
+          a direct connection between watch and sensor.</p>
+      </li>
+    </ul>
+    <figure> <img src="juggluco.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+          Wear with amounts displayed</span></figcaption> </figure>
+    <figure> <img src="Jugglucommol5.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+          Wear</span></figcaption> </figure>
+    <figure> <img src="alarms.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Specify
+          glucose alarms</span></figcaption> </figure>
+    <figure> <img src="watchfacemmol.png" style="object-fit:contain;height:4.5cm; width:auto;"><br>
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Watch
+          face</span></figcaption> </figure>
+    <p> Exact instructions on how to get the watch working is given in the
+      Smartphone version of Juggluco (&gt;2.3.1) under Left menu-&gt; watch-&gt;
+      Wearos Config -&gt; Help.</p>
+    <h2>Watch-sensor connection </h2>
+    <p>I have only experience with Samsung Galaxy Watch4. With about half of the
+      sensors Watch4 has a good connection, with the other half it had so much
+      connection errors, that I had to switch to an indirect connection with the
+      sensor. The last time a sensor that previously had too much connection
+      errors worked well, when I powered off my smartphone after switching the
+      sensor connection from the phone to the watch. The connection stayed well
+      also after I booted the phone.</p>
+    <h2>Watch-phone connection</h2>
+    <img src="PrivateDNS.jpg" alt="PrivateDNS" style="object-fit:contain; width:auto;		    height:11.5cm;"
+      align="right">
+    <p style="line-height: 100%; margin-bottom: 0in">
+Connecting the sensor indirectly with the watch should always be possible, but the phone needs an external connection for it to work. A connection of the watch with a
+      portable hotspot on the phone will stop, without such an external
+      connection. If the phone has an external connection, you can turn off
+      Wi-Fi on the watch. This external connection is not used by Juggluco, but
+      there is only a TCP over Bluetooth connection between watch and phone if
+      such an external connection exists. The external connection can be Wi-Fi,
+      mobile data, personal hotspot, Bluetooth tethering etc. For more on this
+      topic see: <a href="https://web.archive.org/web/20220428115244/https://us.community.samsung.com/t5/Galaxy-Watch/Portable-Bluetooth-connection/td-p/2254198">Portable
+        connection</a>.</p>
+	<p>
+	Sometimes there are general disconnection problems between phone and watch: The android companion app can't connect with the Watch. This can often be solved by rebooting the phone. Another method is to find Bluetooth in the list of apps (including system apps) in Android settings on your phone and press <i>Clear Data</i>. Nothing untoward has befallen me, after I did that and the phone could again connect with the watch (After I did the same with "Google Play Services" on my phone I had to do a factory reset on my watch).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">If you are afraid that
+      turning on Mobile Data will generate costs, you can make that trying to
+      use the internet results in an error. You can for example set Private DNS
+      to an arbitrary name, so that every time someone asks for the IP of a
+      hostname, this will fail; making it impossible to connect to another host
+      using its hostname.</p>
+    <p style="line-height: 100%; margin-bottom: 0in"> The question arises what
+      will happen if you are in a situation where you are unable to form a
+      mobile data connection because its out of reach? I think that the
+      connection will stop functioning. When I switched mobile phone provider,
+      the connection stopped at the moment the provider of the SIM I was still
+      using, turned off the connection. One possibility is to take your tablet
+      with you and on that tablet create a portable hotspot and connect the
+      phone (but not the watch) with that hotspot. Now there will also be a TCP
+      over Bluetooth connection created between watch and phone. If someone
+      knows a better solution, let me know.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">To make it possible to
+      create a portable hotspot on the phone and connect the watch to it without
+      the phone having an external connection, Juggluco 2.9.6 adds the
+      possibility to keep on WIFI on the watch.</p>
+    <p>After switching connection or returning after getting out of reach, the
+      new connection is sometimes not immediately recognized. You can make it
+      recognized by switching Wi-FI, Mobile Data or Bluetooth OFF-and-ON on the
+      phone. </p>
+    <h2>How to get it?</h2>
+    <p>You should be able to find Juggluco in Google Play on your watch.
+      Detailed instructions are giving in Juggluco under Left
+      menu-&gt;Watch-&gt;Wearos Config-&gt;Help. The same text plus some
+      pictures is given <a href="http://jkaltes.byethost16.com/JugglucoWearOS/install/mmol/index.html">here</a>.</p>
+    <h2 class="western">What to do when Juggluco on the watch stops receiving
+      data from Juggluco on the phone?</h2>
+    <figure> <img src="watchconnect1.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">On
+          Watch connection with phone top</span></figcaption> </figure>
+    <figure> <img src="watchconnect2.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">On
+          Watch connection with phone middle</span></figcaption> </figure>
+    <figure> <img src="watchconnect3.png" style="object-fit:contain;height:4.5cm; width:auto;">
+      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">On
+          Watch connection with phone bottom</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">See that <b>Direct
+        sensor-watch connection</b> is turned <b>off</b> in the phone Left
+      menu-&gt;Watch-&gt;Wearos Config.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">First of all turn Bluetooth
+      On in both watch and phone. Then switch WIFI off and on in one of them, if
+      that doesn't work, try the other or try the same a second time (Turning
+      Bluetooth off and on can also be effective if tcp is redirected through
+      Bluetooth.) Hereafter you sometimes have to go to Left (middle) Menu-&gt;
+      Mirror and press sync in phone and watch.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">It is possible that the
+      connection between Juggluco's on watch and phone doesn't work, because it
+      was changed, therefore some screenshots are shown here of a functioning
+      connection. The shown IP is automatically determined and exchanged via
+      Bluetooth and don't need to be specified manually. The label is a watch
+      identifier also shown in Watch-&gt;Wearos Config.</p>
+    <p>If you want to reinstall the watch version, you should remove the
+      existing connection on the phone in Left-middle menu-&gt; Mirror, by
+      touching the connection and pressing <i>Delete</i>. After reinstalling
+      the watch version of Juggluco you can go again to Watch-Wearos Config and
+      press <i>Init Watch app</i>. </p>
+    <p style="line-height: 100%; margin-bottom: 0in">It is very important that
+      always enough storage space is available. If at a critical moment the
+      device is out of storage space, it is possible that the some files are not
+      created the right way and you have to reinstall Juggluco again with enough
+      storage space.</p>
+    <figure> <img src="connection.jpg" alt="Juggluco" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Phone
+          connection with watch</span></figcaption> </figure>
+<h2>Help</h2>
+<p style="line-height: 100%; margin-bottom: 0in">If after
+scrutinizing these instructions, you still can't get Juggluco on the
+watch to work, send an E-Mail to <span style="font-variant: normal"><font color="#222222"><font face="Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">jaapkorthalsaltes@gmail.com</span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#222222"><font face="Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">
+</span></span></span></font></font></font></span>containing:</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Information
+	about the external connection of the phone. Is it connected to WIFI
+	or Mobile data?</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Screenshots of
+	the following smartphone screens:</p>
+	<ul>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Left menu-&gt;
+		Watch -&gt; Watch config;</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Left menu -&gt;
+		Sensor;</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Left middle
+		menu -&gt; Mirror. The overview screen and after touching the
+		specific connection;</p>
+	</ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Screenshots of
+	the following watch screens (use multiple screenshots per item to
+	show all information):</p>
+	<ul>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Left menu -&gt;
+		Sensor</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Left menu -&gt;
+		Mirror. The overview screen and after touching the specific
+		connection.</p>
+	</ul>
+</ul>
+    <h2 class="western"> Starting a new Sensor</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">(US-like sensors always
+      need to be started with the Libre 2 app, thereafter do the same as
+      described hereunder.)</p>
+    <p style="line-height: 100%; margin-bottom: 0in">When <i>"Direct
+        sensor-watch connection"</i> is turned OFF, everything should be the
+      same as when no watch is connected to the smartphone. </p>
+    <p style="line-height: 100%; margin-bottom: 0in">With <i>"Direct
+        sensor-watch connection"</i> ON you should scan the sensor a few times.
+      After warm-up period, the watch should get a Bluetooth connection with the
+      sensor. Sometimes some more scans are needed after the warm-up period.
+      Sometimes this isn't enough, then restarting Juggluco on the watch, by
+      force closing it and starting it again, may help. If this doesn't work,
+      you can turn OFF <i>"Direct sensor-watch connection"</i><i> </i><span style="font-style: normal">and
+try
+        it that way. Thereafter you can turn </span><i>"Direct sensor-watch
+        connection"</i><i> ON</i><span style="font-style: normal"> again.</span></p>
+    <h2 class="western"> Watchface difficulties</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">Sometimes after an update
+      of Juggluco, the appearance of the watch face has changed without any
+      change in the program. For example the complications are not displayed.
+      Changing to another watch face and back, let to the reappearance of the
+      complications, but now lines appeared around the complications. Changing
+      the color in the Watch face in the Watch companion app, led to the
+      disappearance of these lines. </p>
+    <br>
+    <p style="line-height: 100%; margin-bottom: 0in"> </p>
+    <p></p>
+  </body>
+</html>

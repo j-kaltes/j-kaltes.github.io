@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="generator" content="LibreOffice 7.4.2.3 (Linux)">
+    <meta name="created" content="2022-11-16T10:35:31.434843149">
+    <meta name="changed" content="2022-11-17T17:33:31.958675137">
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+	</style>
+  </head>
+  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
+    <p style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid"
+      align="center"> <font face="Liberation Sans, sans-serif"><font style="font-size: 28pt"
+          size="6"><b>Freestyle Libre 3</b></font></font></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">Since Juggluco 3.0.0
+      Freestyle Libre 3 sensors can be used directly with Juggluco. Juggluco
+      4.7.5 can start Libre 3 sensors. </p>
+    <p style="line-height: 100%; margin-bottom: 0in"> Juggluco can take over a
+      sensor started with Abbott's Libre3 app, but only when you can get the
+      Libreview account id used to start the sensor.&nbsp;</p>
+    <h2 style=" line-height: 100%; margin-bottom: 0in">Libre 3 app had Libreview
+      Account</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">- The Libre3 app that
+      starts the sensor should have a Libreview account connected to it;</p>
+    <figure> <img src="getaccountID.jpg" alt="Get Account ID" style="object-fit:contain;
+		    height:auto;		    width:11.5cm;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Get
+          Account ID needed to take over a sensor</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">- Juggluco should retrieve
+      the Libreview account ID: in Juggluco goto left
+      menu-&gt;settings-&gt;Libreview. Give E-Mail address and password and
+      press "<i>Get Account ID</i>", "<i>From Libreview</i>". Leave this view
+      and come back, now there should be a number other then 0 displayed before
+      "Get Account ID". (This account ID is sent by Juggluco to the sensor,
+      otherwise it results in an error. Don't ask me why it is needed, maybe to
+      prevent someone from hijacking a sensor by holding Juggluco to the back of
+      someone else arm; something which is possible with Freestyle Libre 2
+      sensors. Or to prevent that the same data is present on multiple accounts,
+      some which in reality it does not prevent, thanks to Juggluco.)</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Adding later a Libreview
+      account to the Libre3 app after the sensor is activated will not work. </p>
+    <h2 style=" line-height: 100%; margin-bottom: 0in">Libre 3 app had no
+      Libreview Account</h2>
+    <h3>With root access:</h3>
+    <p>If you have root access connect your phone to your computer and type</p>
+    <p>adb shell su -c grep PREF_UNIQUE_ID
+/data/data/com.freestylelibre3.app.nl/shared_prefs/com.freestylelibre3.app.nl_preferences.xml</p>
+    <p>Where you replace nl with the language code of the Libre3 app you are
+      using. This will return something like:</p>
+    <p>&lt;string
+      name="PREF_UNIQUE_ID"&gt;2fe33cb2-3ca4-4a44-9fea-13c24fddf487&lt;/string&gt;</p>
+    <p>From 2fe33cb2-3ca4-4a44-9fea-13c24fddf487, you can get the account id
+      with the following java program:</p>
+    <p>public class conv {<br>
+      static&nbsp; private final int h(String str) {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int length = str.length();<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i2 = 0;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i3 = 0;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (i2 &lt; length) {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char
+      charAt = str.charAt(i2);<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i2++;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i4
+      = i3 * (-2128831035);<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i3 = i4
+      ^ charAt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return i3;<br>
+      &nbsp;&nbsp;&nbsp; }<br>
+      static&nbsp; private final String uns(String str) {<br>
+      &nbsp;&nbsp;&nbsp; return Integer.toUnsignedString(h(str));<br>
+      &nbsp;&nbsp;&nbsp; }<br>
+      public static void main(String[] args) {<br>
+      &nbsp;&nbsp;&nbsp; System.out.println(uns(args[0]));<br>
+      &nbsp;&nbsp;&nbsp; }<br>
+      }</p>
+    <p>Put it in conv.java, build it with </p>
+    <p>javac java.java</p>
+    <p>run it with </p>
+    <p>java conv 2fe33cb2-3ca4-4a44-9fea-13c24fddf487</p>
+    <p>Where you replace 2fe33cb2-3ca4-4a44-9fea-13c24fddf487 with your
+      PREF_UNIQUE_ID.</p>
+    <p>In the above example it will return 2329149245</p>
+    <p>This number you fill in in Juggluco Left
+      menu-&gt;Settings-&gt;Libreview-&gt;Get Account ID after setting <i>Manually</i>.</p>
+    <img src="manually.jpg" style="object-fit:contain; height:auto;		width:11.5cm;" alt="" title="Manually">
+    <h3>The patched Libre3 app was used to activate the sensor</h3>
+    <p>Use a new version of the 
+<a href="https://j-kaltes.github.io/Juggluco/libre3/patched.html">patched Libre 3</a> app. The Account ID is shown
+      after "Account ID" in the Juggluco screen. Use this in Juggluco Left
+      menu-&gt;Settings-&gt;Libreview-&gt;Get Account ID after setting <i>Manually</i>.</p>
+    <p style="line-height: 100%; margin-bottom: 0in"></p>
+    <h2 style=" line-height: 100%; margin-bottom: 0in">Scan the sensor with
+      Juggluco.</h2>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <figure> <img src="readyforuse.jpg" alt="Juggluco NFC scan succesfull" style="object-fit:contain;
+		    height:auto;		    width:11.5cm;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+          NFC scan succesfull</span></figcaption> </figure>
+    <p style="line-height: 100%; margin-bottom: 0in">The same restriction as
+      apply to Juggluco, also apply when using the same sensor on another phone
+      or after a reinstall of the Libre3 app. If you want to use the sensor
+      again with the Libre3 app, you should do the same as when starting a new
+      sensor.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Every time you switch
+      between Juggluco and the Libre3 app you should scan the sensor. In
+      Juggluco, you used hold the NFC in the phone to the sensor while Juggluco
+      is in the foreground, in the Libre3 app you press on "Start New Sensor",
+      "Yes" ,"Next" and hold the NFC in the phone against the sensor. Always
+      force close the app you are not using. It is not possible to connect the
+      sensor with multiple apps at the same time; it will only cause
+      interference. Also during scanning, a PIN is transferred from sensor to
+      the app; that PIN is needed for data to be exchanged and previous PINs are
+      no longer valid.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">But when you use the same
+      Libreview account e-mail address, you can change from one app to the next.
+      All 5 minute period values since the start of the sensors and all 1 minute
+      data of the last 2 hours are remembered on the sensor and transferred to
+      the app.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Mostly the phone has a
+      connection with the sensor in three minutes, but it can take longer.
+      Sometimes switching Bluetooth OFF and ON helps. In rare cases the phone
+      has to be rebooted before it functions again. When you switch between
+      devices, momentary turning off Bluetooth in the device you are no longer
+      using, can help to disrupt the previous connection.</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="https://j-kaltes.github.io/JugglucoWearOS">Juggluco
+for
+        WearOS</a> can also directly connect with FreeStyle Libre 3 sensors. </p>
+    <h2>USA</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">I don't have access to US
+      Libre 3 sensors, but someone else claims to have used successfully a US
+      Libre3 sensor with Juggluco: <a href="https://github.com/maheini/FreeStyle-Libre-3-patch/discussions/27#discussioncomment-4558435"
+        title="https://github.com/maheini/FreeStyle-Libre-3-patch/discussions/27#discussioncomment-4558435">https://github.com/maheini/FreeStyle-Libre-3-patch/discussions/27#discussioncomment-4558435</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="https://j-kaltes.github.io/Juggluco/download.html">Download
+        Juggluco</a></p>
+  </body>
+</html>

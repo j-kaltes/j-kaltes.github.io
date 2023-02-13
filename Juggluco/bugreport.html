@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Bug report</title>
+	<meta name="generator" content="LibreOffice 7.4.3.2 (Linux)"/>
+	<meta name="created" content="2021-12-07T14:33:00.190780140"/>
+	<meta name="changed" content="2023-01-05T12:33:41.079660854"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Bug
+report</b></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in">If you encounter a
+problem in Juggluco, you can send an e-mail to
+<a href="mailto:jaapkorthalsaltes@gmail.com?subject=Juggluco%20bug">jaapkorthalsaltes@gmail.com</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The e-mail should
+contain all the information needed to diagnose the problem. Some
+suggestions:</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Description of
+	problem plus screenshots to illustrate the problem.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Screenshot(s)
+	of settings (Left menu, Settings)</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Screenshot of
+	Left menu, Sensor (for each sensor) after Juggluco is trying to get
+	a connection with the sensor for at least 20 minutes. Open de Left
+	menu-&gt;Sensor immediately before making the screenshot, because
+	the screen isn't updated automatically.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">If
+	alarms give problems,</span> <span lang="en-US">screenshots of alarm
+	settings.</span></p>
+	<li><p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">If
+	Mirror function</span> <span lang="en-US">gives problems,</span>
+	<span lang="en-US">screenshot of Mirror (left middle menu, Mirror).</span></p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">When Libreview
+	gives problems, a screenshot of Left menu-&gt;Settings-&gt;Libreview
+	at least 20 minutes it is turned on or &quot;Get Account ID&quot; is
+	pressed.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Urls of Android
+	apps with which the sensor does work</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Sensor type</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Sensor id: e.g.
+	3MH0078YXXW</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Information
+	about phone (Android Settings-&gt;About Phone):</p>
+	<ul>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Phone type</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Model</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Android
+		version</p>
+		<li><p style="line-height: 100%; margin-bottom: 0in">Build number</p>
+	</ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Everything else
+	you consider relevant.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">When Juggluco
+	crashes, logcat is very helpful. To make it, you have to enable
+	developer options on your phone and install adb on your computer.
+	Then from a command shell run: <i><b>adb shell logcat -d &gt;
+	logcat.txt</b></i><i> </i>to generate a general logcat. More helpful
+	is a logcat specific for Juggluco. For this you first have to find
+	out the pid of Juggluco and then press <i><b>adb shell logcat --pid
+	$PID -d &gt; logcat.$PID</b></i> where $PID stand for the pid. If
+	you can regenerate the crash, you first start Juggluco then press
+	<i><b>adb shell pidof tk.glucodata</b></i> to get the pid. Let
+	Juggluco crash and then press  <i><b>adb shell logcat --pid $PID -d
+	&gt; logcat.$PID</b></i> or immediately press <i><b>adb shell logcat
+	--pid $PID &gt; logcat.$PID</b></i> and keep it running while you
+	let Juggluco crash. Thereafter you can send me logcat.txt and
+	logcat.$PID.</p>
+</ul>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <link rel="icon" href="https://j-kaltes.github.io/Juggluco/arrow.png">
+    <title>Juggluco command line</title>
+  </head>
+  <body dir="ltr" lang="en-US">
+    <p style="margin-top: 0.17in; margin-bottom: 0.08in; line-height: 100%; page-break-after: avoid"
+      align="center"> <font face="Liberation Sans, sans-serif"><font style="font-size: 28pt"
+          size="6"><b>Juggluco</b></font></font></p>
+    <p style="margin-bottom: 0.2in; line-height: 100%">In <a href="https://play.google.com/store/apps/details?id=tk.glucodata">Juggluco</a>
+      (an android app for Freestyle libre 2 sensors) it is possible to make a
+      network connection with a pc to transfer data to and from this pc.</p>
+    <p> For this you need a little command line program: <br>
+      <a href="https://j-kaltes.github.io/Juggluco/cmdline/download/juggluco4.5.4.xz">https://j-kaltes.github.io/Juggluco/cmdline/download/juggluco4.5.4.xz</a>
+      <br>
+      The source can be found here: <br>
+      <a href="https://j-kaltes.github.io/Juggluco/cmdline/download/juggluco-server4.5.4.src.tar.xz">https://j-kaltes.github.io/Juggluco/cmdline/download/juggluco-server4.5.4.src.tar.xz</a>
+      <br>
+      <br>
+      <a href="https://j-kaltes.github.io/Juggluco/cmdline/download">Previous
+        versions</a> </p>
+    <p> <a href="data/index.html">Follow this link on how to view Juggluco's
+        saved data.</a> </p>
+    <font style="font-size: 28pt" size="6"><b>Mirror</b></font>
+    <p style="line-height: 100%; margin-bottom: 0in">To connect two devices
+      running Juggluco directly with each other, at least one of them should
+      listen on a network port. How to do that, you can see in the help menu of
+      the Android version of Juggluco (left middle menu-&gt;Mirror-&gt;add
+      Connection).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Some mobile data
+      connections don't have a non-shared IP where an Android device can listen
+      on a port. Connecting two of these phones is still possible by placing a
+      computer in the middle running command line juggluco.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">One possibility is to run a
+      computer yourself connected to a modem; a cheaper possibility is to run
+      command line juggluco on Amazon Aws. (It is also possible to keep an old
+      Android smartphone home running Juggluco to which both other smartphones
+      connect (<a href="https://j-kaltes.github.io/Juggluco/phones/index.html">Details</a>)).</p>
+    <p style="line-height: 100%; margin-bottom: 0in">The current description
+      only applies to Juggluco 1.4.0 or above.</p>
+    <h1 class="western">PC</h1>
+    <p style="line-height: 100%; margin-bottom: 0in">Place juggluco in your
+      current directory and make it executable:</p>
+    <pre class="western">chmod a+x ./juggluco</pre>
+    <p style="line-height: 100%; margin-bottom: 0in"> Try if it works with:</p>
+    <pre class="western">./juggluco -h</pre>
+    <p style="line-height: 100%; margin-bottom: 0in"> </p>
+    <p style="line-height: 100%; margin-bottom: 0in">In the following example I
+      have a Sony smartphone connected to the sensor and a Huawei tablet
+      receiving data from the Sony smartphone.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">So the Sony Smartphone is
+      the sender of data. In left middle Menu-&gt;Mirror-&gt;Add Connection we
+      specify it as an active only sender:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <img src="addconnection-sony.png" style="object-fit:contain; width:12cm;		    height:auto;">
+    <p style="line-height: 100%; margin-bottom: 0in">The label is "sony" and the
+      password "123456789", it connects to a PC with IP 3.22.240.59 and port
+      8795.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">On this PC we specify the
+      corresponding receiver as:</p>
+    <pre class="western">./juggluco  -riP -L sony -w 123456789
+-r: receiver
+-i: ignore ip
+-P: passive only
+-L sony: test on label 'sony'
+-w 123456789: decrypt with password 123456789.</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">To get the data from the PC
+      to the Huawei tablet, we add to the <b>Add connection</b> screen on the
+      Huawei Tablet the following:</p>
+    <p> <img src="addconnection-huawei.jpg" style="object-fit:contain; width:18cm;		    height:auto;">
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">On the PC we specify the
+      corresponding sender:</p>
+    <pre class="western">./juggluco  -nsbiP -L huawei -w 987654321</pre>
+    <pre class="western">-n: <i>send numbers</i>
+-s: <i>send scans</i>
+-b: <i>send Bluetooth glucose values</i>
+-i: <i>ignore IP</i>
+-P: <i>passive</i><i> </i><i>only</i>
+-L huawei: <i>test on label huawei</i>
+-w 987654321: <i>encrypt with password </i><i>987654321</i></pre>
+    <p style="line-height: 100%; margin-bottom: 0in">By pressing</p>
+    <pre class="western"> ./juggluco</pre>
+    <p style="line-height: 100%; margin-bottom: 0in"> </p>
+    <p style="line-height: 100%; margin-bottom: 0in">the command line juggluco
+      should now be ready for connections from Sony to receive data and from
+      Huawei to send data to.</p>
+    <p> Later you can better put something like the following in repeat.sh:</p>
+    <pre class="western"> 
+while true
+do
+   echo -n "Start new Juggluco Server: "
+   date
+   ./juggluco  
+done
+</pre>and run
+    <pre class="western"> 
+nohup bash ./repeat.sh &amp;
+</pre>
+    <p> </p>
+    <h1 class="western">Remote computer</h1>
+    <p style="line-height: 100%; margin-bottom: 0in">Exactly the same you can do
+      on a remote host you connect to over the Internet. For example Amazon AWS
+      EC2. After paying one dollar with credit card, you can use it for one
+      year.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Thereafter, you have maybe
+      to pay 30 to 45 dollars a year. I don't know. If you don't <a href="https://aws.amazon.com/premiumsupport/knowledge-center/close-aws-account/">close
+        your account</a>, you will be changed after one year even if you don't
+      use it anymore.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">An introduction with
+      Chinese links: <a href="https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/">https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">The following howto has US
+      links, but doesn't say how to connect with ssh under Linux:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.howtoforge.com/tutorial/how-to-setup-linux-server-with-aws/">https://www.howtoforge.com/tutorial/how-to-setup-linux-server-with-aws/</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">If you have a virtual
+      machine running and can login with ssh using mykey.pem, you can put
+      juggluco on the machine with scp or sftp. On your Linux home computer:</p>
+    <pre class="western">scp -i mykey.pem file ec2-user@myaws:/home/ec2-user</pre>
+    <p style="line-height: 100%; margin-bottom: 0in"> Here myaws is the ip or
+      hostname of the aws machine.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">You also need to open the
+      8795 port.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Goto <a href="http://console.aws.amazon.com/">https://console.aws.amazon.com</a>
+      to find the Security group your VPC is using. Press 'Edit inbound rule".
+      Here you should see a rule for ssh with port 22. Press "Add rule" and add
+      a custom TCP with port 8795 source anywere IP4.</p>
+    <p> <img src="inboundrules.png" style="object-fit:contain; width:30cm;		    height:auto;">
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">If you have uploaded
+      juggluco to the AWS machine, you can do exactly the same as on the PC. If
+      you don't look at the other settings, it is all very simple.</p>
+    <p style="margin-bottom: 0.2in"><font style="font-size: 20pt" size="5">Windows
+        10</font></p>
+    <p style="margin-bottom: 0.2in; line-height: 100%">Command line Juggluco is
+      compiled for Linux x86_64, but because you can run Linux programs on
+      Windows 10 there is no need for a special Windows version (see <a href="https://ubuntu.com/tutorials/ubuntu-on-windows">https://ubuntu.com/tutorials/ubuntu-on-windows</a>).</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">To
+      use ./juggluco under windows 10 you should, after installing WSL, redirect
+      a network port from windows to Linux (running under windows), if they have
+      different IPs.</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      You can find the Linux IP under bash by commands like:</p>
+    <pre class="western" style="margin-bottom: 0.2in">ip   route|sed -n 's/^.*src \([^ ]*\).*$/\1/p'</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      or</p>
+    <pre class="western" style="margin-bottom: 0.2in">ifconfig|grep inet</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      In a powershell under adminstrator permission, clear previous proxy
+      settings with:</p>
+    <pre class="western" style="margin-bottom: 0.2in">netsh interface portproxy reset</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      And make a new redirection with:</p>
+    <pre class="western" style="margin-bottom: 0.2in">netsh interface portproxy add v4tov4 listenport=$winport connectport=$linuxport connectaddress=$linuxip</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      Use for $winport the port number you like to contact to and $linuxport to
+      the port number juggluco is listening on e.g. both 8795 and for $linuxip
+      the ip you found above.</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      Give access to port $winport through the firewall with:</p>
+    <pre class="western" style="margin-bottom: 0.2in">netsh advfirewall firewall add rule name=$winport dir=in action=allow protocol=TCP localport=$winport"</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      The windows IP you find with ipconfig in cmd.com or powershell</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      Ethernet adapter Ethernet:</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      [...]</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      IPv4 Address. . . . . . . . . . . : 192.168.122.230</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      [...]</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      For sending to ./juggluco running under linux under windows 10,</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      go to Mirror-&gt;add connection in Juggluco running under Android.</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      After Port you set $winport</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      Under Ips $windowsip</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      You check Amounts, Scans and or Stream and save.</p>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      To configure ./juggluco runnning under linux under windows 10 to receive
+      this data, press in bash in the directory you placed juggluco in:</p>
+    <pre class="western" style="margin-bottom: 0.2in; line-height: 100%; background: transparent">./juggluco -p $linuxport
+./juggluco -rag</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      And start it with:</p>
+    <pre class="western" style="margin-bottom: 0.2in">./juggluco</pre>
+    <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
+      <font style="font-size: 20pt" size="5">Command line options:</font></p>
+    <p style="margin-bottom: 0.2in; line-height: 100%">By running ./juggluco -h
+      you get a help screen, as displayed here:</p>
+    <pre class="western">Command line program to create a Juggluco backup on a desktop computer.
+Juggluco is an android applet that connects with Freestyle libre 2 sensors
+and allows one to add diabetes diary data, see:
+https://play.google.com/store/apps/details?id=tk.glucodata
+Within a certain directory (-d dir) backup and connection data is saved.
+With this program, you can specify the connections the program
+should receive data from and send data to.
+Usages: ./juggluco -d dir : save data in directory dir
+        ./juggluco [-d dir] -p port : listen on port port
+        ./juggluco [-d dir] -l : list configuration data
+        ./juggluco [-d dir] -c : clear configuration data
+        ./juggluco -x[-+]: start xDrip watch app server or not (-x-)
+        ./juggluco [-d dir] -N filename: export nums 
+	./juggluco [-d dir] -S filename: export scans 
+	./juggluco [-d dir] -B filename: export stream 
+	./juggluco [-d dir] -H filename: export history 
+	./juggluco [-d dir] -m filename: export meals 
+	./juggluco [-d dir] -M : mmol/L
+	./juggluco [-d dir] -G : mg/dL
+	./juggluco [-d dir] -R n : remove n-th connection
+	./juggluco -v  : version
+
+
+	./juggluco [-d dir] OPTIONS IP1,IP2 ...  : Specify connection with IP(s).
+OPTIONS:
+	-r: receive from host
+	-a: automatically detect IP the first time
+	-A: Active only. Don't accept connections from this host. Only actively connect to this host.
+	-P: Passive only. Never connect actively to this host. Only accepts connections.
+
+	-n: send nums (amounts)
+	-s: send scans (via NFC received data)
+	-b: send stream (via bluetooth received data)
+
+	-L label: give connection label 'label'. A connection is only established if both side specify 
+		the same label.
+	-i: don't test on ip
+	-w password: encrypt communication with password
+	-p port:  connect to port (default: 8795)
+
+	-C n: overwrite n-th connection. If this program sends to this connection, data will not be resend. 
+
+example:
+
+./juggluco -d mydir -r  192.168.1.64
+
+Receive data from host 192.168.1.64 (an ip shown in backup screen android app)
+In the juggluco android applet you can in "backup, add connection"
+specfiy send to amounts, scans and stream and specify port 8795 and
+an ip of this computer (e.g 192.168.1.71)
+
+./juggluco -d mydir -nsb  192.168.1.69
+
+Send the amounts, scans and stream data to 192.168.1.69 on the default port (8795)
+In the android applet you can in the "add connection" dialog, specify 
+an ip of this computer (192.168.1.71) check "Receive from" and specify as port 8795
+(the port specified earlier for this computer)
+
+./juggluco -d mydir
+
+Starts the program with this configuration.
+</pre>
+  </body>
+</html>

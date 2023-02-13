@@ -1,0 +1,425 @@
+Delivered-To: jaapkorthalsaltes@gmail.com
+Received: by 2002:a05:7022:323:b0:45:5cb0:416e with SMTP id 35csp3176871dld;
+        Tue, 18 Oct 2022 04:33:14 -0700 (PDT)
+X-Received: by 2002:a05:6638:311:b0:363:77fa:f7b7 with SMTP id w17-20020a056638031100b0036377faf7b7mr1565475jap.112.1666092794609;
+        Tue, 18 Oct 2022 04:33:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1666092794; cv=none;
+        d=google.com; s=arc-20160816;
+        b=zxABT3yNWMB7nbFcsdWEzt4UuYHabPpOsW52UUpS5wyxx7fU0SYuyvvMUECjpFwZFw
+         JqZT2ZiMkoK6ue39BTYiRKXMIc5VTaQyOPxd3d0nBystgATea4kI9qmyg/ifHugKoWVl
+         7vo+qzaVwOl+UApaUDwbJOVldVvq1Yw6w6RjBhbr52LKC4l7vc4V3TAVgtmFjjkh5BQK
+         tcBc63uM1TGhGTbNZKCHyBqajSR5d6gRr+SqLL4qrYBA/DIJb5fwGCFlW8gSwo/I9Euz
+         JgvRsWcuUuHEFfzHUuIzhSO5axGXo3BzEoR+HGnHbndknLUehTrd1Hvjyr93YTr21EXW
+         pIcw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:dkim-signature;
+        bh=JsWUoUxbPF2yYWhm7rqruDn6nLre3s6FlfEeRe7ZeWs=;
+        b=wqYQxbnJax0WM2xg/+XBK+PclPXrwdDqeUKGuAJBVugaFimK13EFOHYiI+PAkY6diK
+         WTojc0pxTyF7yE8+qIz9sS06DYewRNlDQvyUMzBb7RMt2v871LYCtcnrMq/lPfczFVt8
+         nSW1SHGeLahIqqGzrEOpBw7H/+PQjZXJ6NQTHseqVZP3V3Ms4V/8FtBJIGcGPOwzyjfX
+         GUGBgahrH41Pgzy5gE7/2IHW61ZOFW7+ryx76FoyfEoraO9shH98AzLiUsCOtdvPpust
+         9MN/6T9lH8vw7xPUoalqc6WKwoqilHMO+VYg6Go4nI0ylQyWQyJKBdC+aup2F8v/6dPr
+         6yBQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=amBxEHK+;
+       spf=pass (google.com: domain of 3-o5oyx0kahmef-ivgcp-xffxcvgcrp-uvmvcfgvixffxcv.tfd@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3-o5OYx0KAHMef-iVgcp-XffXcVgcRp-UVmVcfgViXffXcV.Tfd@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <3-o5OYx0KAHMef-iVgcp-XffXcVgcRp-UVmVcfgViXffXcV.Tfd@scoutcamp.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id r9-20020a5e8e49000000b006a235c2aca7sor3458340ioo.20.2022.10.18.04.33.14
+        for <jaapkorthalsaltes@gmail.com>
+        (Google Transport Security);
+        Tue, 18 Oct 2022 04:33:14 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 3-o5oyx0kahmef-ivgcp-xffxcvgcrp-uvmvcfgvixffxcv.tfd@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=amBxEHK+;
+       spf=pass (google.com: domain of 3-o5oyx0kahmef-ivgcp-xffxcvgcrp-uvmvcfgvixffxcv.tfd@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3-o5OYx0KAHMef-iVgcp-XffXcVgcRp-UVmVcfgViXffXcV.Tfd@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=JsWUoUxbPF2yYWhm7rqruDn6nLre3s6FlfEeRe7ZeWs=;
+        b=amBxEHK+2rp+drqVt460OxAhiwjcT9jtL22KVQnlk1adDQYPnV7o0B5olz743RtfhE
+         U51P8hAnhAA5CfsfAiI3+ouba1lyORZOHZRhDRwig1iqbuAFtTR24bb0Uzar+wirwIiy
+         B8KgbCVD7efQgAXtKuGFz6AsL5gqT1aXKj7jZUOt+SFGnltLMDxWL6jeuE3h8IggZoyo
+         XD1gFOSK52ZrVF06wodXDxZnJM6oZKGl3NLZXpLKurilQfsloTtancc9ujBe9Vx6RR3p
+         68dsQVN7e460oegU6gniyaS2d5nSPSukxStz1F0OrDh8FPMeLdc5mqTcFyySUPHHRmcB
+         5tcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:from:subject:message-id:feedback-id:reply-to:date
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JsWUoUxbPF2yYWhm7rqruDn6nLre3s6FlfEeRe7ZeWs=;
+        b=ITmooZBqgLWmvA47QO2LwvAJImUi/FNykGMzEnv4zin8BNrODVajufoj4eXW2xSaGs
+         ij6XctV/szVhSk79dhwef6OssgRNgHyRiPOqZuG2NxtgiKlVNI/lYdg2MdnwtGI/73/8
+         ETCTWgrQXGyP1U7gOn1v/TAxh2VW7gUCHbTFhBQCPDO7EGLF/Qc05wKNTqefqtR2CdH2
+         hmxg4VkLAn/nT4VCp9v4VqVmL7wpPMg27hgHPQzfJVSwYQncCp1dKhK8nTCD0hSHeksv
+         F7ntAPwyCQ27+jnH5jJuHuc4iX3QWLwna47ZyUixSfZWBXZE/1A5lE+Cx7f8yTaueWgL
+         366g==
+X-Gm-Message-State: ACrzQf3TSVpWFBEOnQdvmwlBCYjBX7wJPD2IhA9d4ONIoApXSuH/uq1O
+	HIOiyZzDbERbYAk=
+X-Google-Smtp-Source: AMsMyM6IM2Q9xU730pgntsQnssgREHVmc3T/Kg+oXWB5BKt0BpPkhsqp+21+eHebiOtg4lqzvm2j9mQ=
+MIME-Version: 1.0
+X-Received: by 2002:a05:6602:1551:b0:6bc:dfba:33f9 with SMTP id
+ h17-20020a056602155100b006bcdfba33f9mr1435577iow.76.1666092794012; Tue, 18
+ Oct 2022 04:33:14 -0700 (PDT)
+Date: Tue, 18 Oct 2022 04:33:14 -0700
+Reply-To: Google Play Support <no-reply-googleplay-developer@google.com>
+X-Trak-Extra-Language: en
+X-Google-Ads-Sender: auto_adsense_emails
+X-Google-Id: 310751
+Feedback-ID: P-70-0:C20097810:M110242748-en:gamma
+X-Notifications: GAMMA:<32bce1042e730ef0f84f9ce500441728d8c69554-20097810-110619858@google.com>
+X-Notifications-Bounce-Info: AT2jwkbC7vXKEXYsbd5fJ01PLf4Tuq16esMZIu-iu_C1D9qrVHoA-E6dtGYn0d1TqJ-NYOcWvP6Y2vmVrBeCpAyvsKqdTA2Om-OPTM7T9IfB_9FGNI_4qhXAeomjISOhF-4m4fR5UycoTKl3XkxXblAUl2mAQ_r6DhfKlXOwWEQjALYUZvYTC1Qy8es_pJ-cWbX0WsPfVJks4Z-X0rByU85pdT7CKoqz-hnBdnGbUK1dQEkAgo39oaQe6-RaASfafdn0qjedgJkfg93Qc2uN7xn8RqnsmQ8OyOrliovktRFeK4b4VIOUkK7C0l_m38O2dM91yYvsUbnnKTn3_Wr4yGtxe1QJNjAwNjA0MDQxNTM1NTk2OTMzMg
+Message-ID: <32bce1042e730ef0f84f9ce500441728d8c69554-20097810-110619858@google.com>
+Subject: Action Required: Your app is not compliant with Google Play Policies (Juggluco)
+From: Google Play Support <no-reply-googleplay-developer@google.com>
+To: jaapkorthalsaltes@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000002669fe05eb4d75ca"
+
+--0000000000002669fe05eb4d75ca
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+R29vZ2xlIFBsYXkNCg0KRGV2ZWxvcGVyIHVwZGF0ZQ0KDQoNCg0KDQpIaSBEZXZlbG9wZXJzIGF0
+IEphYXAgS29ydGhhbHMgQWx0ZXMsDQoNCkFmdGVyIGEgcmVjZW50IHJldmlldywgd2UgZm91bmQg
+dGhhdCB5b3VyIGFwcCBKdWdnbHVjbyAodGsuZ2x1Y29kYXRhKSBpcyAgDQpub3QgY29tcGxpYW50
+IHdpdGggb25lIG9yIG1vcmUgb2Ygb3VyIERldmVsb3BlciBQcm9ncmFtIFBvbGljaWVzLiBTZWUg
+YmVsb3cgIA0KZm9yIG1vcmUgaW5mb3JtYXRpb24gYWJvdXQgeW91ciBhcHAncyBzdGF0dXMgYW5k
+IGhvdyB0byBjb3JyZWN0IHRoZSBpc3N1ZS4NCg0KDQoNClB1Ymxpc2hpbmcgU3RhdHVzDQpBcHAg
+U3RhdHVzOiBSZWplY3RlZA0KDQpZb3VyIGFwcCBoYXMgYmVlbiByZWplY3RlZCBhbmQgd2Fzbid0
+IHB1Ymxpc2hlZCBkdWUgdG8gdGhlIHBvbGljeSBpc3N1ZShzKSAgDQpsaXN0ZWQgYmVsb3cuIElm
+IHlvdSBzdWJtaXR0ZWQgYW4gdXBkYXRlLCB0aGUgcHJldmlvdXMgdmVyc2lvbiBvZiB5b3VyIGFw
+cCAgDQppcyBzdGlsbCBhdmFpbGFibGUgb24gR29vZ2xlIFBsYXkuDQoNCg0KDQoNCklzc3VlIGZv
+dW5kOiBCYXNpYyBmdW5jdGlvbmFsaXR5IG9mIGFwcCBpc24ndCB3b3JraW5nIGFzIGRlc2NyaWJl
+ZA0KDQpUaGUgYmFzaWMgZnVuY3Rpb25hbGl0eSBvZiB5b3VyIGFwcCBkb2Vzbid0IHdvcmsgYXMg
+ZGVzY3JpYmVkLiBNYWtlIHN1cmUgdG8gIA0KdGVzdCB5b3VyIGFwcCBvbiBhIHZhcmlldHkgb2Yg
+V2VhciBPUyBkZXZpY2VzIGFuZCBjb25maWd1cmF0aW9ucy4gUGxlYXNlICANCnJlZmVyIHRvIHRo
+ZSBCdWlsZGluZyBBcHBzIGZvciBXZWFyYWJsZXMgYW5kIFRlc3RpbmcgeW91ciBBcHAgZG9jdW1l
+bnRhdGlvbiAgDQpmb3IgbW9yZSBpbmZvcm1hdGlvbi4NCg0KSXNzdWUgZGV0YWlscw0KDQpXZSBm
+b3VuZCBhbiBpc3N1ZSBpbiB0aGUgZm9sbG93aW5nIGFyZWEocyk6DQoNCg0KU1BMSVRfQlVORExF
+IDI1Nw0KDQpBZGRpdGlvbmFsIG5vdGVzIHJlbGF0ZWQgdG8gdGhpcyBpc3N1ZToNCg0KDQpBcHAg
+aXMgbm90IHdvcmtpbmcgYXMgZGVzY3JpYmVkIG9yIGFzIHNob3duIGluIHdlYXIgc2NyZWVuc2hv
+dHMuDQoNCg0KQWJvdXQgdGhlIFdlYXIgQXBwIFF1YWxpdHkgR3VpZGVsaW5lcw0KV2UgZG8gbm90
+IGFjY2VwdCBhcHBzIGludG8gV2VhciBPUyB0aGF0IGRvbid0IGFkaGVyZSB0byBXZWFyIEFwcCBR
+dWFsaXR5ICANCkd1aWRlbGluZXMuDQoNCg0KDQpJc3N1ZSBmb3VuZDogV2F0Y2ggZmFjZSBhcHAg
+aWNvbiBtaXNtYXRjaA0KDQpZb3VyIGFwcCBpY29uIGRvZXMgbm90IGFjY3VyYXRlbHkgcmVwcmVz
+ZW50IHRoZSBpbWFnZSBwcmVzZW50ZWQgaW4gdGhlICANCndhdGNoIGZhY2UuDQoNCklzc3VlIGRl
+dGFpbHMNCg0KV2UgZm91bmQgYW4gaXNzdWUgaW4gdGhlIGZvbGxvd2luZyBhcmVhKHMpOg0KDQoN
+ClNQTElUX0JVTkRMRSAyNTcNCg0KQWRkaXRpb25hbCBub3RlcyByZWxhdGVkIHRvIHRoaXMgaXNz
+dWU6DQoNCg0KQXBwIGljb24gaW1hZ2UgZG9lcyBub3QgYWNjdXJhdGVseSByZXByZXNlbnQgd2F0
+Y2ggZmFjZS4NCg0KDQpBYm91dCB0aGUgV2VhciBBcHAgUXVhbGl0eSBHdWlkZWxpbmVzDQpXZSBk
+byBub3QgYWNjZXB0IGFwcHMgaW50byBXZWFyIE9TIHRoYXQgZG9uJ3QgYWRoZXJlIHRvIFdlYXIg
+QXBwIFF1YWxpdHkgIA0KR3VpZGVsaW5lcy4NCg0KDQpBY3Rpb24gcmVxdWlyZWQ6IFN1Ym1pdCBh
+biB1cGRhdGVkIGFwcCBmb3IgcmV2aWV3DQpIZXJlJ3Mgd2hhdCB0byBkbyB0byBoZWxwIGdldCB5
+b3VyIGFwcCBvbiBHb29nbGUgUGxheToNCg0KTWFrZSBzdXJlIHRvIHJlYWQgdGhlIGFwcGxpY2Fi
+bGUgcG9saWNpZXMgb3IgcmVxdWlyZW1lbnRzIGxpc3RlZCBiZWxvdzoNCg0KV2VhciBBcHAgUXVh
+bGl0eSBHdWlkZWxpbmVzDQoNCk1ha2UgYXBwcm9wcmlhdGUgY2hhbmdlcyB0byB5b3VyIGFwcCAo
+aWYgcG9zc2libGUpLCBhbmQgYmUgc3VyZSB0byBhZGRyZXNzICANCnRoZSBpc3N1ZSBkZXNjcmli
+ZWQgYWJvdmUuIFlvdSBtYXkgYWxzbyB3YW50IHRvIGNoZWNrIHlvdXIgYXBwJ3Mgc3RvcmUgIA0K
+bGlzdGluZyBmb3IgY29tcGxpYW5jZSwgaWYgYXBwbGljYWJsZS4NCklmIHlvdSdkIGxpa2UgdG8g
+ZGlzYWJsZSB5b3VyIFdlYXIgT1MgYnkgR29vZ2xlIGFwcCB0ZW1wb3JhcmlseSwgb3IgcmVtb3Zl
+ICANCnRoZSByZWxlYXNlIHR5cGUgZW50aXJlbHk6DQoNCk9wZW4gdGhlIFBsYXkgQ29uc29sZS4N
+ClNlbGVjdCB5b3VyIGFwcC4NCk9uIHRoZSBsZWZ0IG1lbnUsIHNlbGVjdCBTZXR1cCA+IEFkdmFu
+Y2VkIHNldHRpbmdzLg0KQ2xpY2sgdGhlIFJlbGVhc2UgdHlwZXMgdGFiLg0KWW91IGNhbiBlaXRo
+ZXIgZGlzYWJsZSB5b3VyIFdlYXIgT1MgYnkgR29vZ2xlIGFwcCAodGhpcyBpcyBjb252ZW5pZW50
+IGlmICANCnlvdSB3YW50IHRvIGVuYWJsZSBpdCBhZ2FpbiBpbiB0aGUgZnV0dXJlKSBvciByZW1v
+dmUgdGhlIHJlbGVhc2UgdHlwZSAgDQplbnRpcmVseToNCg0KRGlzYWJsZSB5b3VyIFdlYXIgT1Mg
+YXBwOiBOZXh0IHRvIOKAnFdlYXIgT1MgYnkgR29vZ2xlLOKAnSBzZWxlY3QgTWFuYWdlLiBOZXh0
+LCAgDQp1bmNoZWNrIHRoZSDigJxPcHQtaW7igJ0gYm94LCBhbmQgY2xpY2sgU2F2ZS4NClJlbW92
+ZSB0aGUgcmVsZWFzZSB0eXBlOiBOZXh0IHRvIOKAnFdlYXIgT1MgYnkgR29vZ2xlLOKAnSBzZWxl
+Y3QgUmVtb3ZlLg0KDQoNCkRvdWJsZSBjaGVjayB0aGF0IHlvdXIgYXBwIGlzIGNvbXBsaWFudCB3
+aXRoIGFsbCBvdGhlciBEZXZlbG9wZXIgUHJvZ3JhbSAgDQpQb2xpY2llcy4NCklmIHlvdSBtYWRl
+IGNoYW5nZXMgdG8geW91ciBhcHAgYnVuZGxlLCBzdG9yZSBsaXN0aW5nLCBvciBBUEssIHBsZWFz
+ZSBzaWduICANCmluIHRvIHlvdXIgUGxheSBDb25zb2xlIGFuZCBzdWJtaXQgdGhlIHVwZGF0ZShz
+KS4NCg0KQ29udGFjdCBzdXBwb3J0DQpJZiB5b3UndmUgcmV2aWV3ZWQgdGhlIHBvbGljeSBhbmQg
+ZmVlbCBvdXIgZGVjaXNpb24gbWF5IGhhdmUgYmVlbiBpbiBlcnJvciwgIA0KcGxlYXNlIHJlYWNo
+IG91dCB0byBvdXIgcG9saWN5IHN1cHBvcnQgdGVhbS4gV2UnbGwgZ2V0IGJhY2sgdG8geW91IHdp
+dGhpbiAyICANCmJ1c2luZXNzIGRheXMuDQpMZWFybiBNb3JlDQoNClZpc2l0IHRoZSBBbmRyb2lk
+IERldmVsb3BlcnMgQmxvZyB0byBsZWFybiBtb3JlIGFib3V0IGZyZWUgdG9vbHMgYW5kICANCnJl
+c291cmNlcyBmb3IgYnVpbGRpbmcgc2FmZSBhbmQgc3VjY2Vzc2Z1bCBhcHBzLg0KDQpUaGFua3Mg
+Zm9yIHlvdXIgY29udGludWVkIHN1cHBvcnQgaW4gaGVscGluZyB0byBtYWtlIEdvb2dsZSBQbGF5
+IGEgcG9zaXRpdmUgIA0KZXhwZXJpZW5jZSBmb3IgYm90aCBkZXZlbG9wZXJzIGFuZCBjb25zdW1l
+cnMuIFdlIGxvb2sgZm9yd2FyZCB0byBzZWVpbmcgYW4gIA0KdXBkYXRlZCB2ZXJzaW9uIG9mIHlv
+dXIgYXBwIG9uIEdvb2dsZSBQbGF5Lg0KDQpQbGVhc2UgY29tcGxldGUgYSB0d28gcXVlc3Rpb24g
+c3VydmV5IHRvIGhlbHAgdXMgaW1wcm92ZSB0aGlzIGV4cGVyaWVuY2UuDQoNCg0KDQoNCg0KVGhl
+IEdvb2dsZSBQbGF5IFRlYW0NCg0KDQoNCg0KDQrCqSAyMDIyIEdvb2dsZSBMTEMgMTYwMCBBbXBo
+aXRoZWF0cmUgUGFya3dheSwgTW91bnRhaW4gVmlldywgQ0EgOTQwNDMNCg0KQ2xpY2sgaGVyZSB0
+byBjb25maWd1cmUgeW91ciBub3RpZmljYXRpb24gcHJlZmVyZW5jZXMuDQoNClRoaXMgbWVzc2Fn
+ZSB3YXMgc2VudCB0byBpbmZvcm0geW91IGFib3V0IGltcG9ydGFudCB1cGRhdGVzIHRvIHlvdXIg
+R29vZ2xlICANClBsYXkgZGV2ZWxvcGVyIGFjY291bnQuDQoNCg0KDQoNCg0K
+--0000000000002669fe05eb4d75ca
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><style>.mokka-email {
+  background-color:#fff;
+  color:#3a3a3a;
+  font-family:Roboto,Helvetica,Arial,sans-serif;
+  font-size:13px;
+  line-height:20px;
+}
+.mokka-email span {
+  color:#3a3a3a;
+}
+
+.mokka-email table, .mokka-email tr, .mokka-email td {
+  border-collapse:collapse;
+}
+
+.mokka-email table {
+  border-spacing:0;
+  border-width:0;
+}
+
+@media(max-width:640px) {
+  .mokka-decision {
+    width:100%;
+  }
+  .mokka-decision tr, .mokka-decision td {
+    display:block;
+  }
+  .mokka-decision td.icon-cell {
+    border-bottom:#d8d8d8 2px solid;
+    border-right:none !important;
+    width:100% !important;
+  }
+}
+</style></head><body><div class=3Dmokka-email>
+  <table style=3D"margin:0 auto;max-width:800px;width:100%">
+    <tbody>
+      <tr>
+        <td style=3Dpadding:20px;text-align:center>
+        <div style=3Dfloat:left;vertical-align:middle><img alt=3D"Google Pl=
+ay" height=3D30 src=3Dhttps://services.google.com/fh/files/emails/google_pl=
+ay_dev_logo_5.png title=3D"Google Play"></div>
+
+        <div style=3Dfloat:right;font-size:10px;color:#757575;line-height:3=
+0px;vertical-align:middle>Developer update</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table style=3D"margin:0 auto;width:100%">
+    <tbody>
+      <tr>
+        <td style=3D"background-image:linear-gradient(#304ffe,#304ffe 70px,=
+white 5px,white);padding:0 18px">
+        <table align=3Dcenter style=3D"background-color:#fff;border-left:1p=
+x solid #f5f5f5;border-right:1px solid #f5f5f5;margin:18px auto 0;max-width=
+:800px;width:100%">
+          <tbody>
+            <tr>
+              <td style=3D"padding:20px 40px 0">
+              <h3 style=3Dfont-weight:400>Hi Developers at Jaap Korthals Al=
+tes,</h3>
+              <p style=3Dpadding:0>After a recent review, we found that you=
+r app Juggluco (tk.glucodata) is not compliant with one or more of our Deve=
+loper Program Policies. See below for more information about your app&#39;s=
+ status and how to correct the issue.</p><div class=3Dmokka-decision style=
+=3D"border:#d8d8d8 2px solid;border-bottom:none"><table style=3Dborder-coll=
+apse:collapse;width:100%>
+  <tr style=3D"border-bottom:#d8d8d8 2px solid">
+    <td class=3Dicon-cell style=3D"border-right:#d8d8d8 2px solid;padding:2=
+0px 0;text-align:center;vertical-align:top;width:100px"><img alt=3D"Publish=
+ing Status" src=3Dhttps://www.gstatic.com/images/icons/material/system/2x/w=
+arning_amber_24dp.png title=3D"Publishing Status" width=3D48></td>
+    <td style=3D"padding:0 10px"><h3 style=3Dfont-weight:400>App Status: <s=
+pan style=3Dcolor:#ff3821>Rejected</span></h3>
+
+<p>Your app has been rejected and wasn&#39;t published due to the policy is=
+sue(s) listed below. If you submitted an update, the previous version of yo=
+ur app is still available on Google Play.</p></td>
+  </tr>
+</table><table style=3Dborder-collapse:collapse;width:100%>
+  <tbody>
+    <tr style=3D"border-bottom:#d8d8d8 2px solid">
+      <td class=3Dicon-cell style=3D"border-right:#d8d8d8 2px solid;padding=
+:20px 0;text-align:center;vertical-align:top;width:100px"><img src=3Dhttps:=
+//www.gstatic.com/images/icons/material/system/2x/build_grey600_24dp.png wi=
+dth=3D48></td>
+      <td style=3D"padding:0 10px 10px">
+      <h3 style=3Dfont-weight:400>Issue found: Basic functionality of app i=
+sn&#39;t working as described</h3>
+
+      <p>The basic functionality of your app doesn&#39;t work as described.=
+ Make sure to test your app on a variety of Wear OS devices and configurati=
+ons. Please refer to the <a rel=3Dnoopener style=3Dtext-decoration:none;col=
+or:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQiQhPqbLaIicVTt=
+Kcql6GYnK1u2AcHLFtooze2yi-kxx2S-yBZtqtvh8-gjp0Qpkp7SLuuW6Q30tpRXX69_GP7a3Vv=
+mRWO3_kIdtkZQbpYQkJZ6E42y93b7fm8Ls9pDo7tHDq9W1AjqTrB2 target=3D_blank>Build=
+ing Apps for Wearables</a> and <a rel=3Dnoopener style=3Dtext-decoration:no=
+ne;color:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQjrF22zpi=
+YQ0sfDiPLlchILrnlKcVeM2qoeNKo80V9VQ7EET5Iemtu7qWeMZV02wG2oe0zR5kmANHXGRi7S-=
+gRi_F02L-qEU3-32QQWIoyNp8_vc-Drs3NJrzsMIMFfF41xuA target=3D_blank>Testing y=
+our App</a> documentation for more information.</p>
+      <p><b>Issue details</b></p>
+<p>We found an issue in the following area(s):</p>
+<ul style=3Dmargin-top:0;margin-bottom:0><li><b>SPLIT_BUNDLE 257</b></li></=
+ul>
+<div style=3D"margin:8px 0">Additional notes related to this issue:
+<div><ul style=3Dmargin-top:0;margin-bottom:0><li>App is not working as des=
+cribed or as shown in wear screenshots.</li></ul>
+</div></div>
+      <h3 style=3Dfont-weight:400>About the Wear App Quality Guidelines</h3=
+>
+We do not accept apps into Wear OS that don&#39;t adhere to Wear App Qualit=
+y Guidelines.
+      </td>
+    </tr>
+  </tbody>
+</table><table style=3Dborder-collapse:collapse;width:100%>
+  <tbody>
+    <tr style=3D"border-bottom:#d8d8d8 2px solid">
+      <td class=3Dicon-cell style=3D"border-right:#d8d8d8 2px solid;padding=
+:20px 0;text-align:center;vertical-align:top;width:100px"><img src=3Dhttps:=
+//www.gstatic.com/images/icons/material/system/2x/build_grey600_24dp.png wi=
+dth=3D48></td>
+      <td style=3D"padding:0 10px 10px">
+      <h3 style=3Dfont-weight:400>Issue found: Watch face app icon mismatch=
+</h3>
+
+      <p>Your app icon does not accurately represent the image presented in=
+ the watch face.</p>
+      <p><b>Issue details</b></p>
+<p>We found an issue in the following area(s):</p>
+<ul style=3Dmargin-top:0;margin-bottom:0><li><b>SPLIT_BUNDLE 257</b></li></=
+ul>
+<div style=3D"margin:8px 0">Additional notes related to this issue:
+<div><ul style=3Dmargin-top:0;margin-bottom:0><li>App icon image does not a=
+ccurately represent watch face.</li></ul>
+</div></div>
+      <h3 style=3Dfont-weight:400>About the Wear App Quality Guidelines</h3=
+>
+We do not accept apps into Wear OS that don&#39;t adhere to Wear App Qualit=
+y Guidelines.
+      </td>
+    </tr>
+  </tbody>
+</table></div><h3 style=3Dfont-weight:400>Action required: Submit an update=
+d app for review</h3>
+Here&#39;s what to do to help get your app on Google Play: <ol><li>Make sur=
+e to read the applicable policies or requirements listed below: <ul style=
+=3Dmargin-top:0;margin-bottom:0><li><a rel=3Dnoopener style=3Dtext-decorati=
+on:none;color:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQjNl=
+lqZaRbfs6dhKGQZRGBgxTmjyTgE5seVPkky_k7T8pYg5L1E0urITTj5ZMSaI3RpYd44IPmKqk_H=
+stywAywpSRxKSKaDGj11NmOIgRhqz098EVl3sPgJyj4ao-nG22983CqlfjCY1zmynHcGGma9ax4=
+ target=3D_blank>Wear App Quality Guidelines</a></li></ul>
+</li>
+<li>Make appropriate changes to your app (if possible), and be sure to addr=
+ess the issue described above. You may also want to check your app&#39;s st=
+ore listing for compliance, if applicable.</li>
+<li>If you=E2=80=99d like to disable your Wear OS by Google app temporarily=
+, or remove the release type entirely:
+<ol>
+  <li>Open the <a rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff=
+ href=3Dhttps://notifications.google.com/g/p/AKWoLQiO1qcBxMBHWyqNtNLDpg0Zm4=
+Hza55ec6GUn0Wu0VTrOlxUu54WJ4DUA42TbTWICHJd4UXPvz0xUoEbQwHZzS6YPj6LLOnpxNxAY=
+Gc885IGkA target=3D_blank>Play Console</a>.</li>
+  <li>Select your app.</li>
+  <li>On the left menu, select <strong>Setup &gt; Advanced settings</strong=
+>.</li>
+  <li>Click the <strong>Release types</strong> tab.</li>
+  <li>You can either disable your Wear OS by Google app (this is convenient=
+ if you want to enable it again in the future) or remove the release type e=
+ntirely:
+    <ul style=3Dmargin-top:0;margin-bottom:0>
+      <li><strong>Disable your Wear OS app:</strong> Next to =E2=80=9CWear =
+OS by Google,=E2=80=9D select <strong>Manage</strong>. Next, uncheck the =
+=E2=80=9COpt-in=E2=80=9D box, and click <strong>Save</strong>.</li>
+      <li><strong>Remove the release type:</strong> Next to =E2=80=9CWear O=
+S by Google,=E2=80=9D select <strong>Remove</strong>.</li>
+    </ul>
+  </li>
+</ol></li>
+<li>Double check that your app is compliant with all other <a rel=3Dnoopene=
+r style=3Dtext-decoration:none;color:#448aff href=3Dhttps://notifications.g=
+oogle.com/g/p/AKWoLQjHjH040DPVpV5DDQ2LIqvhlLKNLle214XvPJ_9a9_auhkSXBwfZrF_q=
+yhtdnRrFsnTxtbQMLjnN-DiyC0J6hcOehlXF_Ux4AvELS_52VoJIOJRK2bEtQFXYtx0LpX5J-Hy=
+a3zZp8VQ target=3D_blank>Developer Program Policies</a>.</li>
+<li>If you made changes to your app bundle, store listing, or APK, please s=
+ign in to your <a rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff=
+ href=3Dhttp://notifications.google.com/g/p/AKWoLQjlBSSPNO2C7ElZyGpTIMmKQZW=
+Wg0IBGfyp1EmlBHM7QreUy_pRu3n-S-QBmH2IyvYaj_veYciYHTri63mLF0aOgGMp5vjfemIqa7=
+oJpVX7eBZmoW5DAsXlOGRG-zbrKJKxgu0iIbim182G9p13 target=3D_blank>Play Console=
+</a> and submit the update(s).</li></ol>
+<h3 style=3Dfont-weight:400>Contact support</h3>
+If you&#39;ve reviewed the policy and feel our decision may have been in er=
+ror, please reach out to our <a rel=3Dnoopener style=3Dtext-decoration:none=
+;color:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQhhcsOaBuTI=
+a7m6UfdMrqw7-EbWiexKaEiP1pWGRBiOPbSBOjzWrY0_NnzXK5e62v0k6IGvlDCq1GmPDG0_7fh=
+vmnz9tqPOnPYzxYMTP90ic3iu56DS36jddb6hcy8GiWSyz6IMMy2bjypXnca94CBS target=3D=
+_blank>policy support team</a>. We&#39;ll get back to you within 2 business=
+ days.
+
+<h3 style=3Dfont-weight:400>Learn More</h3>
+
+<p>Visit the <a rel=3Dnoopener style=3Dtext-decoration:none;color:#448aff h=
+ref=3Dhttps://notifications.google.com/g/p/AKWoLQhnmNFsuCjMa1Kdv4oHUyS-vh_W=
+7rT_n7MPUYPG6zrtb8TpVdKFgE2FNWyJOQGd35VF0-seIeDBGptkZLr9kBdFW18JJjUNFObpTHE=
+vnofjWvkIWDK-MuGTsZOEVLZAVrcMzJq0gyDJT2zRvH-AbfWS4umfGkK1JtSX0bgbACoUUh8Mrw=
+ target=3D_blank>Android Developers Blog</a> to learn more about free tools=
+ and resources for building safe and successful apps.</p>
+
+<p>Thanks for your continued support in helping to make Google Play a posit=
+ive experience for both developers and consumers. We look forward to seeing=
+ an updated version of your app on Google Play.</p>
+
+<p><em>Please complete a <a rel=3Dnoopener style=3Dtext-decoration:none;col=
+or:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQggBEwmDa_qoeVF=
+2ZhKxok5Iy-UgAsMK7eDgK80_bSbZn-FhhKCV4euZBVJNC4H2gLtzLsW1OBTlwSXDIr1hdTyiCy=
+6NSCX6kCY8kuFEOaZGWHs7LvmI-gLAqHrueR4NJQ4eM6H-841St8aV35voOkVt5pk-pFujNnkdO=
+9Ndec5mXpSZdVvZm_5jk-qya8-wg target=3D_blank>two question survey</a> to hel=
+p us improve this experience.</em></p></td>
+            </tr>
+            <tr>
+              <td>
+              <table style=3Dwidth:100%>
+                <tbody>
+                  <tr>
+                    <td style=3D"padding:0 40px 20px">
+                    <h3 style=3Dfont-weight:400>The Google Play Team</h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style=3Dpadding:10px;text-align:center><a rel=3Dnoo=
+pener style=3Dtext-decoration:none;color:#448aff href=3Dhttps://notificatio=
+ns.google.com/g/p/AKWoLQj5Zl0RW7CEYXkunt5ZNhSIrW_Gla8Q2B9m1hBSirK6IFuzU6ZZJ=
+cwFoCiUQ75urB99RJjU_V9UnA23p1sq9TssCY4_T5hG6qJCYLBBQMohvUHEXe-SEIJmoDIsCI1K=
+8UH9VJCrwnnZjT1k6FxQAvXbpFHUCHLkdhb50gmXJQy4-vrbG4nMQvaasSxlU1VcvrqlyaSIm8E=
+KNb2UQ3SwC5levnzmcV9SF0mdvKRGiZ1ImMM-3Wvu2IPwL3e0--o target=3D_blank><img s=
+rc=3Dhttps://services.google.com/fh/files/emails/gpacademy_email_policy.png=
+ title=3D"Play academy" width=3D513></a></td>
+                  </tr>
+                  <tr>
+                    <td style=3D"background-color:#f5f5f5;color:#9b9b9b;fon=
+t-size:10px;line-height:14px;padding:15px 25px;text-align:center">
+                    <p>=C2=A9 2022 Google LLC 1600 Amphitheatre Parkway, Mo=
+untain View, CA 94043</p>
+                    <p>Click <a rel=3Dnoopener style=3Dtext-decoration:none=
+;color:#448aff href=3Dhttps://notifications.google.com/g/p/AKWoLQhc2XNoEU6_=
+xq1uESlmtKv8mYC2u3RQrT2vKkFRys0_05U50m61xJtu2slMesfdD-7r6d8lNaUDypTAo0yfOfR=
+9Bp3YBA9Kkq3D5UtGDazXbATcuc1Ea2YejdNnXGTjqPMgzefBhMAAveKZhv3RvhbXPCFLC7hX t=
+arget=3D_blank>here</a> to configure your notification preferences.</p>
+
+<p>This message was sent to inform you about important updates to your Goog=
+le Play developer account.</p></td>
+                  </tr>
+                </tbody>
+              </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div><img alt=3D"" height=3D1 width=3D3 src=3Dhttps://notifications.google=
+.com/g/img/AKWoLQjnjmIdv6cXf5goP-5XrBQzCsquYeZ-0l6tCcFqZr6OiLxrLSCE8Uw9dcU.=
+gif></body></html>
+--0000000000002669fe05eb4d75ca--

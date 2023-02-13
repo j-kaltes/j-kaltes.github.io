@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.2.6.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2022-04-25T23:24:59.239277149"/>
+	<style type="text/css">
+		h4.cjk { font-family: "Noto Serif CJK SC" }
+		h4.ctl { font-family: "Mangal" }
+		h5.cjk { font-family: "Noto Serif CJK SC" }
+		h5.ctl { font-family: "Mangal" }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><h4 class="western">No WIFI</h4>
+<p>Currently Juggluco phone and watch are made to communicate via
+WIFI. If you are out of the house you are expected to create a
+portable hotspot on your phone. But the portable hotspot connection
+is often disrupted. The connection using the IPs connecting via the
+modem keep functioning probably because it is redirected to Bluetooth
+when the WIFI connection is turned down to use less battery power.
+This seems not to be the case when connected over a portable hotspot,
+instead of that after some time no new glucose values are send over
+and you have to awake the connection again. 
+</p>
+<h5 class="western">solution</h5>
+<p>If your phone is connected via a DATA connection there is an other
+option on the watch4. On the phone modify the automatically created
+connection to &quot;Passive only&quot;, on the watch &quot;Active
+Only&quot; and add on the watch as second ip 192.0.0.4. If your phone
+has a data connection and you adb to the phone and press ifconfig you
+should see this IP: 
+</p>
+<pre class="western">v4-rmnet_data2 Link encap:UNSPEC
+          <span lang="en-US">inet addr:192.0.0.4  P-t-P:192.0.0.4  Mask:255.255.255.255</span>
+          <span lang="en-US">UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1472  Metric:1</span>
+          <span lang="en-US">RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span>
+          <span lang="en-US">TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span>
+          <span lang="en-US">collisions:0 txqueuelen:500</span>
+          <span lang="en-US">RX bytes:0 TX bytes:0</span>
+      </pre><p>
+This way you can also turn off WIFI on your watch, while it is turned
+on on your phone and still receive reliably glucose values from the
+watch to the phone (or the other way around). Later I will try to
+automate this. 
+</p>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Glucose broadcasts</title>
+	<meta name="generator" content="LibreOffice 7.4.3.2 (Linux)"/>
+	<meta name="created" content="2022-11-12T16:31:22.342135202"/>
+	<meta name="changed" content="2023-01-24T00:11:13.956668528"/>
+	<style type="text/css">
+		p.sdfootnote { font-size: 10pt; margin-left: 0.24in; text-indent: -0.24in; margin-bottom: 0in }
+		a.sdfootnoteanc { font-size: 57% }
+	</style>
+</head>
+<body lang="en-US" dir="ltr"><h1>Glucose Broadcasts</h1>
+<p>Android apps can receive every minute a glucose value from
+Juggluco.</p>
+<p>Juggluco can imitate xDrip's glucose broadcast
+com.eveningoutpost.dexdrip.BgEstimate or send a new broadcast:
+glucodata.Minute.</p>
+<p>Apps targeting Android 11 or higher will only receive this
+broadcast when they have added the following to their
+AndroidManifest:</p>
+<pre> &lt;queries&gt;
+    <span lang="en-US">&lt;package android:name=&quot;tk.glucodata&quot;/&gt;</span>
+ <span lang="en-US">&lt;/queries&gt;</span></pre><p>
+They should also set in Juggluco's left menu-&gt;Settings &quot;xDrip
+broadcast&quot; or &quot;Glucodata broadcast&quot;.</p>
+<p style="margin-bottom: 0in">In contrast to xDrip, that sends the
+xDrip broadcast only to a few well known applications<a class="sdfootnoteanc" name="sdfootnote1anc" href="#sdfootnote1sym"><sup>1</sup></a>,
+does Juggluco send it to every app who listens to it. This can mean
+that an app will receive input when they turn on the Broadcast in
+Juggluco, although they didn't receive input from the broadcast send
+by xDrip. If you don't want this input, you should turn off the
+reception of these broadcast in that app.</p>
+<p style="margin-bottom: 0in"><br/>
+
+</p>
+<p><span lang="en-US">See <a href="ShowGlucoseJava.tar.xz">a Java
+example app</a> or <a href="GlucoseDataKotlin.tar.xz">a Kotlin
+example app</a> receiving the glucodata.Minute broadcast and writing
+the output to logcat.</span> <span lang="en-US">It</span> is <span lang="en-US">used
+by the Android app for G-Watch.</span></p>
+<p>In Juggluco and in Kerfstok, rate of change near zero
+(-0.8&lt;rate&lt;0.8) is displayed as zero, thus showing a horizontal
+arrow (Steady). This is done because otherwise the arrow would go up,
+when in reality the glucose value goes down and the other way around,
+a lot more often. On the rate of change in the exported values, the
+xDrip webserver and the glucose broadcasts, this threshold is not
+applied.</p>
+<p>To AndroidManifest.xml you add:</p>
+<pre>    &lt;application&gt;
+[...]
+     &lt;receiver android:name=&quot;mijn.apps.showglucose.Receiver&quot; android:enabled=&quot;true&quot; android:exported=&quot;true&quot;&gt;
+          &lt;intent-filter&gt;
+               &lt;action android:name=&quot;glucodata.Minute&quot;/&gt;
+            &lt;/intent-filter&gt;
+        &lt;/receiver&gt;
+    &lt;/application&gt;
+    &lt;queries&gt;
+    &lt;package android:name=&quot;tk.glucodata&quot;/&gt;
+    &lt;/queries&gt;</pre><p>
+And you create the class derived from BroadcastReceiver , here called
+mijn.apps.showglucose.Receiver consisting of onReceive that reads of
+the values out of a Bundle.</p>
+<pre>package mijn.apps.showglucose;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import java.text.DateFormat;
+import java.util.Date;
+
+public class Receiver extends BroadcastReceiver {
+    private static final String ACTION = &quot;glucodata.Minute&quot;;
+    private static final String ALARM = &quot;glucodata.Minute.Alarm&quot;; //Alarm indicator, see showalarm  
+    private static final String GLUCOSECUSTOM = &quot;glucodata.Minute.glucose&quot;; //Glucose in units of settings
+    private static final String LOG_ID = &quot;Receiver&quot;;
+    private static final String MGDL = &quot;glucodata.Minute.mgdl&quot;; //Glucose in mg/dL
+    private static final String RATE = &quot;glucodata.Minute.Rate&quot;; // Rate of change, see label functions
+    private static final String SERIAL = &quot;glucodata.Minute.SerialNumber&quot;; //Serial number of sensor
+    private static final String TIME = &quot;glucodata.Minute.Time&quot;; //Time in msec
+    static DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (!action.equals(ACTION)) {
+            Log.e(LOG_ID, &quot;action=&quot; + action + &quot; != &quot; + ACTION);
+            return;
+        }
+        Bundle extras = intent.getExtras();
+        String name = extras.getString(SERIAL);
+        int mgdl = extras.getInt(MGDL);
+        float glucose = extras.getFloat(GLUCOSECUSTOM);
+        float rate = extras.getFloat(RATE);
+        int alarm = extras.getInt(ALARM);
+        long time = extras.getLong(TIME);
+        showalarm(alarm);
+        System.out.println(name + &quot; glucose=&quot; + glucose + &quot;(mgdL=&quot; + mgdl + &quot;) rate=&quot; + rate + &quot; (libreLabel=&quot; + librelabel(rate) + &quot;, dexcomlabel=&quot;+getdexcomlabel(rate)+&quot;) time=&quot; + dateformat.format(new Date(time)));
+    }
+
+static  String getdexcomlabel(float rate ) {
+        if (rate &gt;= 3.5f) return &quot;DoubleUp&quot;;
+        if (rate &gt;= 2.0f) return &quot;SingleUp&quot;;
+        if (rate &gt;= 1.0f) return &quot;FortyFiveUp&quot;;
+        if (rate &gt; -1.0f) return &quot;Flat&quot;;
+        if (rate &gt; -2.0f) return &quot;FortyFiveDown&quot;;
+        if (rate &gt; -3.5f) return &quot;SingleDown&quot;;
+        if(java.lang.Float.isNaN(rate)) return &quot;&quot;;
+        return &quot;DoubleDown&quot;;
+    }
+
+
+static     String librelabel(float rate) {
+        if (rate &lt;= -2.0f) {
+            return &quot;Falling Quickly&quot;.intern();
+        }
+        if (rate &lt;= -1.0f) {
+            return &quot;Falling&quot;.intern();
+        }
+        if (rate &lt;= 1.0f) {
+            return &quot;Steady&quot;.intern();
+        }
+        if (rate &lt;= 2.0f) {
+            return &quot;Rising&quot;.intern();
+        }
+        if (Float.isNaN(rate)) {
+            return &quot;Undetermined&quot;.intern();
+        }
+        return &quot;Rising Quickly&quot;.intern();
+    }
+
+    void showalarm(int alarm) {
+        if ((alarm &amp; 8) != 0) {
+            System.out.print(&quot;Alarm &quot;);
+        }
+        int withoutalarm = alarm &amp; 7;
+        switch (withoutalarm) {
+            case 4:
+                System.out.println(&quot;Hightest&quot;);
+                return;
+            case 5:
+                System.out.println(&quot;Lowest&quot;);
+                return;
+            case 6:
+                System.out.println(&quot;too high&quot;);
+                return;
+            case 7:
+                System.out.println(&quot;too low&quot;);
+                return;
+            default:
+                return;
+        }
+    }
+
+}</pre>
+<div id="sdfootnote1"><p class="sdfootnote"><a class="sdfootnotesym" name="sdfootnote1sym" href="#sdfootnote1anc">1</a>xDrip
+	sends to other apps only when its application id is given to xDrip.</p>
+</div>
+</body>
+</html>

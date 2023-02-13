@@ -1,0 +1,646 @@
+Received: from VI1EUR05HT209.eop-eur05.prod.protection.outlook.com
+ (2603:10a6:3:9e::25) by HE1P190MB0043.EURP190.PROD.OUTLOOK.COM with HTTPS via
+ HE1PR0701CA0057.EURPRD07.PROD.OUTLOOK.COM; Thu, 4 Feb 2021 14:54:59 +0000
+Received: from VI1EUR05FT036.eop-eur05.prod.protection.outlook.com
+ (2a01:111:e400:fc12::4d) by
+ VI1EUR05HT209.eop-eur05.prod.protection.outlook.com (2a01:111:e400:fc12::215)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11; Thu, 4 Feb
+ 2021 14:54:58 +0000
+Authentication-Results: spf=pass (sender IP is 85.222.158.230)
+ smtp.mailfrom=nhmhm1h4w75pfru1.xa94fy.3-vti4eao.eu18.bnc.salesforce.com;
+ hotmail.nl; dkim=none (message not signed) header.d=none;hotmail.nl;
+ dmarc=none action=none header.from=myfreestyle.nl;
+Received-SPF: Pass (protection.outlook.com: domain of
+ nhmhm1h4w75pfru1.xa94fy.3-vti4eao.eu18.bnc.salesforce.com designates
+ 85.222.158.230 as permitted sender) receiver=protection.outlook.com;
+ client-ip=85.222.158.230; helo=smtp07-fra-sp1.mta.salesforce.com;
+Received: from smtp07-fra-sp1.mta.salesforce.com (85.222.158.230) by
+ VI1EUR05FT036.mail.protection.outlook.com (10.233.242.183) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3784.11 via Frontend Transport; Thu, 4 Feb 2021 14:54:58 +0000
+X-IncomingTopHeaderMarker:
+ OriginalChecksum:23AC51296458EF7373401E2ADFB9FB466CE2EEC94A5A2922E23A44060042F836;UpperCasedChecksum:42C6A343FCB5154BABDDFA3C2DCDC714F046E26B2EB1BE947FC6C6EDBFD6B144;SizeAsReceived:1681;Count:19
+Return-Path:
+ info=myfreestyle.nl__0-ubdfri1o8ylpi9.2kez93dkxva2y53x@nhmhm1h4w75pfru1.xa94fy.3-vti4eao.eu18.bnc.salesforce.com
+Authentication-Results-Original: mx2-fra-sp1.mta.salesforce.com
+ x-tls.subject="/C=US/ST=California/L=San Francisco/O=salesforce.com,
+ inc./OU=0:app;1:fra;2:fra-sp1;3:eu18;4:prod/CN=eu18-app1-6-fra.ops.sfdc.net";
+ auth=pass (cipher=ECDHE-RSA-AES256-GCM-SHA384)
+Received: from [10.212.225.28] ([10.212.225.28:38424] helo=eu18-app1-6-fra.ops.sfdc.net)
+	by mx2-fra-sp1.mta.salesforce.com (envelope-from <info=myfreestyle.nl__0-ubdfri1o8ylpi9.2kez93dkxva2y53x@nhmhm1h4w75pfru1.xa94fy.3-vti4eao.eu18.bnc.salesforce.com>)
+	(ecelerity 4.2.38.62368 r(Core:release/4.2.38.0)) with ESMTPS (cipher=ECDHE-RSA-AES256-GCM-SHA384
+	subject="/C=US/ST=California/L=San Francisco/O=salesforce.com, inc./OU=0:app;1:fra;2:fra-sp1;3:eu18;4:prod/CN=eu18-app1-6-fra.ops.sfdc.net") 
+	id 05/01-05393-2CA0C106; Thu, 04 Feb 2021 14:54:58 +0000
+Date: Thu, 4 Feb 2021 14:54:58 +0000 (GMT)
+From: Abbott diabetes care <info@myfreestyle.nl>
+To: "jkaltes@hotmail.nl" <jkaltes@hotmail.nl>
+Message-ID: <lAp0T000000000000000000000000000000000000000000000QO0ERM00-pX4fzJwTyezJdyypzZqXQ@sfdc.net>
+Subject: Meting bloedglucose vergelijken met sensormeting
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_2945_473558552.1612450498499"
+X-SFDC-LK: 00D30000000VTI4
+X-SFDC-User: 0051n000005x7iJ
+X-Sender: postmaster@salesforce.com
+X-mail_abuse_inquiries: http://www.salesforce.com/company/abuse.jsp
+X-SFDC-TLS-NoRelay: 1
+X-SFDC-Binding: 1WrIRBV94myi25uB
+X-SFDC-EmailCategory: emailAuthorEmail
+X-SFDC-EntityId: 0011n00002PEoU8
+X-SFDC-Interface: internal
+X-IncomingHeaderCount: 19
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Feb 2021 14:54:58.8024
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ b5846e99-5b2a-4d54-fdf5-08d8c91cd7b2
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ VI1EUR05FT036.eop-eur05.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 2/4/2021 2:44:55 PM
+X-MS-Office365-Filtering-Correlation-Id: b5846e99-5b2a-4d54-fdf5-08d8c91cd7b2
+X-MS-TrafficTypeDiagnostic: VI1EUR05HT209:
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 85.222.158.230
+X-SID-PRA: INFO@MYFREESTYLE.NL
+X-SID-Result: NONE
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-SCL: 0
+X-Microsoft-Antispam: BCL:3;
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2021 14:54:58.6804
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5846e99-5b2a-4d54-fdf5-08d8c91cd7b2
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource:
+ VI1EUR05FT036.eop-eur05.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+ 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1EUR05HT209
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.7876591
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.3805.027
+X-Microsoft-Antispam-Mailbox-Delivery:
+	abwl:0;wl:0;pcwl:0;kl:0;iwl:0;ijl:0;dwl:0;dkl:0;rwl:0;ucf:0;jmr:0;ex:0;psp:0;auth:0;dest:I;ENG:(5062000282)(90000117)(90010023)(91010020)(91040095)(9000001)(9050020)(9100273)(5061607266)(5061608174)(4900115)(98392012)(4920090)(6515079)(4950131)(4990090);
+X-Message-Info:
+	5vMbyqxGkddhh69sIkKp9jThlfIEJ4jjt3rrEWZXFw5VkBADP159byEWO41LQdx5Y5TRijbpfndCtrglBH+GmKQGfxy5hRcElMZhh4UtmK372MzkFM7bD74pOJ7OmLtaSqIPWNNdl27CL6ppY7aokATzyeFgx5wDALPUuDhhUn6mJuDHJBMfiBI0WWRDs6tcvViN2bSRLGvhaq/8SEi8WQ==
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0z
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MTBRSXdRWWJnWURodnBSZFVFRi9Kd3BacWRMWkRCRS9ORnpvM1R0MEk2WmJx?=
+ =?utf-8?B?eFQ3VUxBWVFGMUw5dzZiVGRLb0lkVy96QkZmL0dUOFE1Z2dnTkNhZ2QzYktN?=
+ =?utf-8?B?ZVBNYU1mOVF0ZlBJa3V0ckN3ZDY5TG40VTJFTHloQ09aVFo2cHVXZVhjV0Zn?=
+ =?utf-8?B?bkdmMEJCZmRYakIwS2hjSjFxOTBueTB4TzhSdjNwclozQ1haNXhkdWxScWFI?=
+ =?utf-8?B?czYwL1RBQWJIdkZ3ekxETVdsT2FNb2EvZVFYQy9MYkZsVEV2RWJ2N0ducmZp?=
+ =?utf-8?B?QmpTbUJna0xqYnIxcHg5NDBUNXAyVTEyRTA0Vm0rNVg3OWllTGR0NldscG9h?=
+ =?utf-8?B?OThoRnJTMW0yWVczdDVnWFZUN2FQOXBNMUJTcmpweVlVNU54cXQ0L09yVkJJ?=
+ =?utf-8?B?akN2S1pLUWVpSmVoZHZJNVhxbTNETEdYK3JMT2RQeE5rb0dONG5kWXJlQXdh?=
+ =?utf-8?B?aUNOcjBNWWdHeFQ3dWtWT3hRME9PZjJiVTc4QnpZNDljb2h4anhqRGZBSEhV?=
+ =?utf-8?B?ejJIT2FCSlJKYjRjaHhhWkZCSzg0WGs3Qk9XTS9yMDE2QnNQM01ndkZ1U2FT?=
+ =?utf-8?B?dURGL2JmMkNhdXdOMWovNjFYdmo5YWFQWnJWNmd2MmZBWURFSXlpSEVTM0lP?=
+ =?utf-8?B?MHFmN21SbU5Ic2hlZUZxd2VQL3BiNEdwbEhYMVpsM01XOUxqT1A0dlZjNGRK?=
+ =?utf-8?B?MTNzcTVLWnZmS2kyVnBPNHZyVTNLRUxwT2trNUpmS2gzSEYxUnJNM0VMejBM?=
+ =?utf-8?B?R3Ridy9BQklqZC95T1JEaTdrZlkyV3dYZ0tyd3hQTXQvMzZaUTl4RkVpNzQx?=
+ =?utf-8?B?eGZoai95SlR5VEtQS2lxMEhvczAvL3kyQ0pQZFNtYWswVGJJMys2QXJxcC9X?=
+ =?utf-8?B?QkpqOXVsU2VxZlhxVlAyNkRRS2FUM1paUTZvOUttU3cyb0VJeDhZZHNNUmRt?=
+ =?utf-8?B?SGp2anZzY2NnVDNaM1ZXYVpmRFhLQkNNS09kSmpXdjJHamkrTWZ4SDJFcVhG?=
+ =?utf-8?B?TFV1M3dIcHUvNmhpV3RGTkZkN0JDY0poeWwrcUZSc0NHSVZFZFJmWG16ZHVh?=
+ =?utf-8?B?bFlWSXZpZzZQUGdneE9jdzBkUGJDdzg3TDlnMGsyWnZDU1RQVWJucWd1bk11?=
+ =?utf-8?B?amdBTDVNWk4yem9PNlpzSUZWUHJEZmJEbjVoeTZhN1JZUEl4eUVNTGVDVWxM?=
+ =?utf-8?B?dmdSaUxPdVI0OGF6WDdJcEU2a0FsVmdWTXJIcHFMOEJsRXlaM09DUDZ5azA3?=
+ =?utf-8?B?b0hjQjhoMHRyTlVZZUt6eVE5SU9WcnptUmR4dGtvR3FQcWh0OUNKN0xuYitw?=
+ =?utf-8?B?MmkrYVVqY3YycVIyTk9FNUlFQW54WDVjYUI4VmpMSnQ4bzFUVW9DdjlKd3ZQ?=
+ =?utf-8?B?SzN4WjN2ZDFuTmwxSFpzNmJnWmt4R0hveWhBSkx1bzlhYWM1OVVNSnRCTGxZ?=
+ =?utf-8?B?emc5NjdlKy9oSFNTc0hiOWhZR1pZN1RDeW5aRTgwcDB6amZDQ0Q3dkRuZmFV?=
+ =?utf-8?B?YzhZL3RMcUt5ZEdzOHVOYnQ3a2lPdDlvdGdFaXQwcE1lVm5Vcnd6b2U2QU5x?=
+ =?utf-8?B?OUFvd2FUWHJqamJmWC85OUdYMU51M3JTdytuSUorN2t0Wk5XNy9GaW9tcytN?=
+ =?utf-8?B?NmhvV2NNdWlQVUF2YkpvRFhaY3FRS0dyTzgrc1lIcnRvd3U1N2FJeDlFcFc0?=
+ =?utf-8?B?RGdGWUI5VWdha3BiR3BxRlA5L0tzWnFkalJUM0VpVHJ1SU5Ic0p5eEdRPT0=?=
+MIME-Version: 1.0
+
+------=_Part_2945_473558552.1612450498499
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Beste klant,
+
+
+
+Hartelijk dank voor je bericht.=20
+
+
+
+Bloedglucose komt niet altijd overeen met door de sensor gemeten glucose.=
+=C2=A0We hebben hierover een verhelderend filmpje Meten in weefselvocht
+geplaatst op onze website. Klik op de titel en je kunt het op je gemak beki=
+jken.
+=C2=A0=C2=A0
+
+
+Bloedglucosemetingen met vingerprikken en door de sensor gemeten glucose zu=
+llen
+niet altijd gelijk zijn, en zullen zelfs waarschijnlijk verschillen. Dat ko=
+mt
+doordat de sensor glucose meet in het interstiti=C3=ABle vocht (ISV), een d=
+un laagje
+vocht rond de cellen van de weefsels onder je huid en niet in het bloed.=C2=
+=A0De
+glucosewaarden in het ISV lopen 5 tot 10 minuten achter op veranderingen in=
+ de
+bloedglucose. Glucosemetingen op basis van ISV blijken een betrouwbare weer=
+gave
+van de glucosespiegel te zijn.=C2=A0=C2=A0=C2=A0
+
+
+
+Indien je de meting uit het ISV wilt vergelijken met jouw bloedglucose dan =
+vragen
+wij je minimaal een drietal metingen op verschillende tijdstippen gedurende=
+ dezelfde dag te nemen.=C2=A0
+Voer eerst een vingerprik* test uit !=C2=A0(bij voorkeur nadat=C2=A0je de s=
+ensor 24 uur hebt gedragen en/ of er sprake is van een stabiele situatie te=
+n aanzien van de glucosewaarden (de trendpijl op de reader en/ of=C2=A0Free=
+Style
+LibreLink=C2=A0app horizontaal).=C2=A0Indien je in het bezit bent van een F=
+reeStyle Libre reader dan kun je gebruik maken van de ingebouwde strippoort=
+ aan de onderzijde van de reader. Je kunt hiervoor FreeStyle Precision test=
+strips gebruiken (onder meer verkrijgbaar via een =E2=80=93online- apotheek=
+).=C2=A0Wacht na de vingerprik 5-10 minuten en scan dan de FreeStyle Libre =
+sensor.=C2=A0
+Noteer bij de eerste vergelijking het volgende;
+
+
+=20
+=20
+ 1. Serienummer sensor
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 2. Datum en tijd van
+ plaatsing sensor
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 3. Serienummer reader
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 4. Lotnummer en
+ vervaldatum strips
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 5. Tijdstip van
+ sensorresultaat
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 6. Gemeten sensorwaarde
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 7. Richting trendpijl
+ tijdens vergelijkingsperiode
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 8. Tijdstip vingerprik
+=20
+=20
+ =C2=A0
+=20
+=20
+=20
+=20
+ 9. Gemeten vingerprik
+ waarde
+=20
+=20
+ =C2=A0
+=20
+=20
+
+Bij de tweede en derde vergelijking heb je alleen de resultaten nodig van 5=
+. tot en met 9.=C2=A0Nadat je de vergelijkingen hebt genoteerd en mochten e=
+r onverhoopt blijvend grote verschillen in meetwaarden zichtbaar zijn, dan =
+kun je bellen op werkdagen tussen 08.00-17.30uur naar het gratis nummer 080=
+0 0228828. Hou indien mogelijk de sensor op de arm. Wij kunnen dan samen no=
+g een test uitvoeren.=C2=A0Het is van belang dat je de vergelijking bij voo=
+rkeur uitvoert met een Abbott bloedglucosemeter (Freestyle Libre, Freestyle=
+ Lite, Freestyle Insulinx).=C2=A0
+* als aangegeven in onze=C2=A0Gebruikershandleiding: Je moet een vingerprik=
+test met een bloedglucosemeter uitvoeren tijdens periodes van snel verander=
+ende glucosespiegels, wanneer de interstiti=C3=ABle glucosegehaltes een onn=
+auwkeurige weergave kunnen zijn van de bloedglucosespiegels, als het systee=
+m hypoglykemie of dreigende hypoglykemie meldt of als symptomen niet kloppe=
+n met de metingen van het systeem.=C2=A0
+
+Hopende je voldoende geinformeerd te hebben.
+
+Mocht je nog meer vragen hebben, neem dan gerust nog eens weer contact met =
+ons op.
+
+
+Met vriendelijke groet,=20
+
+
+
+Abbott Diabetes Care=20
+Team Klantenservice=20
+
+U kunt ons bereiken op werkdagen tussen 8:00 en 17:30 uur op ons gratis tel=
+efoonnummer: 0800 - 022 88 28=20
+Email: info@myfreestyle.nl
+
+Bellen vanuit het buitenland +31(0) 88 822 23 55
+------=_Part_2945_473558552.1612450498499
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"></=
+head>
+<style>p{margin-top:0px; margin-bottom:0px;}</style><body style=3D" backgro=
+und-color:#FFFFFF; bEditID:b1st1; bLabel:body;"><center><table cellpadding=
+=3D"0" width=3D"500" cellspacing=3D"0" id=3D"topTable" height=3D"450"><tr v=
+align=3D"top" style=3D" display:none;"><td style=3D" background-color:#FFFF=
+FF; bEditID:r1st1; bLabel:header; vertical-align:top; height:0; text-align:=
+left;"></td></tr><tr valign=3D"top" style=3D" display:none;"><td style=3D" =
+background-color:#FFFFFF; bEditID:r2st1; bLabel:accent1; height:0;"></td></=
+tr><tr valign=3D"top"><td styleInsert=3D"1" height=3D"300" style=3D" backgr=
+ound-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12=
+pt; font-family:arial;"><table border=3D"0" cellpadding=3D"5" width=3D"550"=
+ cellspacing=3D"5" height=3D"400"><tr valign=3D"top" height=3D"400"><td tEd=
+itID=3D"c1r1" style=3D" background-color:#FFFFFF; color:#000000; bEditID:r3=
+st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID=3D"c1r1" lock=
+ed=3D"0"><span style=3D"font-size: 10pt; line-height: 107%; font-family: Ar=
+ial, sans-serif;"><br>
+<!--[endif]--></span><p class=3D"MsoNormal" style=3D""><span style=3D"font-=
+size: 12pt; line-height: 107%; color: black;"><font face=3D"Arial, sans-ser=
+if" style=3D"" size=3D"2">Beste klant,<br>
+<br>
+Hartelijk dank voor je bericht. <br>
+<br>
+Bloedglucose komt niet altijd overeen met door de sensor gemeten glucose.&n=
+bsp;</font></span><font size=3D"2">We hebben hierover een verhelderend film=
+pje <a href=3D"https://www.freestyle.abbott/nl-nl/educatie.html" style=3D""=
+>Meten in weefselvocht</a>
+geplaatst op onze website. Klik op de titel en je kunt het op je gemak beki=
+jken.
+&nbsp;&nbsp;</font></p><p class=3D"MsoNormal" style=3D"font-size: 12pt;"><o=
+:p></o:p></p><p class=3D"MsoNormal" style=3D"font-size: 12pt;"><span style=
+=3D"line-height: 107%; color: black;"><font face=3D"Arial, sans-serif" styl=
+e=3D"" size=3D"2">
+<br>
+Bloedglucosemetingen met vingerprikken en door de sensor gemeten glucose zu=
+llen
+niet altijd gelijk zijn, en zullen zelfs waarschijnlijk verschillen. Dat ko=
+mt
+doordat de sensor glucose meet in het interstiti=C3=ABle vocht (ISV), een d=
+un laagje
+vocht rond de cellen van de weefsels onder je huid en niet in het bloed.&nb=
+sp;</font></span></p><p class=3D"MsoNormal" style=3D"font-size: 12pt;"><spa=
+n style=3D"line-height: 107%; color: black;"><font face=3D"Arial, sans-seri=
+f" size=3D"2">De
+glucosewaarden in het ISV lopen 5 tot 10 minuten achter op veranderingen in=
+ de
+bloedglucose. Glucosemetingen op basis van ISV blijken een betrouwbare weer=
+gave
+van de glucosespiegel te zijn.&nbsp;</font><span style=3D"font-size: 11pt; =
+line-height: 107%; font-family: Arial, sans-serif; background: white;">&nbs=
+p;</span><span lang=3D"NL" style=3D"font-size: 10pt; line-height: 107%; fon=
+t-family: Arial, sans-serif;">&nbsp;</span><font face=3D"Arial, sans-serif"=
+ size=3D"2"><br>
+<br>
+Indien je de meting uit het ISV wilt vergelijken met jouw bloedglucose dan =
+vragen
+wij je minimaal een drietal metingen op verschillende tijdstippen gedurende=
+ dezelfde dag te nemen.&nbsp;</font></span></p><p class=3D"MsoNormal" style=
+=3D"font-size: 12pt;"><span style=3D"line-height: 107%;"><font face=3D"Aria=
+l, sans-serif" size=3D"2"><br></font></span></p><p class=3D"MsoNormal" styl=
+e=3D"font-size: 12pt;"><font face=3D"Arial, sans-serif" style=3D"" size=3D"=
+2"><span style=3D"line-height: 107%;">Voer eerst een vingerprik* test uit !=
+&nbsp;</span><span style=3D"line-height: 107%;">(bij voorkeur nadat</span>&=
+nbsp;je de sensor 24 uur hebt gedragen en/ of er sprake is van een stabiele=
+ situatie ten aanzien van de glucosewaarden (<span style=3D"line-height: 12=
+.84px;">de trendpijl op de re</span><span style=3D"line-height: 107%;">ader=
+ en/ of&nbsp;</span><span style=3D"line-height: 107%;"><a href=3D"https://w=
+ww.freestyle.abbott/nl-nl/home.html/freestyle-producten/applicaties/libreli=
+nk?q=3Dfreestyle-producten/applicaties/librelink">FreeStyle
+LibreLink&nbsp;</a>app horizonta</span><span style=3D"line-height: 12.84px;=
+">al)</span>.&nbsp;</font></p><p class=3D"MsoNormal" style=3D"font-size: 12=
+pt; font-family: arial;"><span style=3D"line-height: 107%; font-family: Ari=
+al, sans-serif; color: black;"><font size=3D"1"><i>Indien je in het bezit b=
+ent van een FreeStyle Libre reader dan kun je gebruik maken van de ingebouw=
+de strippoort aan de onderzijde van de reader. Je kunt hiervoor FreeStyle P=
+recision teststrips gebruiken (onder meer verkrijgbaar via een =E2=80=93onl=
+ine- apotheek).&nbsp;</i></font></span></p><p class=3D"MsoNormal" style=3D"=
+font-size: 12pt;"><font face=3D"Arial, sans-serif" style=3D"" size=3D"2">Wa=
+cht na de vingerprik 5-10 minuten en scan dan de FreeStyle Libre sensor.&nb=
+sp;</font></p><p class=3D"MsoNormal" style=3D"font-size: 12pt;"><span style=
+=3D"line-height: 107%; color: black;"><font face=3D"Arial, sans-serif" size=
+=3D"2">
+Noteer bij de eerste vergelijking het volgende;<br><br></font></span></p><p=
+ class=3D"MsoNormal" style=3D"font-size: 12pt;"><font face=3D"Arial, sans-s=
+erif" size=3D"2"><o:p></o:p></font></p><table class=3D"MsoNormalTable" bord=
+er=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"455" style=3D"font-si=
+ze: 12pt; font-family: arial; width: 341pt; border-collapse: collapse;">
+ <tbody><tr style=3D"mso-yfti-irow:0;mso-yfti-firstrow:yes;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:1=
+5.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">1. Serienummer sensor=
+<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:1;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">2. Datum en tijd van
+  plaatsing sensor<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:2;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">3. Serienummer reader=
+<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:3;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">4. Lotnummer en
+  vervaldatum strips<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:4;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" style=3D"width:194.0pt;border:solid windowt=
+ext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">5. Tijdstip van
+  sensorresultaat<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:5;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" style=3D"width:194.0pt;border:solid windowt=
+ext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">6. Gemeten sensorwaar=
+de<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:6;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">7. Richting trendpijl
+  tijdens vergelijkingsperiode<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:7;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" style=3D"width:194.0pt;border:solid windowt=
+ext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">8. Tijdstip vingerpri=
+k<o:p></o:p></font></p>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" size=3D"2">&nbsp;<o:p></o:p></fo=
+nt></p>
+  </td>
+ </tr>
+ <tr style=3D"mso-yfti-irow:8;mso-yfti-lastrow:yes;height:15.0pt">
+  <td width=3D"259" nowrap=3D"" valign=3D"bottom" style=3D"width:194.0pt;bo=
+rder:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bott=
+om-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal"><font face=3D"Arial, sans-serif" style=3D""><font size=3D"2">9. G=
+emeten vingerprik
+  waarde</font><span style=3D"font-size: 9pt;"><o:p></o:p></span></font></p=
+>
+  </td>
+  <td width=3D"196" nowrap=3D"" valign=3D"bottom" style=3D"width:147.0pt;bo=
+rder-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid =
+windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid wi=
+ndowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+  <p class=3D"MsoNormal" style=3D"margin-bottom:0in;margin-bottom:.0001pt;l=
+ine-height:
+  normal">&nbsp;<o:p></o:p></p>
+  </td>
+ </tr>
+</tbody></table><br><br><p class=3D"MsoNormal" style=3D"font-size: 12pt; fo=
+nt-family: arial;"><span style=3D"font-size: 9pt; line-height: 12.84px; fon=
+t-family: Arial, sans-serif;">Bij de tweede en derde vergelijking heb je al=
+leen de resultaten nodig van 5. tot en met 9.&nbsp;</span></p><p class=3D"M=
+soNormal" style=3D"font-size: 12pt; font-family: arial;"><span style=3D"fon=
+t-size: 9pt; line-height: 12.84px; font-family: Arial, sans-serif;">Nadat j=
+e de vergelijkingen hebt genoteerd en mochten er onverhoopt blijvend grote =
+verschillen in meetwaarden zichtbaar zijn, dan kun je bellen op werkdagen t=
+ussen 08.00-17.30uur naar het gratis nummer 0800 0228828. Hou indien mogeli=
+jk de sensor op de arm. Wij kunnen dan samen nog een test uitvoeren.&nbsp;<=
+/span></p><p class=3D"MsoNormal" style=3D"font-size: 12pt; font-family: ari=
+al;"><span style=3D"font-size: 9pt; line-height: 12.84px; font-family: Aria=
+l, sans-serif;">Het is van belang dat je de vergelijking bij voorkeur uitvo=
+ert met een Abbott bloedglucosemeter (Freestyle Libre, Freestyle Lite, Free=
+style Insulinx).&nbsp;</span></p><p class=3D"MsoNormal" style=3D"font-size:=
+ 12pt; font-family: arial;"><span style=3D"font-size: 9pt; line-height: 12.=
+84px; font-family: Arial, sans-serif;"><br></span></p><div style=3D"font-fa=
+mily: arial;"><span style=3D"font-family: Arial, sans-serif;"><font size=3D=
+"1" style=3D""><span style=3D"font-size: 12pt;">* </span><i style=3D""><spa=
+n style=3D"font-size: 12pt;">a</span>ls aangegeven in onze&nbsp;</i></font>=
+</span><font size=3D"1"><i style=3D""><span style=3D"line-height: 107%; fon=
+t-family: Arial, sans-serif;"><a href=3D"https://www.freestyle.abbott/conte=
+nt/dam/adc/fds/netherlands/documents/adc-39904-004_rev_a.pdf" style=3D"">Ge=
+bruikershandleiding</a></span></i><i style=3D"font-family: Arial, sans-seri=
+f;">:</i><i style=3D"font-family: Arial, sans-serif;"> Je moet een vingerpr=
+iktest met een bloedglucosemeter uitvoeren tijdens periodes van snel verand=
+erende glucosespiegels, wanneer de interstiti=C3=ABle glucosegehaltes een o=
+nnauwkeurige weergave kunnen zijn van de bloedglucosespiegels, als het syst=
+eem hypoglykemie of dreigende hypoglykemie meldt of als symptomen niet klop=
+pen met de metingen van het systeem.&nbsp;</i></font></div></td></tr></tabl=
+e></td></tr><tr valign=3D"top" style=3D" display:none;"><td style=3D" backg=
+round-color:#FFFFFF; bEditID:r4st1; bLabel:accent2; height:0;"></td></tr><t=
+r valign=3D"top" style=3D" display:none;"><td style=3D" background-color:#F=
+FFFFF; bEditID:r5st1; bLabel:footer; vertical-align:top; height:0; text-ali=
+gn:left;"></td></tr><tr valign=3D"top" style=3D" display:none;"><td style=
+=3D" background-color:#FFFFFF; bEditID:r6st1; bLabel:accent3; height:0;"></=
+td></tr></table></center><img src=3D"https://adc-onestep.my.salesforce.com/=
+servlet/servlet.ImageServer?oid=3D00D30000000VTI4&amp;esid=3D0181n00000K54X=
+i&amp;from=3Dext"></body></html>=
+
+------=_Part_2945_473558552.1612450498499--

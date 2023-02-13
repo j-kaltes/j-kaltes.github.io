@@ -1,0 +1,162 @@
+﻿1.1.0
+Changes:
+- Changed Garmin watch identifier.
+- Android status bar removed in theme, so will not reappear by soft keyboard
+- Sub-dialogs more distinctive
+- Doze mode exemption dialog
+- Doesn't rescan Bluetooth devices on connection error anymore
+1.1.1
+- Made rejection of old stream values (e.g. because of exhaustion of binder threads) less stringent
+- back button support (for old smartphones)
+- Did something with pre-launch report issues
+- Added link to a command line program to mirror
+1.1.2
+- Cancel vibrate also before starting new vibration (needed newer smartphones).
+- kill program if scan processing takes too long
+- Don't enable rotation in settings anymore, because android portrait only is common and unusable.
+1.1.3
+- Return from empty list numbers stays here
+- Inverted screen default.
+1.1.4
+- Added Android 11 Garmin connect app query permission
+- Added link for downloading Kerfstok
+- don't shrink settings and add connection view anymore when soft keyboard is shown.
+1.1.5
+- Removed delete 'receive from' from mirror bug
+- Use in newer androids not deprecated vibrate
+1.1.6
+- skip duplicate Bluetooth notifications
+- disabled old value check
+- setEGLContextClientVersion with used version, now before setEGLConfigChooser
+- kill works again
+- get carbohydrate from meal components
+- Include NSDA Nutrient database under Left menu->New Amount, Carbohydrate-> Meal-> add Item-> Select-> Define-> Database
+1.1.7
+- Turn database off in arm 32 because program didn't start anymore
+1.1.8
+- Turned nutrient database on in arm 32
+1.1.9
+- Switch to McCance and Widdowson’s The Composition of Foods Integrated Dataset 2021, because the carbohydrate by difference estimations of NSDA are sometimes dangerously high (e.g. for legumes).
+1.1.10
+- add 0 to end of ingredient and unit
+1.1.11
+- Check for already found sensors before searching for sensors
+- Unessential display changes
+- Displays meals in curve
+- Add network recv/send timeouts
+- Keep display state after close or back and from notifications
+1.1.12
+- search in meals on ingredient
+1.1.13
+- Last time period of a sensor with another sensor within its time interval, is now shown
+- Check on zero time from watch
+- Color changes
+- Android notification for Reminders changed
+- Curve scroll changes
+- Slow pinch doesn't evoke long press anymore.
+1.1.14
+- previous version didn't show data of sensors more than two weeks in use.
+1.1.15
+- Deals better with end of sensors
+- Help with meals
+1.1.16
+- Directly use ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to ensure reliable glucose alarms if google play permits this.
+- Solution for zero length countries
+1.1.17
+- No lockin anymore after save or delete in list
+1.1.18
+- Colors settings for curves, scans and numbers
+1.1.19
+- Lasting colors settings for curves, scans and numbers
+1.1.20
+- Again time and level lines in inverts screen mode
+- No glucose values alarm
+- add three hour lines to see time scale
+1.1.21
+- Now with visible menu's in invert color mode
+1.1.22
+- Again some color changes (more colors).
+- If "sensor via Bluetooth" is unchecked or Juggluco can't search for sensors because it doesn't have location permission, Juggluco doesn't enable streaming anymore. In previous versions, Juggluco always took over the Bluetooth connection with the sensor after scanning. If you scanned the sensor one time with another smartphone, you had to scan the sensor again with the original smartphone to get the Bluetooth connection back. Now there is a way to turn that off.
+- AGP like summary statistics: percentage in certain glucose ranges, GMI, Glucose Variability and a summery graph showing below which value lie at each minute of the day 0%,5%,25%,50%,75%,95% or 100% of the values.
+1.2.0
+If "sensor via Bluetooth" is unchecked or Juggluco can't search for sensors because it doesn't have location permission, Juggluco doesn't enable streaming anymore. In previous versions, Juggluco always took over the Bluetooth connection with the sensor after scanning.
+AGP like summary statistics: percentage in certain glucose ranges, GMI, Glucose Variability and a summery graph showing below which value lie at each minute of the day 0%,5%,25%,50%,75%,95% or 100% of the values.
+1.2.2/1.2.3
+- Export meals to html
+- If "manually scale glucose" is set in settings, the position on the screen of the peak and trough of the summary graph can be changed;
+- Added alternative prediction of HbA1c, Estimated A1C, to statistics.
+- For red-green color blinds: made green more distinctive from red in ranges bar.
+1.2.4
+1.3.2
+- Watch shortcut setting functions;
+- Alarms and notifications also evoked if glucose values are received from Juggluco on another device over IP/TCP
+- Alarms in separate dialog;
+- IP/TCP implementation changes.
+1.3.6
+- Possibility to specify identifier of Garmin watch app, so that people who modify the source of Kerfstok (or make something new) don't need to use the ID of Kerfstok to communicate with Juggluco.
+- Version 1.3.5 tried for too long to use finished sensors via Bluetooth, this is corrected.
+- If you set System UI, it stays on until you turn it off or restart.
+
+1.4.2
+- Mirror with passive sender and active receiver now also possible;
+- Bug fixes.
+1.4.
+- Flash light alarm, which needs camera permission when used
+- Interface changes
+1.4.13
+- Flash alarm flashes less frequently and sometimes much shorter.
+- Removed a list of urls at startup because of Google Play
+- Added DeleteLocalRef
+1.4.14
+- Flash alarm now always stops automatically.
+- Removed a list of urls at startup because of Google Play
+- Added DeleteLocalRef
+1.4.15
+- Alarm stops now when the user switches to Juggluco or touches the screen in Juggluco.
+1.4.18
+I was this time generous and created a status bar icon for every glucose value. The size of the app has nearly doubled.
+1.4.20
+TimePicker was not shown on screen with low height and visible status bar. Changed.
+1.4.24
+- Summary graph ends now at 00:30 to make the graph around 00:00 clearer;
+- On some devices Android automatically groups notifications under an old icon. Made harmless.
+1.4.25
+- Switched off notification grouping.
+1.5.1
+- Managed to make spinners open somewhat faster;
+- NFC sound options in settings;
+- Better handling of wrong number format;
+- Added settings option to send glucose values to Xdrip+. Just to try out Xdrip+, otherwise I needed a fresh sensor.
+1.5.2
+- Synchronize flash stop
+- Added KEEP_ALIVE tcp option
+- Test play ringtone stopped upon close dialog
+1.5.3
+- Network changes
+- Change of Garmin watch changes
+1.5.5
+- Network connection changes
+1.5.6
+- Network connection changes;
+- Paging starts now only when tapping more to the right or left of screen;
+- Added Glucose-axis numbers left setting.
+1.5.7
+- Sensor "Sensor via Bluetooth" automatically turned off when Stream input arrives via IP/TCP;
+- Wake sender on loss of signal alarm when 'Sensor via Bluetooth' is turned off;
+- With very large font and android status bar shown, watch status didn't fit on the screen and was not shown. Changed.
+2.0.0
+- Doesn't need location permission anymore. But I don't know if this works with all phones or sensors, so it can be turned on and is still asked for on phones running Android 6 to 7.1;
+- NFC scanning different in the hope to make it work with US-sensors.
+2.0.2
+- Turned on asking for connect with devices permission on Android 12.
+2.0.4
+Some minor changes:
+- It now possible to connect to localhost with WIFI and data connection turned off;
+- Added some more checks on Nearby devices permission;
+2.0.6
+- Less harsh on regex syntax errors;
+- A meal bug removed;
+- Doesn't ask for Camera permission when using Flash anymore. If Juggluco crashes without it, you can still turn it on.
+2.0.7
+- Removes old state files;
+- Added the possibility not to turn off alarm by touching view.

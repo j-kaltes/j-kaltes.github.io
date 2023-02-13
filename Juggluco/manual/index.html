@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+       <link rel="icon" href="../arrow.png">
+	<title>Juggluco Manual</title>
+	<style>
+        h3{text-align: right;}
+
+
+	</style>
+	<script>
+let mmol=[
+"AM",
+"AU",
+"BA",
+"BG",
+"BW",
+"BY",
+"CA",
+"CH",
+"CN",
+"CZ",
+"DK",
+"EE",
+"FI",
+"GB",
+"HK",
+"HR",
+"HU",
+"IE",
+"IS",
+"KW",
+"KZ",
+"LT",
+"LV",
+"MT",
+"MY",
+"NA",
+"NL",
+"NO",
+"NZ",
+"RS",
+"RU",
+"SE",
+"SI",
+"SK",
+"UA",
+"ZA"];
+
+
+
+
+
+
+
+
+var userLang = navigator.language || navigator.userLanguage;
+var  co=userLang.toUpperCase();
+//var co='NL';
+
+var hit=false;
+for(const element of mmol) {
+  if(co.includes(element)) {
+	 window.location = "https://j-kaltes.github.io/Juggluco/manual/mmol/index.html";
+	 hit=true;
+	 break;
+  	}
+   }
+if(! hit) {
+ window.location = "https://j-kaltes.github.io/Juggluco/manual/mgdl.html";
+ }
+</script>
+</head>
+<body lang="en-US" dir="ltr">
+</body>
+</html>
+
+
+
+

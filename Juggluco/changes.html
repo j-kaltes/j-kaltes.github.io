@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.5.0.3 (Linux)"/>
+	<meta name="created" content="2021-09-24T11:01:18.625514264"/>
+	<meta name="changed" content="2023-03-05T21:32:09.888947177"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p style="line-height: 100%; margin-bottom: 0in">
+1.1.0</p>
+<p style="line-height: 100%; margin-bottom: 0in">Changes:</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Changed Garmin
+watch identifier.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Android status bar
+removed in theme, so will not reappear by soft keyboard</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Sub-dialogs more
+distinctive</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Doze mode
+exemption dialog</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Doesn't rescan
+Bluetooth devices on connection error anymore</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.1</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Made rejection of
+old stream valuese.g. because of exhaustion of binder threads) less
+stringent</p>
+<p style="line-height: 100%; margin-bottom: 0in">- back button
+support (for old smartphones)</p>
+<p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">-
+Did something with p</span>re-launch report issues</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added link to a
+command line program to mirror</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.2</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Cancel vibrate
+also before starting new vibration (needed newer smartphones).</p>
+<p style="line-height: 100%; margin-bottom: 0in">- kill program if
+scan processing takes too long</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Don't enable
+rotation in settings anymore, because android portrait only is common
+and unusable.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.3</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Return from empty
+list numbers stays here</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Inverted screen
+default.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.4</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added Android 11
+Garmin connect app query permission</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added link for
+downloading Kerfstok</p>
+<p style="line-height: 100%; margin-bottom: 0in">- don't shrink
+settings and add connection view anymore when soft keyboard is shown.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.5</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Removed delete
+'receive from' from mirror bug</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Use in newer
+androids not deprecated vibrate</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.6</p>
+<p style="line-height: 100%; margin-bottom: 0in">- skip duplicate
+Bluetooth notifications</p>
+<p style="line-height: 100%; margin-bottom: 0in">- disabled old value
+check</p>
+<p style="line-height: 100%; margin-bottom: 0in">-
+setEGLContextClientVersion with used version, now before
+setEGLConfigChooser</p>
+<p style="line-height: 100%; margin-bottom: 0in">- kill works again</p>
+<p style="line-height: 100%; margin-bottom: 0in">- get carbohydrate
+from meal components</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Include NSDA
+Nutrient database under Left menu-&gt;New Amount, Carbohydrate-&gt;
+Meal-&gt; add Item-&gt; Select-&gt; Define-&gt; Database</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.7</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Turn database off
+in arm 32 because program didn't start anymore</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.8</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Turned nutrient
+database on in arm 32</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.9</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Switch to <span lang="en-US">McCance
+and Widdowson’s The Composition of Foods Integrated</span> <span lang="en-US">Dataset
+2021, because the carbohydrate by difference estimations of NSDA are
+sometimes dangerously high (e.g. for legumes).</span></p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.10</p>
+<p style="line-height: 100%; margin-bottom: 0in">- add 0 to end of
+ingredient and unit</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.11</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Check for already
+found sensors before searching for sensors</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Unessential
+display changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Displays meals in
+curve</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Add network
+recv/send timeouts</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Keep display state
+after close or back and from notifications</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.12</p>
+<p style="line-height: 100%; margin-bottom: 0in">- search in meals on
+ingredient</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.13</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Last time period
+of a sensor with another sensor within its time interval, is now
+shown</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Check on zero time
+from watch</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Color changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Android
+notification for Reminders changed</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Curve scroll
+changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Slow pinch doesn't
+evoke long press anymore.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.14</p>
+<p style="line-height: 100%; margin-bottom: 0in">- previous version
+didn't show data of sensors more than two weeks in use.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.15</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Deals better with
+end of sensors</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Help with meals</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.16</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Directly use<font color="#871094"><font face="JetBrains Mono, serif"><font size="2" style="font-size: 10pt"><i><span style="font-weight: normal">
+</span></i></font></font></font><font color="#871094"><font face="JetBrains Mono, serif"><font size="2" style="font-size: 10pt"><i><span style="font-weight: normal">ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</span></i></font></font></font><font color="#871094"><font face="JetBrains Mono, serif"><font size="2" style="font-size: 10pt"><i><span style="font-weight: normal">
+</span></i></font></font></font>to ensure reliable glucose alarms if
+google play permits this.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Solution for zero
+length countries</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.17</p>
+<p style="line-height: 100%; margin-bottom: 0in">- No lockin anymore
+after save or delete in list</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.18</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Colors settings
+for curves, scans and numbers</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.19</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Lasting colors
+settings for curves, scans and numbers</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.20</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Again time and
+level lines in inverts screen mode</p>
+<p style="line-height: 100%; margin-bottom: 0in">- No glucose values
+alarm</p>
+<p style="line-height: 100%; margin-bottom: 0in">- add three hour
+lines to see time scale</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.21</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Now with visible
+menu's in invert color mode</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.1.22</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Again some color
+changes (more colors).</p>
+<p style="line-height: 100%; margin-bottom: 0in">- If &quot;sensor
+via Bluetooth&quot; is unchecked or Juggluco can't search for sensors
+because it doesn't have location permission, Juggluco doesn't enable
+streaming anymore. In previous versions, Juggluco always took over
+the Bluetooth connection with the sensor after scanning. If you
+scanned the sensor one time with another smartphone, you had to scan
+the sensor again with the original smartphone to get the Bluetooth
+connection back. Now there is a way to turn that off.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- AGP like summary
+statistics: percentage in certain glucose ranges, GMI, Glucose
+Variability and a summery graph showing below which value lie at each
+minute of the day 0%,5%,25%,50%,75%,95% or 100% of the values.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.2.0</p>
+<p style="line-height: 100%; margin-bottom: 0in">If &quot;sensor via
+Bluetooth&quot; is unchecked or Juggluco can't search for sensors
+because it doesn't have location permission, Juggluco doesn't enable
+streaming anymore. In previous versions, Juggluco always took over
+the Bluetooth connection with the sensor after scanning.</p>
+<p style="line-height: 100%; margin-bottom: 0in">AGP like summary
+statistics: percentage in certain glucose ranges, GMI, Glucose
+Variability and a summery graph showing below which value lie at each
+minute of the day 0%,5%,25%,50%,75%,95% or 100% of the values.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.2.2/1.2.3</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Export meals to
+html</p>
+<p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">-
+If &quot;manually scale glucose&quot; is set in settings, the
+position </span><span lang="en-US">on the screen </span><span lang="en-US">of
+the p</span><span style="font-variant: normal"><font color="#202124"><font face="arial, sans-serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">eak
+and trough</span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#202124"><font face="arial, sans-serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">
+of the summary graph can be changed;</span></span></span></font></font></font></span></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202124"><font face="arial, sans-serif"><font size="3" style="font-size: 12pt">-
+Added alternative prediction of HbA1c, Estimated A1C, to statistics.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202124"><font face="arial, sans-serif"><font size="3" style="font-size: 12pt">-
+For red-green color blinds: made green more distinctive from red in
+ranges bar.</font></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in">1.2.4</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.3.2</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Watch shortcut
+setting functions;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Alarms and
+notifications also evoked if glucose values are received from
+Juggluco on another device over IP/TCP</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Alarms in separate
+dialog;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- IP/TCP
+implementation changes.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.3.6</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Possibility to
+specify identifier of Garmin watch app, so that people who modify the
+source of Kerfstok (or make something new) don't need to use the ID
+of Kerfstok to communicate with Juggluco.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Version 1.3.5
+tried for too long to use finished sensors via Bluetooth, this is
+corrected.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- If you set System
+UI, it stays on until you turn it off or restart.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.2</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Mirror with
+passive sender and active receiver now also possible;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Bug fixes.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Flash light alarm,
+which needs camera permission when used</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Interface changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.13</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Flash alarm
+flashes less frequently and sometimes much shorter.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Removed a list of
+urls at startup because of Google Play</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added
+DeleteLocalRef</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.14</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Flash alarm now
+always stops automatically.</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Removed a list of
+urls at startup because of Google Play</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added
+DeleteLocalRef</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.15</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Alarm stops now
+when the user switches to Juggluco or touches the screen in Juggluco.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.18</p>
+<p style="line-height: 100%; margin-bottom: 0in">I was this time
+generous and created a status bar icon for every glucose value. The
+size of the app has nearly doubled.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.20</p>
+<p style="line-height: 100%; margin-bottom: 0in">TimePicker was not
+shown on screen with low height and visible status bar. Changed.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.24</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Summary graph ends
+now at 00:30 to make the graph around 00:00 clearer;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- On some devices
+Android automatically groups notifications under an old icon. Made
+harmless.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.4.25</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Switched off
+notification grouping.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.1</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Managed to make
+spinners open somewhat faster;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- NFC sound options
+in settings;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Better handling of
+wrong number format;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added settings
+option to send glucose values to Xdrip+. Just to try out Xdrip+,
+otherwise I needed a fresh sensor.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.2</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Synchronize flash
+stop</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added KEEP_ALIVE
+tcp option</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Test play ringtone
+stopped upon close dialog</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.3</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Network changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Change of Garmin
+watch changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.5</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Network connection
+changes</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.6</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Network connection
+changes;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Paging starts now
+only when tapping more to the right or left of screen;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added Glucose-axis
+numbers left setting.</p>
+<p style="line-height: 100%; margin-bottom: 0in">1.5.7</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Sensor &quot;Sensor
+via Bluetooth&quot; automatically turned off when Stream input
+arrives via IP/TCP;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Wake sender on
+loss of signal alarm when 'Sensor via Bluetooth' is turned off;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- With very large
+font and android status bar shown, watch status didn't fit on the
+screen and was not shown. Changed.</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.0</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Doesn't need
+location permission anymore. But I don't know if this works with all
+phones or sensors, so it can be turned on and is still asked for on
+phones running Android 6 to 7.1;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- NFC scanning
+different in the hope to make it work with US-sensors.</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.2</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Turned on asking
+for connect with devices permission on Android 12.</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.4</p>
+<p style="line-height: 100%; margin-bottom: 0in">Some minor changes:</p>
+<p style="line-height: 100%; margin-bottom: 0in">- It now possible to
+connect to localhost with WIFI and data connection turned off;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added some more
+checks on Nearby devices permission;</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.6</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Less harsh on
+regex syntax errors;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- A meal bug
+removed;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Doesn't ask for
+Camera permission when using Flash anymore. If Juggluco crashes
+without it, you can still turn it on.</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.7</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Removes old state
+files;</p>
+<p style="line-height: 100%; margin-bottom: 0in">- Added the
+possibility not to turn off alarm by touching view.</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.0.8:</p>
+<pre class="western">- Removes old state files;
+- Added the possibility not to turn off alarm by touching view.
+<span lang="en-US">- Use alarm to get phone out of sleep to get connection going.</span>
+<span lang="en-US">2.0.11</span>
+<span lang="en-US">Enabling streaming Bug fix. Under a certain improbable condition device address was not assigned without location permission.</span>
+<span lang="en-US">2.1.0</span>
+<span lang="en-US">Incorporates a web server for xDrip watches. Because xDrip only shows a new glucose value every 5 minutes and Juggluco every minute, a direct connection of Juggluco with xDrip watches gives more recent glucose values.</span>
+<span lang="en-US">2.1.4</span>
+<span lang="en-US">No longer excessive battery power consumption of web server for xDrip watch apps</span>
+<span lang="en-US">2.2.1</span>
+<span lang="en-US">Now works with US Freestyle libre 2 sensors.</span>
+<span lang="en-US">2.2.2</span>
+<span lang="en-US">To my embarrassment, version 2.2.1 of Juggluco crashed while using US Freestyle Libre 2 sensors when root related files could be found at conventional places. Juggluco 2.2.2 on arm64 doesn't crash anymore.</span>
+<span lang="en-US">2.2.3</span>
+<span lang="en-US">Removed</span><span style="font-variant: normal"><font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal"> US Freestyle Libre 2 sensor </span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span lang="en-US"><span style="font-style: normal"><span style="font-weight: normal">e</span></span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">nd-of-life bug.</span></span></span></font></font></font></span>
+
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.2.4</font></font></font>
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">- Made nfc scan timeout longer;</font></font></font>
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">- Android backup killed Juggluco, so set android:allowBackup=&quot;false&quot;;</font></font></font>
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">- Alarms stop better;</font></font></font>
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">- Xdrip server stays off better if set so.</font></font></font>
+
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.0</font></font></font>
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Connects with the Wear OS version of Juggluco.</font></font></font>
+
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Juggluco ported to Wear OS including a watch face that displays the glucose value received every minute via Bluetooth.</font></font></font></pre><p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Developer</font></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://jkaltes.byethost16.com/Juggluco/index.html">Visit
+website</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="mailto:jaapkorthalsaltes@gmail.com">jaapkorthalsaltes@gmail.com</a></p>
+<pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal"></pre><p style="line-height: 100%; margin-bottom: 0in">
+Doesn't end up in NFC settings with NFC turned off;</p>
+<p style="line-height: 100%; margin-bottom: 0in">NFC changes (please
+tell me if scanning doesn't work anymore for a particular sensor);</p>
+<p style="line-height: 100%; margin-bottom: 0in">Display changes.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">2.3.5</p>
+<p style="line-height: 100%; margin-bottom: 0in">- NFC changes
+(please tell me if scanning doesn't work anymore for a particular
+sensor);</p>
+<p style="line-height: 100%; margin-bottom: 0in"><span style="font-variant: normal"><font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">-
+</span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">WearOS
+and Smartphone version of Juggluco communicate also when the
+smartphone has a data connection instead of WIFI;</span></span></span></font></font></font></span></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+The connection is now activeonly for the Watch, because TCP over
+Bluetooth seems only to work if it is initiated by the watch;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Corrected some timeouts in activeonly-passiveonly connection.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.7:</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Network changes to improve an activeonly-passiveonly connection.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.8</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Also
+KEEPALIVE in one sided initiated connections.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.13</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Network changes;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Minor bug fixes.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.14</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">It
+seems that only updating the WearOS version has gone wrong, so I
+update both.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.16</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Removed
+some unused code out of the WearOS version thereby decreasing its
+size.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.17</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Removed
+a lot of unused code out of the WearOS version without much influence
+on its size.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.18</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Removed a lot of unused code out of the WearOS version without much
+influence on its size;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Upgraded to Garmin Connect IQ Mobile SDK 1.5.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.3.19</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">On
+Android&lt;8, the glucose value was not shown in the android status
+bar. Fixed.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.4.
+</font></font></font>
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">On
+some devices, alarms were not played during &quot;Do not disturb&quot;.
+On Smartphones you can now instruct Juggluco to override &quot;Do not
+disturb&quot;.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Glucose
+notifications settings don't have to be changed anymore on some
+devices.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.4.5</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+It turned out that there was a user with arm64 and Opengl 2.0, so on
+arm64 I also use Opengl 2.0 instead of 3.0.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+xDrip server now also works if the phone unit is mg/dL.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.5.0</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">Easier
+to use with Libreview.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.5.1</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Sends less often to Libreview.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">-
+Bug fixes.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#333333"><font face="Helvetica Neue, Arial, sans-serif"><font size="2" style="font-size: 9pt">2.5,5</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">The
+network interface of some data connection carriers is not immediately
+visible and was not detected by Juggluco. Added a delay to solve
+this.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">2.6.0</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">-
+xDrip server didn't work with very little data available. Changed.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">-
+Enable streaming earlier in warm-up period when sensor is started by
+an other app.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">-
+WearOS stream value further from curve.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">-
+Added Alarm message in app, for devices where notifications are
+hidden.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#3c4043"><font face="Roboto, Arial, sans-serif"><font size="2" style="font-size: 10pt">2.6.x</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">Gleichschaltung
+Notifications,</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">2.7.0</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+Translated into dutch;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+Small bug fixes.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">2.8.0</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+Vibration on alarm added;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+WearOS version switches WIFI on, for data transfer, during first run.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">2.9.0</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+Now with Turbo button against Bluetooth connection errors.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+IP/TCP changes.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">2.9.7</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">In
+some circumstances Juggluco still scanned for sensors thereby needing
+location permission on Android   6-11.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">-
+Talks differently with Kerfstok watch App.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">Praat
+anders met Kerstok horloge app.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt">2.9.9</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#202122"><font face="sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-US">-
+Can now send glucose values to a </span><font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">Fitbit</font></font></font><font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">
+watch app (https://glancewatchface.com/);</font></font></font></font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">-
+Better numbering of exported History glucose values;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">-
+A Freestyle Libre 2 sensor immediately after a Freestyle Libre 3
+sensor works.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">2.9.10</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">-
+Added LibreView status line;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">-
+Mirror server restarts listening for connection after error;</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">4.0.1</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<font color="#24292f"><font face="apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"><font size="3" style="font-size: 12pt">Android
+8 or higher can now use Freestyle Libre 3 sensors.</font></font></font></p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Glucose
+	broadcasts added; other apps can receive glucose values from
+	Juggluco. See:
+	http://jkaltes.byethost16.com/Juggluco/glucosebroadcast.html.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Libre3 glucose
+	values can also be sent to Libreview.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Bug fix.</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">4.2.1</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Trend arrow
+	added to notification</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Bug fixes</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">4.3.1</p>
+<p style="line-height: 100%; margin-bottom: 0in">When Juggluco
+determines that IP/TCP doesn't work, it switches to Bluetooth for the
+communication between WearOS and phone version.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">4.4.1</p>
+<p style="line-height: 100%; margin-bottom: 0in">Can now also send
+amounts (as insulin, carbohydrate, or comments) Libreview.</p>
+<p style="line-height: 100%; margin-bottom: 0in">4.5.5</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Possibility to
+	show heart rate in watch face;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Added Librelink
+	broadcast;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">You have to
+	specify to which apps the broadcast should be sent;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">xDrips should
+	now use one of the broadcasts or the xdrip webserver, instead of
+	&quot;Send to xDrip&quot;;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Network less
+	active when WIFI is off;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Timeout in
+	Libreview connection;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Portuguese
+	translation.</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">4.8.0</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Some Nightscout
+	apps can now be directly used with Juggluco. Needs port forwarding
+	and an authenticated SSL key. See left menu-&gt; Settings-&gt; Web
+	server</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">4.8.3:</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Bug fixes</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">4.9.1:</p>
+<ul>
+	<li><p>It is now also possible to receive amounts from the
+	xDrip/Nightscout Web server included in Juggluco with:
+	<a href="http://127.0.0.1:17580/api/v1/treatments?count=4">http://127.0.0.1:17580/api/v1/treatments?count=4</a>
+	See Juggluco, Left menu-&gt;Settings-&gt;Web server-&gt;Help. 
+	</p>
+	<li><p>With this version not only an api_secret, but also an
+	api-secret and a Nightscout token can be used.</p>
+</ul>
+<ul>
+	<p></p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
+</html>

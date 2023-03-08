@@ -13,10 +13,10 @@
       (an android app for Freestyle libre 2 sensors) it is possible to make a
       network connection with a pc to transfer data to and from this pc.</p>
     <p> For this you need a little command line program: <br>
-      <a href="https://www.juggluco.nl/Juggluco/cmdline/download/juggluco4.8.1.xz">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco4.8.1.xz</a>
+      <a href="https://www.juggluco.nl/Juggluco/cmdline/download/juggluco4.9.3.xz">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco4.9.3.xz</a>
       <br>
       The source can be found here: <br>
-      <a href="https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server4.8.1.src.tar.xz">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server4.5.4.src.tar.xz</a>
+      <a href="https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server4.9.3.src.tar.xz">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server4.9.3.src.tar.xz</a>
       <br>
       <br>
       <a href="https://www.juggluco.nl/Juggluco/cmdline/download">Previous
@@ -204,7 +204,21 @@ Usages: ./juggluco -d dir : save data in directory dir
         ./juggluco [-d dir] -p port : listen on port port
         ./juggluco [-d dir] -l : list configuration data
         ./juggluco [-d dir] -c : clear configuration data
-        ./juggluco -x[-+]: start xDrip watch app server or not (-x-)
+        ./juggluco -x[-+]: start xDrip watch app server or not (-x-
+        ./juggluco -X[-+]:  the same but server can also be assesed remotely
+        ./juggluco -g secret: use as api_secret secret
+        ./juggluco -e[-+]:  Use xDrip server with SSL encryption
+        ./juggluco -o port:  use port port for the SSL server
+	./juggluco -[0123456789][RLCOD] place label 0-9 in category R,L,C,O or D:
+	R: Rapid acting Insulin
+	L: Long acting Insulin
+	C: Carbohydate
+	O: cOmments
+	D: Don't send
+	-0R means label 0 (first one) is Rapid acting insulin
+	-1C means label 1 (second) is Carbohydrate
+	-2O means give label 2 as a cOmment
+        ./juggluco [-d dir] -t[+]: give treatments/amounts via Nightscout interface
         ./juggluco [-d dir] -N filename: export nums 
 	./juggluco [-d dir] -S filename: export scans 
 	./juggluco [-d dir] -B filename: export stream 
@@ -213,8 +227,8 @@ Usages: ./juggluco -d dir : save data in directory dir
 	./juggluco [-d dir] -M : mmol/L
 	./juggluco [-d dir] -G : mg/dL
 	./juggluco [-d dir] -R n : remove n-th connection
+	./juggluco [-d dir] -Z n : resend data to n-th connection
 	./juggluco -v  : version
-
 
 	./juggluco [-d dir] OPTIONS IP1,IP2 ...  : Specify connection with IP(s).
 OPTIONS:
@@ -242,13 +256,13 @@ example:
 Receive data from host 192.168.1.64 (an ip shown in backup screen android app)
 In the juggluco android applet you can in "backup, add connection"
 specfiy send to amounts, scans and stream and specify port 8795 and
-an ip of this computer (e.g 192.168.1.71)
+an ip of this computer (e.g 192.168.1.68)
 
 ./juggluco -d mydir -nsb  192.168.1.69
 
 Send the amounts, scans and stream data to 192.168.1.69 on the default port (8795)
 In the android applet you can in the "add connection" dialog, specify 
-an ip of this computer (192.168.1.71) check "Receive from" and specify as port 8795
+an ip of this computer (192.168.1.68) check "Receive from" and specify as port 8795
 (the port specified earlier for this computer)
 
 ./juggluco -d mydir

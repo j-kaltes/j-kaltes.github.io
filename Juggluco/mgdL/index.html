@@ -572,11 +572,39 @@ Android
       connection problems were solved by downgrading to Android 12, using the
       following instructions: <a href="https://www.samsungoneui.com/firmware/download-samsungs-downgrade-rom-android-13-to-android-12">https://www.samsungoneui.com/firmware/download-samsungs-downgrade-rom-android-13-to-android-12</a>/
     </p>
- <h2 class="Heading_20_2"><a id="a__Open_Source"><span/></a>Open Source</h2><p class="P1">
-Since Juggluco is no longer available on Google Play, it has become inaccessible to ordinary users. Especially the WearOS version which is the only possibility to directly connect Freestyle Libre sensors directly with a watch. Using developer options and adb is for a lot of users an insurmountable barrier. 
-For that reason Juggluco has to target a user group that is accustomed to developer tools. 
- The source of Juggluco can be found at: <a href="https://github.com/j-kaltes/Juggluco" class="Internet_20_link">https://github.com/j-kaltes/Juggluco</a></p><p class="P1"> </p> 
+    <h2 class="Heading_20_2"><a id="a__Open_Source"><span></span></a>Open Source</h2>
+    <p class="P1">
+      The source of Juggluco can be
+      found at: <a href="https://github.com/j-kaltes/Juggluco" class="Internet_20_link">https://github.com/j-kaltes/Juggluco</a></p>
+<h2 class="western"> NFC NovoPens</h2>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco 4.13.0 and
+later contains support for <strong>NFC NovoPen® 6</strong> &amp;
+<strong>NovoPen Echo®Plus</strong> insulin pens. Just hold the back
+of the pen to the NFC sensor in your phone with Juggluco in the
+foreground. Thereafter, you can specify with what label the new
+values have to be saved.</p>
+    <figure> <img src="savetype.jpg"  title="Save NovoPen doses"
+        style="object-fit:contain;     width:11.5cm;            height:auto;"> <figcaption><span
+          style="font-size: 0.9em; font-family: Times New Roman;">After you have scanned the NFC NovoPen you can select the label for the insulin</span></figcaption> </figure>
+    <figure> <img src="tagchooser.jpg"  title="Tag chooser"
+        style="object-fit:contain;     height:11.5cm;            width:auto;"> <figcaption><span
+          style="font-size: 0.9em; font-family: Times New Roman;">Chooser shown when you scan the pen without Juggluco in the foreground.</span></figcaption> </figure>
+<p style="line-height: 100%; margin-bottom: 0in">When you hold the
+back of the pen to the NFC sensor in the phone with Juggluco not in
+the foreground, a chooser will emerge with Juggluco and &quot;<em>New
+tag collected</em>&quot;.</p>
+<p style="line-height: 100%; margin-bottom: 0in">If you want only
+Juggluco to be activated you can disable com.android.apps.tag with
+the following command:</p>
+<pre><strong>adb pm disable-user --user 0 com.android.apps.tag</strong></pre><p style="line-height: 100%; margin-bottom: 0in">
+Most people will not miss anything after disabling
+com.android.apps.tag, but you can enable it again with:</p>
+<pre><strong>adb </strong><strong>pm enable com.android.apps.tag</strong></pre><p style="line-height: 100%; margin-bottom: 0in">
+See
+<a href="https://www.androidphonesoft.com/blog/what-is-new-tag-scanned-android">https://www.androidphonesoft.com/blog/what-is-new-tag-scanned-android</a> for more information about com.android.apps.tag</p>
 
+
+    <p class="P1">&nbsp;</p>
     <p class="western" style="font-style: normal; line-height: 100%; margin-bottom: 0in">
       <br>
     </p>

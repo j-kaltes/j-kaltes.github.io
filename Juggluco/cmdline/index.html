@@ -101,6 +101,96 @@ done
 nohup bash ./repeat.sh &amp;
 </pre>
     <p> </p>
+    <h2>Systemd</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">
+      Karol Zygmunt created a juggluco service with systemd, so that the
+      juggluco service is always started at boot. The script starting
+      juggluco is put in /opt/juggluco/start-juggluco.sh containing:</p>
+    <pre>#!/bin/bash
+path="/opt/juggluco/"
+logfile="$path/juggluco-service.log"
+timestamp=$(date "+%F %H:%M:%S")
+echo "[ $timestamp ] Starting new Juggluco Server." &gt;&gt; $logfile
+cd $path
+$path/juggluco
+timestamp=$(date "+%F %H:%M:%S")
+echo "[ $timestamp ] Juggluco Server has stopped." &gt;&gt; $logfile</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">
+    </p>
+    <p>/etc/systemd/system/juggluco.service contains:</p>
+    <pre>[Unit]
+Description = Juggluco service
+After = network.target network-online.target
+Wants = network-online.target
+
+[Service]
+Type = simple
+User = [UID]
+Group = [GROUP_NAME]
+ExecStart = /opt/juggluco/start-juggluco.sh
+TimeoutStartSec = 0
+RemainAfterExit = yes
+Restart = on-failure
+
+[Install]
+WantedBy = multi-user.target</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">I like to add the
+      following:</p>
+    <p style="line-height: 100%; margin-bottom: 0in">
+      First, make /opt/juggluco/start-juggluco.sh executable with </p>
+    <pre>chmod a+x /opt/juggluco/start-juggluco.sh</pre>
+    <p> Second, you always should create a separate user and group for the
+      juggluco service and not run
+      it under root. Thus create a juggluco user with:</p>
+    <p></p>
+    <pre>useradd juggluco</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">And set the
+      following in /etc/systemd/system/juggluco.service </p>
+    <pre>User = juggluco
+Group = juggluco</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">Because of this you should
+      either change the ownership of /opt/juggluco to juggluco:juggluco or <span
+        style="font-family: monospace;"></span>set path="/home/juggluco/"
+      in&nbsp; <span style="font-family: monospace;"></span>start-juggluco.sh</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Also in the above
+      way the service is not restarted when killed with kill -11 PID. So change
+      RemainAfterExit to</p>
+    <pre>RemainAfterExit = no</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">and add:</p>
+    <pre>RestartSec=2
+#StartLimitIntervalSec=0
+#can be used instead of RestartSec
+Restart = always</pre>
+    <p style="line-height: 100%; margin-bottom: 0in">
+      /etc/systemd/system/juggluco.service thus becomes:</p>
+    <pre>[Unit]
+Description = Juggluco service
+After = network.target network-online.target
+Wants = network-online.target
+
+[Service]
+Type = simple
+User = juggluco
+Group = juggluco
+ExecStart = /home/juggluco/start-juggluco.sh
+TimeoutStartSec = 0
+RemainAfterExit = no
+#StartLimitIntervalSec=0 #can be used instead of RestartSec
+RestartSec=2
+Restart = always
+[Install]
+WantedBy = multi-user.target</pre>
+    <p>
+      To start the service do:
+    </p>
+    <pre>systemctl start juggluco.service</pre>
+    To stop the service do:
+    <pre>systemctl stop juggluco.service</pre>
+    To make that the service is started at boot, do:
+    <pre>systemctl enable juggluco.service</pre>
+    <p></p>
     <h1 class="western">Remote computer</h1>
     <p style="line-height: 100%; margin-bottom: 0in">Exactly the same you can do
       on a remote host you connect to over the Internet. For example Amazon AWS

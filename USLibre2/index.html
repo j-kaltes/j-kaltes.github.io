@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title></title>
     <meta name="generator" content="LibreOffice 7.2.5.2 (Linux)">
@@ -20,74 +20,67 @@
 		a.cjk:visited { so-language: zxx }
 		a.ctl:visited { so-language: zxx }
 	</style>
-  </head>
-  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US"><img src="libre2.jpg"
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr">
+
+  <img src="JugglucoLink.jpg"
       style="object-fit:contain; width:auto;		    height:14cm;" alt="Libre2" title="Libre2"
       align="right">
-    <h1 class="western">Patched US Libre 2</h1>
-    <p style="line-height: 100%; margin-bottom: 0in">Patch for Abbots US Libre 2
-      Android app:</p>
-    <p style="line-height: 100%; margin-bottom: 0in"><a class="western" href="https://sourceforge.net/projects/binaryeditor/files/binpatch/libre2.7.1-patch9.zip">https://sourceforge.net/projects/binaryeditor/files/binpatch/libre2.7.1-patch9.zip</a></p>
-    <p style="line-height: 100%; margin-bottom: 0in">For this you need binpatch:
-      <a class="western" href="https://sourceforge.net/projects/binaryeditor/files/binpatch">https://sourceforge.net/projects/binaryeditor/files/binpatch</a>
-    </p>
-    <p style="line-height: 100%; margin-bottom: 0in">When everything goes will you get this file:
-      <a class="western" href="https://apkfab.com/libre-2/test.freestylelibre2.us/apk?h=c23a18f939207ee342d2054c551274f1b91c69a87f9691ac78f94eb49bc4a056">Patched US Libre 2 app</a>
-    </p>
-    <p style="line-height: 100%; margin-bottom: 0in">This makes it possible to
-      send glucose values from the Libre 2 app to <a href="https://www.juggluco.nl/Juggluco">Juggluco</a>.
-      You needed this app to use US Freestyle Libre 2 sensors with Juggluco.
-      From Juggluco 2.2.1 on Juggluco can connect directly with US Freestyle
-      libre 2 sensors and this app is probably superfluous.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">There are some differences
-      with the unpatched version: Normally the US Libre2 app doesn't scan
-      sensors that were started with Freestyle Reader or another device. This
-      restriction is removed. The unpatched US libre 2 app can't scan European
-      sensors, the patched version can. The unpatched version always displays
-      glucose values in mg/dL, in the patched version you can choice between
-      mmol/L and mg/dL. The patched version has removed all contact with
-      Abbott's servers and for that reason LibreView and most help menus don't
-      work. Alarms don't work. Firebase analytics is partly removed and partly
-      left intact. The authentication information is changed and I have disabled
-      firebase in AndroidManifest.xml, but I still see <b>isEmailSend:POST</b>
-      in logcat, so probably they just continue sending information when turned
-      off (<i>Firebase Analytics</i>), without displaying the data to the
-      Firebase account holder. I changed the Application Id, so you can install
-      it besides the unpatched Libre 2 app. It is also possible to receive
-      glucose values via bluetooth on a device <a class="western" href="withoutnfc.html">without
-        NFC</a>. The patched version is only available for <u>arm64</u>,
-      because I couldn't find the unpatched <u>arm</u> Libre2 app. </p>
-    <br>
-    <img src="connectionoverview.jpg" style="object-fit:contain; width:14cm;		    height:auto;"
-      alt="Juggluco's connection overview" title="Juggluco's connection overview">
-    <p style="line-height: 100%; margin-bottom: 0in">The Patched Libre 2 app
-      makes use of Juggluco's Mirror function to send glucose values to
-      Juggluco. Under the right menu the Item "Juggluco" is added. This opened a
-      modified version of Juggluco's "Mirror" dialog. An example connection is
-      already specified.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">To establish the Juggluco
-      side of this example connection, you only need to open the Mirror dialog
-      in Juggluco: Left middle menu, Mirror. Change port to 8118, save. Press '<i>Add
-        Connection'</i>, change there port to 7117. Add the IP 127.0.0.1. Check
-      '<i>Test Label</i>' and write libre2juggluco. Check '<i>Receive from</i>'
-      and press Save. Now press '<i>Sync'</i>.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">Now the Last scan and
-      history values should be shown. Later the values via Bluetooth will
-      arrive.</p>
-    <br>
-    <img src="addconnection.jpg" style="object-fit:contain; width:14cm;		    height:auto;"
-      alt="Add connection" title="Add connection">
-    <p> When making a connection between the patched Libre 2 app and Juggluco
-      running on the same smartphone, you can use different IPs for local
-      connection on the phone. Using 127.0.01 seems to be the simplest, but on
-      my phone it worked better when I used the home net wlan IP. On a Realme GT
-      5G phone I had turned battery optimization for Juggluco of at two place
-      and allowed background at one place and still there were moments when the
-      traffic between Libre 2 and Juggluco was stopped when using 127.0.0.1, but
-      this didn't happen when using the home net wlan IP.</p>
-    <br>
-    <br>
-    <br>
-    <br>
-  </body>
+<p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Patched
+US Libre 2.7.2</b></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=7189cb584d338767d208c333a24f8ff5770301a76c2b4e2dc7e8504f24020905">Download</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
+2.7.2 app doesn't need to start the sensor; it can work with your
+current sensor. It can also be installed beside the unpatched US
+libre 2 app. You only need to force stop the unpatched US libre 2
+app, because otherwise it is possible that you will not get a
+connection because the unpatched US Libre 2 app tried to to that, but
+doesn't succeed because it uses the wrong &quot;PIN&quot;.</p>
+<p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
+2.7.2 app sends glucose values via TCP/IP to Juggluco. For this use
+is made of <a href="https://www.juggluco.nl/Juggluco/mgdL/index.html#mirror">Juggluco's
+Mirror (Clone in a lot of translations) function</a>. How it works
+can also be found in the help in Juggluco under Left middle
+menu-&gt;Mirror and Left middle menu-&gt;Mirror-&gt;Add connection.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Both Juggluco and
+the patched US Libre 2.7.2 app app listen on a port to which the
+other side of the connection can connect. In the start mirror screen
+the port is mentioned where that app is listening on. In &quot;<em>Add
+connection</em>&quot; you have to specify the port to connect to,
+thus the port of the other side.</p>
+<p style="line-height: 100%; margin-bottom: 0in">The app can listen
+to any port in the range 1024-65535 with the restriction that no one
+else in the save device should listen on that port.</p>
+<p style="line-height: 100%; margin-bottom: 0in">In the example
+pictures:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Patched US Libre 2
+app port: 7777</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco port: 8888</p>
+<p style="line-height: 100%; margin-bottom: 0in">Both are on the same
+host, thus they can use the IP: 127.0.0.1</p>
+<p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
+2 app sends Scans and Stream to Juggluco.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco receives.</p>
+  <img src="AbbottOverview.jpg"
+      style="object-fit:contain; width:auto;		    height:14cm;"  title="Libre2 Overview"
+      align="left">
+  <img src="JugglucoAddConnection.jpg"
+      style="object-fit:contain; height:auto;		    width:14cm;"       align="left">
+<p style="line-height: 100%; margin-bottom: 0in"></p>
+
+  <img src="JugglucoOverview.jpg"
+      style="object-fit:contain; height:auto;		    width:14cm;"       align="right">
+  <img src="AbbottAddConnection.jpg"
+      style="object-fit:contain; width:auto;		    height:14cm;" align="right">
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+</body>
 </html>

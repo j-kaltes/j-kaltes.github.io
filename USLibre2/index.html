@@ -78,8 +78,19 @@ host, thus they can use the IP: 127.0.0.1</p>
 <h1>Arm32</h1>
 <p>
 The app is arm64 only. If you want 32 bit arm, you need to give me
-the arm32 libraries installed on a Arm32 phone. With adb you pull
-installed APKs out of the phone:</p>
+the arm32 libraries installed on an Arm32 phone. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The arm32 are
+contained in:
+<a href="https://www.apkmirror.com/apk/abbott-diabetes-care-inc/freestyle-libre-2-us/freestyle-libre-2-us-2-7-2-release/freestyle-libre-2-us-2-7-2-android-apk-download">https://www.apkmirror.com/apk/abbott-diabetes-care-inc/freestyle-libre-2-us/freestyle-libre-2-us-2-7-2-release/freestyle-libre-2-us-2-7-2-android-apk-download</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">But there seems to
+something wrong with the arm32 libraries because when I install the
+arm32 version on my phone arm64 ( adb install   --abi  armeabi-v7a 
+THE_APK_FILE), it scans terribly slow: 7 seconds. Google Play doesn't
+distribute this multi machine APK and it was already uploaded on
+mirror.com before the app was available at Google Play.</p>
+<p style="line-height: 100%; margin-bottom: 0in">With adb you can
+pull installed APKs out of the phone:</p>
 <p style="line-height: 100%; margin-bottom: 0in">An list of the apk's
 belonging to com.freestylelibre2.app.us, you get with:</p>
 <p style="line-height: 100%; margin-bottom: 0in">adb shell pm path

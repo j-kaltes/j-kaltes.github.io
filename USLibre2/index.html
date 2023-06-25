@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title></title>
-    <meta name="generator" content="LibreOffice 7.2.5.2 (Linux)">
-    <meta name="created" content="2022-01-30T12:00:15.471484040">
-    <meta name="changed" content="2022-01-30T12:32:00.171897172">
+    <title>Patched US Libre 2.7.2</title>
+    <meta name="generator" content="LibreOffice 7.1.6.2 (Linux)">
+    <meta name="created" content="2021-10-13T21:19:06.016650885">
+    <meta name="changed" content="2021-10-15T12:35:49.484341909">
     <style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-		h1 { margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
-		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
-		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
-		h1.ctl { font-family: "Mangal"; font-size: 18pt; font-weight: bold }
-		a:link { color: #000080; text-decoration: underline }
-		a.cjk:link { so-language: zxx }
-		a.ctl:link { so-language: zxx }
-		a:visited { color: #800000; text-decoration: underline }
-		a.cjk:visited { so-language: zxx }
-		a.ctl:visited { so-language: zxx }
+figure {
+    display: inline-block;
+}
+
 	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr">
+  </head>
 
-  <img src="JugglucoLink.jpg"
-      style="object-fit:contain; width:auto;		    height:14cm;" alt="Libre2" title="Libre2"
-      align="right">
-<p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
-<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Patched
-US Libre 2.7.2</b></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=7189cb584d338767d208c333a24f8ff5770301a76c2b4e2dc7e8504f24020905">Download</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">
+<body>
 
-</p>
+<h1>Patched US Libre 2.7.2</h1>
+<figure><img src="JugglucoLink.jpg" style="object-fit:contain; width:auto;		    height:14cm;" align="right">
+<figcaption>Juggluco menu added to the US libre 2 app </figcaption> </figure>
+
+
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=1667f645310a58344e5235ea21113b4e9e3f3f02799f9925f648ffdb0dc06d20">Download</a></p>
+
+
 <p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
 2.7.2 app doesn't need to start the sensor; it can work with your
 current sensor. It can also be installed beside the unpatched US
@@ -65,22 +56,50 @@ host, thus they can use the IP: 127.0.0.1</p>
 <p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
 2 app sends Scans and Stream to Juggluco.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Juggluco receives.</p>
-  <img src="AbbottOverview.jpg"
-      style="object-fit:contain; width:auto;		    height:14cm;"  title="Libre2 Overview"
-      align="left">
-  <img src="JugglucoAddConnection.jpg"
-      style="object-fit:contain; height:auto;		    width:14cm;"       align="left">
-<p style="line-height: 100%; margin-bottom: 0in"></p>
-
-  <img src="JugglucoOverview.jpg"
-      style="object-fit:contain; height:auto;		    width:14cm;"       align="right">
-  <img src="AbbottAddConnection.jpg"
-      style="object-fit:contain; width:auto;		    height:14cm;" align="right">
+<p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
 
 </p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
 
 </p>
+<figure> <img src="AbbottOverview.jpg" style="object-fit:contain; width:auto;		    height:14cm;"  title="Libre2 Overview" >
+<figcaption>Connection Overview in US Libre 2</figcaption> </figure>
+<figure><img src="JugglucoAddConnection.jpg" style="object-fit:contain; height:auto;		    width:14cm;"       align="left"> 
+<figcaption>Add Connection in Juggluco</figcaption> </figure>
+
+
+<figure> <img src="JugglucoOverview.jpg" style="object-fit:contain; height:auto;		    width:14cm;"       align="left">
+<figcaption>Connection overview in Juggluco</figcaption> </figure>
+<figure> <img src="AbbottAddConnection.jpg" style="object-fit:contain; width:auto;		    height:14cm;" align="left">
+<figcaption>Add Connection in US Libre 2</figcaption> </figure>
+
+
+<h1>Arm32</h1>
+<p>
+The app is arm64 only. If you want 32 bit arm, you need to give me
+the arm32 libraries installed on a Arm32 phone. With adb you pull
+installed APKs out of the phone:</p>
+<p style="line-height: 100%; margin-bottom: 0in">An list of the apk's
+belonging to com.freestylelibre2.app.us, you get with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">adb shell pm path
+com.freestylelibre2.app.us</p>
+<p style="line-height: 100%; margin-bottom: 0in">thereafter you can
+pull each fill from the device with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">adb pull $FILENAME</p>
+<p style="line-height: 100%; margin-bottom: 0in">where $FILENAME
+stands for a filename.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For example when</p>
+<pre class="western">adb shell pm path com.freestylelibre2.app.us</pre><p style="line-height: 100%; margin-bottom: 0in">
+Returns:</p>
+<pre class="western">package:/data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/base.apk
+package:/data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/split_config.arm64_v8a.apk
+package:/data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/split_config.xxhdpi.apk
+</pre><p>
+You can pull each of the files out of the device with (replacing
+<em>package:</em> with <em>adb pull ):</em></p>
+<pre class="western">adb pull /data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/base.apk
+adb pull /data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/split_config.arm64_v8a.apk
+adb pull /data/app/~~lSfFIR9tZkv_fKuKbK20YA==/com.freestylelibre2.app.us-A2OumPP_a3lfVZSZQkwNog==/split_config.xxhdpi.apk</pre>
 </body>
 </html>

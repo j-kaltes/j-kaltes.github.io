@@ -17,13 +17,14 @@ figure {
 <body>
 
 <h1>Patched US Libre 2.7.2</h1>
+<p>New US Libre 2 sensors (with dates 2023-11-03 or later) don't work with Juggluco. Scanning gives a <i>Scan Error (18)</i> message.
+As a temporary solution I have patched Abbott's US Libre 2.7.2 app so that it sends glucose values to Juggluco. Not only the scan and history values, but also the glucose value stream received via Bluetooth. Normally Abbott's Libre 2 app uses this only to generate low and high glucose alarms.</p>
+
 <figure><img src="JugglucoLink.jpg" style="object-fit:contain; width:auto;		    height:20cm;" align="right">
 <figcaption>Juggluco menu added to the US libre 2 app </figcaption> </figure>
 
 
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=1667f645310a58344e5235ea21113b4e9e3f3f02799f9925f648ffdb0dc06d20">Download</a></p>
-
-
 <p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
 2.7.2 app doesn't need to start the sensor; it can work with your
 current sensor. It can also be installed beside the unpatched US

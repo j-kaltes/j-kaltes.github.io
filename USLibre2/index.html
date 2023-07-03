@@ -3,9 +3,6 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Patched US Libre 2.7.2</title>
-    <meta name="generator" content="LibreOffice 7.1.6.2 (Linux)">
-    <meta name="created" content="2021-10-13T21:19:06.016650885">
-    <meta name="changed" content="2021-10-15T12:35:49.484341909">
     <style type="text/css">
 figure {
     display: inline-block;
@@ -15,22 +12,20 @@ figure {
   </head>
 <body>
 <h1>Patched US Libre 2.7.2</h1>
+<p><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=1667f645310a58344e5235ea21113b4e9e3f3f02799f9925f648ffdb0dc06d20">Download</a></p>
 <p>New US Libre 2 sensors (with dates 2023-11-03 or later) don't work with Juggluco. Scanning gives a <i>Scan Error (18)</i> message.
 As a temporary solution I have patched Abbott's US Libre 2.7.2 app so that it sends glucose values to Juggluco. Not only the scan and history values, but also the glucose value stream received via Bluetooth. Normally Abbott's Libre 2 app uses this only to generate low and high glucose alarms.</p>
 
 <figure><img src="JugglucoLink.jpg" style="object-fit:contain; width:auto;		    height:20cm;" align="right">
 <figcaption>Juggluco menu added to the US libre 2 app </figcaption> </figure>
-
-
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://apkfab.com/libre-2/com.freestylelibre2.app.aq/apk?h=1667f645310a58344e5235ea21113b4e9e3f3f02799f9925f648ffdb0dc06d20">Download</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
+<p>The patched US Libre
 2.7.2 app doesn't need to start the sensor; it can work with your
 current sensor. It can also be installed beside the unpatched US
 libre 2 app. You only need to force stop the unpatched US libre 2
 app, because otherwise it is possible that you will not get a
 connection because the unpatched US Libre 2 app tried to to that, but
 doesn't succeed because it uses the wrong &quot;PIN&quot;.</p>
-<p style="line-height: 100%; margin-bottom: 0in">The patched US Libre
+<p>The patched US Libre
 2.7.2 app sends glucose values via TCP/IP to Juggluco. For this use
 is made of <a href="https://www.juggluco.nl/Juggluco/mgdL/index.html#mirror">Juggluco's
 Mirror (Clone in a lot of translations) function</a>. How it works

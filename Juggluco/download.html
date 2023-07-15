@@ -60,7 +60,7 @@ serious bug. For example Juggluco doesn't work with a certain type of
 sensor or crashes, it would be helpful to generate more information
 about the problem.</p>
 <p style="line-height: 100%; margin-bottom: 0in">For this you can
-install a logging version of Juggluco. 
+install a logging version of Juggluco:
 </p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/file/d/1yAnN2vy-08yivBOXTp_gI94YpsPkkqBM/view?usp=drive_link">Mobile
 phone</a></p>
@@ -83,10 +83,9 @@ immediately, it is more difficult. You can either afterwards create a
 logcat of all apps with:</p>
 <p style="line-height: 100%; margin-bottom: 0in">adb shell logcat -d
 &gt; logcatall.txt</p>
-<p style="line-height: 100%; margin-bottom: 0in">Or make a logfile
-only of Juggluco with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Or make a logfile only of Juggluco, with:</p>
 <p style="line-height: 100%; margin-bottom: 0in">
-adbr shell <B>'</B>while true; do PID=$(pidof tk.glucodata);if test -n "$PID"; then logcat --pid $PID ;break;fi;done<B>'</B> > logcat.txt
+adb shell <B>'</B>while true; do PID=$(pidof tk.glucodata);if test -n "$PID"; then logcat --pid $PID ;break;fi;done<B>'</B> > logcat.txt
 </p>
 <p style="line-height: 100%; margin-bottom: 0in">You can send
 logcat.txt or logcatall.txt to <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Log juggluco">jaapkorthalsaltes@gmail.com</a>

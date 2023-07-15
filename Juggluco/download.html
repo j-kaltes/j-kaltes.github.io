@@ -71,8 +71,7 @@ crash you can afterwards use the following command:</p>
 <p style="line-height: 100%; margin-bottom: 0in">adb shell logcat
 --pid <strong>'</strong>$(pidof tk.glucodata)<strong>' </strong><strong>-d</strong>
 &gt; logcat.txt</p>
-<p style="line-height: 100%; margin-bottom: 0in">If Juggluco soes
-start without crashing, but crashes later you can use the following
+<p style="line-height: 100%; margin-bottom: 0in">If Juggluco does start without crashing, but crashes later, you can use the following
 command before the crash:</p>
 <p style="line-height: 100%; margin-bottom: 0in">adb shell logcat
 --pid '$(pidof tk.glucodata)' &gt; logcat.txt</p>
@@ -83,7 +82,7 @@ immediately, it is more difficult. You can either afterwards create a
 logcat of all apps with:</p>
 <p style="line-height: 100%; margin-bottom: 0in">adb shell logcat -d
 &gt; logcatall.txt</p>
-<p style="line-height: 100%; margin-bottom: 0in">Or make a logfile only of Juggluco, with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Or make a logfile of Juggluco only, with:</p>
 <p style="line-height: 100%; margin-bottom: 0in">
 adb shell <B>'</B>while true; do PID=$(pidof tk.glucodata);if test -n "$PID"; then logcat --pid $PID ;break;fi;done<B>'</B> > logcat.txt
 </p>

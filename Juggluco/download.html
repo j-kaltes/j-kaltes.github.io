@@ -28,42 +28,6 @@ figure {
         href="https://drive.google.com/drive/folders/1qysiLYb2e93WBMjC9MYCqEdW-gGDUb2n?usp=share_link">Previous
         versions</a></p>
 <p>You can always update an existing version without data loss.</p>
-<h2 class="western">Bug report</h2>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Serif, serif">When
-you have serious problems running a version of Juggluco, it would be
-helpful to run a logging version of Juggluco and send the log file to
-me.</font></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">A
-logging variant for the phone is here:</font></font></font></p>
-<p style="orphans: 2; widows: 2"><a href="https://drive.google.com/file/d/1gThFJMMSo3pSRMfEEs3_fnjyqRhff7eH/view?usp=drive_link"><span style="font-variant: normal"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">Juggluco5.1.1-log.apk</span></span></span></font></font></font></span></a></p>
-<p style="orphans: 2; widows: 2"><span style="font-variant: normal"><font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">A
-logging variant for WearOS is here:</span></span></span></font></font></font></span></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><a href="https://drive.google.com/file/d/1nqwIoSd-QclMg0r7LQ_D3GA5OuR2vSCh/view">Juggluco5.1.2-wear-arm32-log.apk</a></font></font></font></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">After
-creating the error, you have first to install a debuggable version of
-Juggluco from:</font></font></font></p>
-<p style="orphans: 2; widows: 2"><a href="https://drive.google.com/file/d/1wer1SYYxKoDwr9Kjzm1p0OYROe1oOpml/view?usp=drive_link"><span style="font-variant: normal"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">Juggluco-Debug-ToDowngrade.apk</span></span></span></font></font></font></span></a></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">And
-then get the log file out of the device with:</font></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in">adb shell run-as
-tk.glucodata cat /data/data/tk.glucodata.debug/files/logs/trace.log &gt;
-trace.log</p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">and
-E-Mail trace.log to me.</font></font></font></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">You
-can remove the log file with:</font></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in">adb shell run-as
-tk.glucodata rm /data/data/tk.glucodata.debug/files/logs/trace.log</p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Thereafter
-you can install an old version of Juggluco without these problems.</font></font></font></p>
-
     <h2 class="western">Phone 5.1.2 (Android 8 or higher. Can also be used with Libre3):</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
       Arm64 only (the usual case): <a href="https://drive.google.com/file/d/14br0bmSt1adf60EsREvRHaIHqd-IYoP5/view?usp=drive_link">Google Drive</a> </p>
@@ -89,6 +53,46 @@ you can install an old version of Juggluco without these problems.</font></font>
 Juggluco
           on WearOS</a> </p>
     </h2>
+<h2 class="western">
+BUG Report</h2>
+<p style="line-height: 100%; margin-bottom: 0in">If you have a
+serious bug. For example Juggluco doesn't work with a certain type of
+sensor or crashes, it would be helpful to generate more information
+about the problem.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For this you can
+install a logging version of Juggluco. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/file/d/1yAnN2vy-08yivBOXTp_gI94YpsPkkqBM/view?usp=drive_link">Mobile
+phone</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/file/d/1f-a25xLIDlkmN1AMR8aSxEvZ-k2JB_6n/view?usp=drive_link">WearOS
+watch</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">If Juggluco doesn't
+crash you can afterwards use the following command:</p>
+<p style="line-height: 100%; margin-bottom: 0in">adb shell logcat
+--pid <strong>'</strong>$(pidof tk.glucodata)<strong>' </strong><strong>-d</strong>
+&gt; logcat.txt</p>
+<p style="line-height: 100%; margin-bottom: 0in">If Juggluco soes
+start without crashing, but crashes later you can use the following
+command before the crash:</p>
+<p style="line-height: 100%; margin-bottom: 0in">adb shell logcat
+--pid '$(pidof tk.glucodata)' &gt; logcat.txt</p>
+<p style="line-height: 100%; margin-bottom: 0in">And generate the
+crash and send logcat.txt to me.</p>
+<p style="line-height: 100%; margin-bottom: 0in">If Juggluco crashes
+immediately, it is more difficult. You can either afterwards create a
+logcat of all apps with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">adb shell logcat -d
+&gt; logcatall.txt</p>
+<p style="line-height: 100%; margin-bottom: 0in">Or make a logfile
+only of Juggluco with:</p>
+<p style="line-height: 100%; margin-bottom: 0in">
+adbr shell <B>'</B>while true; do PID=$(pidof tk.glucodata);if test -n "$PID"; then logcat --pid $PID ;break;fi;done<B>'</B> > logcat.txt
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can send
+logcat.txt or logcatall.txt to <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Log juggluco">jaapkorthalsaltes@gmail.com</a>
+
+</p>
+
     <h2 class="western">Permission</h2>
     <p style="line-height: 100%; margin-bottom: 0in">To use Floating Glucose
       under Android Automotive and WearOS you need to give Juggluco permission

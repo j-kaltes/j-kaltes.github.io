@@ -21,33 +21,36 @@ figure {
     <h1>Download </h1>
     <h2 class="western"> What is NEW:</h2>
 <ul>
-	<li><p>Can also use New US Libre 2 sensors on x86,x86_64 and arm32
-	devices including WearOS.</p>
+	<li><p>Terminating a sensor and later de-terminating it, could lead
+	to data from that sensor not being send to mirror device. Repaired.</p>
+	<li><p>Running US and EU Libre 2 at the same time on slow device is
+	now possible.</p>
+	<p></p>
 </ul>
     <p style="line-height: 100%"><a href="changes.html">Previous changes</a>, <a
         href="https://drive.google.com/drive/folders/1qysiLYb2e93WBMjC9MYCqEdW-gGDUb2n?usp=share_link">Previous
         versions</a></p>
 <p>You can always update an existing version without data loss.</p>
-    <h2 class="western">Phone 5.1.3 (Android 8 or higher. Can also be used with Libre3):</h2>
+    <h2 class="western">Phone 5.1.5 (Android 8 or higher. Can also be used with Libre3):</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm64 only (the usual case): <a href="https://drive.google.com/file/d/1Rjg17YiN0irAOa40rGi0Hiwo6XkqEvhM/view?usp=drive_link">Google Drive</a> </p>
-      <p style="line-height: 100%; margin-bottom: 0in; background: transparent">Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/file/d/1emS0Ezt2KnhpZsw-hE7ASUmLtUa_kqNJ/view?usp=drive_link">Google
+      Arm64 only (the usual case): <a href="https://drive.google.com/file/d/1zWN2URXvSEumuBjHjFV62GGqNSgmfT0W/view?usp=drive_link">Google Drive</a> </p>
+      <p style="line-height: 100%; margin-bottom: 0in; background: transparent">Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/file/d/1_tEfBtvIli5qd72kGQp9-_WYg9cksq9g/view?usp=drive_link">Google
         Drive</a> </p>
 <p><b>WARNING</b>: Juggluco can't take over sensors started with the Arm32 version of Abbott's Libre 3 app, but it can start them itself and take them over from Arm64 and the other way around (the Arm32 version of Abbott's Libre 3 app can't do that and can't be used with the same sensor after a reinstall). Juggluco will also not work with Libre 3 sensors on  devices with very old Linux Kernels a like phone that originally ran maximally Android 6.0.1, on which is put an Android 12 Lineage OS custom ROM.</p>
       
-    <h2 class="western">Phone version 5.1.3-no3 (Android 4.4 or higher. Can NOT be used with Libre3):</h2>
+    <h2 class="western">Phone version 5.1.5-no3 (Android 4.4 or higher. Can NOT be used with Libre3):</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm32 only: <a href="https://drive.google.com/file/d/1mR1XLJi4FccyPUbiNfvCd-33GP91Yclk/view?usp=drive_link">Google
+      Arm32 only: <a href="https://drive.google.com/file/d/1zw1AKoMJNTCUPHo8_UTpnMvp787sk2i8/view?usp=drive_link">Google
         Drive</a> </p>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm/Arm64/x86/x86_64: <a href="https://drive.google.com/file/d/1kF3CwYMZWquxVefjkdeQKCDtnWPXKGNf/view?usp=drive_link">Google
+      Arm/Arm64/x86/x86_64: <a href="https://drive.google.com/file/d/1-qq5FFlmvX4VVL5H01A7D1YZFrDiK-LA/view?usp=drive_link">Google
         Drive</a> </p>
-    <h2 class="western">WearOS version 5.1.3-wear:</h2>
+    <h2 class="western">WearOS version 5.1.5-wear:</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm32 only (the usual case): <a href="https://drive.google.com/file/d/1Tp0l6RRAzcRDWM6H2iMtO3iTutq5Fy2z/view?usp=drive_link">Google
+      Arm32 only (the usual case): <a href="https://drive.google.com/file/d/1S8M941Na_607qkN06oE4oysbdk2CvVGF/view?usp=drive_link">Google
         Drive</a> </p>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/file/d/1ip0pUh4BAQVdRhjYysxIN_WNNDwbQqPe/view?usp=drive_link">Google Drive</a> </p>
+      Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/file/d/1IF0fHE4na90bPXvikRz9OBG4MEm_IOGl/view?usp=drive_link">Google Drive</a> </p>
     <h2>
       <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/JugglucoWearOS/install/adb.html">Install
 Juggluco
@@ -101,10 +104,10 @@ logcat.txt or logcatall.txt to <a href="mailto:jaapkorthalsaltes@gmail.com?subje
     <p style="line-height: 100%; margin-bottom: 0in">It is also possible to give
       Juggluco all permissions it uses during install with:</p>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <pre>adb install -g -r Juggluco5.1.3-wear-arm32.apk</pre>
+    <pre>adb install -g -r Juggluco5.1.5-wear-arm32.apk</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
     <p style="line-height: 100%; margin-bottom: 0in">Were
-      Juggluco5.1.3-wear-arm32.apk is the current WearOS APK you downloaded
+      Juggluco5.1.5-wear-arm32.apk is the current WearOS APK you downloaded
       from:</p>
     <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a></p>
     <p style="line-height: 100%; margin-bottom: 0in">-g means that you grant all

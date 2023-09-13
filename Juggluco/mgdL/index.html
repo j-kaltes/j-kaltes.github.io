@@ -156,7 +156,7 @@ I think that it went like this: The decision makers in the organization were qui
           to their server (as you can see in Libreview), Juggluco doesn't.<br>
         </span></li>
     </ul>
-    <h5  id="mirror">Mirror</h5>
+    <h2  id="mirror">Mirror</h2>
     <figure> <img src="addconnection.jpg" alt="Send data to other device" title="Send data to other device"
         style="object-fit:contain;     width:11.5cm;            height:auto;"> <figcaption><span
           style="font-size: 0.9em; font-family: Times New Roman;">Configure to
@@ -181,60 +181,13 @@ I think that it went like this: The decision makers in the organization were qui
       values. This can make that if you use one of them longer, they will give
       somewhat different values. When used beside each other, differences will
       diminish with time.</p>
-    <h5 style="  margin-bottom: 0in; line-height: 100%">Librelinks alarms stop
-      working</h5>
-    <p>Librelinks alarms won't work anymore after using Juggluco. Not everyone
-      can just receive data via Bluetooth from a sensor. For this you need to
-      generate the right authentication information which is determined while
-      scanning. You don't read it out of the sensor, but generate it. It is
-      therefore different from what the Librelink app uses.&nbsp; When Juggluco
-      and Librelink run on the same device and you let Juggluco get a connection
-      before starting Librelink, Librelink will also generate alarms. But this
-      adds nothing and probably makes that Juggluco get more problems gaining a
-      connection when Librelink is the first trying to use the wrong
-      authentication information. When Juggluco runs on a watch and Librelink on
-      a phone, running in parallel is absolutely impossible and Librelink will
-      have a strong negative impact on the connection of Juggluco. Multiple apps
-      trying to connect with the sensor, has a much stronger negative impact on
-      Freestyle Libre 3 sensors; when both try to get a connection a the same
-      time (even on the same device), neither will succeed.</p>
-    <p>Previously I thought that the Librelink app will never re-enable alarms
-      after another app or device had a Bluetooth connection with the sensor,
-      but I found a method: When you logout the Librelink app and later login
-      with another Libreview account, alarms will work after you scan the
-      sensor. Hereafter Juggluco will lose contact with the sensor and the only
-      way to get it back is the scan the sensor a few times with Juggluco in the
-      foreground after Juggluco has discovered that its authentication
-      information doesn't work anymore.</p>
-    <h5>Connection</h5>
-      <p>If the sensor is already connected with Libre app or reader, it will
-not get a connection with Juggluco. This is especially important in
-the beginning, because later they can't get a connection with the
-sensor anymore and only compete trying to get a connection. On my own smartphone running Librelink doesn't seem to disrupt the connection of Juggluco with the sensor, but Juggluco always got a connection soon after starting the sensor (mostly I started the sensor with Juggluco, so Librelink doesn't even try to connect with the sensor.)</p>
-<p style="line-height: 100%; margin-bottom: 0in">So after you have
-scanned the sensor a few times with Juggluco, you have to disrupt
-this connection:</p>
-<ul>
-	<li><span lang="en-US">Maybe
-	turning Bluetooth OFF and ON is effective;</span>
-	<li><span lang="en-US">Turn
-	OFF alarms of the Libre app and Freestyle reader;</span>
-	<li><span lang="en-US">Revoke Location and Nearby devices permission;</span>
-	<li><span lang="en-US">Force close the Libre2 app;</span>
-	<li><span lang="en-US">Wipe the Libre2 app out of the recent tasks screen;</span>
-	<li><span lang="en-US">Better, disable the Libre app.</span>
-
-</ul>
-
-
-      <p>If you have
-      installed Abbott's Libre/Librelink app, you can just install Juggluco from
-      <a href="https://www.juggluco.nl/Juggluco/download.html">Here</a>, scan two times and after some time a Bluetooth connection will
-      be established and a new glucose value will arrive every minute. Before
-      the Bluetooth values arrive, the values received by scanning will be
-      shown.</p>
-    <p>From Juggluco 2.2.1 on, Juggluco can connect directly with US Freestyle
-      Libre 2 sensors.</p>
+<h2>Multiple apps with the same sensor</h2>
+<p>
+European Libre 2 sensors can handle multiple apps on the same phone connected to the same sensor quite well. The alarms will become less reliable, but you can view two apps at the same time. Sometimes somehow Bluetooth stops totally after the sensor was out of reach for some time, something what never happens otherwise. You have to turn Bluetooth off and on to get it running again.</p></p>
+Only one app will be able to establish a connection with the sensor on its own, except when you run a mirror Juggluco on the same phone. When there are connection issues while running two app in parallel, you should kill the app who can't establish a connection. Mostly it is the app who last came to know the sensor who can make the connection. Librelink will not use Bluetooth when it didn't start the sensor. Juggluco will always try to establish a Bluetooth connection (when "Sensor via Bluetooth" is turned on). When the sensor was scanned with another exemplar of Juggluco or the patched Librelink app, you need to scan the sensor again with Juggluco after it failed to connect to the sensor.</p><p>
+Apps running on different devices can't connect in parallel with the same sensor. Freestyle Reader will interfere more with Juggluco than the Librelink app. When the sensor is connected to Juggluco running on a WearOS watch, the Abbott's Libre app will disrupt connection (if it was used to start the sensor). Juggluco will normally not try to connect with the sensor anymore when it transfers the sensor to the watch. To be certain that nothing is still running somehow, you can kill Juggluco and let it restarts itself.
+US/CA/AU Libre 2 sensors can't connect to multiple apps on the same phone in parallel. The same is true for all Libre 3 sensors.
+</p>
     <figure> <img src="settings.jpg" alt="Settings" title="Settings" style="object-fit:contain;     width:11.5cm;            height:auto;">
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Settings</span></figcaption>
     </figure>
@@ -242,6 +195,7 @@ this connection:</p>
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Scan
           showing the current glucose value and the past 16 minutes trend</span></figcaption>
     </figure>
+    <h2>Scan</h2>
     <p>After scanning something like the right picture above is shown. The
       number is the 'current' glucose value, the curve displays the glucose
       pattern of the past 16 minutes and is taken out of the sensor by NFC

@@ -1,21 +1,21 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
        <link rel="icon" href="../arrow.png">
-	<title>More than one</title>
-	<meta name="generator" content="LibreOffice 7.2.5.2 (Linux)"/>
-	<meta name="created" content="2022-02-18T16:58:14.837145856"/>
-	<meta name="changed" content="2022-02-18T18:00:52.793537017"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-		pre { background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
-		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		a:link { color: #000080; so-language: zxx; text-decoration: underline }
-	</style>
+ <title>More than one</title>
+ <meta name="generator" content="LibreOffice 7.2.5.2 (Linux)"/>
+ <meta name="created" content="2022-02-18T16:58:14.837145856"/>
+ <meta name="changed" content="2022-02-18T18:00:52.793537017"/>
+ <style type="text/css">
+  @page { size: 8.27in 11.69in; margin: 0.79in }
+  p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+  pre { background: transparent }
+  pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+  pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+  pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+  a:link { color: #000080; so-language: zxx; text-decoration: underline }
+ </style>
 </head>
 <body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p style="line-height: 100%; margin-bottom: 0in">
 Some people may want to run multiple instances of Juggluco because
@@ -26,12 +26,12 @@ allow multiple apps with the same Application id. By changing the
 application id, you can install multiple instances of an app.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Here is a link to a
 version of Juggluco with a different application id:</p>
-<p><a href="https://drive.google.com/open?id=1hkh6-Mh_DRfI_VlO8v505EpI2m2IDR2F">Juggluco6.0.2 Second</a></p>
+<p><a href="https://drive.google.com/open?id=1teYz9_FkpeqzvGIB_ewAiRd3ePyDRv1r">Juggluco 6.0.4 Second</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">If you need more
 than two, you can do the following:</p>
 <p style="line-height: 100%; margin-bottom: 0in">First you need to
 get the universal apk of Juggluco from Juggluco's website (At the top
-of https://www.juggluco.nl/Juggluco.)</p>
+of https:
 <p style="line-height: 100%; margin-bottom: 0in">That single apk you
 can decompile with</p>
 <p style="line-height: 100%; margin-bottom: 0in">apktool d
@@ -39,9 +39,9 @@ filename.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">Then edit
 dirname/AndroidManifest.xml</p>
 <p style="line-height: 100%; margin-bottom: 0in">On the top is
-package=&quot;tk.glucodata&quot;. Change  tk.glucodata to something
+package=&quot;tk.glucodata&quot;. Change tk.glucodata to something
 else.</p>
-<p style="line-height: 100%; margin-bottom: 0in">Also remove 
+<p style="line-height: 100%; margin-bottom: 0in">Also remove
 </p>
 <pre class="western">&lt;provider android:authorities=&quot;tk.glucodata.androidx-startup&quot; android:exported=&quot;false&quot; android:name=&quot;androidx.startup.InitializationProvider&quot;&gt;
             &lt;meta-data android:name=&quot;androidx.emoji2.text.EmojiCompatInitializer&quot; android:value=&quot;androidx.startup&quot;/&gt;
@@ -52,13 +52,13 @@ It seems to be some
 kind of nonsense that android studio adds to the manifest and has to
 have a unique name.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Now recompile with:</p>
-<p style="line-height: 100%; margin-bottom: 0in">apktool   b dirname
+<p style="line-height: 100%; margin-bottom: 0in">apktool b dirname
 -o unaligned.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">zipalign -f -p
 unaligned.apk renamed.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">apksigner sign
---ks-pass 'pass:IDontKnow' --ks everyone.keystore  renamed.apk</p>
-<p style="line-height: 100%; margin-bottom: 0in">For this you  need
+--ks-pass 'pass:IDontKnow' --ks everyone.keystore renamed.apk</p>
+<p style="line-height: 100%; margin-bottom: 0in">For this you need
 everyone.keystore for a key to sign. You can make it yourself.</p>
 </body>
 </html>

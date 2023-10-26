@@ -3,11 +3,12 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title></title>
-	<meta name="generator" content="LibreOffice 7.5.0.3 (Linux)"/>
+	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
 	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
-	<meta name="changed" content="2023-03-20T12:45:02.974414610"/>
+	<meta name="changed" content="2023-10-26T15:52:55.539022331"/>
 	<style type="text/css">
 		@page { margin: 0.79in }
+		td p { margin-bottom: 0.1in }
 		p { margin-bottom: 0.1in }
 		h4.western { font-family: "Liberation Sans", sans-serif; font-size: 13pt; font-style: italic }
 		h4.cjk { font-family: "Noto Sans CJK SC"; font-size: 13pt; font-style: italic }
@@ -16,9 +17,328 @@
 		h3.ctl { font-family: "Droid Sans Devanagari" }
 	</style>
 </head>
-<body lang="en-US" dir="ltr"><p align="center" style="line-height: 100%; margin-top: 0.17in; margin-bottom: 0.08in; page-break-after: avoid">
-<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>xDrip/Nightscout
-webserver</b></font></font></p>
+<body lang="en-US" dir="ltr"><h1>Web server</h1>
+<p>Juggluco contains a web server. You can turn it on with Left
+menu-&gt;Settings-&gt;Web server. Via the web server other programs
+can make use of the data in Juggluco. In the following localhost or
+equivalently 127.0.0.1 is used to the hostname or IP of the web
+server. This way you can try out the commands by opening the web page
+on the same phone where Juggluco is running. If you unset &quot;Local
+only&quot; in Left menu-&gt;Settings -&gt; Web server, you can also
+use it from other hosts on your home network by replacing localhost
+or 127.0.0.1 with the IP of the phone. If Use SSL is set you can
+replace http://localhost with https://ahostname:aport. 
+</p>
+<h3 class="western">Juggluco web server</h3>
+<p>Starting with Juggluco 7.1.0 exactly the same data as can be
+exported in Juggluco with Left middle menu-&gt;Export, can also be
+assessed with via the web interface.</p>
+<table width="498" cellpadding="0" cellspacing="0">
+	<col width="116"/>
+
+	<col width="382"/>
+
+	<tr valign="top">
+		<td width="116" style="border: none; padding: 0in"><p><b>Stream</b></p>
+		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream">http://localhost:17580/x/stream</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" style="border: none; padding: 0in"><p><b>Scans</b></p>
+		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/scans?days=5">http://localhost:17580/x/scans</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" style="border: none; padding: 0in"><p><b>History</b></p>
+		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/history?days=0.5">http://localhost:17580/x/history</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" style="border: none; padding: 0in"><p><b>Amounts</b></p>
+		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/amounts?days=1">http://localhost:17580/x/amounts</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" style="border: none; padding: 0in"><p><b>Meals</b></p>
+		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/meals?days=6">http://localhost:17580/x/meals</a></p>
+		</td>
+	</tr>
+</table>
+<p>After one of the above commands you can place <b>'?'</b> followed
+by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
+<table width="1061" cellpadding="0" cellspacing="0">
+	<col width="91"/>
+
+	<col width="503"/>
+
+	<col width="466"/>
+
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>header</b></font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?header">http://localhost:17580/x/stream?header</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Place
+			a header with the meaning of each column above the columns.</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>days</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/history?header&amp;days=0.8">http://localhost:17580/x/history?header&amp;days=0.8</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
+			for how many days data should be returned.</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>duration</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?duration=3600">http://localhost:17580/x/stream?duration=3600</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">The
+			duration of data in seconds.</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>starttime</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/amounts?starttime=1698266963">http://localhost:17580/x/amounts?starttime=1698266963</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Start
+			time in unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>endtime</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?endtime=1698266963">http://localhost:17580/x/stream?endtime=1698266963</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">End
+			time in unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>start</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8">http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Other
+			way to specify the start time for testing purpose. The time is in
+			<b>local time</b> (Nightscout uses GMT).</font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>end</b>=</font></font></p>
+		</td>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?end=2023-10-30T23:10&amp;header">http://localhost:17580/x/stream?end=2023-10-30T23:10&amp;header</a></p>
+		</td>
+		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
+			end time.</font></font></p>
+		</td>
+	</tr>
+</table>
+<p><br/>
+<br/>
+
+</p>
+<p>The data contains the following columns:</p>
+<table width="714" cellpadding="0" cellspacing="0">
+	<col width="157"/>
+
+	<col width="419"/>
+
+	<col width="138"/>
+
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p style="font-weight: normal">
+			<font size="4" style="font-size: 14pt">Column header</font></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Meaning</font></p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Used
+			with:</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>Sensorid</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Sensor
+			identifier</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>Sensor only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>Nr</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Number
+			starting with 1 for the first data item of a particular sensor and
+			incremented with each new item.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>UnixTime</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Time in
+			number of seconds since 00:00 1 January 1970 GMT</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>YYYY-mm-dd-HH:MM:SS</b></font></pre>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Local time
+			split into its component parts.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>TZ</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Time zone in
+			number of hours from GMT</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>Min</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Number of
+			minutes since the start of the sensor.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>mmol/L or
+			mg/dL</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Glucose
+			value. The unit is dependent on the Unit setting of Juggluco.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><p><b>Rate</b></p>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Rate of
+			change.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>ChangeLabel</b></font></pre>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Label for
+			rate of change</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Source</b></font></pre>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>0 for Amounts
+			entered in Juggluco, 1 for Kerfstok.</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Value</b></font></pre>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Value of
+			amount</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Label</b></font></pre>
+		</td>
+		<td width="419" style="border: none; padding: 0in"><p>Label for
+			amount</p>
+		</td>
+		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 100%; margin-bottom: 0in">The meaning of rate
+of change:</p>
+<table width="462" cellpadding="0" cellspacing="0" style="background: transparent">
+	<col width="139"/>
+
+	<col width="191"/>
+
+	<col width="132"/>
+
+	<tr style="background: transparent" valign="top">
+		<td width="139" style="border: none; padding: 0in"><p><b>Rate:</b></p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p><b>Label:</b></p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p><b>Arrow in
+			Abbott app:</b></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="139" style="border: none; padding: 0in"><p>&lt;=-2</p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p>FALLING_QUICKLY</p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p>↓</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="139" style="border: none; padding: 0in"><p>Between -2
+			and -1</p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p>FALLING</p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p>↘</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="139" style="border: none; padding: 0in"><p>-1 to 1</p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p>STEADY</p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p>→</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="139" style="border: none; padding: 0in"><p>1 to 2</p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p>RISING</p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p>↗</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="139" style="border: none; padding: 0in"><p>&gt;=2</p>
+		</td>
+		<td width="191" style="border: none; padding: 0in"><p>RISING_QUICKLY</p>
+		</td>
+		<td width="132" style="border: none; padding: 0in"><p>↑</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">xDrip/Nightscout web server</h3>
+<p>Some existing apps make use of a xDrip or Nightscout web
+interface.</p>
 <h3 class="western">xDrip</h3>
 <p style="line-height: 100%; margin-bottom: 0in">Juggluco
 incorporates an xDrip web server. This way you can receive glucose
@@ -103,12 +423,14 @@ count, you have also the following options:</p>
 <h4 class="western">find[date][$gt]=datemsec</h4>
 <p style="line-height: 100%; margin-bottom: 0in">give results after
 datemsec, where <i>datemsec</i> is the number of milli seconds since
-00:00 1 January 1970 GMT For example: <a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
+00:00 1 January 1970 GMT For example:
+<a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
 <h4 class="western">find[date][$gte]=datemsec</h4>
 <p>gives results at or after datemsec</p>
 <h4 class="western">find[date][$lt]=datemsec</h4>
 <p>give results before datemsec, where datemsec are the number of
-milli seconds since 00:00 1 January 1970 GMT For example: <a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
+milli seconds since 00:00 1 January 1970 GMT For example:
+<a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
 <h4 class="western">find[date][$lte]=datemsec</h4>
 <p>gives results at or before datemsec</p>
 <p style="line-height: 100%; margin-bottom: 0in">By using dateString
@@ -123,9 +445,21 @@ Server</a>. And with SSL if you give Juggluco an SSL key as described
 in Left menu-&gt;Settings-&gt;Web server-&gt;Help and the readme of
 Juggluco Server and the help (-h) of <a href="https://www.juggluco.nl/Juggluco/cmdline/">Juggluco
 server</a>.</p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
 </body>
 </html>

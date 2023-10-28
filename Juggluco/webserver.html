@@ -5,7 +5,7 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
 	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
-	<meta name="changed" content="2023-10-26T15:52:55.539022331"/>
+	<meta name="changed" content="2023-10-28T15:46:42.438348738"/>
 	<style type="text/css">
 		@page { margin: 0.79in }
 		td p { margin-bottom: 0.1in }
@@ -20,15 +20,18 @@
 <body lang="en-US" dir="ltr"><h1>Web server</h1>
 <p>Juggluco contains a web server. You can turn it on with Left
 menu-&gt;Settings-&gt;Web server. Via the web server other programs
-can make use of the data in Juggluco. In the following localhost or
-equivalently 127.0.0.1 is used to the hostname or IP of the web
-server. This way you can try out the commands by opening the web page
-on the same phone where Juggluco is running. If you unset &quot;Local
-only&quot; in Left menu-&gt;Settings -&gt; Web server, you can also
-use it from other hosts on your home network by replacing localhost
-or 127.0.0.1 with the IP of the phone. If Use SSL is set you can
-replace http://localhost with https://ahostname:aport. 
-</p>
+can make use of the data in Juggluco. In the following <i>localhost</i>
+or equivalently <i>127.0.0.1</i> is used for the hostname or IP of
+the web server. In this way you can try out the commands by opening
+the web page on the same phone where Juggluco is running. If you
+unset &quot;Local only&quot; in Left menu-&gt;Settings -&gt; Web
+server, you can also use it from other hosts on your home network by
+replacing <i>localhost</i> or <i>127.0.0.1</i> with the IP of the
+phone. If <i>Use SSL</i> is set, you can replace http://localhost
+with https://ahostname:aport. Whereby &quot;<i>ahostname</i>&quot; is
+the hostname associated with the SSL certificate and &quot;<i>aport&quot;</i>
+is the &quot;<i>SSL Port</i>&quot; in left menu-&gt;Settings-&gt;Web
+server.</p>
 <h3 class="western">Juggluco web server</h3>
 <p>Starting with Juggluco 7.1.0 exactly the same data as can be
 exported in Juggluco with Left middle menu-&gt;Export, can also be
@@ -129,14 +132,14 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8">http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
 		</td>
 		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Other
-			way to specify the start time for testing purpose. The time is in
+			way to specify the start time for testing purposes. The time is in
 			<b>local time</b> (Nightscout uses GMT).</font></font></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="91" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>end</b>=</font></font></p>
 		</td>
-		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?end=2023-10-30T23:10&amp;header">http://localhost:17580/x/stream?end=2023-10-30T23:10&amp;header</a></p>
+		<td width="503" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream?end=2023-10-28T23:10&amp;header">http://localhost:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
 		</td>
 		<td width="466" style="border: none; padding: 0in"><p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
 			end time.</font></font></p>
@@ -149,130 +152,130 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 </p>
 <p>The data contains the following columns:</p>
 <table width="714" cellpadding="0" cellspacing="0">
-	<col width="157"/>
+	<col width="216"/>
 
-	<col width="419"/>
+	<col width="359"/>
 
-	<col width="138"/>
+	<col width="139"/>
 
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p style="font-weight: normal">
+		<td width="216" style="border: none; padding: 0in"><p style="font-weight: normal">
 			<font size="4" style="font-size: 14pt">Column header</font></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Meaning</font></p>
+		<td width="359" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Meaning</font></p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Used
+		<td width="139" style="border: none; padding: 0in"><p><font size="4" style="font-size: 14pt">Used
 			with:</font></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>Sensorid</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>Sensorid</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Sensor
+		<td width="359" style="border: none; padding: 0in"><p>Sensor
 			identifier</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>Sensor only</p>
+		<td width="139" style="border: none; padding: 0in"><p>Sensor only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>Nr</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>Nr</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Number
-			starting with 1 for the first data item of a particular sensor and
-			incremented with each new item.</p>
+		<td width="359" style="border: none; padding: 0in"><p>Number
+			starting with 1 for the first data item of a particular sensor or
+			data source and incremented with each new item.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		<td width="139" style="border: none; padding: 0in"><p>both</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>UnixTime</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>UnixTime</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Time in
+		<td width="359" style="border: none; padding: 0in"><p>Time in
 			number of seconds since 00:00 1 January 1970 GMT</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		<td width="139" style="border: none; padding: 0in"><p>both</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>YYYY-mm-dd-HH:MM:SS</b></font></pre>
+		<td width="216" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>YYYY-mm-dd-HH:MM:SS</b></font></font></font></pre>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Local time
-			split into its component parts.</p>
+		<td width="359" style="border: none; padding: 0in"><p>Local time
+			split into its component parts. mm= month, MM= Minute.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		<td width="139" style="border: none; padding: 0in"><p>both</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>TZ</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>TZ</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Time zone in
+		<td width="359" style="border: none; padding: 0in"><p>Time zone in
 			number of hours from GMT</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>both</p>
+		<td width="139" style="border: none; padding: 0in"><p>both</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>Min</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>Min</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Number of
+		<td width="359" style="border: none; padding: 0in"><p>Number of
 			minutes since the start of the sensor.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		<td width="139" style="border: none; padding: 0in"><p>sensor only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>mmol/L or
+		<td width="216" style="border: none; padding: 0in"><p><b>mmol/L or
 			mg/dL</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Glucose
+		<td width="359" style="border: none; padding: 0in"><p>Glucose
 			value. The unit is dependent on the Unit setting of Juggluco.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		<td width="139" style="border: none; padding: 0in"><p>sensor only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><p><b>Rate</b></p>
+		<td width="216" style="border: none; padding: 0in"><p><b>Rate</b></p>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Rate of
+		<td width="359" style="border: none; padding: 0in"><p>Rate of
 			change.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		<td width="139" style="border: none; padding: 0in"><p>sensor only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>ChangeLabel</b></font></pre>
+		<td width="216" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>ChangeLabel</b></font></font></font></pre>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Label for
+		<td width="359" style="border: none; padding: 0in"><p>Label for
 			rate of change</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>sensor only</p>
+		<td width="139" style="border: none; padding: 0in"><p>sensor only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Source</b></font></pre>
+		<td width="216" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Source</b></font></font></font></pre>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>0 for Amounts
+		<td width="359" style="border: none; padding: 0in"><p>0 for Amounts
 			entered in Juggluco, 1 for Kerfstok.</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		<td width="139" style="border: none; padding: 0in"><p>amounts only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Value</b></font></pre>
+		<td width="216" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Value</b></font></font></font></pre>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Value of
+		<td width="359" style="border: none; padding: 0in"><p>Value of
 			amount</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		<td width="139" style="border: none; padding: 0in"><p>amounts only</p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="157" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><b>Label</b></font></pre>
+		<td width="216" style="border: none; padding: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Label</b></font></font></font></pre>
 		</td>
-		<td width="419" style="border: none; padding: 0in"><p>Label for
+		<td width="359" style="border: none; padding: 0in"><p>Label for
 			amount</p>
 		</td>
-		<td width="138" style="border: none; padding: 0in"><p>amounts only</p>
+		<td width="139" style="border: none; padding: 0in"><p>amounts only</p>
 		</td>
 	</tr>
 </table>

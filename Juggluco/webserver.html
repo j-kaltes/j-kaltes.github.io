@@ -5,7 +5,7 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
 	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
-	<meta name="changed" content="2023-10-29T11:52:12.334867887"/>
+	<meta name="changed" content="2023-10-29T15:06:06.115021624"/>
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
 		td p { margin-bottom: 0.1in }
@@ -35,7 +35,7 @@ that your modem redirects to &quot;<i>SSL Port</i>&quot; (set in left
 menu-&gt;Settings-&gt;Web server) of your phone. Instead of Juggluco
 on a phone, you can also use <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
 server</a>.</p>
-<h3 class="western">Juggluco web server</h3>
+<h3 class="western">Juggluco export web server</h3>
 <p>Starting with Juggluco 7.1.0 exactly the same data as can be
 exported in Juggluco with Left middle menu-&gt;Export, can also be
 assessed with via the web interface.</p>
@@ -191,21 +191,19 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			Nightscout token used for Nightscout commands, can also be used
 			for the Juggluco's export commands. In other Nightscout servers,
 			Nightscout token is different from <span style="font-weight: normal">api_secret,</span>
-			but in the Nightscout server in Juggluco they have the same value.
-			</font></font>
-			</p>
+			but in the Nightscout server in Juggluco they are the same.</font></font></p>
 			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">api_secret
 			and <span style="font-weight: normal">api-secret</span> also work
 			with all commands that use the web server in Juggluco. They are
 			html header elements. api_secret is plain text, api-secret is SHA1
 			encoded. Examples:</font></font></p>
 			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api_secret:</b>
-			xyz</font></font></p>
+			xyx</font></font></p>
 			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api-secret:</b>
 			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/history?token=xyz">http://localhost:17580/x/history?token=xyz</a></p>
+			<a href="http://localhost:17580/x/history?token=xyz">http://localhost:17580/x/history?token=x</a>yx</p>
 		</td>
 	</tr>
 </table>
@@ -541,6 +539,15 @@ YYYY-mm-DDThh:MM:ss, were mm is the month and MM the minutes. For
 example 
 </p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Sans, sans-serif"><font size="3" style="font-size: 13pt"><b>token=the_api_secret</b></font></font></p>
+<p style="line-height: 100%; margin-bottom: 0in">See the Juggluco
+export web server options above.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
 <p style="line-height: 100%; margin-bottom: 0in">These commands can
 also be used with <a href="https://www.juggluco.nl/Juggluco/cmdline">Juggluco
 Server</a>. And with SSL if you give Juggluco an SSL key as described

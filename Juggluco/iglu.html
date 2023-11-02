@@ -48,7 +48,7 @@ figure {
     <p style="line-height: 108%; margin-bottom: 0.11in">Under ubuntu (which also
       runs under Windows 10), you can press</p>
     <pre style=" line-height: 108%; margin-bottom: 0.11in">apt install R-base <span
-style="color: rgb(35, 38, 41); font-family: ui-monospace, &quot;Cascadia Mono&quot;, &quot;Segoe UI Mono&quot;, &quot;Liberation Mono&quot;, Menlo, Monaco, Consolas, monospace; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(227, 230, 232); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">r-cran-devtools </span>libcurl4-openssl-dev libssl-dev</pre>
+style="color: rgb(35, 38, 41); font-family: ui-monospace, &quot;Cascadia Mono&quot;, &quot;Segoe UI Mono&quot;, &quot;Liberation Mono&quot;, Menlo, Monaco, Consolas, monospace; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(227, 230, 232); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">r-cran-devtools </span>libcurl4-openssl-dev libssl-dev gfortran</pre>
     <p style="line-height: 108%; margin-bottom: 0.11in">Rstudio you get from
       here: <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></p>
     <p style="line-height: 108%; margin-bottom: 0.11in">Now you have to install
@@ -60,12 +60,8 @@ class="hljs-string" style="margin: 0px; padding: 0px; border: 0px; font-style: i
 class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">,</span> dependencies <span
 class="hljs-operator" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">=</span> <span
 class="hljs-literal" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; color: var(--highlight-literal);">TRUE</span><span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">)<br>library("devtools")<br></span></code><code
-class="sourceCode r" style="white-space: pre; overflow: visible; position: relative;"><span
-id="cb1-2" style="display: inline-block; line-height: 1.25; color: inherit; text-decoration: inherit;">devtools<span
-class="op" style="color: rgb(102, 102, 102);">::</span><span class="kw" style="color: rgb(0, 112, 32); font-weight: bold;">install_github</span>(<span
-class="st" style="color: rgb(64, 112, 160);">"irinagain/iglu"</span>)</span></code><pre
-class="sourceCode r" style="overflow: visible; margin: 0px; color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"></pre>#install.packages("iglu") #?<br>install.packages("tidyverse"<code
+class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">)<br>library("devtools")<br></span></code><pre
+class="sourceCode r" style="overflow: visible; margin: 0px; color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"></pre>install.packages("iglu", dependencies = TRUE )<br>install.packages("tidyverse"<code
 class="hljs language-r" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;"><span
 class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">,</span> dependencies <span
 class="hljs-operator" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">=</span> <span
@@ -76,7 +72,7 @@ class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-sty
     <pre>library("tidyverse")
 library(iglu)
 </pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Use for directory the
+    <p style="line-height: 108%; margin-bottom: 0.11in">Use for <i>directory</i> the
       full name of your current directory, for stream.tsv the file you have your
       stream data in and for 3MH0042XDKM the name of the sensor you want to
       show.</p>

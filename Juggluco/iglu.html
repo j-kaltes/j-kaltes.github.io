@@ -1,112 +1,99 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <link rel="icon" href="arrow.png">
-    <title>Iglu</title>
-    <style type="text/css">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Iglu</title>
+	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2023-11-04T12:32:41.191940827"/>
+	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
-		a:link { color: #000080; text-decoration: underline }
-figure {
-    display: inline-block;
-}
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
 	</style>
-  </head>
-  <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
-    <h1 style=" line-height: 108%; margin-bottom: 0.11in">Iglu</h1>
-    <p style="line-height: 108%; margin-bottom: 0.11in"><a href="https://www.juggluco.nl/Juggluco">Juggluco</a>
-      let you export continuous glucose monitoring values. Here I describe how
-      you can use these data to generate a picture of you glucose percentiles
-      with the <a href="https://irinagain.github.io/iglu/">R package Iglu</a>.</p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">First you have to save
-      your streaming data. In Juggluco for Android you can select Export from
-      the left middle menu and press Stream to save it in some file. You need to
-      save in mg/dL so before you save it you should set mg/dL in Settings. The
-      resulting graph is also in mg/dL. This file you can then transfer to you
-      computer.</p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">You can also run cmdline
-      juggluco on you computer. Setting it to receive glucose values via IP/TCP
-      connection by selecting Mirror in the left middle menu and adding a
-      connection with you computers' IP and Stream checked. On you computer you
-      press </p>
-    <pre style=" line-height: 108%; margin-bottom: 0.11in">juggluco -ra</pre>
-    Set unit to mg/dL:
-    <pre style=" line-height: 108%; margin-bottom: 0.11in">juggluco -G</pre>
-    Make it a receiver and run in the background by pressing:
-    <pre style=" line-height: 108%; margin-bottom: 0.11in">juggluco&amp;</pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">If the data are
-      transferred to the computer, you can press </p>
-    <pre style=" line-height: 108%; margin-bottom: 0.11in">juggluco -B filename </pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">to save the stream data
-      to filename. See <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">https://www.juggluco.nl/Juggluco/cmdline/index.html</a>
-      for more information about cmdline juggluco.</p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">First you have to
-      install the statistics computing language R and preferentially Rstudio
-      which are both freely available on the web. The only drawback is that the
-      installation takes a lot of time. </p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Under ubuntu (which also
-      runs under Windows 10), you can press</p>
-    <pre style=" line-height: 108%; margin-bottom: 0.11in">apt install R-base <span
-style="color: rgb(35, 38, 41); font-family: ui-monospace, &quot;Cascadia Mono&quot;, &quot;Segoe UI Mono&quot;, &quot;Liberation Mono&quot;, Menlo, Monaco, Consolas, monospace; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(227, 230, 232); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">r-cran-devtools </span>libcurl4-openssl-dev libssl-dev gfortran</pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Rstudio you get from
-      here: <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Now you have to install
-      some packages, which also can take ages and you have to answer questions
-      or press return in between: </p>
-    <pre><br><code class="hljs language-r" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;">install.packages<span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">(</span><span
-class="hljs-string" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; color: var(--highlight-variable);">"devtools"</span><span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">,</span> dependencies <span
-class="hljs-operator" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">=</span> <span
-class="hljs-literal" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; color: var(--highlight-literal);">TRUE</span><span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">)<br>library("devtools")<br></span></code><pre
-class="sourceCode r" style="overflow: visible; margin: 0px; color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"></pre>install.packages("iglu", dependencies = TRUE )<br>install.packages("tidyverse"<code
-class="hljs language-r" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;"><span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">,</span> dependencies <span
-class="hljs-operator" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;">=</span> <span
-class="hljs-literal" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; color: var(--highlight-literal);">TRUE</span><span
-class="hljs-punctuation" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit;"></span></code>) </pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">And say that you use
-      them:</p>
-    <pre>library("tidyverse")
-library(iglu)
-</pre>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Use for <i>directory</i> the
-      full name of your current directory, for stream.tsv the file you have your
-      stream data in and for 3MH0042XDKM the name of the sensor you want to
-      show.</p>
-    <pre>setwd("directory")<br><br>streamdata&lt;-read.csv("stream.tsv",header=TRUE,sep='\t');<br><br>cgmdata&lt;-data.frame(streamdata$Sensorid,as.POSIXct(streamdata$UnixTime, origin="1970-01-01"),streamdata$mg.dL) 
-colnames(cgmdata)[1]&lt;-"id"
-colnames(cgmdata)[2]&lt;-"time"
-colnames(cgmdata)[3]&lt;-"gl"
-<br>unique(cgmdata$id)		# to see the sensor id's
-agp(dplyr::filter(cgmdata,id=="3MH0042XDKM"))       # display one particular sensor</pre>
-    <p>If you want the analyze a period that is not restricted to a single
-      sensor, you can do the following:</p>
-    <pre>cgmdata2&lt;-data.frame("Name",as.POSIXct(streamdata$UnixTime, origin="1970-01-01"),streamdata$mg.dL)
-colnames(cgmdata2)[1]&lt;-"id"
-colnames(cgmdata2)[2]&lt;-"time"
-colnames(cgmdata2)[3]&lt;-"gl"
+</head>
+<body lang="en-US" dir="ltr"><h1 style="line-height: 108%; margin-top: 0in; margin-bottom: 0.11in">
+Iglu</h1>
+<p style="line-height: 108%; margin-bottom: 0.11in"><a href="https://www.juggluco.nl/Juggluco">Juggluco</a>
+let you export continuous glucose monitoring values. Here I describe
+how you can use these data to generate a picture of you glucose
+percentiles with the <a href="https://irinagain.github.io/iglu/">R
+package Iglu</a>.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">First you have to
+save your streaming data. In Juggluco for Android you can select
+Export from the left middle menu and press Stream to save it in some
+file. You need to save in mg/dL so before you save it you should set
+mg/dL in Settings. The resulting graph is also in mg/dL. This file
+you can then transfer to your computer.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">You can also run
+<a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
+server</a> on you computer.</p>
+<p>Set unit to mg/dL: 
+</p>
+<pre style="line-height: 108%; margin-bottom: 0.11in">juggluco -G</pre><p style="line-height: 108%; margin-bottom: 0.11in">
+If the data are transferred to the computer, you can press 
+</p>
+<pre style="line-height: 108%; margin-bottom: 0.11in">juggluco -B filename </pre><p style="line-height: 108%; margin-bottom: 0.11in">
+to save the stream data to filename. See
+<a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">https://www.juggluco.nl/Juggluco/cmdline/index.html</a>
+for more information about cmdline juggluco.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">First you have to
+install the statistics computing language R and preferentially
+Rstudio which are both freely available on the web. The only drawback
+is that the installation takes a lot of time. 
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Under ubuntu
+(which also runs under Windows 10), you can press</p>
+<pre style="line-height: 108%; text-align: left; orphans: 2; widows: 2; margin-bottom: 0.11in">apt install R-base <span style="font-variant: normal"><font color="#232629"><font face="ui-monospace, Cascadia Mono, Segoe UI Mono, Liberation Mono, Menlo, Monaco, Consolas, monospace"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">r-cran-devtools </span></span></span></font></font></font></span>libcurl4-openssl-dev libssl-dev gfortran</pre><p style="line-height: 108%; margin-bottom: 0.11in">
+Rstudio you get from here:
+<a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Now you have to
+install some packages, which also can take ages and you have to
+answer questions or press return in between: 
+</p>
+<pre><span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>install.packages(&quot;devtools&quot;, dependencies = TRUE)</span></span></font></font></code>
+<span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>library(&quot;devtools&quot;)</span></span></font></font></code>
+install.packages(&quot;iglu&quot;, dependencies = TRUE )<br/>
+install.packages(&quot;tidyverse&quot;<span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>, dependencies = TRUE</span></span></font></font></code>) </pre><p style="line-height: 108%; margin-bottom: 0.11in">
+And say that you use them:</p>
+<pre>library(&quot;tidyverse&quot;)
+library(iglu)</pre><p style="line-height: 108%; margin-bottom: 0.11in">
+Use for <i>directory</i> the full name of your current directory, for
+stream.tsv the file you have your stream data in and for 3MH0042XDKM
+the name of the sensor you want to show.</p>
+<pre>setwd(&quot;directory&quot;)
+streamdata&lt;-read.csv(&quot;stream.tsv&quot;,header=TRUE,sep='\t');
+cgmdata&lt;-data.frame(streamdata$Sensorid,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$mg.dL) 
+colnames(cgmdata)[1]&lt;-&quot;id&quot;
+colnames(cgmdata)[2]&lt;-&quot;time&quot;
+colnames(cgmdata)[3]&lt;-&quot;gl&quot;
+unique(cgmdata$id)              # to see the sensor id's
+agp(dplyr::filter(cgmdata,id==&quot;3MH0042XDKM&quot;))       # display one particular sensor</pre><p>
+If you want the analyze a period that is not restricted to a single
+sensor, you can do the following:</p>
+<pre>cgmdata2&lt;-data.frame(&quot;Name&quot;,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$mg.dL)
+colnames(cgmdata2)[1]&lt;-&quot;id&quot;
+colnames(cgmdata2)[2]&lt;-&quot;time&quot;
+colnames(cgmdata2)[3]&lt;-&quot;gl&quot;
 
-agp(dplyr::filter(cgmdata2,time&gt;="2021-01-26"&amp;time&lt;"2021-02-26")) 
-</pre>
-    <p> Replace 2021-01-26 with the start date and 2021-02-26 with the end date.
-    </p>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Later you can put the
-      above in file and run it by opening it in rstudio, select everything and
-      press run. To see the display, press on the plots penal at the right side.
-      Resize it so everything is visible and save it with export. You can also
-      cut and past to command line R, but adjusting the size of the image is
-      then more difficult.</p>
-    <figure><img src="agp-hist.jpg" alt="AGP" title="AGP" style="object-fit:contain;  ">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">History
-          data. Not scanned often enough for full data. Misses a lot of hypo's
-          also because the history data are less extream as the scans and stream</span></figcaption>
-    </figure>
-    <figure><img src="agp-stream.jpg" alt="AGP" title="AGP" style="object-fit:contain;  ">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Bluetooth
-          stream. 10% hypoglycemia, instead of the 4% shown in the history data</span></figcaption>
-    </figure>
-  </body>
+agp(dplyr::filter(cgmdata2,time&gt;=&quot;2021-01-26&quot;&amp;time&lt;&quot;2021-02-26&quot;)) </pre><p>
+Replace 2021-01-26 with the start date and 2021-02-26 with the end
+date. 
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Later you can put
+the above in file and run it by opening it in rstudio, select
+everything and press run. To see the display, press on the plots
+penal at the right side. Resize it so everything is visible and save
+it with export. You can also cut and past to command line R, but
+adjusting the size of the image is then more difficult.</p>
+<p><img src="agp-hist.jpg" name="Image1" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
+
+<font face="Times New Roman">History data. Not scanned often enough
+for full data. Misses a lot of hypo's also because the history data
+are less extream as the scans and stream</font> 
+<img src="agp-stream.jpg" name="Image2" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
+
+<font face="Times New Roman">Bluetooth stream. 10% hypoglycemia,
+instead of the 4% shown in the history data</font> 
+</p>
+</body>
 </html>

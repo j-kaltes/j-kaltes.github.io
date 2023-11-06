@@ -5,10 +5,11 @@
 	<title>Iglu</title>
 	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2023-11-04T12:32:41.191940827"/>
+	<meta name="changed" content="2023-11-06T22:02:15.630340901"/>
+	<meta name="created" content="00:00:00">
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		p { margin-bottom: 0.1in; background: transparent }
 	</style>
 </head>
 <body lang="en-US" dir="ltr"><h1 style="line-height: 108%; margin-top: 0in; margin-bottom: 0.11in">
@@ -52,7 +53,8 @@ answer questions or press return in between:
 </p>
 <pre><span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>install.packages(&quot;devtools&quot;, dependencies = TRUE)</span></span></font></font></code>
 <span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>library(&quot;devtools&quot;)</span></span></font></font></code>
-install.packages(&quot;iglu&quot;, dependencies = TRUE )<br/>
+install.packages(&quot;iglu&quot;, dependencies = TRUE )
+
 install.packages(&quot;tidyverse&quot;<span style="display: inline-block; border: none; padding: 0in"><font face="inherit"><font size="2" style="font-size: 9pt"><span style="background: transparent"><code>, dependencies = TRUE</span></span></font></font></code>) </pre><p style="line-height: 108%; margin-bottom: 0.11in">
 And say that you use them:</p>
 <pre>library(&quot;tidyverse&quot;)
@@ -61,8 +63,14 @@ Use for <i>directory</i> the full name of your current directory, for
 stream.tsv the file you have your stream data in and for 3MH0042XDKM
 the name of the sensor you want to show.</p>
 <pre>setwd(&quot;directory&quot;)
-streamdata&lt;-read.csv(&quot;stream.tsv&quot;,header=TRUE,sep='\t');
-cgmdata&lt;-data.frame(streamdata$Sensorid,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$mg.dL) 
+streamdata&lt;-read.table(&quot;stream.tsv&quot;,header=TRUE,sep='\t',check.names=FALSE);
+
+#If you have turned on the web server in Juggluco (left menu-&gt;Settings-&gt;Web server) with <i>Local only</i> unset, 
+#you can also use:
+#streamdata&lt;-read.table(&quot;http://192.168.1.69:17580/x/stream?header&amp;days=90&quot;,header=TRUE,sep='\t',check.names=FALSE);
+#You should replace 192.168.1.69 with the IP of your phone in your home network. Juggluco should use mg/dL.
+
+cgmdata&lt;-data.frame(streamdata$Sensorid,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$'mg/dL') 
 colnames(cgmdata)[1]&lt;-&quot;id&quot;
 colnames(cgmdata)[2]&lt;-&quot;time&quot;
 colnames(cgmdata)[3]&lt;-&quot;gl&quot;
@@ -70,13 +78,13 @@ unique(cgmdata$id)              # to see the sensor id's
 agp(dplyr::filter(cgmdata,id==&quot;3MH0042XDKM&quot;))       # display one particular sensor</pre><p>
 If you want the analyze a period that is not restricted to a single
 sensor, you can do the following:</p>
-<pre>cgmdata2&lt;-data.frame(&quot;Name&quot;,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$mg.dL)
+<pre>cgmdata2&lt;-data.frame(&quot;Name&quot;,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$'mg/dL')
 colnames(cgmdata2)[1]&lt;-&quot;id&quot;
 colnames(cgmdata2)[2]&lt;-&quot;time&quot;
 colnames(cgmdata2)[3]&lt;-&quot;gl&quot;
 
-agp(dplyr::filter(cgmdata2,time&gt;=&quot;2021-01-26&quot;&amp;time&lt;&quot;2021-02-26&quot;)) </pre><p>
-Replace 2021-01-26 with the start date and 2021-02-26 with the end
+agp(dplyr::filter(cgmdata2,time&gt;=&quot;2023-10-01&quot;&amp;time&lt;&quot;2023-12-24&quot;)) </pre><p>
+Replace 2023-10-01 with the start date and 2023-12-24 with the end
 date. 
 </p>
 <p style="line-height: 108%; margin-bottom: 0.11in">Later you can put

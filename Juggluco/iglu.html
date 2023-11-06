@@ -67,7 +67,7 @@ streamdata&lt;-read.table(&quot;stream.tsv&quot;,header=TRUE,sep='\t',check.name
 
 #If you have turned on the web server in Juggluco (left menu-&gt;Settings-&gt;Web server) with <i>Local only</i> unset, 
 #you can also use:
-#streamdata&lt;-read.table(&quot;http://192.168.1.69:17580/x/stream?header&amp;days=90&quot;,header=TRUE,sep='\t',check.names=FALSE);
+#streamdata&lt;-read.table(<a href="http://192.168.1.69:17580/x/stream?header&days=5">"http://192.168.1.69:17580/x/stream?header&days=5"</a>,header=TRUE,sep='\t',check.names=FALSE);
 #You should replace 192.168.1.69 with the IP of your phone in your home network. Juggluco should use mg/dL.
 
 cgmdata&lt;-data.frame(streamdata$Sensorid,as.POSIXct(streamdata$UnixTime, origin=&quot;1970-01-01&quot;),streamdata$'mg/dL') 

@@ -20,15 +20,14 @@
 <body lang="en-US" dir="ltr"><h1>Web server</h1>
 <p>Juggluco contains a web server. You can turn it on with Left
 menu-&gt;Settings-&gt;Web server. Via the web server other programs
-can make use of the data in Juggluco. In the following <i>localhost</i>
-or equivalently <i>127.0.0.1</i> is used for the hostname or IP of
+can make use of the data in Juggluco. In the following <i>127.0.0.1</i> is used for the hostname or IP of
 the web server. In this way you can try out the commands by opening
 the web page on the same phone where Juggluco is running. If you
 unset &quot;Local only&quot; in Left menu-&gt;Settings -&gt; Web
 server, you can also use it from other hosts on your home network by
-replacing <i>localhost</i> or <i>127.0.0.1</i> with the IP of the
+replacing <i>127.0.0.1</i> with the IP of the
 phone. If <i>Use SSL</i> is set, you can replace
-<i>http://localhost:17580</i> with <i>https://ahostname:aport.
+<i>http://127.0.0.1:17580</i> with <i>https://ahostname:aport.
 W</i>hereby &quot;<i>ahostname</i>&quot; is the hostname associated
 with the SSL certificate and &quot;<i>aport&quot;</i> is the port
 that your modem redirects to &quot;<i>SSL Port</i>&quot; (set in left
@@ -47,31 +46,31 @@ assessed with via the web interface.</p>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Stream</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/stream">http://localhost:17580/x/stream</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/stream">http://127.0.0.1:17580/x/stream</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Scans</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/scans?days=5">http://localhost:17580/x/scans</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/scans?days=5">http://127.0.0.1:17580/x/scans</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>History</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/history?days=0.5">http://localhost:17580/x/history</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/history?days=0.5">http://127.0.0.1:17580/x/history</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Amounts</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/amounts?days=1">http://localhost:17580/x/amounts</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/amounts?days=1">http://127.0.0.1:17580/x/amounts</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Meals</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://localhost:17580/x/meals?days=6">http://localhost:17580/x/meals</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals</a></p>
 		</td>
 	</tr>
 </table>
@@ -104,7 +103,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			a header with the meaning of each column above the columns.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/stream?header">http://localhost:17580/x/stream?header</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?header">http://127.0.0.1:17580/x/stream?header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -116,7 +115,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			for how many days data should be returned.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/history?header&amp;days=0.8">http://localhost:17580/x/history?header&amp;days=0.8</a></p>
+			<a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -130,7 +129,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			defaults to 5 hours.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/stream?duration=3600">http://localhost:17580/x/stream?duration=3600</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?duration=3600">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -142,7 +141,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/amounts?starttime=1698266963">http://localhost:17580/x/amounts?starttime=1698266963</a></p>
+			<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -154,7 +153,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/stream?endtime=1698266963">http://localhost:17580/x/stream?endtime=1698266963</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?endtime=1698266963">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -167,7 +166,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			<b>local time</b> (Nightscout uses GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8">http://localhost:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
+			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -179,7 +178,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			end time.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/stream?end=2023-10-28T23:10&amp;header">http://localhost:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -203,7 +202,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://localhost:17580/x/history?token=xyz">http://localhost:17580/x/history?token=x</a>yx</p>
+			<a href="http://127.0.0.1:17580/x/history?token=xyz">http://127.0.0.1:17580/x/history?token=x</a>yx</p>
 		</td>
 	</tr>
 </table>

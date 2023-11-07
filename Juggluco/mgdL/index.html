@@ -25,12 +25,8 @@ figure {
       Manual</a><br>
     <a href="https://www.juggluco.nl/Juggluco/mmol.html">mmol/L version</a><br>
 <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Juggluco">Contact</a><h1>Juggluco</h1>
-    <p style="margin-bottom: 0in; line-height: 100%"> Juggluco (juggle glucose) is an alternative
-      android app for Abbott's FreeStyle Libre 2 sensors, meant for glucose
-      control by people with diabetes. Beside the current value received by
-      scans and the 15 minutes values out of the memory of the sensor, it also
-      displays the current glucose value received every minute via Bluetooth
-      (which Abbott's Librelink 2.5.3 only uses for glucose alarms).</p>
+    <p style="margin-bottom: 0in; line-height: 100%">Juggluco (juggle glucose) is an alternative android app for Abbott's FreeStyle Libre 1,2 and 3 sensors, meant for glucose control by people with diabetes. 
+Libre 1 and Libre 2 sensors can be scanned via NFC to display the current value and the 15 minutes values out of the memory of the sensor. For Libre 2 and 3 sensors it displays the glucose values received every minute via Bluetooth.</p>
     <figure> <img src="value.jpg" alt="Juggluco" style="object-fit:contain;
 		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
           showing current glucose value received by Bluetooth</span></figcaption>
@@ -122,27 +118,33 @@ I think that it went like this: The decision makers in the organization were qui
     Some of the restrictions applicable to Librelink app don't apply to
     Juggluco:
     <ul>
-      <li>Juggluco can establish a Bluetooth connection with a sensor after the sensor was activated with FreeStyle reader or Librelink (US-like sensors even need to be activated by them).</li>
+      <li>Juggluco can establish a Bluetooth connection with a sensor after the
+        sensor was activated with FreeStyle reader or Librelink (US-like sensors
+        even need to be activated by them).</li>
       <li> <span lang="en-US">You can use multiple sensors beside each other</span><span
           lang="en-US">;</span><span lang="en-US"> making it easy to move to a
           new sensor, without a gap between.</span><span lang="en-US"> </span><span
           lang="en-US">If a sensor seemed unreliable you can </span><span lang="en-US">add
           </span><span lang="en-US">a </span><span lang="en-US">sensor and see
           if that was warranted</span><span lang="en-US">.</span> </li>
-      <li> <span lang="en-US">Juggluco can use sensors 12 hours longer than
-          Librelink</span><span lang="en-US">: I</span><span lang="en-US">t </span><span
-          lang="en-US">takes as the and date 14 days after the start date</span><span
-          lang="en-US"> and stops at this end date, but after scanning two times
-          you use it for another</span><span lang="en-US"> 12 hours.</span> </li>
+      <li> <span lang="en-US">Juggluco can use Libre 1 and 2 sensors 12 hours
+          longer than Librelink</span><span lang="en-US">: I</span><span lang="en-US">t
+        </span><span lang="en-US">takes as the and date 14 days after the start
+          date</span><span lang="en-US"> and stops at this end date, but after
+          scanning two times you use it for another</span><span lang="en-US"> 12
+          hours. This does not apply to Libre 3 sensors, they only last 14 days
+          and a few minutes.</span> </li>
       <li><span lang="en-US">Librelink is only available in certain countries.
-          Juggluco 2.2.0 and higher now work with US Freestyle Libre 2 sensors.
-          So are there FreeStyle Libre sensors that don't work with Juggluco?</span></li>
+          Juggluco 2.2.0 and higher now work with US Freestyle Libre 2 sensors.<br>
+        </span></li>
       <li> <span lang="en-US">Librelink usable with Freestyle Libre 2 sensors
           needs Android&nbsp; 8.</span><span lang="en-US"> Minimally Android 4.4
           is needed for </span><span lang="en-US">Juggluco. </span><span lang="en-US">
         </span><span lang="en-US">So you can try Juggluco on an old phone with
           NFC for 12 hours on a sensor after it is unusable with Abbott's
-          Librelink because the 14 days period has expired.</span> </li>
+          Librelink because the 14 days period has expired. This only applies to
+          European Libre 2 sensors. US Libre 2 and all Libre 3 sensors also
+          require Android 8.</span> </li>
       <li><span lang="en-US">Librelink needs an e-mail address and password and
           regular contact with a server for I don't know what reasons. The last
           time I had to press a few times on accept related to altered
@@ -153,8 +155,7 @@ I think that it went like this: The decision makers in the organization were qui
           server. Most of the activity of Librelink consists of Firebase
           Analytics gathering information on you smartphone. Juggluco doesn't
           use firebase analytics. Librelink sends all your glucose measurements
-          to their server (as you can see in Libreview), Juggluco doesn't.<br>
-        </span></li>
+          to their server (as you can see in Libreview), Juggluco doesn't.</span></li>
     </ul>
     <h2  id="mirror">Mirror</h2>
     <figure> <img src="addconnection.jpg" alt="Send data to other device" title="Send data to other device"

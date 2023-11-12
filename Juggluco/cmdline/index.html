@@ -46,6 +46,136 @@
     <pre class="western">chmod a+x ./juggluco</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> Try if it works with:</p>
     <pre class="western">./juggluco -h</pre>
+
+The juggluco binary has the following functions: 
+</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Configuring the
+	server;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Running as a
+	server daemon constantly in the background;</p>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Exporting data
+	from the server to a file.</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">If you want to run
+the server you have first to specify the settings.</p>
+<h2 class="western">Add connection</h2>
+<p style="line-height: 100%; margin-bottom: 0in">Like when using Left
+middle menu-&gt;Mirror to add a connection, you have to specify of
+each connection in turn how and with whom it should connect.</p>
+<p style="line-height: 100%; margin-bottom: 0in">A connection is one
+specific instance of Juggluco to which to send data and/or receive
+data. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">NEVER put IPs of
+different connections in the same specification. It is always only
+one Juggluco or juggluco server running on a specific phone or
+computer. The mirror
+connections of Juggluco work by the sender of the data remembering
+what has already been send and only sending what is not send. This is
+different from how servers usually work, they give the data they are
+asked for. Juggluco send data when it comes available and after a
+connection disruption also the data it hasn't already send. If you
+put the IPS of different receivers in the same connection
+specification, they will both receive only part of the data and they
+will no longer work.</p>
+<p style="line-height: 100%; margin-bottom: 0in">As you can see in
+./juggluco -h adding a connection is of the following form:</p>
+<p style="line-height: 100%; margin-bottom: 0in">juggluco [-d dir]
+OPTIONS IP1,IP2 ... 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You always have to
+specify what the connection sends and whether it does receive.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Receiving you
+specify with -r</p>
+<p style="line-height: 100%; margin-bottom: 0in">Sending with -n, -s
+and/or -b:</p>
+<p style="line-height: 100%; margin-bottom: 0in">        -n: send
+nums (amounts)</p>
+<p style="line-height: 100%; margin-bottom: 0in">        -s: send
+scans (via NFC received data)</p>
+<p style="line-height: 100%; margin-bottom: 0in">        -b: send
+stream (via bluetooth received data)</p>
+<p style="line-height: 100%; margin-bottom: 0in">Thus, use -n to send
+nums, -s to send scans and -b to send stream. It is possible to merge
+different options:-sb is the same as -s -b.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You also have to
+specify how to recognize the connection. By default, juggluco server
+tests on the IP. If you don't want to test on IP, for example because
+of a passive only connection with a changing IP of the other site,
+you can specify -i to not test on the IP.</p>
+<p style="line-height: 100%; margin-bottom: 0in">In most cases you
+also want to circumvent mistakes by testing on a label. You specify a
+label with -L. For example when you specify <em>-L homecomputer </em>the
+connection is made only when the other side has also used
+&quot;<em>homecomputer</em>&quot; as label.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Over the internet,
+you should also always specify a password with -w</p>
+<p style="line-height: 100%; margin-bottom: 0in">With  -p (lowercase)
+you can specify the port of other side.</p>
+<p style="line-height: 100%; margin-bottom: 0in">-P (UPPERCASE)
+stands for <em>passive only</em><em>.</em> This means that only the
+other side will initiate a connection with this instance of Juggluco
+server. -A means <em>active only</em> and in that case only this
+instance of Juggluco will initiate contact with the other side.</p>
+<p style="line-height: 100%; margin-bottom: 0in">If the connection is
+passive only (-P) you don't need to specify IPs when you also specify
+-i.</p>
+<p style="line-height: 100%; margin-bottom: 0in">In all other cases
+you need to specify the IPs of the other side, hostnames don't work.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can let Juggluco
+server detect the IP of the first host that connects with -a.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For example:</p>
+<p style="line-height: 100%; margin-bottom: 0in">./juggluco -ra
+-Lhallo -wniets -p 7788</p>
+<p style="line-height: 100%; margin-bottom: 0in">Creates a receiver
+that automatically detect the IP with label <em>hallo</em> and
+password <em>niets</em> and the other side has port 7788.</p>
+<p style="line-height: 100%; margin-bottom: 0in">By running
+./juggluco -l you can lists the connections you have already
+configured.</p>
+<p style="line-height: 100%; margin-bottom: 0in">In this case you
+see:</p>
+<pre>connection:
+1: hallo detect, receiver niets, port=7788</pre><p style="line-height: 100%; margin-bottom: 0in">
+To send to another host, you can specify:</p>
+<p style="line-height: 100%; margin-bottom: 0in">./juggluco -n -s -b
+-Laway -wsomething -p 9999 192.168.1.69</p>
+<p style="line-height: 100%; margin-bottom: 0in">This means that you
+send all data amounts (n), scans (s) and stream(b) to another
+Juggluco on a host with ip 192.168.1.69 listening on port 9999.</p>
+<p style="line-height: 100%; margin-bottom: 0in">./juggluco -l show
+the following:</p>
+<pre>connections:
+1: hallo detect, receiver niets, port=7788
+2: away  something, port=9999 send nums scans stream  192.168.1.69</pre><h2 class="western">
+Other server configurations</h2>
+<p>You can also specify which port juggluco server is listening on.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For example</p>
+<p style="line-height: 100%; margin-bottom: 0in">./juggluco -p 8923</p>
+<p style="line-height: 100%; margin-bottom: 0in">Specifies that
+juggluco server should listen at port 8923.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can again view
+the current setting with ./juggluco -l, now it will be:</p>
+<pre>Saving in directory jugglucodata
+xdrip/Nightscout webserver turned off
+
+Mirror port 8923
+unit: mg/dL</pre>
+<p style="line-height: 100%; margin-bottom: 0in">In the same way you
+can also specify other settings, like what glucose unit to use when
+exporting data. Whether to turn on the web server (see
+<a href="https://www.juggluco.nl/Juggluco/webserver.html">https://www.juggluco.nl/Juggluco/webserver.html</a>),
+whether to use SSL for that server, on which SSL port to listen, the
+api_secret and the categories of the amounts when returning them as
+treatments following the Nightscout protocol.</p>
+<p style="line-height: 100%; margin-bottom: 0in">See ./juggluco -h</p>
+<h2 class="western">Starting the server</h2>
+<p>After you have configured everything, you can start the server
+simply with:</p>
+<p><em>./juggluco</em></p>
+<p>
+<h2>Examples</h2>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
     <p style="line-height: 100%; margin-bottom: 0in">In the following example I
       have a Sony smartphone connected to the sensor and a Huawei tablet

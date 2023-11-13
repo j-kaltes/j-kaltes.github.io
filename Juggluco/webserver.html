@@ -16,6 +16,28 @@
 		h3.cjk { font-family: "Droid Sans Fallback" }
 		h3.ctl { font-family: "Droid Sans Devanagari" }
 	</style>
+
+<script type="text/javascript"> 
+var urlstart='http://127.0.0.1:17580';
+function getiparg(){ 
+	const params = new URLSearchParams(document.location.search);
+	const ip = params.get("urlstart");
+	if(ip===null||ip.length<7)	 {
+		return;
+		}
+	urlstart=ip;
+	return;
+    } 
+
+
+
+
+
+
+	getiparg();
+   </script> 
+
+
 </head>
 <body lang="en-US" dir="ltr"><h1>Web server</h1>
 <p><a href="https://www.juggluco.nl/Juggluco">Juggluco</a> contains a web server. You can turn it on with Left
@@ -46,31 +68,30 @@ assessed with via the web interface.</p>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Stream</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/stream">http://127.0.0.1:17580/x/stream</a></p>
-		</td>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/stream" onclick= "location.href=urlstart+'/x/stream';return false;"  >http://127.0.0.1:17580/x/stream</a></p> </td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Scans</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/scans?days=5">http://127.0.0.1:17580/x/scans</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/scans?days=5" onclick="location.href=urlstart+'/x/scans?days=5';return false;">http://127.0.0.1:17580/x/scans</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>History</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/history?days=0.5">http://127.0.0.1:17580/x/history</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/history?days=0.5" onclick="location.href=urlstart+'/x/history?days=0.5';return false;">http://127.0.0.1:17580/x/history</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Amounts</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/amounts?days=1">http://127.0.0.1:17580/x/amounts</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/amounts?days=1" onclick="location.href=urlstart+'/x/amounts?days=1';return false;">http://127.0.0.1:17580/x/amounts</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Meals</b></p>
 		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals</a></p>
+		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals</a></p>
 		</td>
 	</tr>
 </table>
@@ -103,7 +124,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			a header with the meaning of each column above the columns.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?header">http://127.0.0.1:17580/x/stream?header</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?header" onclick="location.href=urlstart+'/x/stream?header';return false;">http://127.0.0.1:17580/x/stream?header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -118,7 +139,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			Juggluco server.</b></font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?header&amp;mg/dL">http://127.0.0.1:17580/x/stream?header&amp;mg/dL</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?header&amp;mg/dL" onclick="location.href=urlstart+'/x/stream?header&amp;mg/dL';return false;">http://127.0.0.1:17580/x/stream?header&amp;mg/dL</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -130,7 +151,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			glucose in mmol/L</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?mmol/L&amp;header">http://127.0.0.1:17580/x/stream?mmol/L&amp;header</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?mmol/L&amp;header" onclick="location.href=urlstart+'/x/stream?mmol/L&amp;header';return false;">http://127.0.0.1:17580/x/stream?mmol/L&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -142,7 +163,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			for how many days data should be returned.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
+			<a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8" onclick="location.href=urlstart+'/x/history?header&amp;days=0.8';return false;">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -156,7 +177,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			defaults to 5 hours.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?duration=3600">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?duration=3600" onclick="location.href=urlstart+'/x/stream?duration=3600';return false;">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -168,7 +189,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
+			<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963" onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -180,7 +201,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?endtime=1698266963">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?endtime=1698266963" onclick="location.href=urlstart+'/x/stream?endtime=1698266963';return false;">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -193,7 +214,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			<b>local time</b> (Nightscout uses GMT).</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
+			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8" onclick="location.href=urlstart+'/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8';return false;">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -205,7 +226,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			end time.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
+			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -229,7 +250,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/history?token=xyz">http://127.0.0.1:17580/x/history?token=xyz</a></p>
+			<a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
 		</td>
 	</tr>
 </table>
@@ -481,7 +502,7 @@ interface.</p>
 <h3 class="western">xDrip</h3>
 <p style="line-height: 100%; margin-bottom: 0in">Juggluco
 incorporates an xDrip web server. This way you can receive glucose
-values via <a href="http://127.0.0.1:17580/sgv.json">http://127.0.0.1:17580/sgv.json</a>
+values via <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>
 on the devices running Juggluco. Turn the server on in Juggluco under
 left menu, watch.</p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
@@ -495,15 +516,15 @@ server options</a>:</p>
 instead of 24.</p>
 <p style="line-height: 100%; margin-bottom: 0in">For example to
 receive 10 values use:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=10">http://127.0.0.1:17580/sgv.json?count=10</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=10" onclick="location.href=urlstart+'/sgv.json?count=10';return false;">http://127.0.0.1:17580/sgv.json?count=10</a></p>
 <h4 class="western">brief_mode=Y</h4>
 <p style="line-height: 100%; margin-bottom: 0in">Display less
 information. For example:</p>
-<p><a href="http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y">http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y</a></p>
+<p><a href="http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y" onclick="location.href=urlstart+'/sgv.json?count=2&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y</a></p>
 <h4 class="western">sensor=Y</h4>
 <p style="line-height: 100%; margin-bottom: 0in">Give sensor start
 date and age. For example:</p>
-<p><a href="http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y">http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y</a></p>
+<p><a href="http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y" onclick="location.href=urlstart+'/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y</a></p>
 <h4 class="western">all_data=Y</h4>
 <p style="line-height: 100%; margin-bottom: 0in">If necessary also
 displays values of previous sensors.</p>
@@ -521,7 +542,7 @@ This means that if multiple values are given they are spaced at least
 like to receive values spaced more closely in time, you can specify a
 smaller number.</p>
 <p style="line-height: 100%; margin-bottom: 0in">for example:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90">http://127.0.0.1:17580/sgv.json</a><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90">?count=100&amp;interval=90</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90" onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">http://127.0.0.1:17580/sgv.json</a><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90" onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">?count=100&amp;interval=90</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">To receive 100
 glucose values spaced 90 seconds apart. In reality this will be
 around 2 minutes apart.</p>
@@ -542,34 +563,34 @@ other purpose than what other commands already do.
 </p>
 <h4 class="western">Nightscout commands implemented in Juggluco:</h4>
 <p style="line-height: 100%; margin-bottom: 0in">You can receive the
-same results as with <a href="http://127.0.0.1:17580/sgv.json">http://127.0.0.1:17580/sgv.json</a>
-also with: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.json">http://127.0.0.1:17580/api/v1/entries/sgv.json</a>
-and <a href="http://127.0.0.1:17580/api/v1/entries.json">http://127.0.0.1:17580/api/v1/entries.json</a></p>
+same results as with <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>
+also with: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.json" onclick="location.href=urlstart+'/api/v1/entries/sgv.json';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.json</a>
+and <a href="http://127.0.0.1:17580/api/v1/entries.json" onclick="location.href=urlstart+'/api/v1/entries.json';return false;">http://127.0.0.1:17580/api/v1/entries.json</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">In csv format:
-<a href="http://127.0.0.1:17580/api/v1/entries/sgv.csv">http://127.0.0.1:17580/api/v1/entries/sgv.csv</a></p>
+<a href="http://127.0.0.1:17580/api/v1/entries/sgv.csv" onclick="location.href=urlstart+'/api/v1/entries/sgv.csv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.csv</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">In tsv format:
-<a href="http://127.0.0.1:17580/api/v1/entries/sgv.tsv">http://127.0.0.1:17580/api/v1/entries/sgv.tsv</a>
-or <a href="http://127.0.0.1:17580/api/v1/entries/sgv.txt">http://127.0.0.1:17580/api/v1/entries/sgv.txt</a>
-or <a href="http://127.0.0.1:17580/api/v1/entries">http://127.0.0.1:17580/api/v1/entries</a></p>
+<a href="http://127.0.0.1:17580/api/v1/entries/sgv.tsv" onclick="location.href=urlstart+'/api/v1/entries/sgv.tsv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.tsv</a>
+or <a href="http://127.0.0.1:17580/api/v1/entries/sgv.txt" onclick="location.href=urlstart+'/api/v1/entries/sgv.txt';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.txt</a>
+or <a href="http://127.0.0.1:17580/api/v1/entries" onclick="location.href=urlstart+'/api/v1/entries';return false;">http://127.0.0.1:17580/api/v1/entries</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">For only the last
 value in tsv format, you can use
-<a href="http://127.0.0.1:17580/api/v1/entries/current">http://127.0.0.1:17580/api/v1/entries/current</a></p>
+<a href="http://127.0.0.1:17580/api/v1/entries/current" onclick="location.href=urlstart+'/api/v1/entries/current';return false;">http://127.0.0.1:17580/api/v1/entries/current</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">You can receive the
 amounts from Juggluco with:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/treatments">http://127.0.0.1:17580/api/v1/treatments</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/treatments" onclick="location.href=urlstart+'/api/v1/treatments';return false;">http://127.0.0.1:17580/api/v1/treatments</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">In addition to
 count, you have also the following options:</p>
 <h4 class="western">find[date][$gt]=datemsec</h4>
 <p style="line-height: 100%; margin-bottom: 0in">give results after
 datemsec, where <i>datemsec</i> is the number of milli seconds since
 00:00 1 January 1970 GMT For example:
-<a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
+<a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000" onclick="location.href=urlstart+'/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
 <h4 class="western">find[date][$gte]=datemsec</h4>
 <p>gives results at or after datemsec</p>
 <h4 class="western">find[date][$lt]=datemsec</h4>
 <p>give results before datemsec, where datemsec are the number of
 milli seconds since 00:00 1 January 1970 GMT For example:
-<a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
+<a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000" onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
 <h4 class="western">find[date][$lte]=datemsec</h4>
 <p>gives results at or before datemsec</p>
 <p style="line-height: 100%; margin-bottom: 0in">By using dateString
@@ -577,7 +598,7 @@ or created_at instead of date, you can use a date in the format
 YYYY-mm-DDThh:MM:ss, were mm is the month and MM the minutes. For
 example 
 </p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01" onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
 <p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Sans, sans-serif"><font size="3" style="font-size: 13pt"><b>token=the_api_secret</b></font></font></p>
 <p style="line-height: 100%; margin-bottom: 0in">See the Juggluco
 export web server options above.</p>

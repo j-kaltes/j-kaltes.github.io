@@ -20,7 +20,7 @@ figure {
 <base href="https://www.juggluco.nl/Juggluco/mgdL/" id="baseurl" target="_blank">
 
 <script type="text/javascript"> 
-var unitstr='mg/dL';
+var unitstr='niets';
 function getunitarg(){ 
 	const params = new URLSearchParams(document.location.search);
 	const unit = params.get("unit");
@@ -115,8 +115,8 @@ function setbaseurl(){
    </script> 
   </head>
   <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
-    <h3><a href="https://www.juggluco.nl/Juggluco/mgdL/download.html">Download</a> </h3>
-    <a href="https://www.juggluco.nl/Juggluco/manual/mmol/index.html">User Manual</a><br>
+    <h3><a href="https://www.juggluco.nl/Juggluco/download.html">Download</a> </h3>
+    <a href="https://www.juggluco.nl/Jugglucohelp/introhelp.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">User Manual</a><br>
     <a href="https://www.juggluco.nl/Juggluco/index.html?unit=mg/dL">mg/dL version</a><br>
     <a href="https://www.juggluco.nl/Juggluco/index.html?unit=mmol/L">mmol/L version</a><br>
     <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Juggluco">Contact</a>

@@ -874,8 +874,30 @@ api_secret: Xsa%sLF8
 
 Mirror port 9113
 unit: mg/dL
-connection:</pre><p>
-<br/>
+connection:</pre>
+<h3 class="western">SSL</h3>
+<p style="line-height: 100%; margin-bottom: 0in">To make use of SSL,
+you need to give Juggluco server a SSL certificate for the hostname
+by which the server is accessed. How you can get an SSL key is
+described in the help under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
+menu-&gt;Settings-&gt;Webserver</a> and in the <a href="https://www.juggluco.nl/Juggluco/cmdline/README">README</a>
+in the source of Juggluco server. For Juggluco server, you need to
+put the the private key in a file named prevkey.pem and the fullchain
+in a file named fullchain.pem in <em>jugglucodata</em>. <em>jugglucodata</em>
+is the directory were Juggluco server saves its data: 
+</p>
+<pre>ls -l jugglucodata/
+total 136
+-rwxr-xr-x   1 juggluco juggluco   8064 18 nov 20:36 backup.dat
+-rwxr-xr-x   1 juggluco juggluco   4716  8 nov 13:12 fullchain.pem
+drwxr-xr-x   2 juggluco juggluco   4096 12 jan  2023 logs
+-rwxr-xr-x   1 juggluco juggluco 253952 18 nov 20:00 meals.dat
+drwxr-xr-x   4 juggluco juggluco   4096 12 jan  2023 nums
+-rw-r--r--   1 juggluco juggluco   1702  8 nov 13:12 privkey.pem
+drwxr-xr-x 104 juggluco juggluco   4096 18 nov 12:36 sensors
+-rwxr-xr-x   1 juggluco juggluco  22032 18 nov 17:49 settings.dat
+</pre>
+
 <br/>
 
 </p>

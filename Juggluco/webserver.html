@@ -16,6 +16,19 @@
 		h3.ctl { font-family: "Droid Sans Devanagari" }
 		td p { margin-bottom: 0.1in }
 	</style>
+    <script type="text/javascript"> 
+	var urlstart='http://127.0.0.1:17580';
+	function getiparg(){ 
+		const params = new URLSearchParams(document.location.search);
+		const ip = params.get("urlstart");
+		if(ip===null||ip.length<7)	 {
+			return;
+			}
+		urlstart=ip;
+		return;
+		} 
+     getiparg();
+   </script>
 </head>
 <body lang="en-US" dir="ltr"><h1>Web server</h1>
 <p><a href="https://www.juggluco.nl/Juggluco">Juggluco</a> contains a

@@ -792,14 +792,14 @@ remotely over http</em></p>
 <p>With <strong>-e</strong> you can enable SSL encryption.</p>
 <p>The http web server always uses port 17580 because xDrip watch app
 can only be used with this port number. The SSL version is accessed
-by the port specified with -o</p>
+by the port specified with <b>-o</b></p>
 <p>./<strong>juggluco -e -o 9191</strong></p>
 <p>says to enable the SSL (https) version and to use port 9191.</p>
 <p>The mirror port, the http and the https port all need to be
 different.</p>
 <p>./juggluco -l now shows:</p>
 <p><em>Use SSL, sslport=9191</em></p>
-<p>You can configure an api-secret with -g &quot;an api-secret&quot;,
+<p>You can configure an api-secret with <b>-g</b> &quot;an api-secret&quot;,
 for example you can use</p>
 <p>./<strong>juggluco -g Xsa%sLF8</strong></p>
 <p>To set the api-secret to &quot;<em>Xsa%sLF8</em>&quot;</p>
@@ -851,10 +851,10 @@ Use SSL, sslport=9191
 4: Bike        Comments
 5: Walk        Comments
 6: Blood       Comments
-7: bad         Don't send</pre><p>
-api/v1/treatments turned off</p>
+7: bad         Don't send
+api/v1/treatments turned off</pre>
 <p>Now it still doesn't give treatments. You first have to turn it on
-with -t</p>
+with <b>-t</b></p>
 <p><b>./juggluco -t</b></p>
 <p>./juggluco -l now shows:</p>
 <pre>Saving in directory jugglucodata

@@ -1,5 +1,4 @@
-For more information see:
-http://jkaltes.byethost16.com/Juggluco/cmdline/index.html
+For more information see: https://www.juggluco.nl/Juggluco/cmdline/index.html
 
 Compile for debugging with:
 

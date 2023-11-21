@@ -3,22 +3,32 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title>Juggluco for WearOS install</title>
-	<meta name="generator" content="LibreOffice 7.5.2.2 (Linux)"/>
+	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2023-11-21T12:28:40.142614379"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
 	<style type="text/css">
 		h4.cjk { font-family: "Droid Sans Fallback" }
 		h4.ctl { font-family: "Droid Sans Devanagari" }
+		h3.cjk { font-family: "Droid Sans Fallback" }
+		h3.ctl { font-family: "Droid Sans Devanagari" }
+		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt }
+		h2.cjk { font-family: "Droid Sans Fallback"; font-size: 16pt }
+		h2.ctl { font-family: "Droid Sans Devanagari"; font-size: 16pt }
 	</style>
 </head>
-<body lang="en-US" dir="ltr"><h1>Install <a href="https://www.juggluco.nl/JugglucoWearOS">Juggluco</a> via ADB</h1>
-<p style="line-height: 100%; margin-bottom: 0in">As far as I know, the only way to install independent WearOS apps is
-to enable developer options on the watch and turn on ADB debugging. I
-would recommend using the command line adb, because on some watches
-(Galaxy Watch 4, 5 and 6) you also need it to give Juggluco
-permission for <i>Floating glucose</i>. Others swear by apps like
-Easy Fire, Bugjaeger or Wear Installer on their smartphone.</p><p>
-<a href="https://www.juggluco.nl/Juggluco/download.html">Download
+<body lang="en-US" dir="ltr"><h1>Install <a href="https://www.juggluco.nl/JugglucoWearOS">Juggluco</a>
+via ADB</h1>
+<p style="line-height: 100%; margin-bottom: 0in">As far as I know,
+the only way to install independent WearOS apps is to enable
+developer options on the watch and turn on ADB debugging. For
+installation without the use of a PC, see <a href="#withoutpc">“<i>Without
+PC</i>”</a> below.</p>
+<p><a href="https://www.juggluco.nl/Juggluco/download.html">Download
 Juggluco</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">For instruction on how to install an APK on WearOS see:</p>
+<p style="line-height: 100%; margin-bottom: 0in">For instruction on
+how to install an APK on WearOS see:</p>
 <p><a href="https://www.droidwin.com/sideload-apk-install-apps-via-adb-commands-in-galaxy-watch-5-pro">https://www.droidwin.com/sideload-apk-install-apps-via-adb-commands-in-galaxy-watch-5-pro</a></p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.guidingtech.com/how-to-install-apks-on-wear-os-smartwatches">https://www.guidingtech.com/how-to-install-apks-on-wear-os-smartwatches</a>
 </p>
@@ -30,36 +40,35 @@ get adb, see
 <p style="line-height: 100%; margin-bottom: 0in"><b>Download adb:</b></p>
 <p>adb is included in the <a href="https://developer.android.com/studio/releases/platform-tools">SDK
 platform tools</a> of Android and also in most Linux distributions.
-For those of us without a Windows, Linux or MacOS computer, adb is
-also included in android-tools package of <a href="https://termux.dev/">Termux</a>,
-which you can use to install the WearOS version of Juggluco on your
-watch using adb on your phone or tablet.</p>
-<p style="line-height: 100%; margin-bottom: 0in">You also need to
-enable <b>developer options</b> on your watch
+You also need to enable <b>developer options</b> on your watch
 (<a href="https://developer.android.com/training/wearables/get-started/debugging">https://developer.android.com/training/wearables/get-started/debugging</a>):</p>
 <p style="line-height: 100%; margin-bottom: 0in">How exactly you have
-to do it, differs per watch. On Watch4 you have to press on &quot;About
-Watch&quot; in Settings. Press on &quot;Software Info&quot; and then
-touch 7 times &quot;Software version&quot;. You can turn it off again
-by doing the same, so if you do it too long it is turned off again.</p>
+to do it, differs per watch. On Watch4 you have to press on &quot;<i>About
+Watch</i>&quot; in Settings. Press on &quot;<i>Software Info</i>&quot;
+and then touch 7 times &quot;<i>Software version</i>&quot;. You can
+turn it off again by doing the same, so if you do it too long it is
+turned off again.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Now an item called
-&quot;Developer options&quot; is added to Settings. Here &quot;ADB
-Debugging&quot; and &quot;Debug over Wi-Fi&quot; should be turned on.</p>
+&quot;<i>Developer options</i>&quot; is added to Settings. Here &quot;<i>ADB
+Debugging</i>&quot; and &quot;<i>Debug over Wi-Fi</i>&quot; should be
+turned on.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Ensure that <b>WIFI</b>
 is stably turned on on your watch. If it is not, go in Juggluco on
 your watch to Left menu-&gt;Mirror and turn on WIFI (remember to turn
 it off later).</p>
-<p style="line-height: 100%; margin-bottom: 0in">Get the IP of your
-watch. In Watch4 you can find it be going to
-settings-&gt;Connections-&gt;Wifi and pressing on your connection. At
-the bottom you find the IP address of the watch.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Get your watch IP.
+In Watch4 you can find it be going to settings-&gt;Connections-&gt;Wifi
+and pressing on your connection. At the bottom you find the IP
+address of the watch.</p>
 <p style="line-height: 100%; margin-bottom: 0in">On your computer
 press:</p>
 <pre style="margin-bottom: 0.2in"><b>adb connect IP-of-watch</b></pre><p style="line-height: 100%; margin-bottom: 0in">
 <i>IP-of-watch</i><span style="font-variant: normal"> </span><span style="font-variant: normal"><span style="font-style: normal">stands
-for the IP address of your watch.</span></span></p>
-<p style="line-height: 100%; margin-bottom: 0in">On your watch you are
-asked: allow debugging?</p>
+for the IP address of your watch. </span></span><span style="font-variant: normal"><span style="font-style: normal">As
+described in the <a href="https://www.juggluco.nl/JugglucoWearOS/install/WearOS4.0">WearOS4.0</a>, this is now different for Samsung Galaxy
+WearOS watches.</span></span></p>
+<p style="line-height: 100%; margin-bottom: 0in">On your watch you
+are asked: allow debugging?</p>
 <p style="line-height: 100%; margin-bottom: 0in">Press Yes or Always
 allow from this computer.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Hereafter</p>
@@ -77,8 +86,11 @@ If that file was <i>Juggluco4.6.1-wear-arm32.apk</i>, it becomes:</p>
 <pre style="margin-bottom: 0.2in"><b>adb install -r Juggluco4.6.1-wear-arm32.apk</b></pre><p style="line-height: 100%; margin-bottom: 0in">
 The -r option is only needed for an update (when Juggluco was already
 installed on the watch).</p>
-<h3>Android 13</h3>
-<p>On Samsung Galaxy Watch 4, the update to Android 13 changed using adb. See <a href="https://www.juggluco.nl/JugglucoWearOS/install/WearOS4.0">Android 13</a> for more information. The same will apply to Watch 5 and 6.  </p>
+<h3 class="western">WearOS4.0/Android 13</h3>
+<p>On Samsung Galaxy Watch 4, the update to WearOS4.0/Android 13
+changed the use of adb. See <a href="https://www.juggluco.nl/JugglucoWearOS/install/WearOS4.0">WearOS4.0</a>
+for more information. The same will also apply to Watch 5 and 6. 
+</p>
 <h4 class="western">PATH</h4>
 <p style="line-height: 100%; margin-bottom: 0in">To use adb in the
 above manner under bash or powershell, adb's location should be in
@@ -97,13 +109,33 @@ C:\Android\platform-tools, do</p>
 <p style="line-height: 100%; margin-bottom: 0in"><b>Windows cmd.com</b>:</p>
 <p style="line-height: 100%; margin-bottom: 0in">set
 PATH=%PATH%;C:\Android\platform-tools</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
 <p style="line-height: 100%; margin-bottom: 0in">You can also run the
 commands from the place were adb is located and using ./adb instead
 of adb under Linux and .\adb instead of adb under Windows.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<h2 class="western"><a name="withoutpc"></a>Without PC</h2>
+<p style="margin-bottom: 0in">When you don’t have access to a
+computer, it is still possible to install Juggluco for WearOS:</p>
+<h3 class="western">TERMUX</h3>
+<p style="margin-bottom: 0in">Install <a href="https://termux.dev/">TERMUX</a>
+on a phone or tablet. Install android-tools:</p>
+<p style="margin-bottom: 0in"><b>apt install android-tools</b></p>
+<p style="margin-bottom: 0in">and use adb from your phone or tablet
+to the watch.</p>
+<h3 class="western">GeminiMan WearOS Manager</h3>
+<p>Install <a href="https://play.google.com/store/apps/details?id=com.geminiman.wearosmanager">GeminiMan
+WearOS Manager</a> from Google Play. When with adb you had to type
+<b>adb connect IP:port</b>, you now fill in the IP and and port under
+<i>Your Watch IP Address </i>and press CONNECT.</p>
+<p>Instead of <b>adb pair IP:port code</b>, you now have to press on
+<b>Wireless debugging</b> and fill in the corresponding values.</p>
+<p>When connected you can use “<b>Sideload APK file</b>” to
+install an apk. You can also give Juggluco permission for the
+floating glucose by pasting</p>
+<pre style="margin-bottom: 0.2in"><b>pm grant tk.glucodata android.permission.SYSTEM_ALERT_WINDOW</b></pre><p>
+above “<i>Run Command …</i> ” and pressing on “<i>Run Command
+Only</i>” or “<i>Save and Run command</i>”.</p>
+<p><br/>
+<br/>
 
 </p>
 </body>

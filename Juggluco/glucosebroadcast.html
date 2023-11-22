@@ -27,16 +27,11 @@ left menu-&gt;Settings, &quot;<i>xDrip broadcast</i>&quot; or
 		    width:15cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucodata Broadcast set to send to mijn.apps.glucosedata in Juggluco settings</span></figcaption> </figure>
 <p><span lang="en-US">See <a href="ShowGlucoseJava.tar.xz">a Java
 example app</a> or <a href="GlucoseDataKotlin.tar.xz">a Kotlin
-example app</a> receiving the glucodata.Minute broadcast and writing
-the output to logcat.</span> <span lang="en-US">It</span> is <span lang="en-US">used
-by the Android app for G-Watch.</span></p>
+example app</a> receiving the glucodata.Minute broadcast and writing the output to logcat.</p>
 <p>In Juggluco and in Kerfstok, rate of change near zero
 (-0.8&lt;rate&lt;0.8) is displayed as zero, thus showing a horizontal
-arrow (Steady). This is done because otherwise the arrow would go up,
-when in reality the glucose value goes down and the other way around,
-a lot more often. On the rate of change in the exported values, the
-xDrip webserver and the glucose broadcasts, this threshold is not
-applied.</p>
+arrow (Steady). This is done to prevent an upward arrow, when in reality the glucose value is falling and the other way around. This threshold is not applied to the rate of change in the exported values, the
+xDrip webserver and the glucose broadcasts.</p>
 <p>To AndroidManifest.xml you add:</p>
 <pre>    &lt;application&gt;
 [...]

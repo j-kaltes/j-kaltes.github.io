@@ -3,13 +3,9 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title>Glucose broadcasts</title>
-	<meta name="generator" content="LibreOffice 7.4.3.2 (Linux)"/>
+	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
 	<meta name="created" content="2022-11-12T16:31:22.342135202"/>
-	<meta name="changed" content="2023-01-24T00:11:13.956668528"/>
-	<style type="text/css">
-		p.sdfootnote { font-size: 10pt; margin-left: 0.24in; text-indent: -0.24in; margin-bottom: 0in }
-		a.sdfootnoteanc { font-size: 57% }
-	</style>
+	<meta name="changed" content="2023-11-22T20:58:36.126785043"/>
 </head>
 <body lang="en-US" dir="ltr"><h1>Glucose Broadcasts</h1>
 <p>Android apps can receive every minute a glucose value from
@@ -23,18 +19,12 @@ AndroidManifest:</p>
 <pre> &lt;queries&gt;
     <span lang="en-US">&lt;package android:name=&quot;tk.glucodata&quot;/&gt;</span>
  <span lang="en-US">&lt;/queries&gt;</span></pre><p>
-They should also set in Juggluco's left menu-&gt;Settings &quot;xDrip
-broadcast&quot; or &quot;Glucodata broadcast&quot;.</p>
-<p style="margin-bottom: 0in">In contrast to xDrip, that sends the
-xDrip broadcast only to a few well known applications<a class="sdfootnoteanc" name="sdfootnote1anc" href="#sdfootnote1sym"><sup>1</sup></a>,
-does Juggluco send it to every app who listens to it. This can mean
-that an app will receive input when they turn on the Broadcast in
-Juggluco, although they didn't receive input from the broadcast send
-by xDrip. If you don't want this input, you should turn off the
-reception of these broadcast in that app.</p>
-<p style="margin-bottom: 0in"><br/>
+The application id of the app should also be selected in Juggluco's
+left menu-&gt;Settings, &quot;<i>xDrip broadcast</i>&quot; or
+&quot;<i>Glucodata broadcast</i>&quot;.</p>
 
-</p>
+    <figure> <img src="Broadcastsettings.jpg" alt="Juggluco" style="object-fit:contain;
+		    width:15cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucodata Broadcast set to send to mijn.apps.glucosedata in Juggluco settings</span></figcaption> </figure>
 <p><span lang="en-US">See <a href="ShowGlucoseJava.tar.xz">a Java
 example app</a> or <a href="GlucoseDataKotlin.tar.xz">a Kotlin
 example app</a> receiving the glucodata.Minute broadcast and writing
@@ -157,8 +147,5 @@ static     String librelabel(float rate) {
     }
 
 }</pre>
-<div id="sdfootnote1"><p class="sdfootnote"><a class="sdfootnotesym" name="sdfootnote1sym" href="#sdfootnote1anc">1</a>xDrip
-	sends to other apps only when its application id is given to xDrip.</p>
-</div>
 </body>
 </html>

@@ -30,8 +30,7 @@ example app</a> or <a href="GlucoseDataKotlin.tar.xz">a Kotlin
 example app</a> receiving the glucodata.Minute broadcast and writing the output to logcat.</p>
 <p>In Juggluco and in Kerfstok, rate of change near zero
 (-0.8&lt;rate&lt;0.8) is displayed as zero, thus showing a horizontal
-arrow (Steady). This is done to prevent an upward arrow, when in reality the glucose value is falling and the other way around. This threshold is not applied to the rate of change in the exported values, the
-xDrip webserver and the glucose broadcasts.</p>
+arrow (Steady). This is done to prevent an upward arrow, when in reality the glucose value is falling and the other way around. This threshold is not applied to the rate of change in the exported values, the eXport/xDrip/Nightscout webserver in Juggluco and the glucose broadcasts.</p>
 <p>To AndroidManifest.xml you add:</p>
 <pre>    &lt;application&gt;
 [...]

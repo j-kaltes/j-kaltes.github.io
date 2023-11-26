@@ -51,8 +51,26 @@ constexpr static Shortcut_t  deshortinit[]= { {"Bread",
 //DIT IS EEN NIEUWE FILE
 jugglucotext detext {
 .daylabel={"So","Mo","Di","Mi","Do","Fr","Sa"},
+
+.speakdaylabel={"Sonntag",
+"Montag",
+"Dienstag",
+"Mittwoch",
+"Donnerstag",
+"Freitag",
+"Samstag"},
 .monthlabel={ "Jan", "Feb", "Mär",  "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"},
 .scanned="Gescannt",
+	.readysecEnable="Sensor in %d Minuten bereit. Erneut scannen, um Streaming zu aktivieren.",
+         .readysec="Sensor bereit in %d Minuten.",
+.networkproblem="Keine Glukose vom Klon",
+.enablebluetooth="Bluetooth aktivieren",
+.useBluetoothOff="'Bluetooth nutzen' aus",
+.noconnectionerror=": Keine Verbindung",
+.stsensorerror=": Sensorfehler",
+.streplacesensor=": Sensor ersetzen?",
+.endedformat="Sensor %s funktioniert nicht mehr. state=%d",
+.notreadyformat="Sensor %s nicht bereit. state=%d",
 #ifndef WEAROS
 .median="Median",
 .middle="mittlere",
@@ -61,10 +79,10 @@ jugglucotext detext {
 
 .historyinfo="Einmal alle 15 Minuten.\nAuf dem Sensor gespeichert für 8 Stunden.\nDurch das Scannen werden sie an dieses Programm übertragen.\nSensor: ",
 .history3info="Einmal alle 5 Minuten.\nWird 14 Tage lang auf dem Sensor gespeichert.\nÜber Bluetooth an dieses Programm übertragen.\nSensor: ",
-.sensorstarted= "Sensor gestartet:",
+.sensorstarted= "Gestartet:",
 .lastscanned="Zuletzt gescannt:",
 .laststream="Letzter Stream:",
-.sensorends="Sensor endet: ",
+.sensorends="Endet: ",
 #ifndef WEAROS
 .newamount="Neue Menge",
 .averageglucose="Durchschnittliche Glukose: ",
@@ -76,7 +94,8 @@ jugglucotext detext {
 .SD="SD: %.2f",
 .glucose_variability="Glukosevariabilität: %.1f%%",
       .menustr0={
-"System UI",
+"System UI       ",
+"Menus",
 "Uhren",
 "Sensor",
 "Einstellungen",
@@ -85,12 +104,13 @@ jugglucotext detext {
 "Alarm stoppen"
 },
 .menustr1={
-"Benachr.       ",
 "Export",
 "Klon",
 detext.newamount,
 "Liste",
-"Statistiken"
+"Statistiken",
+"Sprechen",
+"Schweben       "
 },
 .menustr2= {"Letzter Scan","Scans","Stream","History","Mengen","Mahlzeiten","Dunkelmodus       "},
 .menustr3= {hourminstr,"Suche", "Datum", "Vortag", "Tag später", "Woche zurück", "Woche später"},
@@ -100,10 +120,11 @@ detext.newamount,
   .menustr0= {
 "Klon",
 "Sensor",
-	"Dark mode     ",
-         "Einstellungen",
-"Alarm stoppen" },
-.menustr2= {"Datum",hourminstr,"Vortag",detext.amount},
+	"    Darkmode      ",
+         "Einstellen",
+"Stop Alarm" },
+.menustr2= {"Datum      ",hourminstr,
+"Vortag                  ",detext.amount},
 #endif
 
 .scanerrors={
@@ -113,24 +134,40 @@ detext.newamount,
 {"Sensor wird aktiviert",""},
 {"Sensor ist definitiv beendet",""},
 {"Sensor bereit in","%d Minuten"},
-{"373: Sensorfehler","Bitte kontaktieren Sie nicht sofort den Kundendienst von Abbott; möglicherweise sind Glukosewerte in 1 Minuten verfügbar."},
+{"Sensorfehler (373)","Versuchen Sie es später erneut"},
 {"Neuer Sensor initialisiert","Zur Verwendung erneut scannen"},
 {"","Blockiert Berührungen während des Scannens"},
 {"",""},
 {"Fehler bei Bibliotheksinitialisierung", "Neuinstallation durch Entfernen der Bibliothek erzwingen"},
 {"Klasseninitialisierungsfehler","Mach etwas"},
 {"Vorgang dauert zu lange","Ich beende das Programm"},
-{"365: Sensor ersetzen","Ihr Sensor funktioniert nicht. Bitte entfernen Sie Ihren Sensor und starten Sie einen neuen."},
-{"368: Sensor ersetzen","Ihr Sensor funktioniert nicht. Bitte entfernen Sie Ihren Sensor und starten Sie einen neuen."},
+{"Sensor ersetzen (365)","Ihr Sensor funktioniert nicht. Bitte entfernen Sie Ihren Sensor und starten Sie einen neuen."},
+{"Sensor ersetzen (368)","Ihr Sensor funktioniert nicht. Bitte entfernen Sie Ihren Sensor und starten Sie einen neuen."},
 {"",""},
 {"Scanfehler","Versuchen Sie es erneut"}},
 
+
+.libre3scanerror={"FreeStyle Libre 3, Scanfehler", "Versuchen Sie es erneut"},
+.libre3wrongID={"Falsche Konto-ID?","Verwenden Sie dasselbe Libreview-Konto, mit dem Sie den Sensor aktiviert haben"},
+.libre3scansuccess= {"FreeStyle Libre 3-Sensor", "Glukosewerte werden jetzt von Juggluco empfangen"},
+.unknownNFC={"Unerkannter NFC-Scanfehler", "Versuchen Sie es erneut"},
+
+.nolibre3={"FreeStyle Libre 3 Sensor","Von dieser Version von Juggluco nicht unterstützt"},
 #ifndef WEAROS
 .advancedstart= R"(<h1>Geändertes Gerät</h1>
 <p>Eine der von dieser Anwendung verwendeten Bibliotheken hat einen BUG, der sie zum Absturz bringt, wenn sie bestimmte Dateien erkennt. Ihr Gerät enthält einige dieser Dateien. Dieses Programm enthält einen Hack, um diesen BUG zu umgehen, aber es ist wahrscheinlich besser, diese Dateien auf andere Weise unauffindbar zu machen. Magisk hat beispielsweise die Möglichkeit, Root für bestimmte Anwendungen zu verbergen (Magiskhide oder Denylist) und den eigenen Namen zu ändern, beides wird benötigt. In Ihrem Fall hat es Probleme mit der folgenden Datei)",
 	.add_s=false,
 .shortinit=deshortinit,
-.labels=delabels
+.labels=delabels,
+.checked="aktiviert",
+.unchecked="deaktiviert",
+.Undetermined="",
+.FallingQuickly="Fällt rasch",
+.Falling="Fällt",
+.Stable="Ändert sich langsam",
+.Rising="Steigt",
+.RisingQuickly="Steigt rasch"
+
 #endif
 		}
 

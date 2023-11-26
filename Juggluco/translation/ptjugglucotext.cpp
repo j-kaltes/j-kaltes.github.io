@@ -53,12 +53,35 @@ constexpr static Shortcut_t  ptshortinit[]= { {"Pão",
 
 jugglucotext pttext {
         .daylabel={"Dom","Seg","Ter","Qua","Qui","Sex","Sáb"},
+
+.speakdaylabel={
+	"Domingo",
+"Segunda-feira",
+"Terça-feira",
+"Quarta-feira",
+"Quinta-feira",
+"Sexta-feira",
+"Sábado"},
         .monthlabel={
       "Jan","Feb","Mar","Abr","Mai"      ,             "Jun",
        "Jul","Ago","Set",
       "Out","Nov","Dez"},
 
         .scanned="Digitalizado",
+
+
+
+	.readysecEnable="Sensor ready in %d minutes. Scan again to enable Streaming.",
+	.readysec="Sensor ready in %d minutes.",
+.networkproblem="Network problem?",
+.enablebluetooth="Enable Bluetooth",
+.useBluetoothOff="'Use Bluetooth' off",
+.noconnectionerror=": No Connection",
+.stsensorerror=": Sensor Error",
+.streplacesensor=": Replace Sensor?",
+.endedformat="Sensor %s not working anymore. state=%d",
+.notreadyformat="Sensor %s not ready. state=%d",
+
 #ifndef WEAROS
         .median="Mediana",
         .middle="Média",
@@ -82,6 +105,7 @@ jugglucotext pttext {
         .glucose_variability="Variabilidade da glicose: %.1f%%",
      .menustr0={
                 "UI do Sistema        ",
+		"Menus",
                 "Relógio",
                 "Sensor",
                 "Definições",
@@ -90,12 +114,13 @@ jugglucotext pttext {
                 "Parar Alarme"
                 },
         .menustr1={
-                "Notificar",
                 "Exportar",
                 "Espelhar",
                 pttext.newamount,
                 "Listagem", 
-                "Estatísticas"
+                "Estatísticas",
+				"Talk",
+				"Float        "
                 },
         .menustr2= {"Último Scan","Scans","Stream","Histórico","Valores","Refeições","Modo escuro        "},
         .menustr3= {hourminstr,"Procurar","Data","Dia anterior","Dia seguinte","Semana anterior","Semana seguinte"},
@@ -104,10 +129,10 @@ jugglucotext pttext {
  .menustr0= {
         "Espelhar",
         "Sensor",
-	"Dark mode     ",
+	"    Darkmode      ",
         "Definições",
         "Parar Alarme" },
-.menustr2= {"Data",hourminstr,"Dia anterior    ",pttext.amount},
+.menustr2= {"Data",hourminstr,"Dia anterior         ",pttext.amount},
 #endif
 
         .scanerrors={
@@ -118,18 +143,23 @@ jugglucotext pttext {
                 {"Sensor terminou definitivamente",""},
 
                 {"Sensor pronto em","%d minutos"},
-                {"373: Erro do Sensor","Não contacte imediatamente o serviço de apoio ao cliente Abbott; possivelmente as leituras de glicose estarão disponíveis em 10 minutos."},
+                {"Erro do Sensor (373)","Não contacte imediatamente o serviço de apoio ao cliente Abbott; possivelmente as leituras de glicose estarão disponíveis em 10 minutos."},
                 {"Novo Sensor iniciado","Scan novamente para o utilizar"},
                 {"","Bloquear toques durante o scan"},
                 {"",""},
                 {"Erro de iniciação da biblioteca","Forçar reinstalação removendo a biblioteca"},
                 {"Erro de inicialização de classificação","Fazer algo"},
                 {"O procedimento demora demasiado tempo","Fechar programa"},
-                {"365: Substitua o sensor","O seu sensor não está a funcionar. Remova o sensor e inicie um novo."},
-                {"368: Substitua o sensor","O seu sensor não está a funcionar. Remova o sensor e inicie um novo."},
+                {"Substitua o sensor (365)","O seu sensor não está a funcionar. Remova o sensor e inicie um novo."},
+                {"Substitua o sensor (368)","O seu sensor não está a funcionar. Remova o sensor e inicie um novo."},
                 {"",""},
                 {"Scan Erro","Tentar novamente"}},
 
+.libre3scanerror={"FreeStyle Libre 3, Scan error", "Try again"},
+.libre3wrongID={"Error, wrong account ID?","Specify in Settings->Libreview the same account used to activate the sensor"},
+.libre3scansuccess= {"FreeStyle Libre 3 sensor", "Glucose values will now be received by Juggluco"},
+.unknownNFC={"Unrecognized NFC scan Error", "Try again"},
+.nolibre3={"FreeStyle Libre 3 sensor","Not supported by this version of Juggluco"},
 #ifndef WEAROS
         .advancedstart= R"(<h1>Dispositivo modificado</h1>
 <p>Uma das bibliotecas utilizadas por esta aplicação tem um BUG que faz
@@ -139,7 +169,15 @@ aplicações (Magiskhide ou Denylist) e mudar o seu próprio nome, ambos
 são necessárias. No seu caso, tem problemas com o seguinte ficheiro)",
         .add_s=true,
 .shortinit=ptshortinit,
-.labels=ptlabels
+.labels=ptlabels,
+
+.checked="checked",
+.unchecked="not checked",
+.FallingQuickly="A descer rapidamente",
+.Falling="A descer",
+.Stable="Em alteração lenta",
+.Rising="A subir",
+.RisingQuickly="A subir rapidamente"
 #endif
                 }
 

@@ -59,8 +59,27 @@ constexpr static Shortcut_t  itshortinit[]= { {"Muffin", .54f},
 #endif
 static jugglucotext ittext {
 	.daylabel={"dom","lun","mar","mer","gio","ven","sab"},
+
+.speakdaylabel={
+"Domenica",
+"Lunedi",
+"Martedì",
+"Mercoledì",
+"Giovedì",
+"Venerdì",
+"Sabato"},
 	.monthlabel={"gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"}, 
 	.scanned="Scansione",
+	.readysecEnable="Sensor ready in %d minutes. Scan again to enable Streaming.",
+	.readysec="Sensor ready in %d minutes.",
+.networkproblem="Network problem?",
+.enablebluetooth="Enable Bluetooth",
+.useBluetoothOff="'Use Bluetooth' off",
+.noconnectionerror=": No Connection",
+.stsensorerror=": Sensor Error",
+.streplacesensor=": Replace Sensor?",
+.endedformat="Sensor %s not working anymore. state=%d",
+.notreadyformat="Sensor %s not ready. state=%d",
 #ifndef WEAROS
 	.median="Mediana",
 	.middle="Centro",
@@ -84,6 +103,7 @@ static jugglucotext ittext {
 	.glucose_variability="Variabilità glicemica: %.1f%%",
      .menustr0={
 		"UI di sistema       ",
+		"Menus",
 		"Orologio",
 		"Sensore",
 		"Impostazione",
@@ -92,12 +112,13 @@ static jugglucotext ittext {
 		"Stop Allarme"
 		},
 	.menustr1={
-		"Notifica",
 		"Esporta",
 		"Mirror",
 		ittext.newamount,
 		"Lista", 
-		"Statistiche"
+		"Statistiche",
+		"Talk",
+		"Float       "
 		},
 	.menustr2= {"Ultima scansione","Scansioni","Flusso","Cronologia","Valori","Pasti","Modalità scura       "}, 
 	.menustr3= {hourminstr,"Cerca","Data","Giorno prima","Giorno dopo","Settimana prima","Settimana dopo"}, 
@@ -106,11 +127,11 @@ static jugglucotext ittext {
  .menustr0= {
 	"Mirror",
 	"Sensore",
-	"Dark mode     ",
+	"    Darkmode      ",
 	"Impostazione",
 	"Stop Allarme"
 	 },
-   .menustr2= {"Data",hourminstr,"Giorno dietro",ittext.amount},
+   .menustr2= {"Data",hourminstr,"Giorno dietro       ",ittext.amount},
 #endif
 	.scanerrors={
 		{"Scan Error (%d)","Riprova"},
@@ -119,17 +140,23 @@ static jugglucotext ittext {
 		{"Attivazione sensore",""},
 		{"Sensore definitivamente scaduto",""},
 		{"Sensore pronto in","%d minuti"},
-		{"373: Errore del sensore","Non contattare l'Abbotto subito, esiste la possibilità che riprenda a leggere dopo 10 minuti."},
+		{"Errore del sensore (373)","Non contattare l'Abbotto subito, esiste la possibilità che riprenda a leggere dopo 10 minuti."},
 		{"Nuovo sensore inizializzato","Scansionare di nuovo per usarlo"},
 		{"","Bloccare il touch durante la scansione"},
 		{"",""},
 		{"Errore di inizializzazione della libreria","Reinstallazione forzata per rimozione libreria"},
 		{"Errore di inizializzazione della classe","Fai qualcosa"}, 
 		{"La procedura sta impiegando troppo tempo","Chiuderò il programma"},
-		{"365: Sostituire sensore","Il tuo sensore non funziona. Rimuovilo e avviane un altro."},
-		{"368: Sostituire sensore","Il tuo sensore non funziona. Rimuovilo e avviane un altro."},
+		{"Sostituire sensore (365)","Il tuo sensore non funziona. Rimuovilo e avviane un altro."},
+		{"Sostituire sensore (368)","Il tuo sensore non funziona. Rimuovilo e avviane un altro."},
 		{"",""},
 		{"Errore di scansione","Riprova"}},
+
+.libre3scanerror={"FreeStyle Libre 3, Scan error", "Try again"},
+.libre3wrongID={"Error, wrong account ID?","Specify in Settings->Libreview the same account used to activate the sensor"},
+.libre3scansuccess= {"FreeStyle Libre 3 sensor", "Glucose values will now be received by Juggluco"},
+.unknownNFC={"Unrecognized NFC scan Error", "Try again"},
+.nolibre3={"FreeStyle Libre 3 sensor","Not supported by this version of Juggluco"},
 #ifndef WEAROS
 	.advancedstart=R"(<H1>Dispositivi modificati</H1>
 <P>Una delle librerie usate dall'applicazione Juggluco ha un BUG che
@@ -144,7 +171,14 @@ sono necessaire.<BR>Nel tuo caso c'&egrave; un problema con i
 seguenti file)",
 	.add_s=false,
 .shortinit=itshortinit,
-.labels=itlabels
+.labels=itlabels,
+.checked="checked",
+.unchecked="not checked",
+.FallingQuickly="In rapida diminuzione",
+.Falling="In diminuzione",
+.Stable="In lenta modifica",
+.Rising="In aumento",
+.RisingQuickly="In rapido aumento",
 #endif
 }
 		;

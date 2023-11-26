@@ -46,12 +46,29 @@ constexpr static Shortcut_t  nlshortinit[]= { {"Meer. Brood",
         {"SportPowder",
         .873f}};
 #endif
-
 static jugglucotext nltext {
-	.daylabel={"zon","maa","din","woe","don","vri","zat"},
-	.monthlabel={"jan","feb","maa","apr","mei","jun","jul","aug","sep", "okt","nov","dec"},
+	.daylabel={"zo","ma","di","wo","do","vr","za"},
+.speakdaylabel={
+"Zondag",
+"Maandag",
+"Dinsdag",
+"Woensdag",
+"Donderdag",
+"Vrijdag",
+"Zaterdag"},
+	.monthlabel={"jan","feb","mrt","apr","mei","jun","jul","aug","sep", "okt","nov","dec"},
 
 	.scanned="gescanned",
+	.readysecEnable="Sensor is gereed in %d minuten. Scan nog een keer om Streaming aan te zetten.",
+	.readysec="Sensor is gereed in %d minuten.",
+.networkproblem="Geen glucose van kloon",
+.enablebluetooth="Zet Bluetooth aan!",
+.useBluetoothOff="'Gebruik Bluetooth' uit",
+.noconnectionerror=": geen verbinding",
+.stsensorerror=": Sensorfout",
+.streplacesensor=": vervang sensor?",
+.endedformat="Sensor %s not working anymore. state=%d",
+.notreadyformat="Sensor %s not ready. state=%d",
 #ifndef WEAROS
 	.median="Mediaan",
 	.middle="Midden",
@@ -59,10 +76,10 @@ static jugglucotext nltext {
 	.history="History",
 	.historyinfo="Een keer in 15 minuten, onthouden gedurende 8 uur.\nDoor scanning naar Juggluco gezonden.\nSensor: ",
 	.history3info="Een keer in 5 minute.\nVia Bluetooth naar Juggluco gezonden.\nSensor: ",
-	.sensorstarted= "Sensor gestart:",
+	.sensorstarted= "Gestart:",
 	.lastscanned="Laatste scan:",
 	.laststream="Laatste stream:",
-	.sensorends="Sensor eindigt: ",
+	.sensorends="Eindigt: ",
 #ifndef WEAROS
 	.newamount="Hoeveelheid",
 	.averageglucose="Gemiddelde glucose: ",
@@ -77,6 +94,7 @@ static jugglucotext nltext {
 
      .menustr0={
 		"System UI        ",
+		"Menus",
 		"Horloges",
 		"Sensor",
 		"Instellingen",
@@ -85,12 +103,13 @@ static jugglucotext nltext {
 		"Stop Alarm"
 		},
 	.menustr1={
-		"Melding",
 		"Export",
 		"Kloon",
 		nltext.newamount,
 		"Lijst", 
-		"Statistiek"
+		"Statistiek",
+		"Praat",
+		"Zweef        "
 		},
 	.menustr2= {"Laatste scan","Scans","Stream","History","Hoeveelheden        ","Maaltijden","Dark mode"},
 	.menustr3= {hourminstr,"Zoeken","Datum","Dag terug","Dag later","Week terug","Week later"},
@@ -99,10 +118,10 @@ static jugglucotext nltext {
  .menustr0= {
 	"Kloon",
 	"Sensor",
-	"Dark mode     ",
+	"    Darkmode      ",
         "Instellingen",
 	"Stop Alarm" },
-.menustr2= {"Datum",hourminstr, "Dag terug        ",nltext.amount},
+.menustr2= {"Datum",hourminstr, "Dag terug              ",nltext.amount},
 #endif
 
 	.scanerrors={
@@ -112,18 +131,24 @@ static jugglucotext nltext {
 		{"Sensor activeren",""},
 		{"Sensor is volledig opgebruikt",""},
 		{"Sensor klaar in","%d minuten"},
-		{"373: Sensorfout","Bel nou niet onmiddelijk Abbott's klantenservice; misschien werkt hij wel weer in 10 minuten."},
+		{"Sensorfout (373)","Probeer het later nog eens"},
 		{"Nieuwe sensor geïnitialiseed","Scan nog eens om hem te gebruiken"},
 		{"","Reageert niet op aanraking tijdens scannen"},
 		{"",""},
-		{"Library initialization error","Force reinstall by removing library"},
+		{"Library initialization error","Are shared libraries missing?"},
 		{"Class initalization error","Do something"},
 		{"Procedure takes too long","I kill program"},
-		{"365: Vervang sensor","Uw sensor werkt niet. Verwijder uw sensor en start een nieuwe sensor."},
-		{"368: Vervang sensor","Uw sensor werkt niet. Verwijder uw sensor en start een nieuwe sensor."},
+		{"Vervang sensor (365)","Uw sensor werkt niet. Verwijder uw sensor en start een nieuwe sensor."},
+		{"Vervang sensor (368)","Uw sensor werkt niet. Verwijder uw sensor en start een nieuwe sensor."},
 		{"",""},
 		{"Scanfout","Probeer het opnieuw"}},
 
+
+.libre3scanerror={"FreeStyle Libre 3, Scanfout", "Probeer het opnieuw"},
+.libre3wrongID={"Fout, verkeerde account-ID?","Specificeer in Instellingen->Libreview hetzelfde account dat is gebruikt om de sensor te activeren"},
+.libre3scansuccess= {"FreeStyle Libre 3-sensor", "Glucosewaarden worden nu ontvangen door Juggluco"},
+.unknownNFC={"Onbekende NFC-scanfout", "Probeer het opnieuw"},
+.nolibre3={"FreeStyle Libre 3-sensor","Niet ondersteund door deze versie van Juggluco"},
 #ifndef WEAROS
 	.advancedstart= R"(<h1>Veranderd apparaat</h1>
 <p>Een van de libraries
@@ -137,7 +162,15 @@ veranderen. Beide zijn nodig. In het huidige geval betreft het de
 volgende file)",
 	.add_s=true,
 .shortinit=nlshortinit,
-.labels=nllabels
+.labels=nllabels,
+.checked="aangevinkt",
+.unchecked="niet aangevinkt",
+.Undetermined="",
+.FallingQuickly="Daalt snel",
+.Falling="Daalt",
+.Stable="Verandert langzaam",
+.Rising="Stijgt",
+.RisingQuickly="Stijgt snel"
 #endif
 		}
 

@@ -1,4 +1,7 @@
 <resources>
+    <string name="language">nl</string>
+    <string name="languagename">Taal</string>
+
     <string name="app_name">Juggluco</string>
 
     <string name="ok">OK</string>
@@ -31,9 +34,10 @@
     <string name="bluetoothenabled">Bluetooth Aan</string>
     <string name="bluetoothdisabled">Bluetooth Uit</string>
     <string name="amountsname">Hoeveelheden</string>
+    <string name="amountshort">Hoeveel</string>
     <string name="mealsname">Maaltijden</string>
     <string name="closename">Sluiten</string>
-    <string name="exporthelp"> Maaltijden opgeslagen in html\nRest in .tsv (tab-separated values)</string>
+    <string name="exporthelp">Slaat op tot de laatste waarde die op het scherm wordt weergegeven. Het begin is het aantal opgegeven dagen terug in de tijd.</string>
     <string name="detect">Detecteer</string>
     <string name="testip">Test IP</string>
     <string name="testlabel">Test Label</string>
@@ -50,7 +54,7 @@
     <string name="portrange">Poort moet een nummer zijn tussen 1024 en 65535</string>
     <string name="start">Begin</string>
     <string name="now">Nu</string>
-    <string name="dontchangeamounts">Verander hoeveelheden niet</string>
+    <string name="dontchangeamounts">Kloon stuurt hoeveelheden</string>
     <string name="thishost">Deze:</string>
     <string name="dozemode">Doze mode?</string>
     <string name="sync">Sync</string>
@@ -58,7 +62,7 @@
     <string name="save">Opslaan</string>
  <string name="addconnectionbutton">Verbinding toevoegen</string>
  <string name="offtouch">Off Touch</string>
- <string name="glucosestatusbar">Glucose op Android statusbalk</string>
+ <string name="glucosestatusbar">Glucosemelding</string>
  <string name="lowglucosealarm">Laag glucose alarm</string>
  <string name="numlabel">"Label: "</string>
  <string name="roundto">"Rond af op: "</string>
@@ -73,9 +77,8 @@
  <string name="targetrange">"Doelbereik: "</string>
  <string name="graphrange">"Bereik grafiek: "</string>
  <string name="unit">"Eenheid: "</string>
- <string name="glucoseaxisleft">Glucose-as nummers LINKS</string>
+ <string name="glucoseaxisleft">Glucose-as links</string>
  <string name="startsapp">Scannen start Juggluco</string>
- <string name="sendtoxdrip">Librelink broadcast/<strike>Zend naar xDrip</strike></string>
  <string name="disablecamerakey">Disable camera key</string>
  <string name="invertscreen">Scherm omkeren</string>
  <string name="nfcsound">NFC geluid</string>
@@ -87,7 +90,7 @@
  <string name="setunitfirst">Zet eerst eenheid</string>
  <string name="numberlabels">Nummer Labels</string>
  <string name="colors">Kleuren</string>
- <string name="remindersname">Herinneringen</string>
+ <string name="remindersname">Herinneren</string>
  <string name="display">Tonen</string>
  <string name="shutcuts">Shortcuts</string>
  <string name="advanced">Gevorderd</string>
@@ -96,7 +99,7 @@
  <string name="meal">Maaltijd:</string>
  <string name="ringshort">Toon</string>
  <string name="days">Dagen</string>
- <string name="invaliddays">\' is geen aantal dagen</string>
+ <string name="invaliddays">\' ongeldig. Dagen moet een natuurlijk getal zijn.</string>
  <string name="summarygraph">Samenvattende grafiek</string>
  <string name="forget">Vergeet</string>
  <string name="reenable">Re-enable</string>
@@ -157,13 +160,13 @@
  <string name="nextpage">Volgende pagina</string>
  <string name="ips">IPs:</string>
  <string name="port">Poort</string>
- <string name="saved">Opgeslagen</string>
+ <string name="saved">"opgeslagen"</string>
  <string name="savefailed">Opslaan mislukt</string>
  <string name="notsaved">Niet opgeslagen</string>
  <string name="failedbyexception">Mislukte door exception</string>
  <string name="nodata">Geen gegevensa</string>
  <string name="addsensorenddate">Sensor einddatum toevoegen aan calendar app</string>
- <string name="enddatesensor">"Sensor einddatum"</string>
+ <string name="enddatesensor">"Sensor einddatum "</string>
  <string name="open">Open</string>
  <string name="withoutsensor">Zonder sensor</string>
  <string name="wronglibrary">Library werkt niet goed, probeer een andere</string>
@@ -175,9 +178,9 @@
  <string name="lowglucose">" Laag Glucose!"</string>
  <string name="highglucose">" Hoog Glucose!"</string>
  <string name="sendto">Zend naar</string>
- <string name="resenddata">Resend data</string>
+ <string name="resenddata">Herzend data</string>
  <string name="minimum">Minimum</string>
- <string name="minuteddeactivated">Minuten op non-actief:</string>
+ <string name="minuteddeactivated">Minuten non-actief:</string>
  <string name="duractionsec">Duur (sec):</string>
  <string name="duraction">Duur:</string>
  <string name="sec">sec</string>
@@ -196,10 +199,122 @@
  <string name="longinsulin">Langwerkende insuline</string>
     <string name="comments">Opmerking</string>
  <string name="sendamounts">Zend hoeveelheden</string>
- <string name="resendquestion">Resend data?</string>
+ <string name="resendquestion">Herzend data?</string>
  <string name="resendmessage">Gebruik \"Resend data\" enkel na wisseling naar een ander Libreview account of nadat het huidige \"Apparaat\" uit Libreview verwijderd is (Account instellingen->Mijn Apparaten).</string>
  <string name="getaccountidquestion">Haal Account ID van Libreview?</string>
  <string name="getaccountidmessage">De Account ID is noodzakelijk om Libre3 sensoren te gebruiken die geactiveerd zijn door Abbott\'s Libre3 app met dit Libreview account.</string>
  <string name="deleteconnection">Verwijder verbinding?</string>
  <string name="heartrate">Hartslag</string>
+ <string name="xdripbroadcast">xDrip broadcast</string>
+ <string name="floatglucose">Zwevende glucose</string>
+<string name="fontsize">Lettergrootte</string>
+  <string name="fonttoolarge">Lettergrootte te groot: max=</string>
+  <string name="foreground">Voorgrond</string>
+  <string name="background">Achtergrond</string>
+  <string name="transparent">Doorzichtig</string>
+  <string name="touchable">Tastbaar</string>
+  <string name="overlaypermission">Toestemming geven:</string>
+  <string name="deletereminder">Herinnering verwijderen?</string>
+  <string name="deletelabel">Label verwijderen?</string>
+  <string name="finish">Beëindig</string>
+  <string name="finishsensormessage">Deze sensor niet meer gebruiken voor streaming?</string> 
+
+
+ <string name="email">E-mail:</string>
+ <string name="getaccountid">Account-ID ophalen</string>
+
+ <string name="emailaddresstooshort">E-mailadres te kort </string>
+ <string name="emailaddresstoolong">E-mailadres te lang </string>
+ <string name="password8">Wachtwoord moet minimaal 8 tekens lang zijn </string>
+ <string name="password36">Maximale wachtwoordlengte is 36 tekens </string>
+ <string name="fromlibreview">Van Libreview</string>
+ <string name="manual">Handmatig</string>
+ <string name="noaccountidspecified">Geen account-ID opgegeven </string>
+ <string name="wrongformat">Verkeerde opmaak </string>
+<string name="noapplisteningto">"Geen app luistert naar "</string>
+<string name="secret">api_secret</string>
+<string name="withoutsaving">Weg gaan zonder op te slaan?</string>
+<string name="active">Actief</string>
+<string name="usessl">Gebruik SSL</string>
+<string name="fullchain">Full Chain</string>
+
+         <string name="privatekey">Private Key</string>
+<string name="localonly">Alleen lokaal</string>
+<string name="toolongsecret">: api_secret te lang. maximaal=</string>
+<string name="invalidport">" ongeldig poortnummer"</string>
+<string name="newsecret">"nieuwe api_secret: "</string>
+<string name="newport">"nieuwe poort ="</string>
+<string name="webserver">Webserver</string>
+<string name="treatments">Geef hoeveelheden</string>
+
+<string name="wentwrong">Er ging iets mis</string>
+     <string name="dosis">" dosis "</string>
+     <string name="doses">" doses "</string>
+  <string name="penfailed">Het lezen van de insulinepen is mislukt. Probeer het opnieuw.</string>
+  <string name="changeinsulin">"Verander insulinetype naar "</string>
+     <string name="type">"Type: "</string>
+    <string name="dosesprior">Voeg enkel doses toe van na:</string>
+<string name="notsynced">Niet gesynchroniseerd</string>
+  <string name="lossdata">Instellen op standaardwaarden kan leiden tot gegevensverlies.</string>
+  <string name="defaults">Standaardwaarden</string>
+    <string name="notify">Melding</string>
+ <string name="separate">Apart</string>
+    <string name="librecurrent">Direct</string>
+    <string name="speed">Snelheid</string>
+    <string name="pitch">Toonhoogte</string>
+  <string name="talker">Spreker</string>
+  <string name="secondsbetween">Seconden er tussen</string>
+  <string name="test">Test</string>
+ <string name="novalue">No value</string>
+
+ <string name="menus">Menus</string>
+
+<string name="system_ui">System UI        </string>
+<string name="watch">Horloges</string>
+<string name="sensor">Sensor</string>
+<string name="settings">Instellingen</string>
+<string name="aboutname">About</string>
+<string name="export">Export</string>
+<string name="mirror">Kloon</string>
+<string name="new_amount">Hoeveelheid</string>
+<string name="list">Lijst</string>
+<string name="statistics">Statistiek</string>
+<string name="talk">Praat</string>
+<string name="floatname">Zweef        </string>
+<string name="last_scan">Laatste scan</string>
+<string name="date">Datum</string>
+<string name="day_back">Dag terug</string>
+<string name="day_later">Dag later</string>
+<string name="week_back">Week terug</string>
+<string name="week_later">Week later</string>
+
+ <string name="talk_touch">Talk touch</string>
+
+ <string name="speakmessages">Spreek berichten uit</string>
+ <string name="speakalarms">Spreek alarmen uit</string>
+ <string name="speakglucose">Spreek glucose uit</string>
+
+<string name="notfound">Niet gevonden</string>
+  <string name="no_ringtone_picker_found">Geen Ringtone picker gevonden</string>
+  <string name="can_t_play">"afspelen gaat niet: "</string>
+  <string name="seconds">" seconden"</string>
+  <string name="duration_can_t_be_negative">"tijdduur kan niet negatief zijn: "</string>
+  <string name="too_large_maximum_65535">" te groot, maximum=65535, "</string>
+  <string name="too_large">"te groot"</string>
+  <string name="can_t_use_specification">Kan specificatie niet gebruiken</string>
+  <string name="turn_on_nearby_devices_permission">Schakel de toestemming voor APPARATEN IN DE BUURT in</string>
+     <string name="enable_bluetooth">set Bluetooth aan</string>
+  <string name="turn_on_location_permission">Schakel locatietoestemming in</string>
+  <string name="bluetooth_is_turned_off">Bluetooth is uitgeschakeld</string>
+  <string name="allsentnoreceive">Als alles naar een host wordt verzonden, moet \"Ontvang van\" uitgeschakeld zijn.</string>
+  <string name="nomirrorport">Het poortnummer moet verschillen van de kloonpoort</string>
+  <string name="nohttpport">Het poortnummer moet verschillen van de http-poort</string>
+<string name="ready_in">" klaar in "</string>
+<string name="ready_for_use">Sensor klaar voor gebruik</string>
+<string name="endstime">" eindigt op dit moment"</string>
+<string name="triednothing">Niets geprobeerd</string>
+<string name="resendwarning">Alle gegevens worden opnieuw verzonden, wat tijd kost en gevolgen kan hebben voor Libreview en Kerfstok</string>
+<string name="parseip">Fout bij interpreteren van IP</string>
+<string name="toomanyhosts">Maximumaantal hosts overschreden</string>
+<string name="senthosts">Juggluco zendt naar maximaal 4 hosts</string>
 </resources>

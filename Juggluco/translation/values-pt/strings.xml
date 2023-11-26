@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="language">pt</string>
+
+    <string name="languagename">Linguagem</string>
 <string name="app_name">Juggluco</string>
 
 <string name="ok">OK</string>
@@ -72,9 +76,8 @@
 <string name="targetrange">"Intervalo-alvo: "</string>
 <string name="graphrange">"Intervalo do gráfico: "</string>
 <string name="unit">"Unidade: "</string>
-<string name="glucoseaxisleft">Números do eixo da glicose À ESQUERDA</string>
+<string name="glucoseaxisleft">Eixo da glicose à esquerda</string>
 <string name="startsapp">A digitalização inicia a aplicação</string>
-<string name="sendtoxdrip">>Librelink broadcast/<strike>Enviar para xDrip</strike></string>
 <string name="disablecamerakey">Desativar tecla da câmera</string>
 <string name="invertscreen">Inverter tela</string>
 <string name="nfcsound">som NFC</string>
@@ -156,7 +159,7 @@
 <string name="nextpage">Próxima página</string>
 <string name="ips">IPs:</string>
 <string name="port">Porta</string>
-<string name="saved">Guardado</string>
+<string name="saved">"Guardado "</string>
 <string name="savefailed">Falha ao guardar</string>
 <string name="notsaved">Não guardado</string>
 <string name="failedbyexception">Falha por exceção</string>
@@ -205,6 +208,26 @@
 <string name="deleteconnection">Excluir conexão?</string>
 <string name="wakelock">sempre ativo</string>
 <string name="wifi">Wi-Fi</string>
+    <string name="notify">Notificar</string>
+
+<string name="system_ui">UI do Sistema</string>
+<string name="watch">Relógio</string>
+<string name="sensor">Sensor</string>
+<string name="settings">Definições</string>
+<string name="aboutname">Sobre</string>
+<string name="export">Exportar</string>
+<string name="mirror">Espelhar</string>
+<string name="new_amount">Novo valor</string>
+<string name="list">Listagem</string>
+<string name="statistics">Estatísticas</string>
+<string name="talk">Talk</string>
+<string name="floatname">Float</string>
+<string name="last_scan">Último Scan</string>
+<string name="date">Data</string>
+<string name="day_back">Dia anterior</string>
+<string name="day_later">Dia seguinte</string>
+<string name="week_back">Semana anterior</string>
+<string name="week_later">Semana seguinte</string>
 </resources>
 
 

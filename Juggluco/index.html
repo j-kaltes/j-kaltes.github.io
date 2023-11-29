@@ -736,7 +736,29 @@ e-mail
       display of these data, for example to send a quick overview to a medical
       practitioner.</p>
     <h2 class="western">Watches</h2>
-    <p>Make a watch app to display glucose values received from Juggluco. <a href="https://www.juggluco.nl/Juggluco/addwatch.html">Add
-        Watch</a> </p>
+    <p>Make a watch app to display glucose values received from Juggluco. <a href="https://www.juggluco.nl/Juggluco/addwatch.html">Add Watch</a> </p>
+ <h2 class="western">Transfer data to a new phone</h2>
+<p style="line-height: 100%; margin-bottom: 0in">Transferring date to
+another phone can with Juggluco’s <a href="https://www.juggluco.nl/Juggluco/index.html#mirror" onclick="location.href='https://www.juggluco.nl/Juggluco/index.html?unit='+unitstr+'#mirror';return false;" >mirror</a> function: left middle menu→<a href="https://www.juggluco.nl/Jugglucohelp/connectionoverview.html">Mirror</a>.
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">Another possibility
+is to use tar via <a href="https://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/">adb</a>:</p>
+<p style="line-height: 100%; margin-bottom: 0in">First install and
+run Juggluco on the new phone, then force stop Juggluco on the new
+phone.</p>
+<p style="line-height: 100%; margin-bottom: 0in">On the computer
+while connected to the old phone:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>adb shell run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
+<p style="line-height: 100%; margin-bottom: 0in">On the computer
+while connected to the new phone:</p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>type all.tar | adb shell run-as tk.glucodata tar -xf -</b></p>
+<p style="line-height: 100%; margin-bottom: 0in">The last will
+generate some error messages, but that is no problem.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><i>type</i> is for
+<a href="http://cmd.com/" target="_blank">cmd.com</a> under windows,
+under linux you should use <b>cat</b> instead.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
   </body>
 </html>

@@ -3,18 +3,20 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title></title>
-	<meta name="generator" content="LibreOffice 7.5.7.1 (Linux)"/>
+	<meta name="generator" content="LibreOffice 7.5.8.2 (Linux)"/>
 	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
-	<meta name="changed" content="2023-11-18T16:57:09.641917238"/>
+	<meta name="changed" content="2023-11-30T12:26:09.613923320"/>
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
+		td p { margin-bottom: 0.1in }
 		p { margin-bottom: 0.1in }
 		h4.western { font-family: "Liberation Sans", sans-serif; font-size: 13pt; font-style: italic }
 		h4.cjk { font-family: "Noto Sans CJK SC"; font-size: 13pt; font-style: italic }
 		h4.ctl { font-family: "Mangal"; font-size: 13pt; font-style: italic }
 		h3.cjk { font-family: "Droid Sans Fallback" }
 		h3.ctl { font-family: "Droid Sans Devanagari" }
-		td p { margin-bottom: 0.1in }
+		h2.cjk { font-family: "Droid Sans Fallback" }
+		h2.ctl { font-family: "Droid Sans Devanagari" }
 	</style>
     <script type="text/javascript"> 
 	var urlstart='http://127.0.0.1:17580';
@@ -55,7 +57,9 @@ in which case http://127.0.0.1:17580 is replaced with
 http://192.168.1.69:17580. (It works only when you click on a link,
 not when you open a link in a different tab or window).</p>
 <p>Instead of Juggluco on a phone, you can also use <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
-server</a>. Android or WearOS apps can, instead of making use of the web server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a> every time a new glucose value is received from the sensor.</p>
+server</a>. Android or WearOS apps can, instead of making use of the
+web server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a>
+every time a new glucose value is received from the sensor.</p>
 <h3 class="western">Juggluco export web server</h3>
 <p>Starting with Juggluco 7.1.0 exactly the same data as can be
 exported in Juggluco with <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Left
@@ -227,12 +231,12 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
 			end time.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="token"></a>
 			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td id="token" width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>token</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
@@ -250,9 +254,18 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			xyx</font></font></p>
 			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api-secret:</b>
 			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
+			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Juggluco
+			7.1.15 has added a third method to supply the api-secret. You can
+			add the api-secret after the hostname and port. This has the
+			advantage that you can also add an api-secret to app that
+			themselves don’t have the possibility to supply an api-secret or
+			token. This is meant to be used with Nightscout clients. So you
+			can give as Nightscout Follow URL  <a href="http://192.168.1.68:17580/xyz">http://127.0.0.1:17580/xyz</a>
+			instead of  <a href="http://192.168.1.68:17580/">http://127.0.0.1:17580</a>
+			when xyz is the api-secret. It is needed for <a href="https://github.com/kashamalasha/nightscout-widget-electron">nightscout-widget-electron</a>. Specifying <i>"Nightscout token"</i> in its widget settings has no effect.</font></font></p>
 		</td>
 		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
+			 <a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
 		</td>
 	</tr>
 </table>
@@ -646,7 +659,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="0" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="0" sdnum="1033;"><p>
 			0</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>nan</p>
@@ -665,7 +678,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="1" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="1" sdnum="1033;"><p>
 			1</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>&gt;=3.5</p>
@@ -679,7 +692,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="2" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="2" sdnum="1033;"><p>
 			2</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>[2, 3.5)</p>
@@ -692,7 +705,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="3" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="3" sdnum="1033;"><p>
 			3</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>[1, 2)</p>
@@ -705,7 +718,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="4" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="4" sdnum="1033;"><p>
 			4</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>(-1, 1)</p>
@@ -718,7 +731,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="5" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="5" sdnum="1033;"><p>
 			5</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>(-2, -1]</p>
@@ -731,7 +744,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="6" sdnum="2057;"><p>
+		<td width="61" style="border: none; padding: 0in" sdval="6" sdnum="1033;"><p>
 			6</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>(-3.5, -2]</p>
@@ -744,7 +757,7 @@ Meaning of </i><span style="font-variant: normal"><span style="font-style: norma
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" height="34" style="border: none; padding: 0in" sdval="7" sdnum="2057;"><p>
+		<td width="61" height="35" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
 			7</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>&lt;=-3.5</p>
@@ -772,7 +785,7 @@ measure.</p>
 <p style="line-height: 100%; margin-bottom: 0in">To used this web
 interface with SSL, you give Juggluco an SSL key as described in <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
 menu-&gt;Settings-&gt;Web server-&gt;Help</a>.</p>
-<h2 id="cmdline">Juggluco server</h2>
+<h2 class="western"><a name="cmdline"></a>Juggluco server</h2>
 <p style="line-height: 100%; margin-bottom: 0in">This web interface
 is also put in a standalone version of the network connectivity of
 Juggluco: see <a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a></p>
@@ -812,8 +825,8 @@ by the port specified with <b>-o</b></p>
 different.</p>
 <p>./juggluco -l now shows:</p>
 <p><em>Use SSL, sslport=9191</em></p>
-<p>You can configure an api-secret with <b>-g</b> &quot;an api-secret&quot;,
-for example you can use</p>
+<p>You can configure an api-secret with <b>-g</b> &quot;an
+api-secret&quot;, for example you can use</p>
 <p>./<strong>juggluco -g Xsa%sLF8</strong></p>
 <p>To set the api-secret to &quot;<em>Xsa%sLF8</em>&quot;</p>
 <p>When you also enable https, this gives a kind of access
@@ -865,8 +878,8 @@ Use SSL, sslport=9191
 5: Walk        Comments
 6: Blood       Comments
 7: bad         Don't send
-api/v1/treatments turned off</pre>
-<p>Now it still doesn't give treatments. You first have to turn it on
+api/v1/treatments turned off</pre><p>
+Now it still doesn't give treatments. You first have to turn it on
 with <b>-t</b></p>
 <p><b>./juggluco -t</b></p>
 <p>./juggluco -l now shows:</p>
@@ -887,17 +900,18 @@ api_secret: Xsa%sLF8
 
 Mirror port 9113
 unit: mg/dL
-connection:</pre>
-<h3 class="western">SSL</h3>
+connection:</pre><h3 class="western">
+SSL</h3>
 <p style="line-height: 100%; margin-bottom: 0in">To make use of SSL,
 you need to give Juggluco server a SSL certificate for the hostname
 by which the server is accessed. How you can get an SSL key is
 described in the help under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
 menu-&gt;Settings-&gt;Webserver</a> and in the <a href="https://www.juggluco.nl/Juggluco/cmdline/README.txt">README</a>
 in the source of Juggluco server. For Juggluco server, you need to
-put the the private key in a file named <b>prevkey.pem</b> and the fullchain
-in a file named <b>fullchain.pem</b> in <em>jugglucodata</em>. <em>jugglucodata</em>
-is the directory were Juggluco server saves its data: 
+put the the private key in a file named <b>prevkey.pem</b> and the
+fullchain in a file named <b>fullchain.pem</b> in <em>jugglucodata</em>.
+<em>jugglucodata</em> is the directory were Juggluco server saves its
+data: 
 </p>
 <pre>ls -l jugglucodata/
 total 136
@@ -908,9 +922,8 @@ drwxr-xr-x   2 juggluco juggluco   4096 12 jan  2023 logs
 drwxr-xr-x   4 juggluco juggluco   4096 12 jan  2023 nums
 -rw-r--r--   1 juggluco juggluco   1702  8 nov 13:12 privkey.pem
 drwxr-xr-x 104 juggluco juggluco   4096 18 nov 12:36 sensors
--rwxr-xr-x   1 juggluco juggluco  22032 18 nov 17:49 settings.dat
-</pre>
-
+-rwxr-xr-x   1 juggluco juggluco  22032 18 nov 17:49 settings.dat</pre><p>
+<br/>
 <br/>
 
 </p>

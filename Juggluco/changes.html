@@ -5,7 +5,8 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 7.5.8.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2023-11-30T15:46:58.041592021"/>
+	<meta name="changed" content="2023-12-01T18:56:20.024402630"/>
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
@@ -1328,7 +1329,14 @@ Libreview.</font></font></font></p>
 	the Flash please tell me.</p>
 	<li><p style="line-height: 100%; margin-bottom: 0.08in"><a href="https://github.com/kashamalasha/nightscout-widget-electron">https://github.com/kashamalasha/nightscout-widget-electron</a>
 	now works with integrated <a href="https://www.juggluco.nl/Juggluco/webserver.html">Nightscout
-	server</a>.</p>
+	server</a>. The Owlet “<i>NIGHTSCOUT TOKEN</i>” field isn’t
+	used by the Nightscout web server in Juggluco, you can enter
+	whatever you want. To specify an api-secret you can add it after the
+	hostname and port. Thus, instead of something like
+	<a href="http://192.168.1.64:17580/">http://192.168.1.64:17580</a>
+	you use <a href="http://192.168.1.64:17580/xyz">http://192.168.1.64:17580/xyz</a>
+	if <i>xyz</i> is the api-secret and 192.168.1.64 is the IP of the
+	phone running Juggluco.</p>
 	<li><p style="line-height: 100%; margin-bottom: 0.08in">Added
 	possibility to use <a href="https://www.juggluco.nl/Juggluco/webserver.html#token">api-secret</a>
 	as the first element of the path.</p>

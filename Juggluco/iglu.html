@@ -88,21 +88,36 @@ agp(dplyr::filter(cgmdata2,time&gt;=&quot;2023-10-01&quot;&amp;time&lt;&quot;202
 Replace 2023-10-01 with the start date and 2023-12-24 with the end
 date. 
 </p>
+<p>
+Using the history data is identical. 
+To get the history data from the web server in Juggluco, you do something like:
+<pre>history<-read.table("http://192.168.1.64:17580/x/history?header&mg/dL&days=14",header=TRUE,sep='\t',check.names=FALSE);</pre>
+Where you replace 192.168.1.64 with the ip of your phone and 14 with the number of days you want to  analyze.
+</p>
 <p style="line-height: 108%; margin-bottom: 0.11in">Later you can put
 the above in file and run it by opening it in rstudio, select
 everything and press run. To see the display, press on the plots
 penal at the right side. Resize it so everything is visible and save
 it with export. You can also cut and past to command line R, but
 adjusting the size of the image is then more difficult.</p>
-<p><img src="agp-hist.jpg" name="Image1" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
 
-<font face="Times New Roman">History data. Not scanned often enough
+    <figure> 
+<img src="agp-hist.jpg" name="AGP history" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
+
+		    <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">
+History data. Not scanned often enough
 for full data. Misses a lot of hypo's also because the history data
-are less extream as the scans and stream</font> 
-<img src="agp-stream.jpg" name="Image2" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
+are less extream as the scans and stream
+		    </span></figcaption>
+    </figure>
 
-<font face="Times New Roman">Bluetooth stream. 10% hypoglycemia,
-instead of the 4% shown in the history data</font> 
-</p>
+
+
+    <figure> 
+<img src="agp-stream.jpg" name="AGP stream" alt="AGP" align="bottom" width="1580" height="762" border="0"/>
+		    <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Bluetooth stream. 10% hypoglycemia, instead of the 4% shown in the history data</span></figcaption>
+    </figure>
+
+
 </body>
 </html>

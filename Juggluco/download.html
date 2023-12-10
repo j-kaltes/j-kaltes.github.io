@@ -18,30 +18,55 @@ figure {
   <body>
 <a href="index.html">Juggluco</a>
     <h1>Download </h1>
-    <h2 class="western">New in Juggluco 7.1.19:</h2>
+    <h2 class="western">New in Juggluco 7.1.20:</h2>
 <ul>
-	<li><p style="line-height: 100%; margin-bottom: 0.08in">Libreview bug fix.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0.08in">Besides the
+	scan time and pink color, the display of old scans is now also
+	crossed out to prevent confusion with a recent value. One user still
+	thought to see a current value when looking at an already pink
+	display. Now the past is crossed out, so it is not confused with the
+	present. The display of a scan is also closed automatically after 1
+	minute. So nobody can confuse it with the current value received via
+	Bluetooth.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0.08in">When
+	exporting meals to html, moved the date from the caption into the
+	table. Now the date is available when reading the table into R,
+	Python or Mathematica:</p>
+	<p style="line-height: 100%; margin-bottom: 0.08in">R: 
+	</p>
+	<pre>library(<span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">rvest}</span></span></span></font></font></font></span>
+library(xml2)
+meal1&lt;-html_table(read_html(&quot;http://127.0.0.1:17580/x/meals?days=6&quot;),header=TRUE)</pre><p style="line-height: 100%; margin-bottom: 0.08in">
+	Python: 
+	</p>
+	<pre>import pandas as pd
+meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</pre><p>
+	Mathematica:</p>
+	<pre style="margin-bottom: 0.2in">mail1=Import[&quot;http://127.0.0.1:17580/x/meals&quot;, &quot;Data&quot;]</pre>
+	<li><p>Amounts are now displayed above the other elements of the
+	graph instead of under them.</p>
+	<li><p>Bug fix of French translation.</p>
 </ul>
     <p style="line-height: 100%"><a href="changes.html"><b>CHANGELOG</b></a></p>
     <p><a
         href="https://drive.google.com/drive/folders/1qysiLYb2e93WBMjC9MYCqEdW-gGDUb2n?usp=share_link">Previous versions</a> (under Android not all is shown in Google Drive App or Chrome, except when "Desktop site [x]" is set)</p>
 <p>If adb refuses to install the APK, because the app is already installed, you can use the -r option. If it refuses because it is a downgrade, you also need to add the -d option.</p>
-    <h2 class="western">Phone 7.1.19 (Android 8 or higher. Can also be used with Libre3):</h2>
+    <h2 class="western">Phone 7.1.20 (Android 8 or higher. Can also be used with Libre3):</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm64 only (the usual case): <a href="https://drive.google.com/open?id=1VbD6v9rHFWndK5r5dJQDCprHghRmWZG3">Google Drive</a> </p>
-      <p style="line-height: 100%; margin-bottom: 0in; background: transparent">Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/open?id=1SoqtkuwqycMpzwY2ImMAuPN-jsTovFcq">Google
+      Arm64 only (the usual case): <a href="https://drive.google.com/open?id=1UZBlUHtFXjWiymDOlJdxKGZ5iNEg5jin">Google Drive</a> </p>
+      <p style="line-height: 100%; margin-bottom: 0in; background: transparent">Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/open?id=179C3fJC5RUA1yKfFgKQzlGnJMPNxfKs0">Google
         Drive</a> </p>
 <p><b>WARNING</b>: Juggluco can't take over sensors started with the Arm32 version of Abbott's Libre 3 app, but it can start them itself and take them over from Arm64 and the other way around (the Arm32 version of Abbott's Libre 3 app can't do that and can't be used with the same sensor after a reinstall). Juggluco will also not work with Libre 3 sensors on  devices with very old Linux Kernels a like phone that originally ran maximally Android 6.0.1, on which is put an Android 12 Lineage OS custom ROM.</p>
-    <h2 class="western">Phone 7.1.19 (Android 4.4 or higher. Can NOT be used with Libre3):</h2>
+    <h2 class="western">Phone 7.1.20 (Android 4.4 or higher. Can NOT be used with Libre3):</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-     Arm32 only: <a href="https://drive.google.com/open?id=1HpxSdEyJrq3VhdHjUKbpvdzelYSogHfa">Google Drive</a></p>
+     Arm32 only: <a href="https://drive.google.com/open?id=1GUtU23KszOn55X0aSwgjon3UIdOoLPwp">Google Drive</a></p>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
- Arm/Arm64/x86/x86_64: <a href="https://drive.google.com/open?id=1pU1rPmiqTM4EIN8b4apQNZWCNgHFk-Ar">Google Drive</a> </p>
-    <h2 class="western">WearOS 7.1.19:</h2>
+ Arm/Arm64/x86/x86_64: <a href="https://drive.google.com/open?id=1aeyvd0fsUO3gXWQ-G2rc0jh1sgpC5Cz2">Google Drive</a> </p>
+    <h2 class="western">WearOS 7.1.20:</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-      Arm32 only (the usual case): <a href="https://drive.google.com/open?id=1vSxgGo2H4q2uXGHG0jJI_O_iCV8DW9m6">Google Drive</a> </p>
+      Arm32 only (the usual case): <a href="https://drive.google.com/open?id=1gt9uG0mxfrVM2NlSHBBH-ZpXZAIxOb15">Google Drive</a> </p>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
-     Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/open?id=1msPvVOSVpKg8xQYeKb_cJfeMbp0pDr2N">Google Drive</a> </p>
+     Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/open?id=1ryA-oMhj-WBg9WksTlnq6ZqR9SBgtmLq">Google Drive</a> </p>
     <h2>
       <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/JugglucoWearOS/install/adb.html">Install
 Juggluco
@@ -55,9 +80,9 @@ about the problem.</p>
 <p style="line-height: 100%; margin-bottom: 0in">For this you can
 install a logging version of Juggluco:
 </p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=1DzVyyUUasibrVxE_BuTmdZ0_1Ny7fFt_">Mobile
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=1z-mAsstonEKSsZgA1HmWjILUfRPr43Wl">Mobile
 phone</a></p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=1nUwTp4OxnDBHhUm5D2_b3fx4hY-05UVo">WearOS
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=1bPe34iDQx5HwBaIqb9y5Zr8I8FJ26WoH">WearOS
 watch</a></p>
 <p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
 <font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">And

@@ -5,7 +5,13 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 7.5.8.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2023-12-04T20:43:59.486886994"/>
+	<meta name="changed" content="2023-12-10T20:22:37.206497308"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
@@ -1353,6 +1359,35 @@ Libreview.</font></font></font></p>
 <ul>
 	<li><p style="line-height: 100%; margin-bottom: 0.08in">Libreview
 	bug fix.</p>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0.08in">7.1.20</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0.08in">Besides the
+	scan time and pink color, the display of old scans is now also
+	crossed out to prevent confusion with a recent value. One user still
+	thought to see a current value when looking at an already pink
+	display. Now the past is crossed out, so it is not confused with the
+	present. The display of a scan is also closed automatically after 1
+	minute. So nobody can confuse it with the current value received via
+	Bluetooth.</p>
+	<li><p style="line-height: 100%; margin-bottom: 0.08in">When
+	exporting meals to html, moved the date from the caption into the
+	table. Now the date is available when reading the table into R,
+	Python or Mathematica:</p>
+	<p style="line-height: 100%; margin-bottom: 0.08in">R: 
+	</p>
+	<pre>library(<span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">rvest}</span></span></span></font></font></font></span>
+library(xml2)
+meal1&lt;-html_table(read_html(&quot;http://127.0.0.1:17580/x/meals?days=6&quot;),header=TRUE)</pre><p style="line-height: 100%; margin-bottom: 0.08in">
+	Python: 
+	</p>
+	<pre>import pandas as pd
+meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</pre><p>
+	Mathematica:</p>
+	<pre style="margin-bottom: 0.2in">mail1=Import[&quot;http://127.0.0.1:17580/x/meals&quot;, &quot;Data&quot;]</pre>
+	<li><p>Amounts are now displayed above the other elements of the
+	graph instead of under them.</p>
+	<li><p>Bug fix of French translation.</p>
 </ul>
 </body>
 </html>

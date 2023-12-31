@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 7.5.8.2 (Linux)"/>
-	<meta name="created" content="2022-03-03T15:02:35.013438506"/>
-	<meta name="changed" content="2023-11-30T12:26:09.613923320"/>
-	<style type="text/css">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="generator" content="LibreOffice 7.5.8.2 (Linux)">
+    <meta name="created" content="2022-03-03T15:02:35.013438506">
+    <meta name="changed" content="2023-11-30T12:26:09.613923320">
+    <style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
 		td p { margin-bottom: 0.1in }
 		p { margin-bottom: 0.1in }
@@ -31,812 +31,976 @@
 		} 
      getiparg();
    </script>
-</head>
-<body lang="en-US" dir="ltr"><h1>Web server</h1>
-<p><a href="https://www.juggluco.nl/Juggluco">Juggluco</a> contains a
-web server. You can turn it on with <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
-menu-&gt;Settings-&gt;Web server</a>. Via the web server other
-programs can make use of the data in Juggluco. In the following
-<i>127.0.0.1</i> is used for the hostname or IP of the web server. In
-this way you can try out the commands by opening the web page on the
-same phone where Juggluco is running. If you unset &quot;Local only&quot;
-in Left menu-&gt;Settings -&gt; Web server, you can also use it from
-other hosts on your home network by replacing <i>127.0.0.1</i> with
-the IP of the phone. If <i>Use SSL</i> is set, you can replace
-<i>http://127.0.0.1:17580</i> with <i>https://ahostname:aport.
-W</i>hereby &quot;<i>ahostname</i>&quot; is the hostname associated
-with the SSL certificate and &quot;<i>aport&quot;</i> is the port
-that your modem redirects to &quot;<i>SSL Port</i>&quot; (set in left
-menu-&gt;Settings-&gt;Web server) of your phone. You can also use
-this page when using something different from
-&quot;http://127.0.0.1:17580&quot;: If you add ?urlstart=<i>aurl</i>&nbsp;
-http://127.0.0.1:17580 in all these examples is replaced with <i>aurl</i>.&nbsp;
-For example you can use
-https://www.juggluco.nl/Juggluco/webserver.html?urlstart=http://192.168.1.69:17580
-in which case http://127.0.0.1:17580 is replaced with
-http://192.168.1.69:17580. (It works only when you click on a link,
-not when you open a link in a different tab or window).</p>
-<p>Instead of Juggluco on a phone, you can also use <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
-server</a>. Android or WearOS apps can, instead of making use of the
-web server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a>
-every time a new glucose value is received from the sensor.</p>
-<h3 class="western">Juggluco export web server</h3>
-<p>Starting with Juggluco 7.1.0 exactly the same data as can be
-exported in Juggluco with <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Left
-middle menu-&gt;Export</a>, can also be assessed with via the web
-interface.</p>
-<table width="498" cellpadding="0" cellspacing="0">
-	<col width="116"/>
-
-	<col width="382"/>
-
-	<tr valign="top">
-		<td width="116" style="border: none; padding: 0in"><p><b>Stream</b></p>
-		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/stream" onclick="location.href=urlstart+'/x/stream';return false;">http://127.0.0.1:17580/x/stream</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="116" style="border: none; padding: 0in"><p><b>Scans</b></p>
-		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/scans?days=5" onclick="location.href=urlstart+'/x/scans?days=5';return false;">http://127.0.0.1:17580/x/scans</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="116" style="border: none; padding: 0in"><p><b>History</b></p>
-		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/history?days=0.5" onclick="location.href=urlstart+'/x/history?days=0.5';return false;">http://127.0.0.1:17580/x/history</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="116" style="border: none; padding: 0in"><p><b>Amounts</b></p>
-		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/amounts?days=1" onclick="location.href=urlstart+'/x/amounts?days=1';return false;">http://127.0.0.1:17580/x/amounts</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="116" style="border: none; padding: 0in"><p><b>Meals</b></p>
-		</td>
-		<td width="382" style="border: none; padding: 0in"><p><a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals</a></p>
-		</td>
-	</tr>
-</table>
-<p>After one of the above commands you can place <b>'?'</b> followed
-by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
-<table width="1057" cellpadding="2" cellspacing="0" style="background: transparent">
-	<col width="93"/>
-
-	<col width="464"/>
-
-	<col width="486"/>
-
-	<tr style="background: transparent" valign="top">
-		<td width="93" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p style="font-weight: normal">
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Option</font></font></p>
-		</td>
-		<td width="464" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Meaning</font></font></p>
-		</td>
-		<td width="486" style="border: 1px solid #000000; padding: 0.02in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Example</font></font></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>header</b></font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Place
-			a header with the meaning of each column above the columns.</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?header" onclick="location.href=urlstart+'/x/stream?header';return false;">http://127.0.0.1:17580/x/stream?header</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" id="unit" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>mg/dL</b></font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
-			glucose in mg/dL</font></font></p>
-			<p style="font-variant: normal; font-style: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>The
-			default unit is dependent on the unit settings of Juggluco or
-			Juggluco server.</b></font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?header&amp;mg/dL" onclick="location.href=urlstart+'/x/stream?header&amp;mg/dL';return false;">http://127.0.0.1:17580/x/stream?header&amp;mg/dL</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>mmol/L</b></font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
-			glucose in mmol/L</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?mmol/L&amp;header" onclick="location.href=urlstart+'/x/stream?mmol/L&amp;header';return false;">http://127.0.0.1:17580/x/stream?mmol/L&amp;header</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>days</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
-			for how many days data should be returned.</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8" onclick="location.href=urlstart+'/x/history?header&amp;days=0.8';return false;">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>duration</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">The
-			duration of data in seconds. Multiple <i>days</i> and <i>duration</i>
-			specifications are added. When the total duration is zero, it
-			defaults to 5 hours.</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?duration=3600" onclick="location.href=urlstart+'/x/stream?duration=3600';return false;">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>starttime</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Start
-			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963" onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>endtime</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">End
-			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/stream?endtime=1698266963" onclick="location.href=urlstart+'/x/stream?endtime=1698266963';return false;">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>start</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Other
-			way to specify the start time for testing purposes. The time is in
-			<b>local time</b> (Nightscout uses GMT).</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8" onclick="location.href=urlstart+'/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8';return false;">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>end</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
-			end time.</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="token"></a>
-			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>token</b>=</font></font></p>
-		</td>
-		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">The
-			Nightscout token used for Nightscout commands, can also be used
-			for the Juggluco's export commands. In other Nightscout servers,
-			Nightscout token is different from <span style="font-weight: normal">api_secret,</span>
-			but in the Nightscout server in Juggluco they are the same.</font></font></p>
-			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">api_secret
-			and <span style="font-weight: normal">api-secret</span> also work
-			with all commands that use the web server in Juggluco. They are
-			http header elements. api_secret is plain text, api-secret is SHA1
-			encoded. Examples:</font></font></p>
-			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api_secret:</b>
-			xyx</font></font></p>
-			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api-secret:</b>
-			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
-			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Juggluco
-			7.1.15 has added a third method to supply the api-secret. You can
-			add the api-secret after the hostname and port. This has the
-			advantage that you can also add an api-secret to app that
-			themselves don’t have the possibility to supply an api-secret or
-			token. This is meant to be used with Nightscout clients. So you
-			can give as Nightscout Follow URL  <a href="http://192.168.1.68:17580/xyz">http://127.0.0.1:17580/xyz</a>
-			instead of  <a href="http://192.168.1.68:17580/">http://127.0.0.1:17580</a>
-			when xyz is the api-secret. It is needed for <a href="https://github.com/kashamalasha/nightscout-widget-electron">Owlet</a>. Specifying <i>"Nightscout token"</i> in its widget settings has no effect.</font></font></p>
-		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			 <a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
-		</td>
-	</tr>
-</table>
-<p>The data contains the following columns:</p>
-<table width="914" cellpadding="2" cellspacing="0">
-	<col width="213"/>
-
-	<col width="581"/>
-
-	<col width="106"/>
-
-	<thead>
-		<tr valign="top">
-			<td width="213" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p style="font-weight: normal">
-				<font size="4" style="font-size: 14pt">Column header</font></p>
-			</td>
-			<td width="581" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<font size="4" style="font-size: 14pt">Meaning</font></p>
-			</td>
-			<td width="106" style="border: 1px solid #000000; padding: 0.02in"><p>
-				<font size="4" style="font-size: 14pt">Used with:</font></p>
-			</td>
-		</tr>
-	</thead>
-	<tbody>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>Sensorid</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Sensor identifier</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				Sensor only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>Nr</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Number starting with 1 for the first data item of a particular
-				sensor or data source and incremented with each new item.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				both</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>UnixTime</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Time in number of seconds since 00:00 1 January 1970 GMT</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				both</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>YYYY-mm-dd-HH:MM:SS</b></font></font></font></pre>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Local time split into its component parts. mm= month, MM= Minute.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				both</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>TZ</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Time zone in number of hours from GMT</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				both</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>Min</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Number of minutes since the start of the sensor.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				sensor only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>mmol/L or mg/dL</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Glucose value. If the url doesn't contain <i>mmol/L</i> or <i><a href="#unit">mg/dL</a></i>, is the unit dependent on the unit setting of Juggluco.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				sensor only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				<b>Rate</b></p>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Rate of change.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				sensor only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>ChangeLabel</b></font></font></font></pre>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Label for rate of change</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				sensor only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Source</b></font></font></font></pre>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				0 for Amounts entered in Juggluco, 1 for Kerfstok.</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				amounts only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Value</b></font></font></font></pre>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Value of amount</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				amounts only</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Label</b></font></font></font></pre>
-			</td>
-			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-				Label for amount</p>
-			</td>
-			<td width="106" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-				amounts only</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<p style="line-height: 100%; margin-bottom: 0in">The meaning of rate
-of change:</p>
-<table width="462" cellpadding="2" cellspacing="0" style="background: transparent">
-	<col width="134"/>
-
-	<col width="186"/>
-
-	<col width="127"/>
-
-	<tr style="background: transparent" valign="top">
-		<td width="134" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<b>Rate:</b></p>
-		</td>
-		<td width="186" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<b>Label:</b></p>
-		</td>
-		<td width="127" style="border: 1px solid #000000; padding: 0.02in"><p>
-			<b>Arrow in Abbott app:</b></p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			&lt;=-2</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			FALLING_QUICKLY</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			↓</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			Between -2 and -1</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			FALLING</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			↘</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			-1 to 1</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			STEADY</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			→</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			1 to 2</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			RISING</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			↗</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			&gt;=2</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			RISING_QUICKLY</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			↑</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="134" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			nan</p>
-		</td>
-		<td width="186" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			NOT_DETERMINED</p>
-		</td>
-		<td width="127" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<br/>
-
-			</p>
-		</td>
-	</tr>
-</table>
-<h3 class="western">xDrip/Nightscout web server</h3>
-<p>Some existing apps make use of a xDrip or Nightscout web
-interface.</p>
-<h3 class="western">xDrip</h3>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco
-incorporates an xDrip web server. This way you can receive glucose
-values via <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>
-on the devices running Juggluco. Turn the server on in Juggluco under
-<a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">left
-menu-&gt;watch-&gt;web server</a>.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco recognizes
-the following <a href="https://github.com/NightscoutFoundation/xDrip/blob/master/Documentation/technical/Local_Web_Services.md">xDrip
-server options</a>:</p>
-<h4 class="western">count=nr</h4>
-<p style="line-height: 100%; margin-bottom: 0in">Give nr values,
-instead of 24.</p>
-<p style="line-height: 100%; margin-bottom: 0in">For example to
-receive 10 values use:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=10" onclick="location.href=urlstart+'/sgv.json?count=10';return false;">http://127.0.0.1:17580/sgv.json?count=10</a></p>
-<h4 class="western">brief_mode=Y</h4>
-<p style="line-height: 100%; margin-bottom: 0in">Display less
-information. For example:</p>
-<p><a href="http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y" onclick="location.href=urlstart+'/sgv.json?count=2&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y</a></p>
-<h4 class="western">sensor=Y</h4>
-<p style="line-height: 100%; margin-bottom: 0in">Give sensor start
-date and age. For example:</p>
-<p><a href="http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y" onclick="location.href=urlstart+'/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y</a></p>
-<h4 class="western">all_data=Y</h4>
-<p style="line-height: 100%; margin-bottom: 0in">If necessary also
-displays values of previous sensors.</p>
-<h4 class="western">no_empty=Y</h4>
-<p style="line-height: 100%; margin-bottom: 0in">Displays nothing
-instead of [] when no data is available.</p>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco added the
-following option:</p>
-<h4 class="western">interval=seconds</h4>
-<p style="line-height: 100%; margin-bottom: 0in"><i>interval</i>
-gives the minimal number of seconds between values. If not specified,
-it is set to 270 seconds (4.5 minutes) to keep in line with xDrip.
-This means that if multiple values are given they are spaced at least
-270 seconds apart (the first is always the most recent value). If you
-like to receive values spaced more closely in time, you can specify a
-smaller number.</p>
-<p style="line-height: 100%; margin-bottom: 0in">for example:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90" onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">http://127.0.0.1:17580/sgv.json</a><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90" onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">?count=100&amp;interval=90</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">To receive 100
-glucose values spaced 90 seconds apart. In reality this will be
-around 2 minutes apart.</p>
-<p style="line-height: 100%; margin-bottom: 0in">Another possibility
-could be to round values instead of skipping them. But averaging the
-last values makes the measurement older. If the last value is the
-average of the last 5 values, the average of its age will be 2 to 3
-minutes. Because the measurement location is already physiologically
-distance from the blood, there is more to say for extrapolating
-instead of averaging the values. Thus, if you have for the last 5
-minutes 10,9,8,7 and 6 mmol/L you should return 5 mmol/L instead of
-7.6 mmol/L.</p>
-<h3 class="western">Nightscout</h3>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco only
-implements Nightscout used by apps contacting Nightscout; it has not
-the intent to implements commands used by no one and full-filling no
-other purpose than what other commands already do. 
-</p>
-<h4 class="western">Nightscout commands implemented in Juggluco:</h4>
-<p style="line-height: 100%; margin-bottom: 0in">You can receive the
-same results as with <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>
-also with: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.json" onclick="location.href=urlstart+'/api/v1/entries/sgv.json';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.json</a>
-and <a href="http://127.0.0.1:17580/api/v1/entries.json" onclick="location.href=urlstart+'/api/v1/entries.json';return false;">http://127.0.0.1:17580/api/v1/entries.json</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">In csv format:
-<a href="http://127.0.0.1:17580/api/v1/entries/sgv.csv" onclick="location.href=urlstart+'/api/v1/entries/sgv.csv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.csv</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">In tsv format:
-<a href="http://127.0.0.1:17580/api/v1/entries/sgv.tsv" onclick="location.href=urlstart+'/api/v1/entries/sgv.tsv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.tsv</a>
-or <a href="http://127.0.0.1:17580/api/v1/entries/sgv.txt" onclick="location.href=urlstart+'/api/v1/entries/sgv.txt';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.txt</a>
-or <a href="http://127.0.0.1:17580/api/v1/entries" onclick="location.href=urlstart+'/api/v1/entries';return false;">http://127.0.0.1:17580/api/v1/entries</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">For only the last
-value in tsv format, you can use
-<a href="http://127.0.0.1:17580/api/v1/entries/current" onclick="location.href=urlstart+'/api/v1/entries/current';return false;">http://127.0.0.1:17580/api/v1/entries/current</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">You can receive the
-amounts from Juggluco with:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/treatments" onclick="location.href=urlstart+'/api/v1/treatments';return false;">http://127.0.0.1:17580/api/v1/treatments</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">In addition to
-count, you have also the following options:</p>
-<h4 class="western">find[date][$gt]=datemsec</h4>
-<p style="line-height: 100%; margin-bottom: 0in">give results after
-datemsec, where <i>datemsec</i> is the number of milli seconds since
-00:00 1 January 1970 GMT For example:
-<a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000" onclick="location.href=urlstart+'/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
-<h4 class="western">find[date][$gte]=datemsec</h4>
-<p>gives results at or after datemsec</p>
-<h4 class="western">find[date][$lt]=datemsec</h4>
-<p>give results before datemsec, where datemsec are the number of
-milli seconds since 00:00 1 January 1970 GMT For example:
-<a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000" onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
-<h4 class="western">find[date][$lte]=datemsec</h4>
-<p>gives results at or before datemsec</p>
-<p style="line-height: 100%; margin-bottom: 0in">By using dateString
-or created_at instead of date, you can use a date in the format
-YYYY-mm-DDThh:MM:ss, were mm is the month and MM the minutes. For
-example 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01" onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Sans, sans-serif"><font size="3" style="font-size: 13pt"><b>token=the_api_secret</b></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in">See the Juggluco
-export web server options above.</p>
-<h3 class="western">Pebble</h3>
-<p style="line-height: 100%; margin-bottom: 0in">Made for a 2013
-watch, some apps still use the following command:</p>
-<p><a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble';return false;">http://127.0.0.1:17580/pebble</a></p>
-<p>It contains the following information:</p>
-<p><b>now</b>: current time in milliseconds since 1 January 1970
-00:00 GMT.</p>
-<p><b>sgv</b>: current glucose value in the unit of the server. For
-Libre sensor you can determine the unit by using the knowledge that
-the value of mg/dL is in the range 39-501 mg/dL and of mmol/L in the
-range 2.2-27.8 mmol/L.</p>
-<p style="margin-top: 0.08in; margin-bottom: 0.08in; page-break-after: avoid">
-<font size="3" style="font-size: 12pt"><i>Table </i><i><span style="background: #c0c0c0">1</span></i><i>:
-Meaning of </i><span style="font-variant: normal"><span style="font-style: normal"><b>trend</b></span></span>
-<i>and </i><span style="font-variant: normal"><span style="font-style: normal"><b>direction</b></span></span>
-<i>in pebble results</i></font></p>
-<table width="528" cellpadding="0" cellspacing="0">
-	<col width="61"/>
-
-	<col width="131"/>
-
-	<col width="120"/>
-
-	<col width="108"/>
-
-	<col width="108"/>
-
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in"><p>trend</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>Rate of
-			change</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>direction</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>DexCom arrow</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>Abbott arrow</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="0" sdnum="1033;"><p>
-			0</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>nan</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p><br/>
-
-			</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p><br/>
-
-			</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p><br/>
-
-			</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="1" sdnum="1033;"><p>
-			1</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>&gt;=3.5</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>DoubleUp</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p style="font-variant: normal; letter-spacing: normal">
-			<font color="#000000">⥣</font></p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↑</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="2" sdnum="1033;"><p>
-			2</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>[2, 3.5)</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>SingleUp</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↑</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↑</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="3" sdnum="1033;"><p>
-			3</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>[1, 2)</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>FortyFiveUp</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↗</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↗</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="4" sdnum="1033;"><p>
-			4</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>(-1, 1)</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>Flat</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>→</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>→</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="5" sdnum="1033;"><p>
-			5</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>(-2, -1]</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>FortyFiveDown</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↘</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↘</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" style="border: none; padding: 0in" sdval="6" sdnum="1033;"><p>
-			6</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>(-3.5, -2]</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>SingleDown</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↓</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↓</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td width="61" height="35" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
-			7</p>
-		</td>
-		<td width="131" style="border: none; padding: 0in"><p>&lt;=-3.5</p>
-		</td>
-		<td width="120" style="border: none; padding: 0in"><p>DoubleDown</p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p align="left" style="font-variant: normal; letter-spacing: normal; orphans: 2; widows: 2">
-			<font color="#000000">⥥</font></p>
-		</td>
-		<td width="108" style="border: none; padding: 0in"><p>↓</p>
-		</td>
-	</tr>
-</table>
-<p><i>Rate of change</i> is the Rate returned when exporting stream
-and scans in Juggluco (for example:
-<a href="http://127.0.0.1:17580/x/stream?header&amp;duration=200" onclick="location.href=urlstart+'/x/stream?header&amp;duration=200';return false;">http://127.0.0.1:17580/x/stream?header&amp;duration=200</a>).
-</p>
-<p><b>bgdelta</b>=rate*5</p>
-<p><b>datetime</b>: time of glucose value in milliseconds since 1
-january 1970 00:00 GMT.</p>
-<p><b>iob</b>: Insulin on board (since Juggluco 7.1.10). Measure of
-how much insulin of previous rapid insulin injections is still
-present in the body. pebble is the only command that returns this
-measure.</p>
-<p style="line-height: 100%; margin-bottom: 0in">To used this web
-interface with SSL, you give Juggluco an SSL key as described in <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
-menu-&gt;Settings-&gt;Web server-&gt;Help</a>.</p>
-<h2 class="western"><a name="cmdline"></a>Juggluco server</h2>
-<p style="line-height: 100%; margin-bottom: 0in">This web interface
-is also put in a standalone version of the network connectivity of
-Juggluco: see <a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a></p>
-<p style="line-height: 100%; margin-bottom: 0in">In the same way as
-the other options, you can also turn on the eXport/xDrip/Nightscout
-web server. For local only usage, you do</p>
-<p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco
--x</strong></p>
-<p style="line-height: 100%; margin-bottom: 0in">You can see the
-current settings with</p>
-<p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco
--l</strong></p>
-<p style="line-height: 100%; margin-bottom: 0in">Output:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>[...]</em></p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>eXport web
-server turned on (port 17580)</em></p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>http only over
-localhost</em></p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>[...]</em></p>
-<p style="line-height: 100%; margin-bottom: 0in">If you want to
-access from other hosts, you need to use capital X:</p>
-<p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco
--X</strong></p>
-<p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco
--l </strong>now shows:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>eXport web
-server turned on (port 17580)</em></p>
-<p style="line-height: 100%; margin-bottom: 0in"><em>can also be used
-remotely over http</em></p>
-<p>With <strong>-e</strong> you can enable SSL encryption.</p>
-<p>The http web server always uses port 17580 because xDrip watch app
-can only be used with this port number. The SSL version is accessed
-by the port specified with <b>-o</b></p>
-<p>./<strong>juggluco -e -o 9191</strong></p>
-<p>says to enable the SSL (https) version and to use port 9191.</p>
-<p>The mirror port, the http and the https port all need to be
-different.</p>
-<p>./juggluco -l now shows:</p>
-<p><em>Use SSL, sslport=9191</em></p>
-<p>You can configure an api-secret with <b>-g</b> &quot;an
-api-secret&quot;, for example you can use</p>
-<p>./<strong>juggluco -g Xsa%sLF8</strong></p>
-<p>To set the api-secret to &quot;<em>Xsa%sLF8</em>&quot;</p>
-<p>When you also enable https, this gives a kind of access
-restriction so that only people who know the api-secret can see your
-data. See <a href="#token">api-secret</a>.</p>
-<p>As with the web server in the Juggluco app, you can also give
-treatments via the Nightscout web protocol. You also have to specify
-for each label what should be done with it. If juggluco server has
-received &quot;<em>Amounts</em>&quot;, you can see the available
-labels with ./juggluco -l, for example:</p>
-<pre>eXport web server turned on (port 17580)
+  </head>
+  <body dir="ltr" lang="en-US">
+    <h1>Web server</h1>
+    <p><a href="https://www.juggluco.nl/Juggluco">Juggluco</a> contains a web
+      server. You can turn it on with <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
+menu-&gt;Settings-&gt;Web
+        server</a>. Via the web server other programs can make use of the data
+      in Juggluco. In the following <i>127.0.0.1</i> is used for the hostname
+      or IP of the web server. In this way you can try out the commands by
+      opening the web page on the same phone where Juggluco is running. If you
+      unset "Local only" in Left menu-&gt;Settings -&gt; Web server, you can
+      also use it from other hosts on your home network by replacing <i>127.0.0.1</i>
+      with the IP of the phone. If <i>Use SSL</i> is set, you can replace <i>http://127.0.0.1:17580</i>
+      with <i>https://ahostname:aport. W</i>hereby "<i>ahostname</i>" is the
+      hostname associated with the SSL certificate and "<i>aport"</i> is the
+      port that your modem redirects to "<i>SSL Port</i>" (set in left
+      menu-&gt;Settings-&gt;Web server) of your phone. You can also use this
+      page when using something different from "http://127.0.0.1:17580": If you
+      add ?urlstart=<i>aurl</i>&nbsp; http://127.0.0.1:17580 in all these
+      examples is replaced with <i>aurl</i>.&nbsp;
+      For example you can use
+      https://www.juggluco.nl/Juggluco/webserver.html?urlstart=http://192.168.1.69:17580
+in
+      which case http://127.0.0.1:17580 is replaced with
+      http://192.168.1.69:17580. (It works only when you click on a link, not
+      when you open a link in a different tab or window).</p>
+    <p>Instead of Juggluco on a phone, you can also use <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
+        server</a>. Android or WearOS apps can, instead of making use of the web
+      server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a>
+      every time a new glucose value is received from the sensor.</p>
+    <h3 class="western">Juggluco export web server</h3>
+    <p>Starting with Juggluco 7.1.0 exactly the same data as can be exported in
+      Juggluco with <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Left
+middle
+        menu-&gt;Export</a>, can also be assessed with via the web interface.</p>
+    <table cellspacing="0" cellpadding="0" width="498">
+      <colgroup><col width="116"> <col width="382"> </colgroup>
+      <tbody>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="116">
+            <p><b>Stream</b></p>
+          </td>
+          <td style="border: none; padding: 0in" width="382">
+            <p><a href="http://127.0.0.1:17580/x/stream" onclick="location.href=urlstart+'/x/stream';return false;">http://127.0.0.1:17580/x/stream</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="116">
+            <p><b>Scans</b></p>
+          </td>
+          <td style="border: none; padding: 0in" width="382">
+            <p><a href="http://127.0.0.1:17580/x/scans?days=5" onclick="location.href=urlstart+'/x/scans?days=5';return false;">http://127.0.0.1:17580/x/scans</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="116">
+            <p><b>History</b></p>
+          </td>
+          <td style="border: none; padding: 0in" width="382">
+            <p><a href="http://127.0.0.1:17580/x/history?days=0.5" onclick="location.href=urlstart+'/x/history?days=0.5';return false;">http://127.0.0.1:17580/x/history</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="116">
+            <p><b>Amounts</b></p>
+          </td>
+          <td style="border: none; padding: 0in" width="382">
+            <p><a href="http://127.0.0.1:17580/x/amounts?days=1" onclick="location.href=urlstart+'/x/amounts?days=1';return false;">http://127.0.0.1:17580/x/amounts</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="116">
+            <p><b>Meals</b></p>
+          </td>
+          <td style="border: none; padding: 0in" width="382">
+            <p><a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>After one of the above commands you can place <b>'?'</b> followed by a
+      list of the following options separated by <b>'&amp;"</b>.</p>
+    <table style="background: transparent" cellspacing="0" cellpadding="2" width="1057">
+      <colgroup><col width="93"> <col width="464"> <col width="486"> </colgroup>
+      <tbody>
+        <tr style="background: transparent" valign="top">
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p style="font-weight: normal"> <font face="Liberation Serif, serif"><font
+                  style="font-size: 15pt" size="4">Option</font></font></p>
+          </td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 15pt"
+                  size="4">Meaning</font></font></p>
+          </td>
+          <td style="border: 1px solid #000000; padding: 0.02in" width="486">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 15pt"
+                  size="4">Example</font></font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>header</b></font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Place a header with the meaning of each column above
+                  the columns.</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/stream?header" onclick="location.href=urlstart+'/x/stream?header';return false;">http://127.0.0.1:17580/x/stream?header</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td id="unit" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>mg/dL</b></font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Give glucose in mg/dL</font></font></p>
+            <p style="font-variant: normal; font-style: normal"><font face="Liberation Serif, serif"><font
+                  style="font-size: 14pt" size="4"><b>The default unit is
+                    dependent on the unit settings of Juggluco or Juggluco
+                    server.</b></font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/stream?header&amp;mg/dL" onclick="location.href=urlstart+'/x/stream?header&amp;mg/dL';return false;">http://127.0.0.1:17580/x/stream?header&amp;mg/dL</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>mmol/L</b></font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Give glucose in mmol/L</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/stream?mmol/L&amp;header" onclick="location.href=urlstart+'/x/stream?mmol/L&amp;header';return false;">http://127.0.0.1:17580/x/stream?mmol/L&amp;header</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>days</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Specify for how many days data should be returned.</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8"
+                onclick="location.href=urlstart+'/x/history?header&amp;days=0.8';return false;">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>duration</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">The duration of data in seconds. Multiple <i>days</i>
+                  and <i>duration</i> specifications are added. When the total
+                  duration is zero, it defaults to 5 hours.</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/stream?duration=3600" onclick="location.href=urlstart+'/x/stream?duration=3600';return false;">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>starttime</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Start time in Unix time (seconds since 00:00 1
+                  January 1970 GMT).</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963"
+                onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>endtime</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">End time in Unix time (seconds since 00:00 1 January
+                  1970 GMT).</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/stream?endtime=1698266963" onclick="location.href=urlstart+'/x/stream?endtime=1698266963';return false;">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>start</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Other way to specify the start time for testing
+                  purposes. The time is in <b>local time</b> (Nightscout uses
+                  GMT).</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8"
+                onclick="location.href=urlstart+'/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8';return false;">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93" height="32">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>end</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Specify end time.</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p><a name="token"></a> <a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header"
+                onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="93">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>token</b>=</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="464">
+            <p> <font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">The Nightscout token used for Nightscout commands,
+                  can also be used for the Juggluco's export commands. In other
+                  Nightscout servers, Nightscout token is different from <span
+                    style="font-weight: normal">api_secret,</span> but in the
+                  Nightscout server in Juggluco they are the same.</font></font></p>
+            <p><font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">api_secret and <span style="font-weight: normal">api-secret</span>
+                  also work with all commands that use the web server in
+                  Juggluco. They are http header elements. api_secret is plain
+                  text, api-secret is SHA1 encoded. Examples:</font></font></p>
+            <p><font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>api_secret:</b> xyx</font></font></p>
+            <p><font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4"><b>api-secret:</b>
+                  3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
+            <p><font face="Liberation Serif, serif"><font style="font-size: 14pt"
+                  size="4">Juggluco 7.1.15 has added a third method to supply
+                  the api-secret. You can add the api-secret after the hostname
+                  and port. This has the advantage that you can also add an
+                  api-secret to app that themselves don’t have the possibility
+                  to supply an api-secret or token. This is meant to be used
+                  with Nightscout clients. So you can give as Nightscout Follow
+                  URL <a href="http://192.168.1.68:17580/xyz">http://127.0.0.1:17580/xyz</a>
+                  instead of <a href="http://192.168.1.68:17580/">http://127.0.0.1:17580</a>
+                  when xyz is the api-secret. It is needed for <a href="https://github.com/kashamalasha/nightscout-widget-electron">Owlet</a>.
+                  Specifying <i>"Nightscout token"</i> in its widget settings
+                  has no effect.</font></font></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="486">
+            <p> <a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The data contains the following columns:</p>
+    <table cellspacing="0" cellpadding="2" width="914">
+      <colgroup><col width="213"> <col width="581"> <col width="106"> </colgroup>
+      <thead>
+        <tr valign="top">
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p style="font-weight: normal"> <font style="font-size: 14pt" size="4">Column
+                header</font></p>
+          </td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> <font style="font-size: 14pt" size="4">Meaning</font></p>
+          </td>
+          <td style="border: 1px solid #000000; padding: 0.02in" width="106">
+            <p> <font style="font-size: 14pt" size="4">Used with:</font></p>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>Sensorid</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Sensor identifier</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> Sensor only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>Nr</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Number starting with 1 for the first data item of a particular
+              sensor or data source and incremented with each new item.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> both</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>UnixTime</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Time in number of seconds since 00:00 1 January 1970 GMT</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> both</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font
+color="#000000"><font face="Liberation Serif, serif"><font style="font-size: 12pt"
+size="3"><b>YYYY-mm-dd-HH:MM:SS</b></font></font></font></pre>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Local time split into its component parts. mm= month, MM=
+              Minute.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> both</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>TZ</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Time zone in number of hours from GMT</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> both</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>Min</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Number of minutes since the start of the sensor.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> sensor only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>mmol/L or mg/dL</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Glucose value. If the url doesn't contain <i>mmol/L</i> or <i><a
+                  href="#unit">mg/dL</a></i>, is the unit dependent on the unit
+              setting of Juggluco.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> sensor only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <p> <b>Rate</b></p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Rate of change.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> sensor only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font
+color="#000000"><font face="Liberation Serif, serif"><font style="font-size: 12pt"
+size="3"><b>ChangeLabel</b></font></font></font></pre>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Label for rate of change</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> sensor only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font
+color="#000000"><font face="Liberation Serif, serif"><font style="font-size: 12pt"
+size="3"><b>Source</b></font></font></font></pre>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> 0 for Amounts entered in Juggluco, 1 for Kerfstok.</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> amounts only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font
+color="#000000"><font face="Liberation Serif, serif"><font style="font-size: 12pt"
+size="3"><b>Value</b></font></font></font></pre>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Value of amount</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> amounts only</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="213">
+            <pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font
+color="#000000"><font face="Liberation Serif, serif"><font style="font-size: 12pt"
+size="3"><b>Label</b></font></font></font></pre>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="581">
+            <p> Label for amount</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="106">
+            <p> amounts only</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="line-height: 100%; margin-bottom: 0in">The meaning of rate of
+      change:</p>
+    <table style="background: transparent" cellspacing="0" cellpadding="2" width="462">
+      <colgroup><col width="134"> <col width="186"> <col width="127"> </colgroup>
+      <tbody>
+        <tr style="background: transparent" valign="top">
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> <b>Rate:</b></p>
+          </td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> <b>Label:</b></p>
+          </td>
+          <td style="border: 1px solid #000000; padding: 0.02in" width="127">
+            <p> <b>Arrow in Abbott app:</b></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> &lt;=-2</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> FALLING_QUICKLY</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> ↓</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> Between -2 and -1</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> FALLING</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> ↘</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> -1 to 1</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> STEADY</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> →</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> 1 to 2</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> RISING</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> ↗</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> &gt;=2</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> RISING_QUICKLY</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> ↑</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="134">
+            <p> nan</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"
+            width="186">
+            <p> NOT_DETERMINED</p>
+          </td>
+          <td style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"
+            width="127">
+            <p> <br>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="western">xDrip/Nightscout web server</h3>
+    <p>Some existing apps make use of a xDrip or Nightscout web interface.</p>
+    <h3 class="western">xDrip</h3>
+    <p style="line-height: 100%; margin-bottom: 0in">Juggluco incorporates an
+      xDrip web server. This way you can receive glucose values via <a href="http://127.0.0.1:17580/sgv.json"
+        onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>
+      on the devices running Juggluco. Turn the server on in Juggluco under <a
+        href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">left
+        menu-&gt;watch-&gt;web server</a>.</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><br>
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in">Juggluco recognizes the
+      following <a href="https://github.com/NightscoutFoundation/xDrip/blob/master/Documentation/technical/Local_Web_Services.md">xDrip
+server
+        options</a>:</p>
+    <h4 class="western">count=nr</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">Give nr values, instead of
+      24.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">For example to receive 10
+      values use:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=10"
+        onclick="location.href=urlstart+'/sgv.json?count=10';return false;">http://127.0.0.1:17580/sgv.json?count=10</a></p>
+    <h4 class="western">brief_mode=Y</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">Display less information.
+      For example:</p>
+    <p><a href="http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y" onclick="location.href=urlstart+'/sgv.json?count=2&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=2&amp;brief_mode=Y</a></p>
+    <h4 class="western">sensor=Y</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">Give sensor start date and
+      age. For example:</p>
+    <p><a href="http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y"
+        onclick="location.href=urlstart+'/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y';return false;">http://127.0.0.1:17580/sgv.json?count=3&amp;sensor=Y&amp;brief_mode=Y</a></p>
+    <h4 class="western">all_data=Y</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">If necessary also displays
+      values of previous sensors.</p>
+    <h4 class="western">no_empty=Y</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">Displays nothing instead of
+      [] when no data is available.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Juggluco added the
+      following option:</p>
+    <h4 class="western">interval=seconds</h4>
+    <p style="line-height: 100%; margin-bottom: 0in"><i>interval</i> gives the
+      minimal number of seconds between values. If not specified, it is set to
+      270 seconds (4.5 minutes) to keep in line with xDrip. This means that if
+      multiple values are given they are spaced at least 270 seconds apart (the
+      first is always the most recent value). If you like to receive values
+      spaced more closely in time, you can specify a smaller number.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">for example:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90"
+        onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">http://127.0.0.1:17580/sgv.json</a><a
+        href="http://127.0.0.1:17580/sgv.json?count=100&amp;interval=90" onclick="location.href=urlstart+'/sgv.json?count=100&amp;interval=90';return false;">?count=100&amp;interval=90</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">To receive 100 glucose
+      values spaced 90 seconds apart. In reality this will be around 2 minutes
+      apart.</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Another possibility could
+      be to round values instead of skipping them. But averaging the last values
+      makes the measurement older. If the last value is the average of the last
+      5 values, the average of its age will be 2 to 3 minutes. Because the
+      measurement location is already physiologically distance from the blood,
+      there is more to say for extrapolating instead of averaging the values.
+      Thus, if you have for the last 5 minutes 10,9,8,7 and 6 mmol/L you should
+      return 5 mmol/L instead of 7.6 mmol/L.</p>
+    <h3 class="western">Nightscout</h3>
+    <p style="line-height: 100%; margin-bottom: 0in">Juggluco only implements
+      Nightscout used by apps contacting Nightscout; it has not the intent to
+      implements commands used by no one and full-filling no other purpose than
+      what other commands already do. </p>
+    <h4 class="western">Nightscout commands implemented in Juggluco:</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">You can receive the same
+      results as with <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urlstart+'/sgv.json';return false;">http://127.0.0.1:17580/sgv.json</a>,
+      but with time in GMT instead of server local time, also with: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.json"
+        onclick="location.href=urlstart+'/api/v1/entries/sgv.json';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.json</a>
+      and <a href="http://127.0.0.1:17580/api/v1/entries.json" onclick="location.href=urlstart+'/api/v1/entries.json';return false;">http://127.0.0.1:17580/api/v1/entries.json</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">In csv format: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.csv"
+        onclick="location.href=urlstart+'/api/v1/entries/sgv.csv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.csv</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">In tsv format: <a href="http://127.0.0.1:17580/api/v1/entries/sgv.tsv"
+        onclick="location.href=urlstart+'/api/v1/entries/sgv.tsv';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.tsv</a>
+      or <a href="http://127.0.0.1:17580/api/v1/entries/sgv.txt" onclick="location.href=urlstart+'/api/v1/entries/sgv.txt';return false;">http://127.0.0.1:17580/api/v1/entries/sgv.txt</a>
+      or <a href="http://127.0.0.1:17580/api/v1/entries" onclick="location.href=urlstart+'/api/v1/entries';return false;">http://127.0.0.1:17580/api/v1/entries</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">For only the last value in
+      tsv format, you can use <a href="http://127.0.0.1:17580/api/v1/entries/current"
+        onclick="location.href=urlstart+'/api/v1/entries/current';return false;">http://127.0.0.1:17580/api/v1/entries/current</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">You can receive the amounts
+      from Juggluco with:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/treatments"
+        onclick="location.href=urlstart+'/api/v1/treatments';return false;">http://127.0.0.1:17580/api/v1/treatments</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">In addition to count, you
+      have also the following options:</p>
+    <h4 class="western">find[date][$gt]=datemsec</h4>
+    <p style="line-height: 100%; margin-bottom: 0in">give results after
+      datemsec, where <i>datemsec</i> is the number of milli seconds since
+      00:00 1 January 1970 GMT For example: <a href="http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000"
+        onclick="location.href=urlstart+'/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/treatments?count=5&amp;find[date][$gt]=1679266800000</a></p>
+    <h4 class="western">find[date][$gte]=datemsec</h4>
+    <p>gives results at or after datemsec</p>
+    <h4 class="western">find[date][$lt]=datemsec</h4>
+    <p>give results before datemsec, where datemsec are the number of milli
+      seconds since 00:00 1 January 1970 GMT For example: <a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000"
+        onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[date][$lt]=1679266800000</a></p>
+    <h4 class="western">find[date][$lte]=datemsec</h4>
+    <p>gives results at or before datemsec</p>
+    <p style="line-height: 100%; margin-bottom: 0in">By using dateString or
+      created_at instead of date, you can use a date in the format
+      YYYY-mm-DDThh:MM:ss, were mm is the month and MM the minutes. For example
+    </p>
+    <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01"
+        onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Sans, sans-serif"><font
+          style="font-size: 13pt" size="3"><b>token=the_api_secret</b></font></font></p>
+    <p style="line-height: 100%; margin-bottom: 0in">See the Juggluco export web
+      server options above.</p>
+    <h3 class="western">Pebble</h3>
+    <p style="line-height: 100%; margin-bottom: 0in">Made for a 2013 watch, some
+      apps still use the following command:</p>
+    <p><a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble';return false;">http://127.0.0.1:17580/pebble</a></p>
+    <p>It contains the following information:</p>
+    <p><b>now</b>: current time in milliseconds since 1 January 1970 00:00 GMT.</p>
+    <p><b>sgv</b>: current glucose value in the unit of the server. For Libre
+      sensor you can determine the unit by using the knowledge that the value of
+      mg/dL is in the range 39-501 mg/dL and of mmol/L in the range 2.2-27.8
+      mmol/L.</p>
+    <p style="margin-top: 0.08in; margin-bottom: 0.08in; page-break-after: avoid">
+      <font style="font-size: 12pt" size="3"><i>Table </i><i><span style="background: #c0c0c0">1</span></i><i>:
+          Meaning of </i><span style="font-variant: normal"><span style="font-style: normal"><b>trend</b></span></span>
+        <i>and </i><span style="font-variant: normal"><span style="font-style: normal"><b>direction</b></span></span>
+        <i>in pebble results</i></font></p>
+    <table cellspacing="0" cellpadding="0" width="528">
+      <colgroup><col width="61"> <col width="131"> <col width="120"> <col width="108">
+        <col width="108"> </colgroup>
+      <tbody>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" width="61">
+            <p>trend</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>Rate of change</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>direction</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>DexCom arrow</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>Abbott arrow</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="0" sdnum="1033;" width="61">
+            <p> 0</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>nan</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p><br>
+            </p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p><br>
+            </p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p><br>
+            </p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="1" sdnum="1033;" width="61">
+            <p> 1</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>&gt;=3.5</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>DoubleUp</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p style="font-variant: normal; letter-spacing: normal"> <font color="#000000">⥣</font></p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↑</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="2" sdnum="1033;" width="61">
+            <p> 2</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>[2, 3.5)</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>SingleUp</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↑</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↑</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="3" sdnum="1033;" width="61">
+            <p> 3</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>[1, 2)</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>FortyFiveUp</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↗</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↗</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="4" sdnum="1033;" width="61">
+            <p> 4</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>(-1, 1)</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>Flat</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>→</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>→</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="5" sdnum="1033;" width="61">
+            <p> 5</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>(-2, -1]</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>FortyFiveDown</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↘</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↘</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="6" sdnum="1033;" width="61">
+            <p> 6</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>(-3.5, -2]</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>SingleDown</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↓</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↓</p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="border: none; padding: 0in" sdval="7" sdnum="1033;" width="61"
+            height="35">
+            <p> 7</p>
+          </td>
+          <td style="border: none; padding: 0in" width="131">
+            <p>&lt;=-3.5</p>
+          </td>
+          <td style="border: none; padding: 0in" width="120">
+            <p>DoubleDown</p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p style="font-variant: normal; letter-spacing: normal; orphans: 2; widows: 2"
+              align="left"> <font color="#000000">⥥</font></p>
+          </td>
+          <td style="border: none; padding: 0in" width="108">
+            <p>↓</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><i>Rate of change</i> is the Rate returned when exporting stream and
+      scans in Juggluco (for example: <a href="http://127.0.0.1:17580/x/stream?header&amp;duration=200"
+        onclick="location.href=urlstart+'/x/stream?header&amp;duration=200';return false;">http://127.0.0.1:17580/x/stream?header&amp;duration=200</a>).
+      </p>
+    <p><b>bgdelta</b>=rate*5</p>
+    <p><b>datetime</b>: time of glucose value in milliseconds since 1 january
+      1970 00:00 GMT.</p>
+    <p><b>iob</b>: Insulin on board (since Juggluco 7.1.10). Measure of how much
+      insulin of previous rapid insulin injections is still present in the body.
+      pebble is the only command that returns this measure.</p>
+    <p><a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble';return false;">http://127.0.0.1:17580/pebble</a>
+      has the following options:</p>
+    <p><b>units=mmol</b>: give glucose values in mmol/L instead of the server
+      units&nbsp; e.g. <a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble?units=mmol';return false;">http://127.0.0.1:17580/pebble?units=mmol</a></p>
+    <p><b>units=mg</b>: give glucose values in mg instead of server units. e.g.
+      <a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble?units=mg';return false;">http://127.0.0.1:17580/pebble?units=mg</a></p>
+    <p><b>count=</b> specify the number of glucose values to return. e.g. <a href="http://127.0.0.1:17580/pebble"
+        onclick="location.href=urlstart+'/pebble?count=3';return false;">http://127.0.0.1:17580/pebble?count=3</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">To used this web interface
+      with <b>SSL</b>, you give Juggluco an SSL key as described in <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
+        menu-&gt;Settings-&gt;Web server-&gt;Help</a>.</p>
+    <h2 class="western"><a name="cmdline"></a>Juggluco server</h2>
+    <p style="line-height: 100%; margin-bottom: 0in">This web interface is also
+      put in a standalone version of the network connectivity of Juggluco: see <a
+        href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a></p>
+    <p style="line-height: 100%; margin-bottom: 0in">In the same way as the
+      other options, you can also turn on the eXport/xDrip/Nightscout web
+      server. For local only usage, you do</p>
+    <p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco -x</strong></p>
+    <p style="line-height: 100%; margin-bottom: 0in">You can see the current
+      settings with</p>
+    <p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco -l</strong></p>
+    <p style="line-height: 100%; margin-bottom: 0in">Output:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>[...]</em></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>eXport web server
+        turned on (port 17580)</em></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>http only over
+        localhost</em></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>[...]</em></p>
+    <p style="line-height: 100%; margin-bottom: 0in">If you want to access from
+      other hosts, you need to use capital X:</p>
+    <p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco -X</strong></p>
+    <p style="line-height: 100%; margin-bottom: 0in">./<strong>juggluco -l </strong>now
+      shows:</p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>eXport web server
+        turned on (port 17580)</em></p>
+    <p style="line-height: 100%; margin-bottom: 0in"><em>can also be used
+        remotely over http</em></p>
+    <p>With <strong>-e</strong> you can enable SSL encryption.</p>
+    <p>The http web server always uses port 17580 because xDrip watch app can
+      only be used with this port number. The SSL version is accessed by the
+      port specified with <b>-o</b></p>
+    <p>./<strong>juggluco -e -o 9191</strong></p>
+    <p>says to enable the SSL (https) version and to use port 9191.</p>
+    <p>The mirror port, the http and the https port all need to be different.</p>
+    <p>./juggluco -l now shows:</p>
+    <p><em>Use SSL, sslport=9191</em></p>
+    <p>You can configure an api-secret with <b>-g</b> "an api-secret", for
+      example you can use</p>
+    <p>./<strong>juggluco -g Xsa%sLF8</strong></p>
+    <p>To set the api-secret to "<em>Xsa%sLF8</em>"</p>
+    <p>When you also enable https, this gives a kind of access restriction so
+      that only people who know the api-secret can see your data. See <a href="#token">api-secret</a>.</p>
+    <p>As with the web server in the Juggluco app, you can also give treatments
+      via the Nightscout web protocol. You also have to specify for each label
+      what should be done with it. If juggluco server has received "<em>Amounts</em>",
+      you can see the available labels with ./juggluco -l, for example:</p>
+    <pre>eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
 0: Aspart      Not set
@@ -847,26 +1011,25 @@ Use SSL, sslport=9191
 5: Walk        Not set
 6: Blood       Not set
 7: bad         Not set
-api/v1/treatments turned off</pre><p>
-For each label numbered 0 to 7, you have to say what it is.</p>
-<p>The following code is used for that:</p>
-<p>R: Rapid acting Insulin</p>
-<p>L: Long acting Insulin</p>
-<p>C: Carbohydate</p>
-<p>O: cOmments</p>
-<p>D: Don't send</p>
-<p>You assign a label to a category, by using '-' followed by the
-number of the label followed by the letter for the category.</p>
-<p>To assign Aspart to <em>Rapid acting Insulin</em> you use -0R :
-Aspart is label number 0 and R means &quot;<em>Rapid acting Insulin</em>&quot;.
-To assign all labels you can use:</p>
-<p>./<strong>juggluco -0R -1C -2C -3L -4O -5O -6O -7D</strong></p>
-<p>labels 0 is R, 1 and 2 are C (Carbohydrate) and 4, 5 and 6 are O
-(cOmments) and 7 is not sent.</p>
-<p>Now, 
-</p>
-<p>./juggluco -l shows:</p>
-<pre>eXport web server turned on (port 17580)
+api/v1/treatments turned off</pre>
+    <p> For each label numbered 0 to 7, you have to say what it is.</p>
+    <p>The following code is used for that:</p>
+    <p>R: Rapid acting Insulin</p>
+    <p>L: Long acting Insulin</p>
+    <p>C: Carbohydate</p>
+    <p>O: cOmments</p>
+    <p>D: Don't send</p>
+    <p>You assign a label to a category, by using '-' followed by the number of
+      the label followed by the letter for the category.</p>
+    <p>To assign Aspart to <em>Rapid acting Insulin</em> you use -0R : Aspart
+      is label number 0 and R means "<em>Rapid acting Insulin</em>". To assign
+      all labels you can use:</p>
+    <p>./<strong>juggluco -0R -1C -2C -3L -4O -5O -6O -7D</strong></p>
+    <p>labels 0 is R, 1 and 2 are C (Carbohydrate) and 4, 5 and 6 are O
+      (cOmments) and 7 is not sent.</p>
+    <p>Now, </p>
+    <p>./juggluco -l shows:</p>
+    <pre>eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
 0: Aspart      Rapid acting insulin
@@ -877,12 +1040,12 @@ Use SSL, sslport=9191
 5: Walk        Comments
 6: Blood       Comments
 7: bad         Don't send
-api/v1/treatments turned off</pre><p>
-Now it still doesn't give treatments. You first have to turn it on
-with <b>-t</b></p>
-<p><b>./juggluco -t</b></p>
-<p>./juggluco -l now shows:</p>
-<pre>Saving in directory jugglucodata
+api/v1/treatments turned off</pre>
+    <p> Now it still doesn't give treatments. You first have to turn it on with
+      <b>-t</b></p>
+    <p><b>./juggluco -t</b></p>
+    <p>./juggluco -l now shows:</p>
+    <pre>Saving in directory jugglucodata
 eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
@@ -899,20 +1062,18 @@ api_secret: Xsa%sLF8
 
 Mirror port 9113
 unit: mg/dL
-connection:</pre><h3 class="western">
-SSL</h3>
-<p style="line-height: 100%; margin-bottom: 0in">To make use of SSL,
-you need to give Juggluco server a SSL certificate for the hostname
-by which the server is accessed. How you can get an SSL key is
-described in the help under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
-menu-&gt;Settings-&gt;Webserver</a> and in the <a href="https://www.juggluco.nl/Juggluco/cmdline/README.txt">README</a>
-in the source of Juggluco server. For Juggluco server, you need to
-put the the private key in a file named <b>prevkey.pem</b> and the
-fullchain in a file named <b>fullchain.pem</b> in <em>jugglucodata</em>.
-<em>jugglucodata</em> is the directory were Juggluco server saves its
-data: 
-</p>
-<pre>ls -l jugglucodata/
+connection:</pre>
+    <h3 class="western"> SSL</h3>
+    <p style="line-height: 100%; margin-bottom: 0in">To make use of SSL, you
+      need to give Juggluco server a SSL certificate for the hostname by which
+      the server is accessed. How you can get an SSL key is described in the
+      help under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
+        menu-&gt;Settings-&gt;Webserver</a> and in the <a href="https://www.juggluco.nl/Juggluco/cmdline/README.txt">README</a>
+      in the source of Juggluco server. For Juggluco server, you need to put the
+      the private key in a file named <b>prevkey.pem</b> and the fullchain in a
+      file named <b>fullchain.pem</b> in <em>jugglucodata</em>. <em>jugglucodata</em>
+      is the directory were Juggluco server saves its data: </p>
+    <pre>ls -l jugglucodata/
 total 136
 -rwxr-xr-x   1 juggluco juggluco   8064 18 nov 20:36 backup.dat
 -rwxr-xr-x   1 juggluco juggluco   4716  8 nov 13:12 fullchain.pem
@@ -921,22 +1082,18 @@ drwxr-xr-x   2 juggluco juggluco   4096 12 jan  2023 logs
 drwxr-xr-x   4 juggluco juggluco   4096 12 jan  2023 nums
 -rw-r--r--   1 juggluco juggluco   1702  8 nov 13:12 privkey.pem
 drwxr-xr-x 104 juggluco juggluco   4096 18 nov 12:36 sensors
--rwxr-xr-x   1 juggluco juggluco  22032 18 nov 17:49 settings.dat</pre><p>
-<br/>
-<br/>
-
-</p>
-<p><br/>
-<br/>
-
-</p>
-<p><br/>
-<br/>
-
-</p>
-<p><br/>
-<br/>
-
-</p>
-</body>
+-rwxr-xr-x   1 juggluco juggluco  22032 18 nov 17:49 settings.dat</pre>
+    <p> <br>
+      <br>
+    </p>
+    <p><br>
+      <br>
+    </p>
+    <p><br>
+      <br>
+    </p>
+    <p><br>
+      <br>
+    </p>
+  </body>
 </html>

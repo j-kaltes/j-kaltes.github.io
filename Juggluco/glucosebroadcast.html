@@ -117,7 +117,14 @@ static     String librelabel(float rate) {
         }
         return &quot;Rising Quickly&quot;.intern();
     }
-
+</pre>
+<p>
+/*<br>
+If alarm&8 is not zero, the alarm goes off. The alarm goes off only once and then waits the number of minutes set with <i>“Minutes deactivated”</i> before going off again.</br>
+During the deactivation, alarm&7 still shows whether the glucose value is too high or too low. Whether the glucose value is higher or lower than the maximally measurable value is shown independent of whether the alarm is set or not.</br>
+*/
+</p>
+<pre>
     void showalarm(int alarm) {
         if ((alarm &amp; 8) != 0) {
             System.out.print(&quot;Alarm &quot;);

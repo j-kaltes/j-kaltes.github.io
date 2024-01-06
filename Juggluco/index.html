@@ -749,15 +749,12 @@ run Juggluco on the new phone, then force stop Juggluco on the new
 phone.</p>
 <p style="line-height: 100%; margin-bottom: 0in">On the computer
 while connected to the old phone:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><b>adb shell run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-out run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
 <p style="line-height: 100%; margin-bottom: 0in">On the computer
 while connected to the new phone:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><b>type all.tar | adb shell run-as tk.glucodata tar -xf -</b></p>
+<p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-in run-as tk.glucodata tar -xf -     < all.tar </b></p>
 <p style="line-height: 100%; margin-bottom: 0in">The last will
 generate some error messages, but that is no problem.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><i>type</i> is for
-<a href="http://cmd.com/" target="_blank">cmd.com</a> under windows,
-under linux you should use <b>cat</b> instead.</p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
 
 </p>

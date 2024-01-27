@@ -236,6 +236,17 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 		</td>
 	</tr>
 	<tr valign="top">
+		<td width="93" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>maxcount</b>=</font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify an absolute limit on the number of items to be returned. Overrules days and duration.</font></font></p>
+		</td>
+		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?maxcount=3';return false;">http://127.0.0.1:17580/x/stream?maxcount=3</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
 		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>token</b>=</font></font></p>
 		</td>
@@ -518,7 +529,7 @@ after the date in local time.</p>
 </h4>
 <pre>library(<span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">rvest</span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">)</span></span></span></font></font></font></span>
 <span lang="en-US">library(xml2)</span>
-<span lang="en-US">meal1=html_table(read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals?days=6</a>&quot;),header=TRUE)</span>
+<span lang="en-US">meal1=html_table(read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;" >http://127.0.0.1:17580/x/meals?days=6</a>&quot;),header=TRUE)</span>
 
 <span lang="en-US">tail(meal1[[1]]$Ingredient,n=1)</span>
 <span lang="en-US">[1] &quot;2023-12-29 13:12&quot;</span>
@@ -530,7 +541,7 @@ Python:
 </h4>
 <pre>import pandas as pd
 <span lang="en-US">from datetime import datetime</span>
-<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
+<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6"   onclick="location.href=urlstart+'/x/meals?days=6';return false;">   >http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
 
 <span lang="en-US">print(datetime.fromtimestamp(meal1[0]['Quantity'].iloc[-1]))</span>
 <span lang="en-US">print(meal1[0]['Ingredient'].iloc[-1])</span>

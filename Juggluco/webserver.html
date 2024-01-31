@@ -541,7 +541,7 @@ Python:
 </h4>
 <pre>import pandas as pd
 <span lang="en-US">from datetime import datetime</span>
-<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6"   onclick="location.href=urlstart+'/x/meals?days=6';return false;">   >http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
+<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6"   onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
 
 <span lang="en-US">print(datetime.fromtimestamp(meal1[0]['Quantity'].iloc[-1]))</span>
 <span lang="en-US">print(meal1[0]['Ingredient'].iloc[-1])</span>

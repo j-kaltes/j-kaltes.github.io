@@ -26,8 +26,9 @@
 		if(ip===null||ip.length<7)	 {
 			return;
 			}
-		if(ip.at(-1)=='/')
+		if(ip.at(-1)=='/') {
 			urlstart=ip.substr(0,ip.length-1);
+			}
 		else
 			urlstart=ip;
 		return;

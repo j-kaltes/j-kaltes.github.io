@@ -26,7 +26,10 @@
 		if(ip===null||ip.length<7)	 {
 			return;
 			}
-		urlstart=ip;
+		if(ip.at(-1)=='/')
+			urlstart=ip.substr(0,ip.length-1);
+		else
+			urlstart=ip;
 		return;
 		} 
      getiparg();

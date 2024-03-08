@@ -41,19 +41,31 @@ phone that is not the companion phone of the watch. Scanning of the
 sensor happens with the companion phone, the follower phone only
 follows the glucose values and amounts of insulin etc.</p>
 <p style="line-height: 100%; margin-bottom: 0in">We will create the
-following configuration:</p>
-<p style="line-height: 100%; margin-bottom: 0in">Watch&lt;==&gt;
-Companion phone</p>
-<p style="line-height: 100%; margin-bottom: 0in">	==&gt; Juggluco
-Server ==&gt; Follower phone</p>
+following configuration:</p><p></p>
+<table width="420" cellpadding="0" cellspacing="0">
+	<col width="60"/>
+	<col width="360"/>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in"></td>
+		<td width="180" style="border: none; padding: 0in">&lt;==&gt; companion phone </td>
+	</tr>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in">watch </td>
+		<td width="180" style="border: none; padding: 0in"></td>
+	</tr>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in"></td>
+		<td width="360" style="border: none; padding: 0in">===&gt; Juggluco server ==> follower phone</td>
+	</tr>
+</table>
+
 <p style="line-height: 100%; margin-bottom: 0in">In most cases the
 watch and follower phone can’t be connected directly with each
 other when both are connected via mobile data. There has to be a go
 between to which each connects. There are two possibilities:</p>
 <ol>
 	<li><p style="line-height: 100%; margin-bottom: 0in">Keep an Android
-	device at home and forward a port from the modem to that device. See
-	https://www.juggluco.nl/Juggluco/phones/index.html</p></li>
+	device at home and forward a port from the modem to that device. See <a href="https://www.juggluco.nl/Juggluco/phones/index.html">https://www.juggluco.nl/Juggluco/phones</a></p></li>
 	<li><p style="line-height: 100%; margin-bottom: 0in">Run <a href="https://www.juggluco.nl/Juggluco/cmdline">Juggluco
 	server</a> on a computer connected to the internet and forward a
 	port to that computer.</p></li>

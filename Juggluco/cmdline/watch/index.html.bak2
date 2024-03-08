@@ -41,8 +41,26 @@ via a mobile data connection. The follower phone has to be a separate
 phone that is not the companion phone of the watch. Scanning of the
 sensor happens with the companion phone, the follower phone only
 follows the glucose values and amounts of insulin etc.</p>
-<p style="line-height: 100%; margin-bottom: 0in">We will create the second of following possible configurations:</p><p></p>
-<img src="scheme.jpg" style="object-fit:contain; width:20cm;		    height:auto;">
+<p style="line-height: 100%; margin-bottom: 0in">We will create the
+following configuration:</p><p></p>
+<img src="scheme.png" style="object-fit:contain; width:45cm;		    height:auto;">
+<table width="420" cellpadding="0" cellspacing="0">
+	<col width="60"/>
+	<col width="360"/>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in"></td>
+		<td width="180" style="border: none; padding: 0in">&lt;==&gt; companion phone </td>
+	</tr>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in">watch </td>
+		<td width="180" style="border: none; padding: 0in"></td>
+	</tr>
+	<tr valign="top">
+		<td width="54" style="border: none; padding: 0in"></td>
+		<td width="360" style="border: none; padding: 0in">===&gt; Juggluco server ==> follower phone</td>
+	</tr>
+</table>
+
 <p style="line-height: 100%; margin-bottom: 0in">In most cases the
 watch and follower phone can’t be connected directly with each
 other when both are connected via mobile data. There has to be a go

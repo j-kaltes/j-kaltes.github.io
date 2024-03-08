@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="https://www.juggluco.nl/Juggluco/arrow.png">
 	<title>Direct watch-Internet connection</title>
 	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
 	<meta name="created" content="2024-03-05T17:51:54.764400306"/>
@@ -12,7 +13,7 @@
 		a:link { color: #000080; text-decoration: underline }
 		pre {
    font-family: "courier new", courier, monospace;
-   font-size: 7mm;
+   font-size: 6.5mm;
 }
 
 	</style>
@@ -107,16 +108,13 @@ There after select “</span><i>Native SSH</i>”.  Then press on
 “<i>Reset your SSH private key</i>”. 
 After you have saved the generated key to “azurekey.pem” and specified as username
 <i>azureuser</i> you can use that file to login with SSH:</p>
-<p style="line-height: 100%; margin-bottom: 0in">ssh -i azurekey.pem
-<a href="mailto:azureuser@IP">azureuser@<b>IP</b></a></p>
-<p style="line-height: 100%; margin-bottom: 0in"><a name="fea20353-b317-4a36-9995-c7754be38332"></a>
-Here <b>IP</b> stands for the public IP address of the virtual
-machine and shown in under Native SSH in Azure’s portal.</p>
+<pre>ssh -i azurekey.pem azureuser@<b>IP</b></pre>
+<p style="line-height: 100%; margin-bottom: 0in">Here <b>IP</b> stands for the public IP address of the virtual
+machine and is shown under Native SSH in Azure’s portal.</p>
 <p style="line-height: 100%; margin-bottom: 0in">You can copy
 something from your local computer to the virtual machine with scp
 for example:</p>
-<p style="line-height: 100%; margin-bottom: 0in">scp -i  azurekey.pem
- afile  <a href="mailto:azureuser@IP">azureuser@<b>IP</b></a>:/tmp</p>
+<pre>scp -i  azurekey.pem afile azureuser@<b>IP</b>:/tmp</pre>
 <p style="line-height: 100%; margin-bottom: 0in">to copy the local
 file afile to /tmp in the virtual machine.</p>
 <p style="line-height: 100%; margin-bottom: 0in"></p>

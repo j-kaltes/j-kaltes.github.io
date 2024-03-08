@@ -1,27 +1,41 @@
 Command line program to create a Juggluco backup on a desktop computer.
 Juggluco is an android applet that connects with Freestyle libre 2 sensors
 and allows one to add diabetes diary data, see:
-https://j-kaltes.github.io/Juggluco
+https://www.juggluco.nl/Juggluco
 Within a certain directory (-d dir) backup and connection data is saved.
 With this program, you can specify the connections the program
 should receive data from and send data to.
-Usages: ./juggluco -d dir : save data in directory dir
-        ./juggluco [-d dir] -p port : listen on port port
-        ./juggluco [-d dir] -l : list configuration data
-        ./juggluco [-d dir] -c : clear configuration data
-        ./juggluco -x[-+]: start xDrip watch app server or not (-x-)
-        ./juggluco [-d dir] -N filename: export nums 
-	./juggluco [-d dir] -S filename: export scans 
-	./juggluco [-d dir] -B filename: export stream 
-	./juggluco [-d dir] -H filename: export history 
-	./juggluco [-d dir] -m filename: export meals 
-	./juggluco [-d dir] -M : mmol/L
-	./juggluco [-d dir] -G : mg/dL
-	./juggluco [-d dir] -R n : remove n-th connection
-	./juggluco -v  : version
+Usages: /home/jka/bin/juggluco -d dir : save data in directory dir
+        /home/jka/bin/juggluco [-d dir] -p port : listen on port port
+        /home/jka/bin/juggluco [-d dir] -l : list configuration data
+        /home/jka/bin/juggluco [-d dir] -c : clear configuration data
+        /home/jka/bin/juggluco -x[-+]: start eXport/xDrip/Nightscout web server (https://www.juggluco.nl/Juggluco/webserver.html) or not (-x-)
+        /home/jka/bin/juggluco -X[-+]:  the same but server can also be assessed remotely
+        /home/jka/bin/juggluco -g secret: use as api_secret secret
+        /home/jka/bin/juggluco -e[-+]:  Use web server with SSL encryption
+        /home/jka/bin/juggluco -o port:  use port for the SSL server
+	/home/jka/bin/juggluco -[0123456789][RLCOD] place label 0-9 in category R,L,C,O or D:
+	R: Rapid acting Insulin
+	L: Long acting Insulin
+	C: Carbohydate
+	O: cOmments
+	D: Don't send
+	-0R means label 0 (first one) is Rapid acting insulin
+	-1C means label 1 (second) is Carbohydrate
+	-2O means give label 2 as a cOmment
+        /home/jka/bin/juggluco [-d dir] -t[+]: give treatments/amounts via Nightscout interface
+        /home/jka/bin/juggluco [-d dir] -N filename: export nums 
+	/home/jka/bin/juggluco [-d dir] -S filename: export scans 
+	/home/jka/bin/juggluco [-d dir] -B filename: export stream 
+	/home/jka/bin/juggluco [-d dir] -H filename: export history 
+	/home/jka/bin/juggluco [-d dir] -m filename: export meals 
+	/home/jka/bin/juggluco [-d dir] -M : mmol/L
+	/home/jka/bin/juggluco [-d dir] -G : mg/dL
+	/home/jka/bin/juggluco [-d dir] -R n : remove n-th connection
+	/home/jka/bin/juggluco [-d dir] -Z n : resend data to n-th connection
+	/home/jka/bin/juggluco -v  : version
 
-
-	./juggluco [-d dir] OPTIONS IP1,IP2 ...  : Specify connection with IP(s).
+	/home/jka/bin/juggluco [-d dir] OPTIONS IP1,IP2 ...  : Specify connection with IP(s).
 OPTIONS:
 	-r: receive from host
 	-a: automatically detect IP the first time
@@ -42,20 +56,20 @@ OPTIONS:
 
 example:
 
-./juggluco -d mydir -r  192.168.1.64
+/home/jka/bin/juggluco -d mydir -r  192.168.1.64
 
 Receive data from host 192.168.1.64 (an ip shown in backup screen android app)
 In the juggluco android applet you can in "backup, add connection"
-specfiy send to amounts, scans and stream and specify port 8795 and
-an ip of this computer (e.g 192.168.1.71)
+specify send to amounts, scans and stream and specify port 8795 and
+an ip of this computer (e.g 192.168.1.68)
 
-./juggluco -d mydir -nsb  192.168.1.69
+/home/jka/bin/juggluco -d mydir -nsb  192.168.1.69
 
 Send the amounts, scans and stream data to 192.168.1.69 on the default port (8795)
 In the android applet you can in the "add connection" dialog, specify 
-an ip of this computer (192.168.1.71) check "Receive from" and specify as port 8795
+an ip of this computer (192.168.1.68) check "Receive from" and specify as port 8795
 (the port specified earlier for this computer)
 
-./juggluco -d mydir
+/home/jka/bin/juggluco -d mydir
 
 Starts the program with this configuration.

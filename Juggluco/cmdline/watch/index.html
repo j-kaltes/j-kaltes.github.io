@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Direct watch-Internet connection</title>
+	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
+	<meta name="created" content="2024-03-05T17:51:54.764400306"/>
+	<meta name="changed" content="2024-03-08T12:24:08.924683722"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		a:link { color: #000080; text-decoration: underline }
+		pre {
+   font-family: "courier new", courier, monospace;
+   font-size: 7mm;
+}
+
+	</style>
+</head>
+<body lang="en-US">
+<h1>Direct watch-Internet connection</h1>
+<p style="line-height: 100%; margin-bottom: 0in">If you have a WearOS
+watch in which you can put an esim, it can sometimes make sense to
+directly connect the watch to Juggluco server. In this way someone
+can follow the glucose values of someone who does not carry a phone.
+The disadvantage is that the watch battery will be empty in less
+time. Also to have a good view on your glucose curve, you can better
+look at the larger phone screen. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The best way to make
+such a connection is to first setup the watch in the usual way as
+described here:
+<a href="https://www.juggluco.nl/JugglucoWearOS/install/manual.html">https://www.juggluco.nl/JugglucoWearOS/install/manual.html</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">The connection
+created in this manner you don’t modify. This connections are meant
+to communicate with the companion phone of the watch, is
+automatically created and switches to Bluetooth when WIFI doesn’t
+work. This is will not work for a phone connected over the internet
+via a mobile data connection. The follower phone has to be a separate
+phone that is not the companion phone of the watch. Scanning of the
+sensor happens with the companion phone, the follower phone only
+follows the glucose values and amounts of insulin etc.</p>
+<p style="line-height: 100%; margin-bottom: 0in">We will create the
+following configuration:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Watch&lt;==&gt;
+Companion phone</p>
+<p style="line-height: 100%; margin-bottom: 0in">	==&gt; Juggluco
+Server ==&gt; Follower phone</p>
+<p style="line-height: 100%; margin-bottom: 0in">In most cases the
+watch and follower phone can’t be connected directly with each
+other when both are connected via mobile data. There has to be a go
+between to which each connects. There are two possibilities:</p>
+<ol>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Keep an Android
+	device at home and forward a port from the modem to that device. See
+	https://www.juggluco.nl/Juggluco/phones/index.html</p></li>
+	<li><p style="line-height: 100%; margin-bottom: 0in">Run <a href="https://www.juggluco.nl/Juggluco/cmdline">Juggluco
+	server</a> on a computer connected to the internet and forward a
+	port to that computer.</p></li>
+</ol>
+<p style="line-height: 100%; margin-bottom: 0in">Here I will describe
+how to use the last possibility. At
+<a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a>
+it was already described how to connect two phones this way.
+Something analogous you can do to connect directly from the watch to
+the internet.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Here I will
+illustrate it with a server hosted at <a href="https://azure.microsoft.com/en-us/free">Azure</a>,
+but it can also be done on other computing clouds.</p>
+<p style="line-height: 100%; margin-bottom: 0in">If you have a
+non-prepaid credit card, you can start for free at <a href="https://azure.microsoft.com/en-us/free">Azure</a>.
+There you have to create and start a virtual machine, analogous at
+the way I described for <a href="https://www.juggluco.nl/Juggluco/cmdline">AWS</a>.</p>
+<p style="line-height: 100%; margin-bottom: 0in">To connect over the
+internet to the virtual machine, you need to forward an external port
+to an internal port.</p>
+<p style="line-height: 100%; margin-bottom: 0in">After pressing on
+the virtual machine, you press on “Network settings”. Normally
+there is already a port 22 rule for ssh and you have to create the
+same kind of rule for other ports.</p>
+<p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">To
+do this press on “</span><span lang="en-US"><i>Create port
+rule</i></span><span lang="en-US">”→”</span><span lang="en-US"><i>Inbound
+rule</i></span><span lang="en-US">”. To connect to port 8795, we
+give for “</span><b>Destination port ranges</b>”, 8795, and as
+<b>Protocol</b> TCP.  (In a similar way you can add an extra port for
+the Nightscout server in Juggluco and one for port 80 to verify a
+domain name.)</p><p></p>
+<img src="network.png" style="object-fit:contain; width:45cm;		    height:auto;">
+<img src="juggluco8795.png" style="object-fit:contain; width:15cm;		    height:auto;">
+<p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">To
+connect via ssh to the machine, you need to create a key: select the
+virtual machine and press there on </span><span lang="en-US"><i>Connect</i></span><span lang="en-US">.
+There after select “</span><i>Native SSH</i>”.  Then press on
+“<i>Reset your SSH private key</i>”. 
+After you have saved the generated key to “azurekey.pem” and specified as username
+<i>azureuser</i> you can use that file to login with SSH:</p>
+<p style="line-height: 100%; margin-bottom: 0in">ssh -i azurekey.pem
+<a href="mailto:azureuser@IP">azureuser@<b>IP</b></a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a name="fea20353-b317-4a36-9995-c7754be38332"></a>
+Here <b>IP</b> stands for the public IP address of the virtual
+machine and shown in under Native SSH in Azure’s portal.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can copy
+something from your local computer to the virtual machine with scp
+for example:</p>
+<p style="line-height: 100%; margin-bottom: 0in">scp -i  azurekey.pem
+ afile  <a href="mailto:azureuser@IP">azureuser@<b>IP</b></a>:/tmp</p>
+<p style="line-height: 100%; margin-bottom: 0in">to copy the local
+file afile to /tmp in the virtual machine.</p>
+<p style="line-height: 100%; margin-bottom: 0in"></p>
+<img src="NativeSSH.png" style="object-fit:contain; width:45cm;		    height:auto;">
+<img src="reset_password.png" style="object-fit:contain; width:30cm;		    height:auto;">
+<p style="line-height: 100%; margin-bottom: 0in">After login in your
+virtual host, you can put Juggluco server on it with:</p>
+<pre>curl https://www.juggluco.nl/Juggluco/cmdline/download/juggluco7.6.1-dyn.xz --output juggluco.xz
+unxz juggluco.xz
+chmod a+x juggluco</pre>
+<p style="line-height: 100%; margin-bottom: 0in">Now we have to create connections.</p>
+<p style="line-height: 100%; margin-bottom: 0in">To configure
+Juggluco server to receive input from Juggluco on the watch, we do
+the following:</p>
+<pre>./juggluco -r -P -i -L watchAzure -w Yji#%83Hlo</pre>
+<p style="line-height: 100%; margin-bottom: 0in">Which means the
+following (see ./juggluco -h):</p>
+<p style="line-height: 100%; margin-bottom: 0in">-r: receive</p>
+<p style="line-height: 100%; margin-bottom: 0in">-P: passive only</p>
+<p style="line-height: 100%; margin-bottom: 0in">-i: don’t test on
+the IP</p>
+<p style="line-height: 100%; margin-bottom: 0in">-L watchAzure: use
+as label watchAzure</p>
+<p style="line-height: 100%; margin-bottom: 0in">-w: Yji#%83Hlo:
+encrypt with password Yji#%83Hlo</p>
+<p style="line-height: 100%; margin-bottom: 0in">On the watch we have
+to create the other side of the connection.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Port: 8795</p>
+<p style="line-height: 100%; margin-bottom: 0in">IPs: Public IP of
+virtual machine</p>
+<p style="line-height: 100%; margin-bottom: 0in">Test Label:
+watchAzure</p>
+<p style="line-height: 100%; margin-bottom: 0in">(*) Active only</p>
+<p style="line-height: 100%; margin-bottom: 0in">[x] Stream</p>
+<p style="line-height: 100%; margin-bottom: 0in">[x] Password 
+Yji#%83Hlo</p>
+<p></p>
+<img src="watch1.png" style="object-fit:contain;height:5cm; width:auto;">
+<img src="watch2.png" style="object-fit:contain;height:5cm; width:auto;">
+<img src="watch3.png" style="object-fit:contain;height:5cm; width:auto;">
+
+<p style="line-height: 100%; margin-bottom: 0in">You could also check
+Amounts and Scan. Another possibility is to send Stream and Amounts
+directly from the companion phone to use less of the battery of the
+watch. <b>You should always also send Scans</b>, Amounts you can be
+left out.</p>
+<p style="line-height: 100%; margin-bottom: 0in">The following
+configures to receive the Scans and Amounts from the companion phone</p>
+<pre>./juggluco  -r -P -i -L phoneAzure -w Tu123#@Uit</pre>
+<p style="line-height: 100%; margin-bottom: 0in">The only difference
+from the above is the label and the password.</p><p>Settings companion phone:</p>
+<img src="companionPhone.png" style="object-fit:contain;height:12cm; width:auto;">
+<p style="line-height: 100%; margin-bottom: 0in">The following
+configures to send to the follower phone:</p>
+<pre>./juggluco -n -s -b -P -i -LazurePhone -w Flop#%56Qua</pre>
+<p style="line-height: 100%; margin-bottom: 0in">Which has the
+following meaning:</p>
+<p style="line-height: 100%; margin-bottom: 0in">-n: send numbers
+(Amounts)</p>
+<p style="line-height: 100%; margin-bottom: 0in">-s: send scans</p>
+<p style="line-height: 100%; margin-bottom: 0in">-b: send Stream
+(bluetooth)</p>
+<p style="line-height: 100%; margin-bottom: 0in">-P: Passive only</p>
+<p style="line-height: 100%; margin-bottom: 0in">-i: don’t test on
+IP</p>
+<p style="line-height: 100%; margin-bottom: 0in">-LazurePhone: use as
+label azurePhone</p>
+<p style="line-height: 100%; margin-bottom: 0in">-w Flop#%56Qua:
+encrypt with password Flop#%56Qua</p>
+<p style="line-height: 100%; margin-bottom: 0in"></p>
+<p style="line-height: 100%; margin-bottom: 0in">On the follower
+phone we make the following configuration:</p><p></p>
+<img src="followerPhone.png" style="object-fit:contain;height:12cm; width:auto;">
+<pre>./juggluco -l</pre> <p>now returns:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Saving in directory
+jugglucodata</p>
+<p style="line-height: 100%; margin-bottom: 0in">Mirror port 8795</p>
+<p style="line-height: 100%; margin-bottom: 0in">unit: mg/dL</p>
+<p style="line-height: 100%; margin-bottom: 0in">connections:</p>
+<p style="line-height: 100%; margin-bottom: 0in">1: phoneAzure don't
+test IP,  receiver passiveonly Tu123#@Uit</p>
+<p style="line-height: 100%; margin-bottom: 0in">2: watchAzure don't
+test IP,  receiver passiveonly Yji#%83Hlo 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">3: azurePhone don't
+test IP,  passiveonly Flop#%56Qua, send nums scans stream</p>
+<p style="line-height: 100%; margin-bottom: 0in">
+As described in <a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a> you can for example start the server by creating the following script:
+</p>
+<pre>while true
+do
+   echo -n "Start new Juggluco Server: "
+   date
+   ./juggluco
+done
+</pre>
+and run it with:
+<pre>nohup bash ./repeat.sh &</pre>
+</body>
+</html>

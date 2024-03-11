@@ -34,50 +34,21 @@
       different modems. I will describe here how to do it on my own modem,
       so that you have an idea for what to look in the user manual of your
       modem.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">First you have to
-      "create" an application, which in reality is nothing more
-      than giving a particular port a name. I call this application
-      port8795 and use port 8795.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">After this you have
-      to assign this application to a local device. We use the device I
-      have called M5. Somewhere else in the modem interface, you can find
-      that this device has IP 192.168.1.69 and that is the home network IP
-      of my tablet.</p>
-    <figure> <img src="Toolbox.png" alt="Toolbox" title="Toolbox" style="object-fit:contain;     width:20cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Go
-          on your modem to where you can forward ports</span></figcaption> </figure>
-    <figure> <img src="ApplicationSharing.png" alt="Application Sharing" title="Application Sharing"
-        style="object-fit:contain;     width:30cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Press on New
-          Application</span></figcaption> </figure>
-    <figure> <img src="NewApplication.png" alt="New Application" title="New Application"
-        style="object-fit:contain;     width:30cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Give a name</span></figcaption>
-    </figure>
-    <figure> <img src="port8795.png" alt="Specify port" title="Specify port" style="object-fit:contain;     width:30cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Specify
-          the port (8795)</span></figcaption> </figure>
-    <figure> <img src="Port8795-assign.png" alt="Application Sharing" title="Application Sharing"
-        style="object-fit:contain;     width:30cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Press "Assign
-          a game or application to a local network device" </span></figcaption>
-    </figure>
-    <figure> <img src="Assigned.png" alt="Assign to M5" title="Assign to M5" style="object-fit:contain;     width:30cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Select
-          port8795 from Game or Application and the Device (here M5)</span></figcaption>
-    </figure>
-    <figure> <img src="AssignReady.png" alt="port8795 assigned to M5" title="port8795 assigned to M5"
-        style="object-fit:contain;     width:30cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">port8795
-          assigned to M5</span></figcaption> </figure>
-    <figure> <img src="m5ip.png" alt="M5 information" title="M5 information" style="object-fit:contain;     width:30cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Under
-          the home network devices we see that M5 has the IP of my tablet,
-          192.168.1.69</span></figcaption> </figure>
-    <p></p>
-    <p style="line-height: 100%; margin-bottom: 0in">External netwerk
-      connections to port 8795 of the modem are now forwarded to port 8795 on
-      192.168.1.69.</p>
+      <p>It was very difficult on my <a href="oldmodem.html">Old modem</a>. 
+On my current modem it isn’t that difficult.
+First you go to <a href="http://192.168.1.1/">http://192.168.1.1</a>
+on your internet browner. There you login with username </span><span lang="en-US"><i>user</i></span><span lang="en-US">
+and password </span><span lang="en-US"><i>user</i></span><span lang="en-US">,
+when you didn’t change them. Thereafter you press on “</span><span lang="en-US"><i>Internet</i></span><span lang="en-US">”
+followed with “</span><span lang="en-US"><i>Security</i></span><span lang="en-US">”,
+and then  “</span><span lang="en-US"><i>Port Forwarding</i></span><span lang="en-US">”.
+ There you press  on “</span><span lang="en-US"><i>Create New
+Item</i></span><span lang="en-US">”. When you forward 8795 to 8795
+you fill them in after WAN Port and LAN Host Port. After LAN Host you
+give the home network IP of the device the port should be forwarded
+to.</p> 
+    <figure> <img src="portforwarding.png"  title="Forward external port 8795 to the port 8795 of 192.168.1.69" style="object-fit:contain;     width:20cm;            height:auto;"> <figcaption><span
+          style="font-size: 0.9em; font-family: Times New Roman;">Forward external port 8795 to the port 8795 of 192.168.1.69"</span></figcaption> </figure>
     <p style="line-height: 100%; margin-bottom: 0in">We have to find
       out what the external IP of the modem we have to connect to. You
       can find this in the modem interface or simple by visiting

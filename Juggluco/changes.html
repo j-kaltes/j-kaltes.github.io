@@ -5,7 +5,8 @@
 	<title>Changes</title>
 	<meta name="generator" content="LibreOffice 7.6.5.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2024-04-09T19:09:37.158228078"/>
+	<meta name="changed" content="2024-04-10T10:13:02.003316597"/>
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 </head>
@@ -1272,12 +1273,18 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 		<li><p>The sensor is now 10 days in use. I optimistically set the
 		use duration to 24 days. I don’t know if this is realistic or
 		requires modifications.</p></li>
-		<li><p>Never use the sensor with more than one app. You can do that
-		(only when both apps are on the same phone), but it results in
-		missing values. Sibionic sensors remember past values and send all
-		values from a certain index. When two apps run in parallel one of
-		the apps will receive the glucose values asked for by the other
-		app, for example only the last value.</p></li>
+		<li><p>Never use the sensor with more than one app at the same
+		time. You can do that (only when both apps are on the same phone),
+		but it results in missing values. Sibionic sensors remember past
+		values and send all values from a certain index. When two apps run
+		in parallel one of the apps will receive the glucose values asked
+		for by the other app, for example only the last value. You can
+		switch a sensor without problem from one app to the other, but the
+		first app should be force stopped and should keep that way.</p></li>
+		<li><p>If you want to receive the output from Sibionics sensors on
+		other instances of Juggluco connected via a miror connection
+		(including WearOS watches), you also need to update those instances
+		of Juggluco to minimally 8.0.0.</p></li>
 	</ul>
 	<li><p>Bug fixes in <i>now clamp.</i></p></li>
 	<li><p>Bug fixes in mirror connection.</p></li>

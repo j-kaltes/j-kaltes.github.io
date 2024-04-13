@@ -82,7 +82,11 @@ jugglucotext pltext {
 		"Zegarek",
 		"Sensor",
 		"Ustawienia",
+#if defined(SIBIONICS)
+"Sibionics",
+#else
 		"Informacje",
+#endif
 		"Zamknij",
 		"Zatrzymaj alarm"
 		},

@@ -5,7 +5,10 @@
 	<title>Changes</title>
 	<meta name="generator" content="LibreOffice 7.6.5.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2024-04-10T10:22:55.338547232"/>
+	<meta name="changed" content="2024-04-13T22:07:39.346082305"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
@@ -1269,11 +1272,14 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 <ul>
 	<li><p>Sibionics sensors can be used with Juggluco. Caveats:</p>
 	<ul>
+		<li><p>It requires Google Play Services.</p></li>
 		<li><p>I have only tried one Chinese Sibionics sensor that couldn’t
 		be used with the European version of Sibionics Android app.</p></li>
-		<li><p>The sensor is now 10 days in use. I optimistically set the
-		use duration to 24 days. I don’t know if this is realistic or
-		requires modifications.</p></li>
+		<li><p>I optimistically set the use duration to 24 days. I don’t
+		know if this is realistic or requires modifications. The only
+		Sibionic sensor I tried now works somewhat longer than two weeks,
+		but only after a connection disruption lasting 7 hours. The data of
+		this missing period I received afterwards.</p></li>
 		<li><p>Never use the sensor with more than one app at the same
 		time. You can do that (only when both apps are on the same phone),
 		but it results in missing values. Sibionic sensors remember past
@@ -1292,10 +1298,14 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 	<li><p>Bug fixes in mirror connection.</p></li>
 	<li><p>Beta version of Russian and Chinese translation.</p></li>
 </ul>
-<p><br/>
-<br/>
-
-</p>
+<p>8.0.1</p>
+<ul>
+	<li><p>Accidentally added sensors without data  (accidentally
+	scanned bar code) will be removed when adding next sensor;</p></li>
+	<li><p>New sensor better send to watch when “direct sensor-watch
+	connection” is turned on;</p></li>
+	<li><p>Now also Sibionics sensors with (SI) bar codes can be used;</p></li>
+</ul>
 <p><a name="end"></a><a href="#start">Goto Start</a> 
 </p>
 </body>

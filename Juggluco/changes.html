@@ -5,7 +5,10 @@
 	<title>Changes</title>
 	<meta name="generator" content="LibreOffice 7.6.5.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2024-04-13T22:07:39.346082305"/>
+	<meta name="changed" content="2024-04-14T22:18:48.807683504"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
@@ -1278,8 +1281,10 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 		<li><p>I optimistically set the use duration to 24 days. I don’t
 		know if this is realistic or requires modifications. The only
 		Sibionic sensor I tried now works somewhat longer than two weeks,
-		but only after a connection disruption lasting 7 hours. The data of
-		this missing period I received afterwards.</p></li>
+		but only after a connection disruption lasting 7 hours. Now it is
+		running without problem. The data of this missing period I received
+		afterwards. 
+		</p></li>
 		<li><p>Never use the sensor with more than one app at the same
 		time. You can do that (only when both apps are on the same phone),
 		but it results in missing values. Sibionic sensors remember past
@@ -1300,11 +1305,18 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 </ul>
 <p>8.0.1</p>
 <ul>
-	<li><p>Accidentally added sensors without data  (accidentally
-	scanned bar code) will be removed when adding next sensor;</p></li>
+	<li><p>Accidentally added sensors without data (accidentally scanned
+	bar code) will be removed when adding next sensor;</p></li>
 	<li><p>New sensor better send to watch when “direct sensor-watch
 	connection” is turned on;</p></li>
-	<li><p>Now also Sibionics sensors with (SI) bar codes can be used;</p></li>
+	<li><p>Now also Sibionics sensors with (SI) bar codes can be used.</p></li>
+</ul>
+<p>8.0.2</p>
+<ul>
+	<li><p>Added ZXing bar code scanner library for users without access
+	Google Play Services. Which has a huge impact not on APK size, but
+	on build time.</p></li>
+	<li><p>Removed another 15 days limit on sensor age.</p></li>
 </ul>
 <p><a name="end"></a><a href="#start">Goto Start</a> 
 </p>

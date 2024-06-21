@@ -388,7 +388,7 @@ WantedBy = multi-user.target</pre>
       the ip you found above.</p>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       Give access to port $winport through the firewall with:</p>
-    <pre class="western" style="margin-bottom: 0.2in">netsh advfirewall firewall add rule name=$winport dir=in action=allow protocol=TCP localport=$winport"</pre>
+    <pre class="western" style="margin-bottom: 0.2in">netsh advfirewall firewall add rule name=$winport dir=in action=allow protocol=TCP localport=$winport</pre>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       The windows IP you find with ipconfig in cmd.com or powershell</p>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
@@ -413,7 +413,7 @@ WantedBy = multi-user.target</pre>
       To configure ./juggluco runnning under linux under windows 10 to receive
       this data, press in bash in the directory you placed juggluco in:</p>
     <pre class="western" style="margin-bottom: 0.2in; line-height: 100%; background: transparent">./juggluco -p $linuxport
-./juggluco -rag</pre>
+./juggluco -ra</pre>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       And start it with:</p>
     <pre class="western" style="margin-bottom: 0.2in">./juggluco</pre>

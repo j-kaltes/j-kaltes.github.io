@@ -125,7 +125,7 @@ function setbaseurl(){
     <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Juggluco">Contact</a>
     <h1>Juggluco</h1>
     <p style="margin-bottom: 0in; line-height: 100%">Juggluco (juggle glucose)
-      is an alternative android app for Abbott's FreeStyle Libre 1,2 and 3
+      is an alternative Android app for Abbott's FreeStyle Libre 1, 2 and 3
       sensors, meant for glucose control by people with diabetes. Libre 1 and
       Libre 2 sensors can be scanned via NFC to display the current value and
       the 15 minutes values out of the memory of the sensor. For Libre 2 and 3
@@ -241,9 +241,9 @@ function setbaseurl(){
           if that was warranted</span><span lang="en-US">.</span> </li>
       <li> <span lang="en-US">Juggluco can use Libre 1 and 2 sensors 12 hours
           longer than Librelink</span><span lang="en-US">: I</span><span lang="en-US">t
-        </span><span lang="en-US">takes as the and date 14 days after the start
+        </span><span lang="en-US">takes as the end date 14 days after the start
           date</span><span lang="en-US"> and stops at this end date, but after
-          scanning two times you use it for another</span><span lang="en-US"> 12
+          scanning two times you can use it for another</span><span lang="en-US"> 12
           hours. This does not apply to Libre 3 sensors, they only last 14 days
           and a few minutes.</span> </li>
       <li><span lang="en-US">Librelink is only available in certain countries.
@@ -265,9 +265,9 @@ function setbaseurl(){
           internet connection, Librelink refused to function without internet
           connection. Happily I already had Juggluco, which doesn't use a
           server. Most of the activity of Librelink consists of Firebase
-          Analytics gathering information on you smartphone. Juggluco doesn't
-          use firebase analytics. Librelink sends all your glucose measurements
-          to their server (as you can see in Libreview), Juggluco doesn't.</span></li>
+          Analytics gathering information on your smartphone. Juggluco doesn't
+          use Firebase Analytics. Librelink sends all your glucose measurements
+          to their server (as you can see in Libreview); Juggluco doesn't.</span></li>
     </ul>
     <ul>
     </ul>
@@ -279,8 +279,8 @@ function setbaseurl(){
     </figure>
     <p style="margin-bottom: 0in; line-height: 100%">With the mirror function
       you can send data via IP/TCP from one Juggluco to another Juggluco running
-      on another Android device. This has all kind of uses: transfer of you data
-      to a new phone or display it on an android tablet or android emulator to
+      on another Android device. This has all kind of uses: transfer your data
+      to a new phone or display it on an Android tablet or Android emulator to
       have a larger display. You can also set alarms in the mirror device. With
       the scan data the mirror app also receives the Bluetooth connection data,
       making it possible for <a href="https://www.juggluco.nl/Juggluco/mirror/index.html">devices
@@ -296,7 +296,7 @@ function setbaseurl(){
       received by Bluetooth differ little from the scanned values of Abbott's
       Libre/Librelink app. The values displayed in Juggluco and Abbott's Libre
       app are determined the same way, but previous readings influence displayed
-      values. This can make that if you use one of them longer, they will give
+      values. Consequently if you use one of them longer, they will give
       somewhat different values. When used beside each other, differences will
       diminish with time.</p>
     <h2 id="multiple">Multiple apps with the same sensor</h2>
@@ -304,14 +304,14 @@ function setbaseurl(){
       connected to the same sensor quite well. The alarms will become less
       reliable, but you can view two apps at the same time. Sometimes somehow
       Bluetooth stops totally after the sensor was out of reach for some time,
-      something what never happens otherwise. You have to turn Bluetooth off and
+      something that never happens otherwise. You have to turn Bluetooth off and
       on to get it running again.</p>
     <p></p>
     Only one app will be able to establish a connection with the sensor on its
     own, except when you run a mirror Juggluco on the same phone. When there are
-    connection issues while running two app in parallel, you should kill the app
-    who can't establish a connection. Mostly it is the app who last came to know
-    the sensor who can make the connection. Librelink will not use Bluetooth
+    connection issues while running two apps in parallel, you should kill the app
+    which can't establish a connection. Mostly it is the app that last came to know
+    the sensor that can make the connection. Librelink will not use Bluetooth
     when it didn't start the sensor. Juggluco will always try to establish a
     Bluetooth connection (when "Sensor via Bluetooth" is turned on). When the
     sensor was scanned with another exemplar of Juggluco or the patched
@@ -321,11 +321,11 @@ function setbaseurl(){
     <p> Apps running on different devices can't connect in parallel with the
       same sensor. Freestyle Reader will interfere more with Juggluco than the
       Librelink app. When the sensor is connected to Juggluco running on a
-      WearOS watch, the Abbott's Libre app will disrupt connection (if it was
+      WearOS watch, Abbott's Libre app will disrupt the connection (if it was
       used to start the sensor). Juggluco will normally not try to connect with
       the sensor anymore when it transfers the sensor to the watch. To be
       certain that nothing is still running somehow, you can kill Juggluco and
-      let it restarts itself. US/CA/AU Libre 2 sensors can't connect to multiple
+      let it restart itself. US/CA/AU Libre 2 sensors can't connect to multiple
       apps on the same phone in parallel. The same is true for all Libre 3
       sensors. </p>
     <p> </p>
@@ -354,7 +354,7 @@ function setbaseurl(){
           of a two minute old value</span></figcaption> </figure>
     <p style="line-height: 100%; margin-bottom: 0in">To display the age of the
       displayed glucose value, the Sensor Identifier under the glucose value, is
-      colored in proportion of how long ago the glucose value is received from
+      colored in proportion to how long ago the glucose value was received from
       the sensor. The total length of the Sensor identifier is 3 minutes, thus
       if the Sensor Identifier is totally colored it was 3 minutes ago the
       glucose value was received from the sensor. If more then three minutes
@@ -371,7 +371,7 @@ function setbaseurl(){
     <p> Values below 2.2 mmol/L (40 mg/dL) are displayed as <b>2.2&gt;</b> (<b>40&gt;</b>), meaning that 2.2
       mmol/L (40 mg/dL) is larger than the real value. In Librelink this is show as LO. I
       myself didn't consider that very handy, especially in the beginning: at
-      the moment you have to eat glucose as quickly as possibly you first have
+      the moment you have to eat glucose as quickly as possible you first have
       to find out what that LO means. </p>
     <p> Values above 27.8 mmol/L (500 mg/dL)  are display <b>27.8&lt;</b> (<b>500&lt;</b>), meaning that 27.8 mmol/L (500 mg/dL) is
       smaller than the real value. In Librelink this is displayed as HI. </p>
@@ -456,8 +456,8 @@ function setbaseurl(){
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
     <pre>adb install -g -r Juggluco4.7.0-wear-arm32.apk</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <p style="line-height: 100%; margin-bottom: 0in">Were
-      Juggluco4.7.0-wear-arm32.apk is the current WearOS APK you downloaded
+    <p style="line-height: 100%; margin-bottom: 0in">Where
+      Juggluco4.7.0-wear-arm32.apk is the WearOS APK downloaded
       from:</p>
     <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a></p>
     <p style="line-height: 100%; margin-bottom: 0in">-g means that you grant all
@@ -465,18 +465,18 @@ function setbaseurl(){
     <h2>Watch</h2>
     <p>If you have a smartwatch that can receive Android notifications, you can
       select Notify in the left middle menu of Juggluco to let Juggluco generate
-      an alerting android notification every time a new glucose value arrived by
+      an alerting Android notification every time a new glucose value arrived by
       Bluetooth. If you configure your smartwatch app to send notifications from
       Juggluco to the watch, you will receive this notification on your watch,
       so you can look every minute at your watch for you current glucose level.
-      This can by useful during physical activity. Some how it didn't work on
+      This can by useful during physical activity. Somehow it didn't work on
       the WearOS watch Samsung Galaxy Watch4, maybe because it is an ongoing
       notification.</p>
     <p>There is also a special watch app for some Garmin watches with
       touchscreen (see <a href="https://www.juggluco.nl/Kerfstok/index.html">Kerfstok</a>),
       wherein you can see your current glucose value, enter numbers and display
       speed and distance during activity and record it.</p>
-    <p>Juggluco (version 2.1.0 and up) has a build-in xDrip web server. This
+    <p>Juggluco (version 2.1.0 and up) has a built-in xDrip web server. This
       means that xDrip watch apps can receive glucose values directly from
       Juggluco. You can turn this on in the <i>left menu-&gt;watch</i> of
       Juggluco. Use the Help button there for more information.</p>
@@ -499,7 +499,7 @@ function setbaseurl(){
     <p>Glucose Management Indicator is an empirically determined predictor of
       HbA1c taken from Bergenstal et al (2018) <a href="https://care.diabetesjournals.org/content/41/11/2275">https://care.diabetesjournals.org/content/41/11/2275</a>.</p>
     <p> The summary graph is made as follows: Of every minute of the day it is
-      determined how the glucose values were distributed over a give number of
+      determined how the glucose values were distributed over a given number of
       days. For example for the first minute of the day, all measurements of
       this minute for every day in this period are taken and it is determine
       under which value 50% of the values lie to get the median. For the 100%
@@ -516,7 +516,7 @@ function setbaseurl(){
       is the end of the period over which these calculations are done, going
       back the number of days specified in <i>Days</i>, or 14 days by default.</p>
     <p>With <i>Export</i> in the left middle menu data can be saved in tab
-      separated format (.tsv), thereafter you can also analyze the data whatever
+      separated format (.tsv), thereafter you can also analyze the data using whatever
       statistics software you like. In the following link is shown how you can
       do this using the R package Iglu. <a href="https://www.juggluco.nl/Juggluco/iglu.html">https://www.juggluco.nl/Juggluco/iglu.html</a>
     </p>
@@ -526,7 +526,7 @@ function setbaseurl(){
       a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">glucose
         broadcast</a> </p>
     <p>In Juggluco's settings you can configure Juggluco to send its glucose
-      value to other apps. Juggluco can send three types of such broadcasts.</p>
+      values to other apps. Juggluco can send three types of such broadcasts.</p>
     <p>The <b>Patched Libre broadcast</b> was originally used by the patched Librelink app
       and can be used to send glucose values to <a href="https://github.com/NightscoutFoundation/xDrip/releases">xDrip</a>.
     </p>
@@ -548,7 +548,7 @@ function setbaseurl(){
       you can do that. Maybe it is a good idea, to <i>decline to share your
         glucose and product-related data for the purposes of research</i> under
       <i>Account Settings-&gt;Profile</i> </p>
-    <p>To send also Amounts of insulin, carbohydrate etc. to Libreview you have
+    <p>To also send amounts of insulin, carbohydrate, etc. to Libreview you have
       to specify for each label what should be done with it
       (Settings-&gt;Libreview-&gt;Send amounts).</p>
     <p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">
@@ -570,7 +570,7 @@ function setbaseurl(){
       the sensor readout it will better approach the finger prick.</p>
     <p style="line-height: 100%; margin-bottom: 0in">In Juggluco you can't
       manually calibrate, because I am afraid it will make it worse. When I look
-      at my own glucose measurements, they don't diverse always in the same
+      at my own glucose measurements, they don't diverge always in the same
       direction. The direction will also depend on what moments you do your
       finger pricks. If you check always a low sensor readout, you will find
       that the sensor readings are too low. If you do a finger prick when you
@@ -593,7 +593,7 @@ function setbaseurl(){
       shouldn't use the sensor anymore.</p>
     <p style="line-height: 100%; margin-bottom: 0in">Getting a replacement from
       Abbott can give difficulties. Although they easily replace sensors that
-      fall off, they do very difficult when you want a replacement because of
+      fall off, they can be very difficult when you want a replacement because of
       poor readings. Probably they think that the sensors are always so bad, so
       that replacement doesn't make a difference.</p>
     <p style="line-height: 100%; margin-bottom: 0in">Here is a list of
@@ -647,7 +647,7 @@ e-mail
       sensor, because I had only scanned at the moment of the blood glucose
       measurement.</p>
     <h2 id="android13">Android 13</h2>
-    <p>Previously there were reports of Bluetooth connection problems of devices
+    <p>Previously there were reports of Bluetooth connection problems with devices
       running&nbsp;Android 13&nbsp;with Libre 2 and 3 sensors. It seems that
       after a system update they don’t exist anymore. I myself updated recently
       to Android 13. Bluetooth functioned perfectly. There is only one
@@ -656,7 +656,7 @@ e-mail
       was started with Abbott’s Libre app, that app will restart more easily and
       disrupt the connection of Juggluco with the sensor.</p>
     <h2 class="Heading_20_2"><a id="a__Open_Source"><span></span></a>Open Source</h2>
-    <p class="P1"> The source of Juggluco can be found at: <a href="https://github.com/j-kaltes/Juggluco"
+    <p class="P1">Juggluco's source code can be found at: <a href="https://github.com/j-kaltes/Juggluco"
         class="Internet_20_link">https://github.com/j-kaltes/Juggluco</a></p>
     <h2 id="novopens" class="western"> NFC NovoPens</h2>
     <p style="line-height: 100%; margin-bottom: 0in">Juggluco 4.13.0 and later
@@ -717,10 +717,10 @@ e-mail
       values from Juggluco to <a href="https://github.com/nightscout/cgm-remote-monitor">https://github.com/nightscout/cgm-remote-monitor</a>.
       See <a href="https://www.juggluco.nl/Jugglucohelp/NightPost.html">Left menu-&gt;Settings-&gt;Uploader-&gt;Help</a>.</p>
     <h2 class="western">LibreLinkUp</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">Glucose values send to
+    <p style="line-height: 100%; margin-bottom: 0in">Glucose values sent to
       Libreview can also be sent to Abbott's LibrelinkUp app. When <a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">Left
-      menu-&gt;Settings-&gt;Libreview-&gt;Immediate</a> is set, will Juggluco
-      (4.16.0 or above) send every glucose value received from Libre 2 or 3
+      menu-&gt;Settings-&gt;Libreview-&gt;Immediate</a> is set, Juggluco
+      (4.16.0 or above) will send every glucose value received from Libre 2 or 3
       sensors to Libreview. In Abbott's Libre app under Connected
       apps-&gt;Librelinkup you can invite an e-mail address to receive these
       data. </p>
@@ -731,8 +731,8 @@ e-mail
         href="https://github.com/j-kaltes/Jugglucohelp">Help</a> for more
       information.</p>
     <h2 class="western">Data Analysis</h2>
-    <p>Juggluco's data can be exported to a file or send to other apps via
-      Broadcasts or a web interface. There is demand for the analysis and
+    <p>Juggluco's data can be exported to a file or sent to other apps via
+      broadcasts or a web interface. There is demand for the analysis and
       display of these data, for example to send a quick overview to a medical
       practitioner.</p>
     <h2 class="western">Watches</h2>

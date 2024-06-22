@@ -13,7 +13,9 @@
       (an android app for Freestyle libre 0, 2 and 3 sensors) it is possible to make a
       network connection with a pc to transfer data to and from this pc.</p>
  <p style="line-height: 100%; margin-bottom: 0in">
-You can compile it yourself from the source from the <a href="https://github.com/j-kaltes/Juggluco">github of Juggluco</a> or:</p>
+You can compile it yourself from the source from the <a href="https://github.com/j-kaltes/Juggluco">github of Juggluco</a>
+(see <a href="https://raw.githubusercontent.com/j-kaltes/Juggluco/primary/Common/src/main/cpp/README">Common/src/main/cpp/README</a> for build instructions)
+or:</p>
       <a href="https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server8.0.21.src.tar.xz">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco-server8.0.21.src.tar.xz</a>
 
 <p style="line-height: 100%; margin-bottom: 0in">Dynamically linked
@@ -66,7 +68,7 @@ The juggluco binary has the following functions:
 the server you have first to specify the settings.</p>
 <h2 class="western">Add connection</h2>
 <p style="line-height: 100%; margin-bottom: 0in">Like when using Left
-middle menu-&gt;<a href="https://www.juggluco.nl/Jugglucohelp/connectionoverview.html">Mirror</a> to add a connection, you have to specify of
+middle menu-&gt;<a href="https://www.juggluco.nl/Jugglucohelp/connectionoverview.html">Mirror</a> to add a connection, you have to specify for
 each connection in turn how and with whom it should connect.</p>
 <p style="line-height: 100%; margin-bottom: 0in">A connection is one
 specific instance of Juggluco to which to send data and/or receive
@@ -219,7 +221,7 @@ simply with:</p>
 -P: <i>passive</i><i> </i><i>only</i>
 -L huawei: <i>test on label huawei</i>
 -w 987654321: <i>encrypt with password </i><i>987654321</i></pre>
-    <p style="line-height: 100%; margin-bottom: 0in">By pressing</p>
+    <p style="line-height: 100%; margin-bottom: 0in">By running</p>
     <pre class="western"> ./juggluco</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
     <p style="line-height: 100%; margin-bottom: 0in">the command line juggluco
@@ -335,7 +337,7 @@ WantedBy = multi-user.target</pre>
       year.</p>
     <p style="line-height: 100%; margin-bottom: 0in">Thereafter, you have maybe
       to pay 30 to 45 dollars a year. I don't know. If you don't <a href="https://aws.amazon.com/premiumsupport/knowledge-center/close-aws-account/">close
-        your account</a>, you will be changed after one year even if you don't
+        your account</a>, you will be charged after one year even if you don't
       use it anymore.</p>
     <p style="line-height: 100%; margin-bottom: 0in">An introduction with
       Chinese links: <a href="https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/">https://www.amazonaws.cn/en/getting-started/tutorials/launch-a-virtual-machine/</a></p>
@@ -388,7 +390,7 @@ WantedBy = multi-user.target</pre>
       the ip you found above.</p>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       Give access to port $winport through the firewall with:</p>
-    <pre class="western" style="margin-bottom: 0.2in">netsh advfirewall firewall add rule name=$winport dir=in action=allow protocol=TCP localport=$winport"</pre>
+    <pre class="western" style="margin-bottom: 0.2in">netsh advfirewall firewall add rule name=$winport dir=in action=allow protocol=TCP localport=$winport</pre>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       The windows IP you find with ipconfig in cmd.com or powershell</p>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
@@ -413,7 +415,7 @@ WantedBy = multi-user.target</pre>
       To configure ./juggluco runnning under linux under windows 10 to receive
       this data, press in bash in the directory you placed juggluco in:</p>
     <pre class="western" style="margin-bottom: 0.2in; line-height: 100%; background: transparent">./juggluco -p $linuxport
-./juggluco -rag</pre>
+./juggluco -ra</pre>
     <p style="margin-bottom: 0.2in; line-height: 100%; background: transparent">
       And start it with:</p>
     <pre class="western" style="margin-bottom: 0.2in">./juggluco</pre>

@@ -1,4 +1,0 @@
-
-(evolution:5494): Gtk-WARNING **: 18:06:01.515: Calling org.xfce.Session.Manager.Inhibit failed: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such method ?Inhibit?
-
-(evolution:5494): GLib-GIO-WARNING **: 18:06:01.647: Your application did not unregister from D-Bus before destruction. Consider using g_application_run().

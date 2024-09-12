@@ -749,10 +749,10 @@ phone.</p>
 <p style="line-height: 100%; margin-bottom: 0in">On the computer
 while connected to the old phone:</p>
 <p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-out run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
-<p style="line-height: 100%; margin-bottom: 0in">On the computer
-while connected to the new phone:</p>
+<p style="line-height: 100%; margin-bottom: 0in">On the computer while connected to the new phone:</p>
+<p>Under bash (Linux) and Command Prompt (Windows):</p>
 <p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-in run-as tk.glucodata tar -xf -     < all.tar </b></p>
-<p>The above works under bash (Linux) and Command Prompt (Windows), but not under Powershell: you can't use < to redirect a file to stdin. There you need to use the following command:</p>
+<p>Or under Powershell: </p>
 <p style="line-height: 100%; margin-bottom: 0in"><b>cat all.tar|adb exec-in run-as tk.glucodata tar -xf - </b></p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
 

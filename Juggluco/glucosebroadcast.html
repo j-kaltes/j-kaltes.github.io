@@ -81,7 +81,7 @@ public class Receiver extends BroadcastReceiver {
         System.out.println(name + &quot; glucose=&quot; + glucose + &quot;(mgdL=&quot; + mgdl + &quot;) rate=&quot; + rate + &quot; (libreLabel=&quot; + librelabel(rate) + &quot;, dexcomlabel=&quot;+getdexcomlabel(rate)+&quot;) time=&quot; + dateformat.format(new Date(time)));
     }
 
-static  String getdexcomlabel(float rate ) {
+static  String getxdriplabel(float rate ) {
         if (rate &gt;= 3.5f) return &quot;DoubleUp&quot;;
         if (rate &gt;= 2.0f) return &quot;SingleUp&quot;;
         if (rate &gt;= 1.0f) return &quot;FortyFiveUp&quot;;
@@ -92,6 +92,16 @@ static  String getdexcomlabel(float rate ) {
         return &quot;DoubleDown&quot;;
     }
 
+static  String getdexcomlabel(float rate ) {
+        if (rate &gt;= 3.0f) return &quot;DoubleUp&quot;;
+        if (rate &gt;= 2.0f) return &quot;SingleUp&quot;;
+        if (rate &gt;= 1.0f) return &quot;FortyFiveUp&quot;;
+        if (rate &gt; -1.0f) return &quot;Flat&quot;;
+        if (rate &gt; -2.0f) return &quot;FortyFiveDown&quot;;
+        if (rate &gt; -3.0f) return &quot;SingleDown&quot;;
+        if(java.lang.Float.isNaN(rate)) return &quot;&quot;;
+        return &quot;DoubleDown&quot;;
+    }
 
 static     String librelabel(float rate) {
         if (rate &lt;= -2.0f) {

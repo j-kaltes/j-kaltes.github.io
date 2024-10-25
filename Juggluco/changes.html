@@ -5,12 +5,12 @@
 	<title>Changes</title>
 	<meta name="generator" content="LibreOffice 24.2.6.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2024-10-08T22:33:06.138600444"/>
+	<meta name="changed" content="2024-10-25T17:13:27.044803148"/>
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 </head>
-<body lang="en-US" dir="ltr">
-<h1 >Changelog of <a href="https://www.juggluco.nl" name="start" >Juggluco</a></h1>
-<p><a href="#end" >Goto End</a>
+<body lang="en-US" dir="ltr"><h1>Changelog of <a href="https://www.juggluco.nl/" name="start">Juggluco</a></h1>
+<p><a href="#end">Goto End</a> 
 </p>
 <p style="border: none; padding: 0in"><font color="#000000"><font face="times new roman">1.1.0</font></font></p>
 <p style="border: none; padding: 0in"><font color="#000000"><font face="times new roman">-
@@ -530,7 +530,7 @@ Bluetooth for the communication between WearOS and phone version.</font></font><
 <p style="border: none; padding: 0in"><font color="#000000"><font face="times new roman">Can
 now also send amounts (as insulin, carbohydrate, or comments) to
 Libreview.</font></font></p>
-<p id="noplay" style="border: none; padding: 0in"><font color="#000000"><font face="times new roman">4.5.5</font></font></p>
+<p style="border: none; padding: 0in"><a name="noplay"></a><font color="#000000"><font face="times new roman">4.5.5</font></font></p>
 <ul>
 	<li><p style="border: none; padding: 0in"><font color="#000000"><font face="times new roman">Possibility
 	to show heart rate in watch face;</font></font></p></li>
@@ -1465,6 +1465,32 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 	complication slot;</p></li>
 	<li><p>Watch Face for WearOS 5 in separate APK.</p></li>
 </ul>
+<p>8.2.7</p>
+<p style="margin-bottom: 0in">Replaced NewStringUTF because Android
+contains a debug version of NewStringUTF that let the app crash when
+it detects  “not valid Modified UTF-8”.  See:
+<a href="https://stackoverflow.com/questions/12127817/android-ics-4-0-ndk-newstringutf-is-crashing-down-the-app">https://stackoverflow.com/questions/12127817/android-ics-4-0-ndk-newstringutf-is-crashing-down-the-app</a></p>
+<p style="margin-bottom: 0in"><br/>
+
+</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
+ : signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
+ : Abort message: 'JNI DETECTED ERROR IN APPLICATION: input is not
+valid Modified UTF-8: illegal continuation byte 0</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
+ :     string: 'BrÃ¶tchen sÃ'</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
+ :     input: '0x42 0x72 0xc3 0xb6 0x74 0x63 0x68 0x65 0x6e 0x20 0x73
+0xc3'</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
+ :     in call to NewStringUTF</p>
+<p style="margin-bottom: 0in"><br/>
+
+</p>
+<p style="margin-bottom: 0in"><br/>
+
+</p>
 <p><a href="#start" name="end">Goto Start</a></p>
 </body>
 </html>

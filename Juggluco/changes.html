@@ -5,7 +5,8 @@
 	<title>Changes</title>
 	<meta name="generator" content="LibreOffice 24.2.6.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2024-10-25T17:13:27.044803148"/>
+	<meta name="changed" content="2024-10-26T11:51:23.100537772"/>
+	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 	<meta name="created" content="00:00:00">
 </head>
@@ -1468,29 +1469,30 @@ meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6">http://
 <p>8.2.7</p>
 <p style="margin-bottom: 0in">Replaced NewStringUTF because Android
 contains a debug version of NewStringUTF that let the app crash when
-it detects  “not valid Modified UTF-8”.  See:
+it detects “not valid Modified UTF-8”. See:
 <a href="https://stackoverflow.com/questions/12127817/android-ics-4-0-ndk-newstringutf-is-crashing-down-the-app">https://stackoverflow.com/questions/12127817/android-ics-4-0-ndk-newstringutf-is-crashing-down-the-app</a></p>
 <p style="margin-bottom: 0in"><br/>
 
 </p>
-<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
- : signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------</p>
-<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
- : Abort message: 'JNI DETECTED ERROR IN APPLICATION: input is not
-valid Modified UTF-8: illegal continuation byte 0</p>
-<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
- :     string: 'BrÃ¶tchen sÃ'</p>
-<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
- :     input: '0x42 0x72 0xc3 0xb6 0x74 0x63 0x68 0x65 0x6e 0x20 0x73
-0xc3'</p>
-<p style="margin-bottom: 0in">10-13 20:44:15.311  8914  8914 F DEBUG 
- :     in call to NewStringUTF</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311 8914 8914 F DEBUG :
+signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311 8914 8914 F DEBUG :
+Abort message: 'JNI DETECTED ERROR IN APPLICATION: input is not valid
+Modified UTF-8: illegal continuation byte 0</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311 8914 8914 F DEBUG :
+string: 'BrÃ¶tchen sÃ'</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311 8914 8914 F DEBUG :
+input: '0x42 0x72 0xc3 0xb6 0x74 0x63 0x68 0x65 0x6e 0x20 0x73 0xc3'</p>
+<p style="margin-bottom: 0in">10-13 20:44:15.311 8914 8914 F DEBUG :
+in call to NewStringUTF</p>
 <p style="margin-bottom: 0in"><br/>
 
 </p>
-<p style="margin-bottom: 0in"><br/>
-
-</p>
+<p>8.2.8</p>
+<ul>
+	<li><p style="margin-bottom: 0in">Removes recently created bug
+	affecting small screens.</p></li>
+</ul>
 <p><a href="#start" name="end">Goto Start</a></p>
 </body>
 </html>

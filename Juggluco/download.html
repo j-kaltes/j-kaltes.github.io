@@ -57,31 +57,27 @@ Works also under WearOS 4
      Arm/Arm64/x86/x86_64 (for the emulator or atypical devices): <a href="https://drive.google.com/open?id=1DIObOldy-WLgTFVo5JhFOijmEB1LoEc0">Google Drive</a> </p>
     </h2>
 <h2 id="bugreport" class="western">BUG Report</h2>
-<p style="line-height: 100%; margin-bottom: 0in">If you have a serious bug. For example Juggluco doesn't work with a certain type of
+<p>If you have a serious bug. For example Juggluco doesn't work with a certain type of
 sensor or crashes, it would be helpful to generate more information
 about the problem.</p>
-<p style="line-height: 100%; margin-bottom: 0in">For this you can
-install a logging version of Juggluco:
+<p>For this you can install a logging version of Juggluco:
 </p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=1gSKEUI-H4l_8-ltzDwVQbDryx02sU7XC">Mobile
-phone</a></p>
-<p style="line-height: 100%; margin-bottom: 0in"><a href="https://drive.google.com/open?id=12B9nPlIg4igwZEDVs43hhHulXzGzSjd_">WearOS
-watch</a></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">And
-then get the log file out of the device with:</font></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in">adb shell run-as
-tk.glucodata cat /data/data/tk.glucodata/files/logs/trace.log > trace.log</p>
-<p style="orphans: 2; widows: 2"><span style="font-variant: normal"><font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">and
-E-Mail trace.log to me.</span></span></span></font></font></font></span></p>
-<p style="font-variant: normal; letter-spacing: normal; font-style: normal; font-weight: normal; orphans: 2; widows: 2">
-<font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">You
-can remove the log file with:</font></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in">adb shell run-as
-tk.glucodata rm /data/data/tk.glucodata/files/logs/trace.log</p>
-<p style="orphans: 2; widows: 2"><span style="font-variant: normal"><font color="#500050"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">Thereafter
-you can install an old version of Juggluco without these problems.</span></span></span></font></font></font></span></p>
-</p>
+<p><a href="https://drive.google.com/open?id=1gSKEUI-H4l_8-ltzDwVQbDryx02sU7XC">Mobile phone</a></p>
+<p ><a href="https://drive.google.com/open?id=12B9nPlIg4igwZEDVs43hhHulXzGzSjd_">WearOS watch</a></p>
+<p>And then get the log file out of the device with:</p>
+<p ><b>adb shell run-as tk.glucodata cat /data/data/tk.glucodata/files/logs/trace.log > trace.log</b></p>
+<p>and E-Mail trace.log to me.</p>
+<p>You can remove the log file with:</p>
+<p >adb shell run-as tk.glucodata rm /data/data/tk.glucodata/files/logs/trace.log</p>
+<p>Thereafter you can install an old version of Juggluco without these problems.</p>
+<p>
+When your Juggluco installation consistently crashes or misbehaves in
+another way, you can also save the data of you installation directory
+and send it to me. If you use the Google Play version, you first need
+to install a debugging version of Juggluco from this page. You need
+to have adb installed. Then you do the following command:</p>
+<p ><b>adb exec-out run-as tk.glucodata tar -cf - ./files &gt; all.tar</b></p>
+<p > and e-mail all.tar to me.</p>
     <h2 class="western">Permission</h2>
     <p style="line-height: 100%; margin-bottom: 0in">To use Floating Glucose
       under Android Automotive and WearOS you need to give Juggluco permission

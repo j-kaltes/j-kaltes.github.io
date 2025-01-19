@@ -1,20 +1,21 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title>More than one</title>
-	<meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
-	<meta name="created" content="2022-02-18T16:58:14.837145856"/>
-	<meta name="changed" content="2025-01-16T13:03:27.012943107"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; background: transparent }
-		pre { background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace }
-		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace }
-		pre.ctl { font-family: "Liberation Mono", monospace }
-		a:link { so-language: zxx }
-	</style>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+       <link rel="icon" href="../arrow.png">
+ <title>More than one</title>
+ <meta name="generator" content="LibreOffice 7.2.5.2 (Linux)"/>
+ <meta name="created" content="2022-02-18T16:58:14.837145856"/>
+ <meta name="changed" content="2022-02-18T18:00:52.793537017"/>
+ <style type="text/css">
+  @page { size: 8.27in 11.69in; margin: 0.79in }
+  p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+  pre { background: transparent }
+  pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+  pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+  pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+  a:link { color: #000080; so-language: zxx; text-decoration: underline }
+ </style>
 </head>
 <body lang="en-US" dir="ltr"><h1>Multiple</h1>
 <p style="line-height: 100%; margin-bottom: 0in">Some people may want
@@ -30,7 +31,6 @@ profile in Android, which you have to delete yourself after you
 uninstall Shelter:
 <a href="https://kb.above.im/work-profile/#deleting-your-work-profile">https://kb.above.im/work-profile/#deleting-your-work-profile</a></p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
-
 </p>
 <p style="line-height: 100%; margin-bottom: 0in"><b>Don’t forget to
 change the port in Left middle menu-&gt;Mirror.</b></p>
@@ -40,8 +40,7 @@ allow multiple apps with the same Application id. By changing the
 application id, you can install multiple instances of an app.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Here is a link to a
 version of Juggluco with a different application id:</p>
-<p><a href="https://drive.google.com/open?id=1XHV3cmWeF-cNEmfrxHMMr0jr1ah-3V_C">Juggluco
-9.0.25 Second</a></p>
+<p><a href="https://drive.google.com/open?id=1aStl1K_guFVp-IfciP7j2yh24--LSeM2">Juggluco 9.0.27 Second</a></p>
 <p style="line-height: 100%; margin-bottom: 0in">If you need more
 than two, you can do the following:</p>
 <p style="line-height: 100%; margin-bottom: 0in">First you need to
@@ -56,26 +55,24 @@ dirname/AndroidManifest.xml</p>
 <p style="line-height: 100%; margin-bottom: 0in">On the top is
 package=&quot;tk.glucodata&quot;. Change tk.glucodata to something
 else.</p>
-<p style="line-height: 100%; margin-bottom: 0in">Also remove 
+<p style="line-height: 100%; margin-bottom: 0in">Also remove
 </p>
 <pre class="western">&lt;provider android:authorities=&quot;tk.glucodata.androidx-startup&quot; android:exported=&quot;false&quot; android:name=&quot;androidx.startup.InitializationProvider&quot;&gt;
             &lt;meta-data android:name=&quot;androidx.emoji2.text.EmojiCompatInitializer&quot; android:value=&quot;androidx.startup&quot;/&gt;
             &lt;meta-data android:name=&quot;androidx.lifecycle.ProcessLifecycleInitializer&quot; android:value=&quot;androidx.startup&quot;/&gt;
 &lt;/provider&gt;</pre><p style="line-height: 100%; margin-bottom: 0in">
 <br/>
-It seems to be some kind of nonsense that android studio adds
-to the manifest and has to have a unique name.</p>
+It seems to be some
+kind of nonsense that android studio adds to the manifest and has to
+have a unique name.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Now recompile with:</p>
-<p style="line-height: 100%; margin-bottom: 0in">apktool b dirname -o
-unaligned.apk</p>
+<p style="line-height: 100%; margin-bottom: 0in">apktool b dirname
+-o unaligned.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">zipalign -f -p
 unaligned.apk renamed.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">apksigner sign
 --ks-pass 'pass:IDontKnow' --ks everyone.keystore renamed.apk</p>
 <p style="line-height: 100%; margin-bottom: 0in">For this you need
 everyone.keystore for a key to sign. You can make it yourself.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
 </body>
 </html>

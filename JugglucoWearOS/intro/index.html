@@ -1,0 +1,294 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf8">
+    <link rel="icon" href="https://www.juggluco.nl/Juggluco/arrow.png">
+    <title>Juggluco for WearOS</title>
+    <style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		a:link { color: #000080; text-decoration: underline }
+figure {
+    display: inline-block;
+}
+figcaption { display: table-caption; caption-side: bottom ;margin-left: -3%;  width: 110%;  }
+
+    h3{text-align: left;}
+    h4{text-align: center;}
+
+	</style>
+    <base href="mmolL/" id="baseurl" target="_blank">
+    <script type="text/javascript"> 
+var unitstr='mmol/L';
+function getunitarg(){ 
+	const params = new URLSearchParams(document.location.search);
+	const unit = params.get("unit");
+	if(unit===null)	 {
+		return 0;
+		}
+	if(unit == "mg/dL") { 
+		return 2;
+		} 
+	else { 
+		if(unit=="mmol/L") {
+		   return 1;
+		   }
+	 	}
+
+	return 0;
+    } 
+let mmol=[
+"AM",
+"AU",
+"BA",
+"BG",
+"BW",
+"BY",
+"CA",
+"CH",
+"CN",
+"CZ",
+"DK",
+"EE",
+"FI",
+"GB",
+"HK",
+"HR",
+"HU",
+"IE",
+"IS",
+"KW",
+"KZ",
+"LT",
+"LV",
+"MT",
+"MY",
+"NA",
+"NL",
+"NO",
+"NZ",
+"RS",
+"RU",
+"SE",
+"SI",
+"SK",
+"UA",
+"ZA"];
+
+
+
+
+
+
+function getunit() {
+	var unit=getunitarg();
+	if(unit!=0) {
+		return unit;
+		}
+
+	var userLang = navigator.language || navigator.userLanguage;
+	var  co=userLang.toUpperCase();
+
+	for(const element of mmol) {
+	  if(co.includes(element)) {
+		return 1;
+		}
+	   }
+
+	return 2;
+	 }
+
+
+
+function setbaseurl(){ 
+	if(getunit()!=1) {
+		document.getElementById("baseurl").href = "mgdL/"; 
+		unitstr='mg/dL';
+		} 
+	else { 
+	       document.getElementById("baseurl").href = "mmolL/";  
+		unitstr='mmol/L';
+		}
+   	} 
+   setbaseurl();
+   </script>
+  </head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h1 class="western">WearOS</h1>
+  <a href="https://www.juggluco.nl/JugglucoWearOS/intro/index.html?unit=mmol/L">mmol/L</a>
+  <a href="https://www.juggluco.nl/JugglucoWearOS/intro/index.html?unit=mg/dL">mg/dL</a>
+<p style="line-height: 100%; margin-bottom: 0in">The WearOS version
+of <a href="https://www.juggluco.nl/Juggluco/index.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">Juggluco</a> is tightly coupled
+with Juggluco running on the Android companion phone of the watch.
+Every sensor needs to be scanned by Juggluco on the companion phone.</p>
+<p style="line-height: 100%; margin-bottom: 0in">To get Juggluco for
+WearOS to work, you only need to install and run it while the
+companion phone version is running, after this everything should go
+by itself, you only need to wait. 
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">The only
+prerequisite is that Bluetooth and WIFI are turned on on both phone
+and WearOS watch.</p>
+<p style="line-height: 100%; margin-bottom: 0in">All data from the
+phone will first be send to the watch.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Problems can arise
+when you do the wrong things.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Most people want to
+directly connect the watch with the sensor. This can only be changed
+when the phone and watch are in sync so that all data is present on
+both sides of the connection.</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can do that with
+left menu→Watch→WearOS config→”<i>Direct sensor-watch
+connection</i>”. This settings changes a few settings on both watch
+and phone. You can also change these settings individually, but that
+is much more work and gives problems when done incorrectly. Someone
+for example turned Left menu-&gt;Sensor→”<i>Use Bluetooth</i>”
+on on the phone again after turning on “<i>Direct sensor-watch
+connection</i>” and thereafter it worked on the phone, but the
+watch didn’t receive any value. But “<i>Use Bluetooth</i>”
+should be turned off on the phone so that the watch can get a
+connection with the sensor. Phone and watch should not compete for a
+connection with the sensor. Using ”<i>Direct sensor-watch
+connection</i>” takes care of is and also of the mirror connection
+between between phone and watch.</p>
+<p>
+<figure> 
+<img src="jugglucowatch.png"   
+style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption>
+<span style="font-size: 0.9em; font-family: Times New Roman;">Figure 1: WearOS version of Juggluco</span>
+</figcaption> </figure>
+
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">When Juggluco on the
+watch does receives glucose values, you can see them by opening
+Juggluco on the watch. After a period of inactivity, the watch will
+return automatically to the watch face. On Watch 4 you can set how
+long the last app is shown in Galaxy Wearable or WearOS
+Settings→Display:</p>
+<p>
+<figure> <img src="1hour.png" style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption>
+<span style="font-size: 0.9em; font-family: Times New Roman;">Figure 2: WearOS setting for last
+	app show time</span>
+</figcaption></figure>
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">There are three
+other ways to see your glucose level on the watch:</p>
+<h3 class="western">Watch face</h3>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco includes a
+watch face displaying the glucose value:</p>
+<p style="line-height: 100%; margin-bottom: 0in">
+<figure><img src="watchface.png" style="object-fit:contain; width:5cm;		    height:auto;">
+</img>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 3: Watch face of Juggluco</span></figcaption></figure>
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">Programmed watch
+faces are not allowed on Galaxy Watch 7 and Ultra and Pixel Watch 3
+in a futile attempt to save energy: when using the glucose
+complication the battery doesn’t last longer.</p>
+<h3 class="western">Glucose complication</h3>
+<p>In every watch, in which a small image glucose complication can be
+placed, you can put one of the glucose complications included in
+Juggluco:</p>
+<p><figure><img src="complicationBoth.png" style="object-fit:contain; width:5cm;		    height:auto;"/><figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 4: Arrow+value complication in bottom right complication slot</span></figcaption></figure>
+<figure><img src="2complications.png"  style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 5: Arrow complication in
+	bottom left complication slot, glucose value complication in bottom right complication slot</span></figcaption></figure>
+</p>
+<p>You can change the colors in left menu→Settings→Complications
+in Juggluco on the watch.</p>
+<p>Some watch faces only allow short text + icon complications in
+which these complications can’t be placed. Ask the maker of the
+watch face to add SMALL_IMAGE to the list of complication types.</p>
+<h3 class="western">Floating glucose</h3>
+<p style="line-height: 100%; margin-bottom: 0in">Floating Glucose is
+a glucose value that can be displayed above other apps, except for
+the system interface.</p>
+<p style="line-height: 100%; margin-bottom: 0in">
+
+<figure><img src="weather.png"  align="left" style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 6: Floating glucose above
+	WearOS weather app</span></figcaption></figure>
+<figure><img src="maps.png"  align="left" style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 7: Floating glucose above
+	WearOS Google Maps</span></figcaption></figure></p>
+<p style="line-height: 100%; margin-bottom: 0in">It needs a
+permission that on some watches you can only give with the use of
+adb:</p>
+<pre>
+<span lang="en-US"><b>adb shell pm grant tk.glucodata android.permission.SYSTEM_ALERT_WINDOW</b></span></pre><p style="line-height: 100%; margin-bottom: 0in">
+</p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Jugglucohelp/floatingconfig.html">https://www.juggluco.nl/Jugglucohelp/floatingconfig.html</a></p>
+<p style="line-height: 100%; margin-bottom: 0in"><a href="https://developer.samsung.com/sdp/blog/en/2024/04/30/connect-galaxy-watch-to-android-studio-over-wi-fi">https://developer.samsung.com/sdp/blog/en/2024/04/30/connect-galaxy-watch-to-android-studio-over-wi-fi</a></p>
+<p style="line-height: 100%; margin-bottom: 0in">Thereafter you can
+go to left menu→Settings. With the <b>Floating Glucose</b> button
+you can change the size and color of the floating glucose and with
+the check box after the button, you can turn it on.</p>
+<h2 class="western">Trouble shooting</h2>
+<h3 class="western">Connection watch-phone</h3>
+<p>Problem: data is not send from phone to watch or from watch to
+phone.</p>
+<p>Sometimes watch and phone are out of sync. Mostly pressing left
+menu→Mirror→<b>Sync</b> on the watch is enough, sometimes
+pressing <b>Reinit</b> before Sync is needed. At other times you
+first need to do the same on the phone. Turning <b>Bluetooth</b> off
+and on or <b>WIFI</b> off and on can sometimes help. You can do so on
+phone and watch. Sometime <b>Rebooting</b> the phone or the watch is
+needed.</p>
+<p>Sometimes this is not enough. Possible causes:</p>
+<p><b>Bluetooth is turned off</b> on phone or watch. Turn it on.</p>
+<p><b>Watch is disconnected from phone.</b> Look in the companion app
+of the watch, for example Galaxy Wearable and see if they are
+connected. If they are not try to connect them. Sometimes you need to
+reboot the phone or the watch before this happens.</p>
+<p>
+<figure><img src="galaxyNoConnection.png" style="object-fit:contain; width:5cm;		    height:auto;"/><figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 8: Wearable app shows <i>not connected</i></span></figcaption></figure>
+<figure><img src="PlayServices.png" style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 9: Google Play Services problem</span></figcaption></figure>
+<figure><img src="GalaxyWearable.png"   style="object-fit:contain; width:5cm;		    height:auto;"/>
+<figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Figure 10: Wearable app shows <i>connected</i></span></figcaption></figure></p>
+<b>The mirror settings are changed </b>for
+example because the mirror view opened under the shower.
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">You can set them to
+their defaults with left menu→Watch→WearOS config→Defaults.</p>
+<p style="line-height: 100%; margin-bottom: 0in">When there is data
+present on the watch that isn’t synced with the phone, this data is
+lost.</p>
+<p style="line-height: 100%; margin-bottom: 0in">When everything
+fails, you can uninstall the Watch version of Juggluco. Remove the
+mirror connection on the phone in left middle menu→Mirror and
+reinstall the watch version and wait to see if it now starts working
+automatically.</p>
+<h3 class="western">Sensor watch connection</h3>
+<p>Earlier I reported that the quality of connection between sensor
+and watch changed from sensor to sensor. Later I came to know that
+bad sensors were determined by wearing my watch on the opposite arm
+of the sensor. When both are on the same arm I have only very
+infrequently connection errors.</p>
+<p>The other causes of connection errors are the same as for the
+phone version:</p>
+<ul>
+	<li><p>Another device is also connecting with the sensor. You should
+	make absolutely certain that no other app is trying to connect with
+	the same sensor. Don’t use “<i>Pause</i>” to stop the app, at
+	least on my phone, it only causes the background activity of the app
+	to become invisible. You need to press “<i>Force stop</i>” and
+	you need to repeat that because these apps set timers to start
+	themselves again. Better is to disable or uninstall them.</p></li>
+	<li><p>Sometimes Bluetooth malfunctions. Turning Bluetooth off and
+	on can help.</p></li>
+	<li><p>If all else fails you can reboot the watch;</p></li>
+	<li><p>If you do a factory reset on the watch or reinstall Juggluco,
+	you need to remove the old mirror connection on the phone under left
+	middle menu→Mirror.</p></li>
+</ul>
+<p>See:</p><p><a href="https://www.juggluco.nl/Jugglucohelp/sensorhelp.html">https://www.juggluco.nl/Jugglucohelp/sensorhelp.html</a></p>
+<p><a href="https://www.juggluco.nl/Jugglucohelp/wearosinfo.html">https://www.juggluco.nl/Jugglucohelp/wearosinfo.html</a></p><p><a href="https://www.juggluco.nl/JugglucoWearOS/overview.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">https://www.juggluco.nl/JugglucoWearOS/overview.html</a></p>
+
+<p><br/>
+<br/>
+
+</p>
+</body>
+</html>

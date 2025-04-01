@@ -103,7 +103,7 @@ file afile to /tmp in the virtual machine.</p>
 <img src="reset_password.png" style="object-fit:contain; width:30cm;		    height:auto;">
 <p style="line-height: 100%; margin-bottom: 0in">After login in your
 virtual host, you can put Juggluco server on it with:</p>
-<pre>curl https://www.juggluco.nl/Juggluco/cmdline/download/juggluco7.6.1-dyn.xz --output juggluco.xz
+<pre>curl <a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline/download/juggluco9.3.0-dyn.xz</a> --output juggluco.xz
 unxz juggluco.xz
 chmod a+x juggluco</pre>
 <p style="line-height: 100%; margin-bottom: 0in">Now we have to create connections.</p>
@@ -138,10 +138,9 @@ Yji#%83Hlo</p>
 <img src="watch3.png" style="object-fit:contain;height:5cm; width:auto;">
 
 <p style="line-height: 100%; margin-bottom: 0in">You could also check
-Amounts and Scan. Another possibility is to send Stream and Amounts
+Amounts and Scan, but in this example we sent Scans and Amounts
 directly from the companion phone to use less of the battery of the
-watch. <b>You should always also send Scans</b>, Amounts you can be
-left out.</p>
+watch. <b>Every mirror should receive Scans</b> in one way or another, Amounts you can be left out altogether.</p>
 <p style="line-height: 100%; margin-bottom: 0in">The following
 configures to receive the Scans and Amounts from the companion phone</p>
 <pre>./juggluco  -r -P -i -L phoneAzure -w Tu123#@Uit</pre>

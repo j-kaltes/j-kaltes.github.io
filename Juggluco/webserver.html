@@ -53,9 +53,10 @@ is the hostname associated with the SSL certificate and &quot;<i>aport&quot;</i>
 is the port that your modem redirects to &quot;<i>SSL Port</i>&quot;
 (set in left menu-&gt;Settings-&gt;Exchange data-&gt;Web server) of
 your phone. 
-<h3>urlstart</h3>
-You can also use this page when using something different
-from &quot;http://127.0.0.1:17580&quot;: If you add <b>?urlstart=<i>aurl</i>&nbsp;</b>
+</p>
+<h3 class="western">urlstart</h3>
+<p>You can also use this page when using something different from
+&quot;http://127.0.0.1:17580&quot;: If you add <b>?urlstart=</b><i><b>aurl</b></i><b>&nbsp;</b>
 http://127.0.0.1:17580 in all these examples is replaced with <i>aurl</i>.&nbsp;
 For example you can use
 https://www.juggluco.nl/Juggluco/webserver.html?urlstart=http://192.168.1.69:17580
@@ -72,20 +73,19 @@ every time a new glucose value is received from the sensor.</p>
 <p style="margin-bottom: 0in">Juggluco web server 9.7.0 and later
 contain the following graphic addictions:</p>
 <h3 class="western">Glucose Curve</h3>
-<p style="margin-bottom: 0in"><a href="http://127.0.0.1:17580/x/curve"  onclick="location.href=urlstart+'/x/curve';return false;" >http://127.0.0.1:17580/x/curve</a></p>
+<p style="margin-bottom: 0in"><a href="http://127.0.0.1:17580/x/curve" onclick="location.href=urlstart+'/x/curve';return false;">http://127.0.0.1:17580/x/curve</a></p>
 <p style="margin-bottom: 0in">This contains a part of the glucose
 curve in Juggluco. See the <a href="#options">options</a> below for
 changing the display options.</p>
 <h3 class="western">Statistics</h3>
- <a href="http://127.0.0.1:17580/x/stats" onclick="location.href=urlstart+'/x/stats';return false;">http://127.0.0.1:17580/x/stats</a></p>
+<p><a href="http://127.0.0.1:17580/x/stats" onclick="location.href=urlstart+'/x/stats';return false;">http://127.0.0.1:17580/x/stats</a></p>
 <p>Displays the same image you also see under left middle
 menu→<a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>.
 See <a href="#options">options</a>.</p>
 <h3 class="western">Summary graph</h3>
 <p><a href="http://127.0.0.1:17580/x/summarygraph" onclick="location.href=urlstart+'/x/summarygraph';return false;">http://127.0.0.1:17580/x/summarygraph</a></p>
 <p>Displays the summary graph of left middle menu→<a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>.
-It can take some time before it is displayed.
-See <a href="#options">options</a>.</p>
+It can take some time before it is displayed. See <a href="#options">options</a>.</p>
 <h3 class="western">Report</h3>
 <p><a href="http://127.0.0.1:17580/x/report" onclick="location.href=urlstart+'/x/report';return false;">http://127.0.0.1:17580/x/report</a></p>
 <p>An overview of the glucose values of a specified number of days
@@ -349,10 +349,11 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>scans</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give scan values in curve or report</font></font></p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
+			scan values in curve or report</font></font></p>
 		</td>
 		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/curve?scans&days=5" onclick="location.href=urlstart+'/x/curve?scans&days=5';return false;">http://127.0.0.1:17580/x/curve?scans&days=5</a></p>
+			<a href="http://127.0.0.1:17580/x/curve?scans&amp;days=5" onclick="location.href=urlstart+'/x/curve?scans&amp;days=5';return false;">http://127.0.0.1:17580/x/curve?scans&amp;days=5</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -360,10 +361,11 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>amounts</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Includes entered numbers (amounts) in curve or report</font></font></p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Includes
+			entered numbers (amounts) in curve or report</font></font></p>
 		</td>
 		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/curve?amounts&stream&days=1" onclick="location.href=urlstart+'/x/curve?amounts&stream&days=1';return false;">http://127.0.0.1:17580/x/curve?amounts&stream&days=1</a></p>
+			<a href="http://127.0.0.1:17580/x/curve?amounts&amp;stream&amp;days=1" onclick="location.href=urlstart+'/x/curve?amounts&amp;stream&amp;days=1';return false;">http://127.0.0.1:17580/x/curve?amounts&amp;stream&amp;days=1</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -371,10 +373,22 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>meals</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Display also meals in curve or graph</font></font></p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Display
+			also meals in curve or graph</font></font></p>
 		</td>
 		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/curve?meals&history&days=0.5" onclick="location.href=urlstart+'/x/curve?meals&history&days=0.5';return false;">http://127.0.0.1:17580/x/curve?meals&history&days=0.5</a></p>
+			<a href="http://127.0.0.1:17580/x/curve?meals&amp;history&amp;days=0.5" onclick="location.href=urlstart+'/x/curve?meals&amp;history&amp;days=0.5';return false;">http://127.0.0.1:17580/x/curve?meals&amp;history&amp;days=0.5</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>hl=</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify the <b>language</b> to display curve, stats, summarygraph or report. Possible values: be, de, en, fr, it, nl, pl, pt, ru, sv, tr, uk or zh.</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/report?hl=tr" onclick="location.href=urlstart+'/x/report?hl=tr';return false;">http://127.0.0.1:17580/x/report?hl=tr</a></p>
 		</td>
 	</tr>
 </table>
@@ -884,7 +898,7 @@ results</i></font></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" height="38" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
+		<td width="61" height="39" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
 			7</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>&lt;=-3.0</p>

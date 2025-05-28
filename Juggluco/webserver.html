@@ -39,42 +39,65 @@
 <body lang="en-US" dir="ltr"><h1>Web server</h1>
 <p><a href="https://www.juggluco.nl/Juggluco">Juggluco</a> contains a
 web server. You can turn it on with <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
-menu-&gt;Settings-&gt;Exchange data-&gt;Web server</a>. Via the web server other
-programs can make use of the data in Juggluco. In the following
-<i>127.0.0.1</i> is used for the hostname or IP of the web server. In
-this way you can try out the commands by opening this web page on the
-same phone where Juggluco is running. If you unset &quot;Local only&quot;
-in Left menu-&gt;Settings -&gt; Exchange data -&gt; Web server, you can also use it from
-other hosts on your home network by replacing <i>127.0.0.1</i> with
-the IP of the phone. If <i>Use SSL</i> is set, you can replace
-<i>http://127.0.0.1:17580</i> with <i>https://ahostname:aport.
-W</i>hereby &quot;<i>ahostname</i>&quot; is the hostname associated
-with the SSL certificate and &quot;<i>aport&quot;</i> is the port
-that your modem redirects to &quot;<i>SSL Port</i>&quot; (set in left
-menu-&gt;Settings-&gt;Exchange data-&gt;Web server) of your phone. You can also use
-this page when using something different from
-&quot;http://127.0.0.1:17580&quot;: If you add ?urlstart=<i>aurl</i>&nbsp;
+menu-&gt;Settings-&gt;Exchange data-&gt;Web server</a>. Via the web
+server other programs can make use of the data in Juggluco. In the
+following <i>127.0.0.1</i> is used for the hostname or IP of the web
+server. In this way you can try out the commands by opening this web
+page on the same phone where Juggluco is running. If you unset &quot;Local
+only&quot; in Left menu-&gt;Settings -&gt; Exchange data -&gt; Web
+server, you can also use it from other hosts on your home network by
+replacing <i>127.0.0.1</i> with the IP of the phone. If <i>Use SSL</i>
+is set, you can replace <i>http://127.0.0.1:17580</i> with
+<i>https://ahostname:aport. W</i>hereby &quot;<i>ahostname</i>&quot;
+is the hostname associated with the SSL certificate and &quot;<i>aport&quot;</i>
+is the port that your modem redirects to &quot;<i>SSL Port</i>&quot;
+(set in left menu-&gt;Settings-&gt;Exchange data-&gt;Web server) of
+your phone. You can also use this page when using something different
+from &quot;http://127.0.0.1:17580&quot;: If you add ?urlstart=<i>aurl</i>&nbsp;
 http://127.0.0.1:17580 in all these examples is replaced with <i>aurl</i>.&nbsp;
 For example you can use
 https://www.juggluco.nl/Juggluco/webserver.html?urlstart=http://192.168.1.69:17580
 in which case http://127.0.0.1:17580 is replaced with
 http://192.168.1.69:17580. (It works only when you click on a link,
-not when you open a link in a different tab or window). You can also append the api_secret, for example: 
+not when you open a link in a different tab or window). You can also
+append the api_secret, for example:
 https://www.juggluco.nl/Juggluco/webserver.html?urlstart=http://192.168.1.74:17580/somethingsecret
 whereby <i>somethingsecret</i> is the api_secret.</p>
 <p>Instead of Juggluco on a phone, you can also use <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html">Juggluco
 server</a>. Android or WearOS apps can, instead of making use of the
 web server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a>
 every time a new glucose value is received from the sensor.</p>
+<p style="margin-bottom: 0in">Juggluco web server 9.7.0 and later
+contain the following graphic addictions:</p>
+<h3 class="western">Glucose Curve</h3>
+<p style="margin-bottom: 0in"><a href="http://127.0.0.1:17580/x/curve"  onclick="location.href=urlstart+'/x/curve';return false;" >http://127.0.0.1:17580/x/curve</a></p>
+<p style="margin-bottom: 0in">This contains a part of the glucose
+curve in Juggluco. See the <a href="#options">options</a> below for
+changing the display options.</p>
+<h3 class="western">Statistics</h3>
+ <a href="http://127.0.0.1:17580/x/stats" onclick="location.href=urlstart+'/x/stats';return false;">http://127.0.0.1:17580/x/stats</a></p>
+<p>Displays the same image you also see under left middle
+menu→<a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>.
+See <a href="#options">options</a>.</p>
+<h3 class="western">Summary graph</h3>
+<p><a href="http://127.0.0.1:17580/x/summarygraph" onclick="location.href=urlstart+'/x/summarygraph';return false;">http://127.0.0.1:17580/x/summarygraph</a></p>
+<p>Displays the summary graph of left middle menu→<a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>.
+See <a href="#options">options</a>.</p>
+<h3 class="western">Report</h3>
+<p><a href="http://127.0.0.1:17580/x/report" onclick="location.href=urlstart+'/x/report';return false;">http://127.0.0.1:17580/x/report</a></p>
+<p>An overview of the glucose values of a specified number of days
+(default 20). It contains the statistics, the summary graph and the
+curve of individual days. Something similar to the AGP Report
+healthcare professionals use to get a quick picture of diabetic
+management of an patient.</p>
 <h3 class="western">Juggluco export web server</h3>
 <p>Starting with Juggluco 7.1.0 exactly the same data as can be
 exported in Juggluco with <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Left
-middle menu-&gt;Export</a>, can also be assessed via the web interface.</p>
+middle menu-&gt;Export</a>, can also be assessed via the web
+interface.</p>
 <table width="498" cellpadding="0" cellspacing="0">
 	<col width="116"/>
-
 	<col width="382"/>
-
 	<tr valign="top">
 		<td width="116" style="border: none; padding: 0in"><p><b>Stream</b></p>
 		</td>
@@ -107,39 +130,36 @@ middle menu-&gt;Export</a>, can also be assessed via the web interface.</p>
 	</tr>
 </table>
 <p>After one of the above commands you can place <b>'?'</b> followed
-by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
-<table width="1057" cellpadding="2" cellspacing="0" style="background: transparent">
-	<col width="93"/>
-
+by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name="options"></a>
+<table width="1052" cellpadding="2" cellspacing="0" style="background: transparent">
+	<col width="91"/>
 	<col width="464"/>
-
-	<col width="486"/>
-
+	<col width="483"/>
 	<tr style="background: transparent" valign="top">
-		<td width="93" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p style="font-weight: normal">
+		<td width="91" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p style="font-weight: normal">
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Option</font></font></p>
 		</td>
 		<td width="464" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Meaning</font></font></p>
 		</td>
-		<td width="486" style="border: 1px solid #000000; padding: 0.02in"><p>
+		<td width="483" style="border: 1px solid #000000; padding: 0.02in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 15pt">Example</font></font></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>header</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Place
 			a header with the meaning of each column above the columns.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="unit"></a>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="unit"></a>
 			<a href="http://127.0.0.1:17580/x/stream?header" onclick="location.href=urlstart+'/x/stream?header';return false;">http://127.0.0.1:17580/x/stream?header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>mg/dL</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
@@ -149,36 +169,36 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			default unit is dependent on the unit settings of Juggluco or
 			Juggluco server.</b></font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/stream?header&amp;mg/dL" onclick="location.href=urlstart+'/x/stream?header&amp;mg/dL';return false;">http://127.0.0.1:17580/x/stream?header&amp;mg/dL</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>mmol/L</b></font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
 			glucose in mmol/L</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/stream?mmol/L&amp;header" onclick="location.href=urlstart+'/x/stream?mmol/L&amp;header';return false;">http://127.0.0.1:17580/x/stream?mmol/L&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>days</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
 			for how many days data should be returned.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/history?header&amp;days=0.8" onclick="location.href=urlstart+'/x/history?header&amp;days=0.8';return false;">http://127.0.0.1:17580/x/history?header&amp;days=0.8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>duration</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
@@ -187,36 +207,36 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			specifications are added. When the total duration is zero, it
 			defaults to 5 hours.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/stream?duration=3600" onclick="location.href=urlstart+'/x/stream?duration=3600';return false;">http://127.0.0.1:17580/x/stream?duration=3600</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>starttime</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Start
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963" onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>endtime</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">End
 			time in Unix time (seconds since 00:00 1 January 1970 GMT).</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/stream?endtime=1698266963" onclick="location.href=urlstart+'/x/stream?endtime=1698266963';return false;">http://127.0.0.1:17580/x/stream?endtime=1698266963</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>start</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
@@ -224,35 +244,36 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			way to specify the start time for testing purposes. The time is in
 			<b>local time</b> (Nightscout uses GMT).</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8" onclick="location.href=urlstart+'/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8';return false;">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>end</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Specify
 			end time.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
 			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="93" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+		<td width="91" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>maxcount</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Truncates output to the specified number of items.</font></font></p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Truncates
+			output to the specified number of items.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="token"></a>
 			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?maxcount=3';return false;">http://127.0.0.1:17580/x/stream?maxcount=3</a></p>
 		</td>
 	</tr>
-	<tr id="token" valign="top">
-		<td width="93" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>token</b>=</font></font></p>
 		</td>
 		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
@@ -270,28 +291,95 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			xyx</font></font></p>
 			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>api-secret:</b>
 			3c4bc8e59079403cb17a03a19c889769faadfdc8</font></font></p>
-			<p>Juggluco 7.1.15 has added a third method to supply the api_secret. You can
+			<p><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Juggluco
+			7.1.15 has added a third method to supply the api_secret. You can
 			add the api_secret after the hostname and port. This has the
 			advantage that you can also add an api_secret to app that
 			themselves don’t have the possibility to supply an api_secret or
 			token. This is meant to be used with Nightscout clients. So you
 			can give as Nightscout Follow URL <a href="http://192.168.1.68:17580/xyz">http://127.0.0.1:17580/xyz</a>
 			instead of <a href="http://192.168.1.68:17580/">http://127.0.0.1:17580</a>
-			when xyz is the api_secret.</p>
+			when xyz is the api_secret.</font></font></p>
 		</td>
-		<td width="486" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
-			<a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;">http://127.0.0.1:17580/x/history?token=xyz</a></p>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/history?token=xyz" onclick="location.href=urlstart+'/x/history?token=xyz';return false;"><font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">http://127.0.0.1:17580/x/history?token=xyz</font></font></a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>darkmode</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Display
+			graphs on a black background.</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/report?darkmode" onclick="location.href=urlstart+'/x/report?darkmode';return false;">http://127.0.0.1:17580/x/report?darkmode</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>stream</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
+			stream values in curve or report</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/curve?stream" onclick="location.href=urlstart+'/x/curve?stream';return false;">http://127.0.0.1:17580/x/curve?stream</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>history</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give
+			history values in curve or report</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/curve?history" onclick="location.href=urlstart+'/x/curve?history';return false;">http://127.0.0.1:17580/x/curve?history</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>scans</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Give scan values in curve or report</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/curve?scans&days=5" onclick="location.href=urlstart+'/x/curve?scans&days=5';return false;">http://127.0.0.1:17580/x/curve?scans&days=5</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>amounts</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Enters labeled numbers (amounts) in curve or report</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/curve?amounts&stream&days=1" onclick="location.href=urlstart+'/x/curve?amounts&stream&days=1';return false;">http://127.0.0.1:17580/x/curve?amounts&stream&days=1</a></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="91" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>meals</b></font></font></p>
+		</td>
+		<td width="464" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">Display also meals in curve or graph</font></font></p>
+		</td>
+		<td width="483" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+			<a href="http://127.0.0.1:17580/x/curve?meals&history&days=0.5" onclick="location.href=urlstart+'/x/curve?meals&history&days=0.5';return false;">http://127.0.0.1:17580/x/curve?meals&history&days=0.5</a></p>
 		</td>
 	</tr>
 </table>
 <p>The data contains the following columns:</p>
 <table width="914" cellpadding="2" cellspacing="0">
 	<col width="213"/>
-
 	<col width="581"/>
-
 	<col width="106"/>
-
 	<thead>
 		<tr valign="top">
 			<td width="213" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p style="font-weight: normal">
@@ -341,7 +429,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			</td>
 		</tr>
 		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>YYYY-mm-dd-HH:MM:SS</b></font></font></font></pre>
+			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>YYYY-mm-dd-HH:MM:SS</b></font></font></font></pre>
 			</td>
 			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 				Local time split into its component parts. mm= month, MM= Minute.</p>
@@ -396,7 +484,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			</td>
 		</tr>
 		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>ChangeLabel</b></font></font></font></pre>
+			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>ChangeLabel</b></font></font></font></pre>
 			</td>
 			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 				Label for rate of change</p>
@@ -406,7 +494,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			</td>
 		</tr>
 		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Source</b></font></font></font></pre>
+			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Source</b></font></font></font></pre>
 			</td>
 			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 				0 for Amounts entered in Juggluco, 1 for Kerfstok.</p>
@@ -416,7 +504,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			</td>
 		</tr>
 		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Value</b></font></font></font></pre>
+			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Value</b></font></font></font></pre>
 			</td>
 			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 				Value of amount</p>
@@ -426,7 +514,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 			</td>
 		</tr>
 		<tr valign="top">
-			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Label</b></font></font></font></pre>
+			<td width="213" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><pre class="western" style="font-variant: normal; letter-spacing: normal; font-style: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><b>Label</b></font></font></font></pre>
 			</td>
 			<td width="581" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 				Label for amount</p>
@@ -437,14 +525,12 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p>
 		</tr>
 	</tbody>
 </table>
-<p style="line-height: 100%; margin-bottom: 0in">The meaning of rate of change:</p>
+<p style="line-height: 100%; margin-bottom: 0in">The meaning of rate
+of change:</p>
 <table width="462" cellpadding="2" cellspacing="0" style="background: transparent">
 	<col width="134"/>
-
 	<col width="186"/>
-
 	<col width="127"/>
-
 	<tr style="background: transparent" valign="top">
 		<td width="134" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<b>Rate:</b></p>
@@ -531,9 +617,9 @@ contains also the unix time (seconds since 1 january 1970 00:00 GMT)
 after the date in local time.</p>
 <h4 class="western">R: 
 </h4>
-<pre>library(<span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">rvest</span></span></span></font></font></font></span><span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">)</span></span></span></font></font></font></span>
+<pre class="western">library(<span style="font-variant: normal"><font color="#000000"><font face="sans-serif"><font size="2" style="font-size: 9pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">rvest)</span></span></span></font></font></font></span>
 <span lang="en-US">library(xml2)</span>
-<span lang="en-US">meal1=html_table(read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;" >http://127.0.0.1:17580/x/meals?days=6</a>&quot;),header=TRUE)</span>
+<span lang="en-US">meal1=html_table(read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals?days=6</a>&quot;),header=TRUE)</span>
 
 <span lang="en-US">tail(meal1[[1]]$Ingredient,n=1)</span>
 <span lang="en-US">[1] &quot;2023-12-29 13:12&quot;</span>
@@ -543,19 +629,18 @@ after the date in local time.</p>
 <span lang="en-US">[1] &quot;2023-12-29 13:12:00 CET&quot;</span></pre><h4 class="western">
 Python: 
 </h4>
-<pre>import pandas as pd
+<pre class="western">import pandas as pd
 <span lang="en-US">from datetime import datetime</span>
-<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6"   onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
+<span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
 
 <span lang="en-US">print(datetime.fromtimestamp(meal1[0]['Quantity'].iloc[-1]))</span>
 <span lang="en-US">print(meal1[0]['Ingredient'].iloc[-1])</span>
 <span lang="en-US">2023-12-29 13:12:00</span>
-<span lang="en-US">2023-12-29 13:12</span></pre>
-<h4>Mathematica:</h4>
-<p>
-<img src="mathematica.png" name="Mathematica" align="left" width="602" height="249" border="0"/>
-</p>
-<h3  style="clear:left;">xDrip / Nightscout web server</h3>
+<span lang="en-US">2023-12-29 13:12</span></pre><h4 class="western">
+Mathematica:</h4>
+<h3 class="western"><img src="mathematica.png" name="Mathematica" align="left" width="602" height="249" border="0"/>
+xDrip
+/ Nightscout web server</h3>
 <p>Some existing apps make use of a xDrip or Nightscout web
 interface.</p>
 <h3 class="western">xDrip</h3>
@@ -676,18 +761,14 @@ the value of mg/dL is in the range 39-501 mg/dL and of mmol/L in the
 range 2.2-27.8 mmol/L.</p>
 <p style="margin-top: 0.08in; margin-bottom: 0.08in; page-break-after: avoid">
 <font size="3" style="font-size: 12pt"><i>Table </i><i><span style="background: #c0c0c0">1</span></i><i>:
-Meaning of </i><b>trend</b> <i>and</i> <b>direction</b> <i>in pebble results</i></font></p>
+Meaning of </i><b>trend</b> <i>and</i> <b>direction</b> <i>in pebble
+results</i></font></p>
 <table width="528" cellpadding="0" cellspacing="0">
 	<col width="61"/>
-
 	<col width="131"/>
-
 	<col width="120"/>
-
 	<col width="108"/>
-
 	<col width="108"/>
-
 	<tr valign="top">
 		<td width="61" style="border: none; padding: 0in"><p>trend</p>
 		</td>
@@ -800,7 +881,7 @@ Meaning of </i><b>trend</b> <i>and</i> <b>direction</b> <i>in pebble results</i>
 		</td>
 	</tr>
 	<tr valign="top">
-		<td width="61" height="36" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
+		<td width="61" height="38" style="border: none; padding: 0in" sdval="7" sdnum="1033;"><p>
 			7</p>
 		</td>
 		<td width="131" style="border: none; padding: 0in"><p>&lt;=-3.0</p>
@@ -821,10 +902,10 @@ and scans in Juggluco (for example:
 <p><b>bgdelta</b>=rate*5</p>
 <p><b>datetime</b>: time of glucose value in milliseconds since 1
 january 1970 00:00 GMT.</p>
-<p><b><a href="https://www.juggluco.nl/Jugglucohelp/IOBhelp.html">iob</a></b>: Insulin on board (since Juggluco 7.1.10). Measure of
-how much insulin of previous rapid insulin injections is still
-present in the body. pebble is the only command that returns this
-measure.</p>
+<p><a href="https://www.juggluco.nl/Jugglucohelp/IOBhelp.html"><b>iob</b></a>:
+Insulin on board (since Juggluco 7.1.10). Measure of how much insulin
+of previous rapid insulin injections is still present in the body.
+pebble is the only command that returns this measure.</p>
 <p><a href="http://127.0.0.1:17580/pebble" onclick="location.href=urlstart+'/pebble';return false;">http://127.0.0.1:17580/pebble</a>
 has the following options:</p>
 <p><b>units=mmol</b>: give glucose values in mmol/L instead of the
@@ -868,9 +949,9 @@ server turned on (port 17580)</em></p>
 <p style="line-height: 100%; margin-bottom: 0in"><em>can also be used
 remotely over http</em></p>
 <p>With <strong>-e</strong> you can enable SSL encryption.</p>
-<p>The http web server always uses port 17580, because xDrip watch apps
-can only be used with this port number. The SSL version is accessed
-by the port specified with <b>-o</b></p>
+<p>The http web server always uses port 17580, because xDrip watch
+apps can only be used with this port number. The SSL version is
+accessed by the port specified with <b>-o</b></p>
 <p>./<strong>juggluco -e -o 9191</strong></p>
 <p>says to enable the SSL (https) version and to use port 9191.</p>
 <p>The mirror port, the http and the https port all need to be
@@ -889,7 +970,7 @@ treatments via the Nightscout web protocol. You also have to specify
 for each label what should be done with it. If juggluco server has
 received &quot;<em>Amounts</em>&quot;, you can see the available
 labels with ./juggluco -l, for example:</p>
-<pre>eXport web server turned on (port 17580)
+<pre class="western">eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
 0: Aspart      Not set
@@ -919,7 +1000,7 @@ To assign all labels you can use:</p>
 <p>Now, 
 </p>
 <p>./juggluco -l shows:</p>
-<pre>eXport web server turned on (port 17580)
+<pre class="western">eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
 0: Aspart      Rapid acting insulin
@@ -935,7 +1016,7 @@ Now it still doesn't give treatments. You first have to turn it on
 with <b>-t</b></p>
 <p><b>./juggluco -t</b></p>
 <p>./juggluco -l now shows:</p>
-<pre>Saving in directory jugglucodata
+<pre class="western">Saving in directory jugglucodata
 eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
@@ -958,14 +1039,15 @@ SSL</h3>
 you need to give Juggluco server a SSL certificate for the hostname
 by which the server is accessed. How you can get an SSL key is
 described in the help under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left
-menu-&gt;Settings-&gt;Exchange data-&gt;WWebserver</a> and in the <a href="https://www.juggluco.nl/Juggluco/cmdline/README.txt">README</a>
+menu-&gt;Settings-&gt;Exchange data-&gt;WWebserver</a> and in the
+<a href="https://www.juggluco.nl/Juggluco/cmdline/README.txt">README</a>
 in the source of Juggluco server. For Juggluco server, you need to
 put the the private key in a file named <b>prevkey.pem</b> and the
 fullchain in a file named <b>fullchain.pem</b> in <em>jugglucodata</em>.
 <em>jugglucodata</em> is the directory were Juggluco server saves its
 data: 
 </p>
-<pre>ls -l jugglucodata/
+<pre class="western">ls -l jugglucodata/
 total 136
 -rwxr-xr-x   1 juggluco juggluco   8064 18 nov 20:36 backup.dat
 -rwxr-xr-x   1 juggluco juggluco   4716  8 nov 13:12 fullchain.pem

@@ -643,9 +643,7 @@ after the date in local time.</p>
 <span lang="en-US">&gt; tail(meal1[[1]]$Quantity,n=1)</span>
 <span lang="en-US">[1] 1703851920</span>
 <span lang="en-US">&gt; as.POSIXct(tail(meal1[[1]]$Quantity,n=1), origin=&quot;1970-01-01&quot;)</span>
-<span lang="en-US">[1] &quot;2023-12-29 13:12:00 CET&quot;</span></pre><h4 class="western">
-Python: 
-</h4>
+<span lang="en-US">[1] &quot;2023-12-29 13:12:00 CET&quot;</span></pre><h4 class="western"> Python: </h4>
 <pre class="western">import pandas as pd
 <span lang="en-US">from datetime import datetime</span>
 <span lang="en-US">meal1=pd.read_html(&quot;<a href="http://127.0.0.1:17580/x/meals?days=6" onclick="location.href=urlstart+'/x/meals?days=6';return false;">http://127.0.0.1:17580/x/meals?days=6</a>&quot;)</span>
@@ -653,11 +651,10 @@ Python:
 <span lang="en-US">print(datetime.fromtimestamp(meal1[0]['Quantity'].iloc[-1]))</span>
 <span lang="en-US">print(meal1[0]['Ingredient'].iloc[-1])</span>
 <span lang="en-US">2023-12-29 13:12:00</span>
-<span lang="en-US">2023-12-29 13:12</span></pre><h4 class="western">
-Mathematica:</h4>
-<h3 class="western"><img src="mathematica.png" name="Mathematica" align="left" width="602" height="249" border="0"/>
-xDrip
-/ Nightscout web server</h3>
+<span lang="en-US">2023-12-29 13:12</span></pre>
+<h4 class="western"> Mathematica:</h4>
+<img src="mathematica.png" name="Mathematica"  width="602" height="249" border="0"/>
+<h3 class="western">xDrip/Nightscout web server</h3>
 <p>Some existing apps make use of a xDrip or Nightscout web
 interface.</p>
 <h3 class="western">xDrip</h3>

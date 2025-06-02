@@ -275,14 +275,13 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			to report it gives the maximal count of days to display in a
 			separate curve (since juggluco server 9.7.0-2).</font></font></p>
 		</td>
-		<td style="width:38%; border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a name="token"></a>
-			<a href="http://127.0.0.1:17580/x/stream?maxcount=3">http://127.0.0.1:17580/x/stream?maxcount=3</a></p>
+		<td style="width:38%; border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p><a href="http://127.0.0.1:17580/x/stream?maxcount=3">http://127.0.0.1:17580/x/stream?maxcount=3</a></p>
                         <p><a href="http://127.0.0.1:17580/x/report?days=90&amp;maxcount=14" onclick="location.href=urlstart+'/x/report?hl=tr';return false;">http://127.0.0.1:17580/x/report?days=90&amp;maxcount=14</a></p>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td style="width:7%; border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
-			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b>token</b>=</font></font></p>
+			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt"><b id="token">token</b>=</font></font></p>
 		</td>
 		<td style="width:55%; border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
 			<font face="Liberation Serif, serif"><font size="4" style="font-size: 14pt">The
@@ -816,9 +815,6 @@ values via <a href="http://127.0.0.1:17580/sgv.json" onclick="location.href=urls
 on the devices running Juggluco. Turn the server on in Juggluco under
 <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">left
 menu-&gt;watch-&gt;web server</a>.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
 <p style="line-height: 100%; margin-bottom: 0in">Juggluco recognizes
 the following <a href="https://github.com/NightscoutFoundation/xDrip/blob/master/Documentation/technical/Local_Web_Services.md">xDrip
 server options</a>:</p>
@@ -913,7 +909,7 @@ example
 <p style="line-height: 100%; margin-bottom: 0in"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01" onclick="location.href=urlstart+'/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
 <p style="line-height: 100%; margin-bottom: 0in"><font face="Liberation Sans, sans-serif"><font size="3" style="font-size: 13pt"><b>token=the_api_secret</b></font></font></p>
 <p style="line-height: 100%; margin-bottom: 0in">See the Juggluco
-export web server options above.</p>
+export web server <a href="#token">options</a> above.</p>
 <h3 class="western">Pebble</h3>
 <p style="line-height: 100%; margin-bottom: 0in">Made for a 2013
 watch, some apps still use the following command:</p>
@@ -1163,9 +1159,8 @@ To assign all labels you can use:</p>
 <p>./<strong>juggluco -0R -1C -2C -3L -4O -5O -6O -7D</strong></p>
 <p>labels 0 is R, 1 and 2 are C (Carbohydrate) and 4, 5 and 6 are O
 (cOmments) and 7 is not sent.</p>
-<p>Now, 
-</p>
-<p>./juggluco -l shows:</p>
+<p>(When you add -V you set these categories for saving in <a href="#libreview">Libreview</a> format.)</p>
+<p>Now, ./juggluco -l shows:</p>
 <pre class="western">eXport web server turned on (port 17580)
 can also be used remotely over http
 Use SSL, sslport=9191
@@ -1177,8 +1172,8 @@ Use SSL, sslport=9191
 5: Walk        Comments
 6: Blood       Comments
 7: bad         Don't send
-api/v1/treatments turned off</pre><p>
-Now it still doesn't give treatments. You first have to turn it on
+api/v1/treatments turned off</pre>
+<p>Now it still doesn't give treatments. You first have to turn it on
 with <b>-t</b></p>
 <p><b>./juggluco -t</b></p>
 <p>./juggluco -l now shows:</p>
@@ -1199,7 +1194,8 @@ api_secret: Xsa%sLF8
 
 Mirror port 9113
 unit: mg/dL
-connection:</pre><h3 class="western">
+connection:</pre>
+<h3 class="western">
 SSL</h3>
 <p style="line-height: 100%; margin-bottom: 0in">To make use of SSL,
 you need to give Juggluco server a SSL certificate for the hostname

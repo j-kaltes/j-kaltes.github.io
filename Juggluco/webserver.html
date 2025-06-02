@@ -690,6 +690,122 @@ table</a>: <a href="#header">header</a>, <a href="#days">days</a>,
 <a href="#starttime">starttime</a>, <a href="#end">end</a>, <a href="#endtime">endtime</a>,
 mmol/L, mg/dL and token.</p>
 <p>As special option there is: <a href="#exclusive">exclusive</a>.</p>
+(For information on how to configure Juggluco
+server to receive data from Android Juggluco, see
+<a href="https://www.juggluco.nl/Juggluco/cmdline">https://www.juggluco.nl/Juggluco/cmdline</a>).</p>
+<p style="line-height: 100%; margin-bottom: 0in">To save entered
+insulin, carbohydrates or comments, you need to assign labels to
+these categories.</p>
+<p style="line-height: 100%; margin-bottom: 0in">For example
+./juggluco -l shows the following labels:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Libreview:</p>
+<table style="line-height:1%;" width="198" cellpadding="0" cellspacing="0">
+	<col width="120"/>
+	<col width="78"/>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">0: Novorapid</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">1: Carbohydra</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">2: Dextro</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">3: Levemir</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">4: Bike</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">5: Walk</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="120" style="border: none; padding: 0in"><pre class="western">6: Blood</pre>
+		</td>
+		<td width="78" style="border: none; padding: 0in"><pre class="western">Not set</pre>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 80%; margin-bottom: 0in">Now you can assign
+these labels to categories with:</p>
+<pre class="western"> ./juggluco -V -0R -1C -2C -3L -4O -5O -6O </pre><p style="line-height: 80%; margin-bottom: 0in">
+-0 stands for label 0, -1 for label 1, etc</p>
+<p style="line-height: 80%; margin-bottom: 0in">R: Rapid acting
+Insulin</p>
+<p style="line-height: 80%; margin-bottom: 0in">L: long acting
+Insulin</p>
+<p style="line-height: 80%; margin-bottom: 0in">C: Carbohydrate</p>
+<p style="line-height: 80%; margin-bottom: 0in">O: cOmment</p>
+<p style="line-height: 80%; margin-bottom: 0in">Now ./juggluco -l
+returns:</p>
+<p style="line-height: 100%; margin-bottom: 0in">Libreview:</p>
+<table style="line-height: 1%;" width="330" cellpadding="0" cellspacing="0">
+	<col width="138"/>
+	<col width="192"/>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">0: Novorapid</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Rapid acting insulin</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">1: Carbohydra</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Carbohydrate</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">2: Dextro</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Carbohydrate</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">3: Levemir</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Long acting insulin</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">4: Bike</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Comments</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">5: Walk</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Comments</pre>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="138" style="border: none; padding: 0in"><pre class="western">6: Blood</pre>
+		</td>
+		<td width="192" style="border: none; padding: 0in"><pre class="western">Comments</pre>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 100%; margin-bottom: 0in">See ./juggluco -h
+for more information.</p>
 <h3 class="western">xDrip/Nightscout web server</h3>
 <p>Some existing apps make use of a xDrip or Nightscout web
 interface.</p>

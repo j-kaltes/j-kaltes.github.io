@@ -482,6 +482,7 @@ function setbaseurl(){
       Juggluco. Use the Help button there for more information.</p>
     <p>There is now a Juggluco version that runs on WearOS. See <a href="https://www.juggluco.nl/JugglucoWearOS/index.html"  onclick="location.href=this.href+'?unit='+unitstr;return false;">>https://www.juggluco.nl/JugglucoWearOS</a>
       for more information. </p>
+<a name="aggregatedata"></a>
     <h1 style=" line-height: 108%; margin-bottom: 0.11in">Aggregate data</h1>
     <p style="line-height: 108%; margin-bottom: 0.11in">Juggluco can display
       some summary statistics of the stream data received via Bluetooth. </p>
@@ -535,29 +536,32 @@ function setbaseurl(){
       send glucose values to <a href="https://wiki.aaps.app/en/latest/Getting-Started/FAQ.html">AAPS</a>.</p>
     <p>The <b>Glucodata broadcast</b> came with Juggluco and can be sent to <a href="https://play.google.com/store/apps/details?id=sk.trupici.g_watch">G-Watch</a>
       and <a href="https://github.com/pachi81/GlucoDataHandler/releases">GlucoDataHandler</a></p>
-    <h2 class="western">LibreView</h2>
-    <p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">
-      In settings, you can also ask Juggluco to sent glucose values to
-      Libreview. For this it creates data points for every 15 minutes, by
-      averaging the stream values around that point, so you don't need to scan
-      to make use of it. In Libreview you can select "<i>Download Glucose Data</i>"
-      to download these data to a .csv file. This data can be imported in apps
-      like Diabetes:M.</p>
-    <p>In Libreview under <i>Account Settings-&gt;My Devices</i> you can delete
-      all data send to Libreview from a particular device. So if you don't like
-      the data or want to send everything anew with a new version of Juggluco,
-      you can do that. Maybe it is a good idea, to <i>decline to share your
-        glucose and product-related data for the purposes of research</i> under
-      <i>Account Settings-&gt;Profile</i> </p>
-    <p>To also send amounts of insulin, carbohydrate, etc. to Libreview you have
-      to specify for each label what should be done with it
-      (Settings-&gt;Exchange data-&gt;Libreview-&gt;Send amounts).</p>
-    <p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">
-      I have to mention that you can also save glucose values in Juggluco
-      itself, by going to Left middle menu-&gt; export and select Stream, in
-      this case you get a value for every minute. To view some statistics of
-      these data you can go to Left middle menu-&gt; Statistics (see Aggregate
-      data).</p>
+<h2 class="western"><a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">LibreView</a></h2>
+<p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">
+In settings, you can also ask Juggluco to sent
+glucose values to Libreview. This are the
+every 5 or 15 minutes history values. In
+Libreview you can select &quot;<i>Download Glucose Data</i>&quot; to download these
+data to a .csv file. This data can be imported in apps like
+Diabetes:M or Glooko. Since Juggluco 9.7.1,
+you can also save data directly in Libreview format in left middle
+menu→<a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Export</a>.</p>
+<p>In Libreview under <i>Account Settings-&gt;My Devices</i> you can
+delete all data send to Libreview from a particular device. So if you
+don't like the data or want to send everything anew with a new
+version of Juggluco, you can do that. Maybe it is a good idea, to
+<i>decline to share your glucose and product-related data for the
+purposes of research</i> under <i>Account Settings-&gt;Profile</i> 
+</p>
+<p>To send amounts of insulin, carbohydrate, etc. to Libreview you
+have to specify for each label what should be done with it
+(Settings-&gt;Exchange data-&gt;Libreview-&gt;<a href="https://www.juggluco.nl/Jugglucohelp/librenumhelp.html">Send
+amounts</a>).</p>
+<p style="line-height: 100%; margin-bottom: 0in">I have to mention that you can also save glucose values in Juggluco
+itself, by going to Left middle menu-&gt; <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Export</a> and select Stream, in this case you get a value for every minute. To
+view some statistics of these data you can go to Left middle menu-&gt;
+<a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>
+(see <a href="index.html#aggregatedata">Aggregate data</a>).</p>
     <h1 id="calibration"> No manual calibration</h1>
     <p style="line-height: 100%; margin-bottom: 0in">Freestyle Libre 1 and 2
       sensors as used by Abbott Librelink app are not manually calibrated;

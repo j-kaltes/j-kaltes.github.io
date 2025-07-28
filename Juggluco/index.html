@@ -561,100 +561,62 @@ itself, by going to Left middle menu-&gt; <a href="https://www.juggluco.nl/Juggl
 view some statistics of these data you can go to Left middle menu-&gt;
 <a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>
 (see <a href="index.html#aggregatedata">Aggregate data</a>).</p>
-    <h1 id="calibration"> No manual calibration</h1>
-    <p style="line-height: 100%; margin-bottom: 0in">Freestyle Libre 1 and 2
-      sensors as used by Abbott Librelink app are not manually calibrated;
-      Finger prick glucose measurements are not used to adjust the sensor
-      readouts. </p>
-    <p style="line-height: 100%; margin-bottom: 0in">Some people demand that
-      Juggluco should add manual calibration. I don't know the exact reason why.
-      Some may not known that Freestyle Libre sensors are factory calibrated.
-      But I think that the reason is that they see a discrepancy between the
-      sensor readout and the finger prick glucose value and hope by adjusting
-      the sensor readout it will better approach the finger prick.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">In Juggluco you can't
-      manually calibrate, because I am afraid it will make it worse. When I look
-      at my own glucose measurements, they don't diverge always in the same
-      direction. The direction will also depend on what moments you do your
-      finger pricks. If you check always a low sensor readout, you will find
-      that the sensor readings are too low. If you do a finger prick when you
-      sense a hypo, but the sensor doesn't show one, you will find that the
-      sensor gives too high values.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">For some time I have sent
-      the sensor glucose values from Juggluco to xDrip and have entered all my
-      finger pricks as calibration data in xDrip. As a results the readings of
-      xDrip were much worse than the not manually calibrated values of Juggluco.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">Why should other users do
-      better?</p>
-    <p style="line-height: 100%; margin-bottom: 0in"> There is also the
-      difficulty of sensor range. The sensor doesn't give values lower than 2.2
-      mmol/L. If the sensor values are more than 1.7 mmol/L lower than blood
-      glucose, it can't detect hypoglycemia anymore. If the sensor gives LO
-      (lower than 2.2 mmol/L), it means in reality lower than 4.2 mmol/L when
-      it's readings are 2 mmol/L too low. So it can be 4.2 mmol/L (nothing to
-      worry about) are 1.4 mmol/L (at the border of getting unconscious.) If a
-      sensor readings consistently diverges so much from the blood glucose, you
-      shouldn't use the sensor anymore.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">Getting a replacement from
-      Abbott can give difficulties. Although they easily replace sensors that
-      fall off, they can be very difficult when you want a replacement because of
-      poor readings. Probably they think that the sensors are always so bad, so
-      that replacement doesn't make a difference.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">Here is a list of
-      restrictions, based on a <a href="https://www.juggluco.nl/Juggluco/AbbottComparison.eml">dutch
-e-mail
-        I received from Abbott</a>: </p>
-    <ul>
-      <li>
-        <p style="line-height: 100%; margin-bottom: 0in">You shouldn't use the
-          readings of a sensor for the first 24 hours of placement;</p>
-      </li>
-      <li>
-        <p style="line-height: 100%; margin-bottom: 0in">Only trust the sensor
-          when the glucose level is stable (<i>bij voorkeur nadat je de sensor
-            24 uur hebt gedragen en/ of er sprake is van een stabiele situatie
-            ten aanzien van de glucosewaarden (de trendpijl op de reader en/ of
-            FreeStyle LibreLink app horizontaal</i>));</p>
-      </li>
-      <li>
-        <p style="line-height: 100%; margin-bottom: 0in">You should not compare
-          them with blood at the moment of scanning, but blood 5 to 10 minutes
-          before, because the sensors are so much behind compared to blood
-          glucose (<i>Wacht na de vingerprik 5-10 minuten en scan dan de
-            FreeStyle Libre sensor. </i>);</p>
-      </li>
-      <li>
-        <p style="line-height: 100%; margin-bottom: 0in">You should measure the
-          blood three times at different moment of the same day (<i>Indien je de
-            meting uit het ISV wilt vergelijken met jouw bloedglucose dan vragen
-            wij je minimaal een drietal metingen op verschillende tijdstippen
-            gedurende dezelfde dag te nemen. </i>);</p>
-      </li>
-      <li>
-        <p style="line-height: 100%; margin-bottom: 0in">You should do another
-          measurement together with the Abbott customer service (<i>Hou indien
-            mogelijk de sensor op de arm. Wij kunnen dan samen nog een test
-            uitvoeren. </i>)</p>
-      </li>
-    </ul>
-    <p style="line-height: 100%; margin-bottom: 0in">From the telephone
-      conversation with Abbott customer service I understood that they consider
-      less than 30% off as acceptable. This seemed to be calculated as the
-      absolute difference divided by the sensor value. Sensor measurement 2.4
-      mmol/L and a blood glucose measurement of 4.9 mmol/L was interpreted as
-      more than 100% difference.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">How the different
-      measurements are integrated I don't know, but it sounds like they only
-      accept that the sensor is wrong if it diverges at all occasions.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">I had a sensor that was off
-      4 mmol/L (72 mg/dL) (the different between the sensor and blood glucose measurement was 4 mmol/L (72 mg/dL)) and the customer service didn't accept that as a fault of the
-      sensor, because I had only scanned at the moment of the blood glucose
-      measurement.</p>
+<h1 id="calibration">Calibration</h1>
+<p style="line-height: 100%; margin-bottom: 0in">
+Before version 10.0.0 Juggluco didn’t allow
+manual calibration of glucose values with
+the following justification: <a href="nocalibration.html">nocalibration.html</a>
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco 10.0.0
+added calibration possibilities. It tried to do this in a way that
+makes it possible to keep on eye on the original values and see what
+calibration does. You can use all appropriate blood glucose
+measurements for calibration, but still keep using only the
+uncalibrated values to see what the effect of calibration will before
+using it.</p>
+<p style="line-height: 100%; margin-bottom: 0in">The right middle
+menu has an additional item “Calibrated” that you can switch on
+to see the calibrated values.</p>
+    <figure> <img src="Calibrated.png" alt="Calibrated" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Switch on Calibrated to view curve with calibrated values</span></figcaption>
+    </figure>
+    <figure> <img src="CalibrationSettings.png" alt="Calibration settings" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left menu->Settings->Calibration</span></figcaption>
+    </figure>
+<p style="line-height: 100%; margin-bottom: 0in">To calibrate, you
+specify in left menu→Settings→<a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>, the label under which blood glucose values are entered. Thereafter,
+every value entered under that label in left middle menu→New
+Amount, is used for calibration, except when “Exclude” is
+checked. You need to check “Exclude” for all values that are
+inappropriate for calibration, because the glucose is not steady, or
+it is during the warm-up period.</p>
+    <figure> <img src="addCalibration.png" alt="Calibration settings" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left middle menu-> New amount</span></figcaption>
+    </figure>
+<p style="line-height: 100%; margin-bottom: 0in">This doesn’t make
+that the calibrated values are used for alarms, notifications, send
+to watches etc. For that you need to set<b> “Active” </b><span style="font-weight: normal">in</span><b>
+</b>left menu→Settings→<a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>.</p>
+<p style="line-height: 100%; margin-bottom: 0in">Juggluco uses all
+blood glucose measurements that are not excluded during the lifetime
+of the sensor, but gives older values less weight. Adding recent
+calibrations mean that the calibration gains wait. With less weight
+the calibrated value diverges less from the uncalibrated value. Also,
+a calibration that is older will be given less weight, which means
+that the calibrated glucose values moves in the direction of
+uncalibrated values with time when there are no new blood glucose
+measurements.</p>
+    <figure> <img src="sensorinfo.png" alt="Sensor info" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Sensor information by long pressing glucose curve</span></figcaption>
+    </figure>
+<p style="line-height: 100%; margin-bottom: 0in">By long pressing on
+the glucose curve of a sensor, a view will the shown with the button
+“<a href="https://www.juggluco.nl/Jugglucohelp/calibrationslist.html">Calibrations</a>”.
+Pressing it will show all calibrations for this sensor.</p>
 
-
-    <figure> <img src="https://www.juggluco.nl/Juggluco/calibration.png" alt="Calibration" title="Calibration" style="object-fit:contain;width:11.5cm; height:auto;"> 
-    <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Calibration useful?</span></figcaption></figure>
-
+    <figure> <img src="CalibrationList.png" alt="Calibration List" style="object-fit:contain;
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">List of calibrations</span></figcaption>
+    </figure>
     <h2 id="android13">Android 13</h2>
     <p>Previously there were reports of Bluetooth connection problems with devices
       running&nbsp;Android 13&nbsp;with Libre 2 and 3 sensors. It seems that

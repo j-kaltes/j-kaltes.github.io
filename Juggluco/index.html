@@ -617,6 +617,27 @@ Pressing it will show all calibrations for this sensor.</p>
     <figure> <img src="CalibrationList.png" alt="Calibration List" style="object-fit:contain;
 		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">List of calibrations</span></figcaption>
     </figure>
+<p>
+A calibration is recalculated after pressing “<i>Save</i>” in
+“<i>New amount</i>”. This can give a different value because of
+the following reasons:</p>
+<ul>
+	<li><p style="line-height: 100%; margin-bottom: 0in">The “<i>Exclude</i>”
+	setting changed;</p></li>
+	<li><p style="line-height: 100%; margin-bottom: 0in">The setting of
+	left menu→Settings→”<i>Change slope</i>” changed;</p></li>
+	<li><p style="line-height: 100%; margin-bottom: 0in">With time CGM
+	glucose values are available that were not present when the blood
+	glucose value was first entered; Later a better matching glucose
+	value can arrive that will be taken instead of an earlier one to
+	compare with the blood glucose value.</p></li>
+</ul>
+<p style="line-height: 100%; margin-bottom: 0in">With the entered
+numbers (amounts), calibrations are also sent to mirror devices, for
+example from the phone to the watch when “Enter numbers (amounts)
+on watch” is not checked. (If it is checked it is sent in the
+opposite direction.)</p>
+
     <h2 id="android13">Android 13</h2>
     <p>Previously there were reports of Bluetooth connection problems with devices
       running&nbsp;Android 13&nbsp;with Libre 2 and 3 sensors. It seems that

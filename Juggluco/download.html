@@ -23,7 +23,7 @@ screenshot would not be in agreements with their policies:</p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Juggluco/GooglePlay/Action%20Required_%20Your%20app%20is%20not%20compliant%20with%20Google%20Play%20Policies%20(Juggluco)%20-%20jaapkorthalsaltes@gmail.com%20-%20Gmail.html">Full
 rejection e-mail</a></p>
 <p>
-<a href="https://www.juggluco.nl/Juggluco/WearOSGooglePlay">Some screenshots</a> of the same offence by the Google Play app under WearOS.
+<a href="https://www.juggluco.nl/Juggluco/WearOSGooglePlay">Some screenshots</a> of the same offense by the Google Play app under WearOS.
 <p style="line-height: 100%; margin-bottom: 0in">For this reason
 Juggluco can now be downloaded from Uptodown:</p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://juggluco.en.uptodown.com/android/download/1097663002">Arm64
@@ -32,6 +32,20 @@ phone</a></p>
 WearOS</a></p>
 <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/JugglucoWearOS/install/adb.html">Install
 via adb</a></p>
+    <h2 class="western">New in Juggluco 10.0.4:</h2>
+<ul>
+	<li><p style="margin-bottom: 0in; background: transparent">Display
+	settings (Stream, History etc) saved over restarts</p></li>
+	<li><p style="margin-bottom: 0in; background: transparent">Added
+	calibration:
+	<a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html</a></p></li>
+	<li><p style="margin-bottom: 0in; background: transparent">Switching
+	between entering numbers on WearOS or Phone can now be done with a
+	single setting under WearOS config</p></li>
+	<li><p style="line-height: 100%; margin-bottom: 0in; background: transparent">
+	Search in calibrated values</p></li>
+</ul>
+<p style="line-height: 100%"><a href="changes.html"><b>CHANGELOG</b></a></p>
 <p style="line-height: 100%; margin-bottom: 0in">For some time the
 previous version of Juggluco will still be available via <a href="https://play.google.com/store/apps/details?id=tk.glucodata">Google
 Play</a> or the previous <a href="https://www.juggluco.nl/Juggluco/download9.7.7.html">download
@@ -42,12 +56,29 @@ a certain type of sensor or crashes, it would be helpful to generate
 more information about the problem.</p>
 <p>For this you can install a logging version of Juggluco:
 </p>
-<h3>Mobile phone:</h3><a href="https://drive.google.com/file/d/1SinzSL7THorHx6x9CM5n63ugQmFyj5cQ/view">Google Drive</a>
+<h3>Mobile phone:</h3><a href="https://drive.google.com/file/d/1XiP9OQvYFpjIlQnsfegOjI9Rpb92O3Le/view">Google Drive</a>
 <p>You can just install the logging mobile phone version as any other apk. In <a href="https://www.juggluco.nl/Jugglucohelp/loghelp.html">left menu→Settings→Logging</a> you can go to a view in which you can turn on and off logging, delete the log files and save the
 log files to a file so you can e-mail the log file to me.
 <figure> <img src="logview.png" style="object-fit:contain;
       width:15cm; height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Log view in logging mobile phone version</span></figcaption> </figure>
 </p>
+<h3>WearOS watch:</h3><a href="https://drive.google.com/open?id=1sJp-7de7LO0DTyRnlA-JqmhgArqfqJiE">Google Drive</a>
+<p>The WearOS version you need to install with adb, see <a href="https://www.juggluco.nl/JugglucoWearOS/install/adb.html">Adb</a>
+</p>
+<p>To get the log file out of the device you also need adb:</p>
+<p ><b>adb shell run-as tk.glucodata cat /data/data/tk.glucodata/files/logs/trace.log > trace.log</b></p>
+<p>and E-Mail trace.log to me.</p>
+<p>You can remove the log file with:</p>
+<p >adb shell run-as tk.glucodata rm /data/data/tk.glucodata/files/logs/trace.log</p>
+<p>Thereafter you can install an old version of Juggluco without these problems.</p>
+<p>
+When your Juggluco installation consistently crashes or misbehaves in
+another way, you can also save the data of you installation directory
+and send it to me. If you use the Google Play version, you first need
+to install a debugging version of Juggluco from this page. You need
+to have adb installed. Then you do the following command:</p>
+<p ><b>adb exec-out run-as tk.glucodata tar -cf - ./files &gt; all.tar</b></p>
+<p > and e-mail all.tar to me.</p>
 <p style="line-height: 100%; margin-bottom: 0in"><br/>
 
 </p>

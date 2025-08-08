@@ -257,6 +257,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			<a href="http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8" onclick="location.href=urlstart+'/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8';return false;"><font  style="font-size: 14pt">http://127.0.0.1:17580/x/scans?header&amp;start=2023-02-23T8:43:00&amp;days=8</font></a></p>
 		</td>
 	</tr>
+
 	<tr valign="top">
 		<td width="105" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p><a name="end"></a>
 			<font  style="font-size: 14pt">end=</font></p>
@@ -268,6 +269,44 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 			<a href="http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header" onclick="location.href=urlstart+'/x/stream?end=2023-10-28T23:10&amp;header';return false;"><font  style="font-size: 14pt">http://127.0.0.1:17580/x/stream?end=2023-10-28T23:10&amp;header</font></a></p>
 		</td>
 	</tr>
+
+
+	<tr valign="top">
+		<td width="105" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p><a name="end"></a>
+			<font  style="font-size: 14pt">calibrated</font></p>
+		</td>
+		<td width="800" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font  style="font-size: 14pt">Give also calibrated values when applied to stream or curve. When applied to stats or summarygraph, it gives the statistics for calibrated instead of uncalibrated values.</font></p>
+		</td>
+		<td width="607" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+<font  style="font-size: 14pt">
+			<a href="http://127.0.0.1:17580/x/stream?calibrated&header" onclick="location.href=urlstart+'/x/stream?calibrated&header';return false;">http://127.0.0.1:17580/x/stream?calibrated&amp;header</a></p>
+<p><a href="http://127.0.0.1:17580/x/stats?calibrated" onclick="location.href=urlstart+'/x/stats?calibrated';return false;">http://127.0.0.1:17580/x/stats?calibrated</a></p>
+</font>
+
+		</td>
+	</tr>
+
+
+	<tr valign="top">
+		<td width="105" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p><a name="end"></a>
+			<font  style="font-size: 14pt">allvalues</font></p>
+		</td>
+		<td width="800" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p>
+			<font  style="font-size: 14pt">When applied to curve, stats or summarygraph in combination with <b>calibrated</b>, it specifies that the raw value should be used when no calibrated value exists. When not specified, the value is not used no calibrated value exists.</font></p>
+		</td>
+		<td width="607" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p>
+<font  style="font-size: 14pt">
+<p><a href="http://127.0.0.1:17580/x/stats?calibrated&allvalues" onclick="location.href=urlstart+'/x/stats?calibrated&allvalues';return false;">http://127.0.0.1:17580/x/stats?calibrated&allvalues</a></p>
+<p><a href="http://127.0.0.1:17580/x/curve?calibrated&allvalues" onclick="location.href=urlstart+'/x/curve?calibrated&allvalues';return false;">http://127.0.0.1:17580/x/curve?calibrated&allvalues</a></p>
+</font>
+
+		</td>
+	</tr>
+
+
+
+
 	<tr valign="top">
 		<td width="105" height="32" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0in"><p><a name="maxcount"></a>
 			<font  style="font-size: 14pt">maxcount=</font></p>

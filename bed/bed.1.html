@@ -426,7 +426,7 @@ Options (applied to all files)
 
 <DD>
 <BR>&nbsp;Use&nbsp;configuration&nbsp;file&nbsp;bedrc,&nbsp;instead&nbsp;of&nbsp;env&nbsp;BEDRC
-<BR>&nbsp;&nbsp;&nbsp;or&nbsp;~/.bedrc&nbsp;or&nbsp;/usr/share/bed/bedrc
+<BR>&nbsp;&nbsp;&nbsp;or&nbsp;~/.bedrc&nbsp;or&nbsp;/usr/lib/bed-3.1.6/bedrc
 <DT><B>-p plugin:</B>
 
 <DD>
@@ -592,7 +592,7 @@ In the configuration file you can change colors, assign keys, change
 the menulayout, loud plugins. and configure to call procedure's at certain moments.
 As configuration file is used the first file found of following:
 the argument to -f at the command line ,
-the environmental variable BEDRC, /sdcard/.bedrc or /data/local/tmp/nontmp/share/bed/bedrc.
+the environmental variable BEDRC, /sdcard/.bedrc or /data/local/tmp/nontmp/lib/bed-3.1.6/bedrc.
 <A NAME="lbAP">&nbsp;</A>
 <H3>Commandline Options</H3>
 
@@ -608,7 +608,7 @@ are specified). For example if you add
 options -C
 </PRE>
 
-to the /data/local/tmp/nontmp/share/bed/bedrc (and that is the only configuration file) -B on the command line loses
+to the /data/local/tmp/nontmp/lib/bed-3.1.6/bedrc (and that is the only configuration file) -B on the command line loses
 its effect.
 <BR>
 
@@ -1958,16 +1958,24 @@ Float (Alt-d,o)
 
 </center>
 Create float datatype:
-4 bytes: float
-8 bytes: double
-12 bytes: long double
+bytes total bits precision exponent
+float16 2 16 11 5
+bfloat16 2 16 8 8
+float 4 32 24 8
+double 8 64 53 11
+long double 12 
+long double 16 128 113 15
 <P>
+See: <A HREF="https://en.cppreference.com/w/cpp/types/floating-point.html" TARGET="_top">https://en.cppreference.com/w/cpp/types/floating-point.html</A>
 It is not possible to use normal search in the float datatype,
 you need to use regex search. Normal search translates
 the search string from the datatype format back to raw bytes and
 searches for these raw bytes. This is not possible because float as
 displayed has not a perfect precision so that that the float
 that is displayed can correspondent to more then one raw byte array.
+Under Alt-d,t you can also select ShortFloat. This is a 16 bit power of 10 float 
+format that is used by Bluetooth devices:
+<A HREF="https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/libraries/others/sfloat.html" TARGET="_top">https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/libraries/others/sfloat.html</A>
 <p><A NAME="addBitFlags"><b>addBitFlags</b></a><center>
 BitFlags (Alt-d,b)
 
@@ -3382,7 +3390,7 @@ Leaving out val means unsetenv.
 <DL COMPACT>
 <DT><B>/sdcard/.bedrc</B><DD>
 Individual configuration.
-<DT><B>/data/local/tmp/nontmp/share/bed/bedrc</B><DD>
+<DT><B>/data/local/tmp/nontmp/lib/bed-3.1.6/bedrc</B><DD>
 System wide configuration.
 <DT><B>/data/local/tmp/nontmp/share/bed/plugins/*</B><DD>
 Files needed to compile plugins: plugin.cpp faked.h mainprocedures.h Makefile
@@ -3390,7 +3398,7 @@ Files needed to compile plugins: plugin.cpp faked.h mainprocedures.h Makefile
 <A NAME="lbBF">&nbsp;</A>
 <H2>PORTABILITY</H2>
 
-Binaries available for: Linux x86-64, arm64 android8 and  Windows 10 x86-64 .
+Binaries available for: Linux x86-64, arm64-v8a, armeabi-v7a and  Windows 10 x86-64 .
 <BR>
 
 Previous versions compiled also under win95, cygwin32/64, FreeBSD32, FreeBSD64, and OpenSolaris 32 bit.
@@ -3411,7 +3419,7 @@ E-Mail:  <A HREF="mailto:binaryeditor@gmx.com">binaryeditor@gmx.com</A>
 <A NAME="lbBH">&nbsp;</A>
 <H2>HOMEPAGE</H2>
 
-<A HREF="https://www.juggluco.nl/bed" TARGET="_top">https://www.juggluco.nl/bed</A>
+<A HREF="http://jkaltes.byethost16.com/bed" TARGET="_top">http://jkaltes.byethost16.com/bed</A>
 <BR>
 
 <A HREF="http://binaryeditor.sourceforge.io" TARGET="_top">http://binaryeditor.sourceforge.io</A>
@@ -3521,7 +3529,7 @@ To compile bed for win64 you need:
 This document was created by
 <A HREF="http://gittup.org/cgi-bin/man/man2html" TARGET="_top">man2html</A>,
 using the manual pages.<BR>
-Time: 15:21:39 GMT, November 11, 2021
+Time: 09:08:31 GMT, October 07, 2025
 
 
 </BODY>

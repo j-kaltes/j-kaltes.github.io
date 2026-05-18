@@ -128,11 +128,10 @@ function setbaseurl(){
     </p>
     <h1>Juggluco</h1>
     <p style="margin-bottom: 0in; line-height: 100%">Juggluco (juggle glucose)
-      is an alternative Android app for Abbott's FreeStyle Libre 1, 2, 2+, 3, 3+, Dexcom G7/ONE+, AccuChek SmartGuide and Sibionics GS1 (Chinese, EU and Hematonix) <a href="https://www.juggluco.nl/Juggluco/sensors">sensors</a>, meant for glucose control by people with diabetes. Libre 1 and
-      Libre 2 sensors can be scanned via NFC to display the current value and
-      the 15 minutes values out of the memory of the sensor. For Libre 2 and 3
+      is an alternative Android app for Abbott's FreeStyle Libre 1, 2, 2+, 3, 3+, Dexcom G7/ONE+, AccuChek SmartGuide, Sibionics GS1 (Chinese, EU and Hematonix) and GS3, CareSens Air, and Linx/Aidex-X<a href="https://www.juggluco.nl/Juggluco/sensors">sensors</a>, meant for glucose control by people with diabetes. Libre 1 and
+      Libre 2 sensors can be scanned via NFC to display the current value and the 15-minute values stored in the sensor memory. For Libre 2 and 3
       sensors it displays the glucose values received every minute via
-      Bluetooth. </p>
+      Bluetooth.</p>
     <figure> <img src="bluetoothvalue.png" alt="Juggluco" style="object-fit:contain;
 		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
           showing current glucose value received by Bluetooth</span></figcaption>
@@ -140,19 +139,15 @@ function setbaseurl(){
     <p>The value received via Bluetooth from Libre 2 sensors, is exactly the
       same as the one received by scanning. And these same values will also be
       used in the sensor to generate the history values of the past 8 hours you
-      also receive by scanning. From its introduction in 2018 until 2023, did
-      Abbott Libre app use these glucose values, received via Bluetooth, only
-      for glucose alarms. Only in 2023, in Librelink 2.10.0, does Abbott's Libre
+      also receive by scanning. From its introduction in 2018 until 2023, Abbott's Libre app used Bluetooth glucose values only for glucose alarms. Only in 2023, in Librelink 2.10.0, does Abbott's Libre
       app also display the glucose values received via Bluetooth. Until then,
       they stuck with the idea that NFC scanning was a good idea. And indeed
       they were remarkably successful in terms of sales.</p>
     <p style="margin-bottom: 0in; line-height: 100%"><span lang="en-US">Apps
         like the official Librelink app from Abbott display the glucose graph in
-        a very reduced form in portrait mode, which maybe allows a doctor to see
-        in a glimpse how well one is doing, but is insufficient for a diabetes
+        a very reduced form in portrait mode, which maybe allows a doctor to see at a glance how well someone is doing, but is insufficient for a diabetes
         patient to see exactly how the glucose curve (its peaks and troughs)
-        relates to other events like carbohydrate, insulin doses or physical
-        activity.</span></p>
+        relates to other events like carbohydrate intake, insulin doses, and physical activity.</span></p>
     <figure> <img src="librelink.png" alt="Daily graph Librelink app" style="object-fit:contain;
 		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Abbott's
           Librelink app. 1 hour in 0.23 cm.</span></figcaption> </figure>
@@ -168,16 +163,11 @@ function setbaseurl(){
     <figure> <img src="Juggluco-detail.png" alt="Juggluco 1 hour in 3.3 cm" style="object-fit:contain;
             width:11.5cm;            height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
           1 hour in 3.3 cm. Showing curve of glucose values arriving every
-          minute by Bluetooth and entered amounts of insulin, food and activity.
-          3-8 mmol/L (54-270 mg/dL) </span></figcaption> </figure>
+          minute by Bluetooth and entered amounts of insulin, food and activity.</span></figcaption> </figure>
     <p style="margin-bottom: 0in; line-height: 100%">Juggluco uses the whole
       screen in landscape mode for the glucose curve. With two fingers you can
       zoom the time axis in or out without any restriction (you can disable this
-      in settings). Abbott has an obligatory display of glucose values from 0 to
-      21 mmol/L (0-378 mg/dL), in Juggluco you can configure this in settings
-      with any range you like (or change it manually by moving up and down if
-      allowed in settings). The amount of insulin or food you consume can be
-      added to the graph, so you can see its relation with the glucose values. </p>
+      in settings). Abbott's app uses a fixed vertical range of 0–21 mmol/L (0–378 mg/dL). In Juggluco, you can configure the vertical range in settings (or change it manually by moving up and down if allowed in settings). You can add insulin doses, carbohydrate intake, and activity amounts to the graph, so you can see their relationship to glucose values.</p>
     <figure> <img src="search.png" alt="Search" style="object-fit:contain;
 		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Search
           for glucose values below 4 mmol/L (70 mg/dL) between 22:00 and 0730</span></figcaption>
@@ -187,12 +177,10 @@ function setbaseurl(){
           search result</span></figcaption> </figure>
     <p>By simply moving over the screen left or right you can move the curve
       backwards and forwards in time.</p>
-    <p>The app contains four menus, opened by touching different fourths of the
-      screen. The right most menu is the movement menu, by which you can move
-      one day or one week back in time with one extra touch after opening the
-      menu with a first touch. Beside this you can jump to a specific date or
-      search for a specific glucose value or amount of food or insulin or
-      whatever number you entered.</p>
+    <p>
+The app has four menus, opened by touching different quarters of the screen. The rightmost menu is the movement menu, by which you can move
+      one day or one week back in time with one extra touch after opening the menu with a first touch. In addition, you can jump to a specific date or search for a glucose value, food amount, insulin dose, or any other entered number.
+      </p>
     <p></p>
     <figure> <img src="first.png" alt="Left menu" title="Left menu" style="object-fit:contain;     width:11.5cm;            height:auto;">
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Menu
@@ -210,12 +198,7 @@ function setbaseurl(){
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Menu
           opened by touching the rightmost fourth of the screen.</span></figcaption>
     </figure>
-    <p style="margin-bottom: 0in; line-height: 100%">Naturally you can also set
-      low and high glucose value alarms. For each of which you can specify
-      separate ringtones in the settings. Beside this you can add medication
-      reminders, setting an alarm to go off if you didn't enter a certain amount
-      in a certain time interval. For example if you didn't enter long acting
-      insulin between 9 and 10 in the evening.</p>
+    <p style="margin-bottom: 0in; line-height: 100%">You can set low and high glucose alarms and choose separate ringtones for each. You can also add medication reminders, for example an alarm if no long-acting insulin amount was entered between 21:00 and 22:00.</p>
     <figure> <img src="ringtone.png" alt="Specify ringtone for low glucose alarm"
         title="Specify ringtone for low glucose alarm" style="object-fit:contain;     width:11.5cm;            height:auto;">
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Specify
@@ -235,30 +218,15 @@ function setbaseurl(){
       <li>Juggluco can establish a Bluetooth connection with a sensor after the
         sensor was activated with FreeStyle reader or Librelink (US-like sensors
         even need to be activated by them).</li>
-      <li> <span lang="en-US">You can use multiple sensors beside each other</span><span
-          lang="en-US">;</span><span lang="en-US"> making it easy to move to a
-          new sensor, without a gap between.</span><span lang="en-US"> </span><span
-          lang="en-US">If a sensor seemed unreliable you can </span><span lang="en-US">add
-          </span><span lang="en-US">a </span><span lang="en-US">sensor and see
-          if that was warranted</span><span lang="en-US">.</span> </li>
-      <li> <span lang="en-US">Juggluco can use Libre 1 and 2 sensors 12 hours
-          longer than Librelink</span><span lang="en-US">: I</span><span lang="en-US">t
-        </span><span lang="en-US">takes as the end date 14 days after the start
-          date</span><span lang="en-US"> and stops at this end date, but after
-          scanning two times you can use it for another</span><span lang="en-US"> 12
-          hours. This does not apply to Libre 3 sensors, they only last 14 days
-          and a few minutes.</span> </li>
+      <li>You can use multiple sensors side by side, which makes it easier to switch to a new sensor without a gap. Juggluco can use Libre 1 and Libre 2 sensors for 12 hours longer than LibreLink. It takes as the end date 14 days after the start
+          date and stops at this end date, but after
+          scanning two times you can use it for another 12 hours. This does not apply to Libre 3 sensors; they only last 14 days
+          and 12 minutes.
       <li><span lang="en-US">Librelink is only available in certain countries.
           Juggluco 2.2.0 and higher now work with US Freestyle Libre 2 sensors.<br>
         </span></li>
       <li> <span lang="en-US">Librelink usable with Freestyle Libre 2 sensors
-          needs Android&nbsp; 8.</span><span lang="en-US"> Minimally Android 4.4
-          is needed for </span><span lang="en-US">Juggluco. </span><span lang="en-US">
-        </span><span lang="en-US">So you can try Juggluco on an old phone with
-          NFC for 12 hours on a sensor after it is unusable with Abbott's
-          Librelink because the 14 days period has expired. This only applies to
-          European Libre 2 sensors. US Libre 2 and all Libre 3 sensors also
-          require Android 8.</span> </li>
+          needs Android&nbsp; 8. An old version of Juggluco usable only with Europan Libre 2 sensors needs Android 4.4, newer version at <a href="https://www.juggluco.nl/Juggluco/download.html">download.html</a> require Android 5. Libre 3 sensors and US/CA/etc Libre 2 sensors require Android 8. Because of that the Google Play version requires Android 8.</span> </li>
       <li><span lang="en-US">Librelink needs an e-mail address and password and
           regular contact with a server for I don't know what reasons. The last
           time I had to press a few times on accept related to altered
@@ -269,7 +237,7 @@ function setbaseurl(){
           server. Most of the activity of Librelink consists of Firebase
           Analytics gathering information on your smartphone. Juggluco doesn't
           use Firebase Analytics. Librelink sends all your glucose measurements
-          to their server (as you can see in Libreview); Juggluco doesn't.</span></li>
+          to their server (as you can see in Libreview). In Juggluco you have the option make your data available to others via: Export, Juggluco webserver, Nightscout, Health connect, a glucose broadcast, Libreview or use mirror/clone to send it to another device running Juggluco, see <a href="https://www.juggluco.nl/Jugglucohelp/exchangehelp.html?lang=en">Exchange data</a></span></li>
     </ul>
     <ul>
     </ul>
@@ -279,12 +247,8 @@ function setbaseurl(){
           style="font-size: 0.9em; font-family: Times New Roman;">Configure to
           send data as they arrive to other device running Juggluco</span></figcaption>
     </figure>
-    <p style="margin-bottom: 0in; line-height: 100%">With the mirror function
-      you can send data via IP/TCP from one Juggluco to another Juggluco running
-      on another Android device. This has all kind of uses: transfer your data
-      to a new phone or display it on an Android tablet or Android emulator to
-      have a larger display. You can also set alarms in the mirror device. With
-      the scan data the mirror app also receives the Bluetooth connection data,
+    <p style="margin-bottom: 0in; line-height: 100%">With the mirror function, one Juggluco instance can send data over TCP/IP to another Juggluco instance running on another Android device. This has all kinds of uses: transferring data to a new phone, displaying it on a tablet or emulator. Setting alarms on a mirror device is also possible.
+      With the scan data the mirror app also receives the Bluetooth connection data,
       making it possible for <a href="https://www.juggluco.nl/Juggluco/mirror/index.html">devices
         without NFC to connect via Bluetooth with the sensor</a>.&nbsp; You can
       also display exactly the same data on a second phone that is connected
@@ -380,17 +344,7 @@ function setbaseurl(){
     <h2>FreeStyle Libre 2 sensor differences</h2>
     <p>The Libre 2 sensors in the USA are different from those in Germany or the
       Netherlands. Libre 2 sensors in Australia and Canada are also reported to
-      be different from European sensors.</p>
-    <p> Previously US Libre 2 sensors could be used with Juggluco, but recently
-      a lot of users report that newer US FreeStyle Libre 2 sensors work only
-      with <a href="https://play.google.com/store/apps/details?id=com.freestylelibre2.app.us">Abbotts
-        US Libre 2.7.2 app</a>.</p>
-    <p> Now Juggluco is updated so that Juggluco 5.1.3 can also be used with the
-      new US Libre 2 sensors. This works with the phone and the WearOS version
-      of Juggluco. </p>
-    <p>The minimum Android version is higher than before. I only know that they
-      don't work with Android 6.0 and do work with Android 8.0.</p>
-    <p>Since 8.1.0 also US Libre 2 sensors can be started with Juggluco. 
+      be different from European sensors. Some apps that work with European Libre 2 sensors don't work with sensors in the USA or Canada. Juggluco works with all these sensors, but US like sensors require a higher Android version and data processing requires more resources.</p>
     <h2 class="western"> Sensor error differences</h2>
     <p style="line-height: 100%; margin-bottom: 0in"> Sensor errors (373, wait
       10 minutes) are usually generated in Juggluco at exactly the same moment
@@ -454,7 +408,7 @@ function setbaseurl(){
     <p style="line-height: 100%; margin-bottom: 0in">It is also possible to give
       Juggluco all permissions it uses during install with:</p>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <pre>adb install -g -r Juggluco4.7.0-wear-arm32.apk</pre>
+    <pre>adb install -g -r Juggluco#CURRENTVERSION#-wear-arm32.apk</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
     <p style="line-height: 100%; margin-bottom: 0in">Where
       Juggluco4.7.0-wear-arm32.apk is the WearOS APK downloaded

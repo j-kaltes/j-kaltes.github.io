@@ -227,7 +227,7 @@ The app has four menus, opened by touching different quarters of the screen. The
         </span></li>
       <li> <span lang="en-US">Librelink usable with Freestyle Libre 2 sensors
           needs Android&nbsp; 8. An old version of Juggluco usable only with Europan Libre 2 sensors needs Android 4.4, newer version at <a href="https://www.juggluco.nl/Juggluco/download.html">download.html</a> require Android 5. Libre 3 sensors and US/CA/etc Libre 2 sensors require Android 8. Because of that the Google Play version requires Android 8.</span> </li>
-      <li><span lang="en-US">Librelink needs an e-mail address and password and
+      <li><span lang="en-US">Librelink needs an email address and password and
           regular contact with a server for I don't know what reasons. The last
           time I had to press a few times on accept related to altered
           conditions of use, but did Librelink know that before it made contact
@@ -257,7 +257,7 @@ The app has four menus, opened by touching different quarters of the screen. The
       There is also a desktop command line program that can receive data from
       and resend data to Juggluco (with the program found <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
         title="Juggluco cmdline">here</a>).&nbsp; </p>
-    <h5 style=" margin-bottom: 0in; line-height: 100%">Values</h5>
+    <h2 style=" margin-bottom: 0in; line-height: 100%">Values</h2>
     <p style="margin-bottom: 0in; line-height: 100%"> The glucose values
       received by Bluetooth differ little from the scanned values of Abbott's
       Libre/Librelink app. The values displayed in Juggluco and Abbott's Libre
@@ -269,12 +269,12 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p> European Libre 2 sensors can handle multiple apps on the same phone
       connected to the same sensor quite well. The alarms will become less
       reliable, but you can view two apps at the same time. Sometimes somehow
-      Bluetooth stops totally after the sensor was out of reach for some time,
+      Bluetooth streaming stops totally after the sensor was out of reach for some time,
       something that never happens otherwise. You have to turn Bluetooth off and
       on to get it running again.</p>
     <p></p>
     Only one app will be able to establish a connection with the sensor on its
-    own, except when you run a mirror Juggluco on the same phone. When there are
+    own (except when you run a mirror Juggluco on the same phone). When there are
     connection issues while running two apps in parallel, you should kill the app
     which can't establish a connection. Mostly it is the app that last came to know
     the sensor that can make the connection. Librelink will not use Bluetooth
@@ -321,12 +321,10 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p style="line-height: 100%; margin-bottom: 0in">To display the age of the
       displayed glucose value, the Sensor Identifier under the glucose value, is
       colored in proportion to how long ago the glucose value was received from
-      the sensor. The total length of the Sensor identifier is 3 minutes, thus
-      if the Sensor Identifier is totally colored it was 3 minutes ago the
-      glucose value was received from the sensor. If more then three minutes
-      have passed since the last glucose value was received, it isn't displayed
-      anymore. Immediately after a new glucose value has arrived the sensor id
-      isn't colored at all, after one minute it is colored for a third. The
+      the sensor. The total length of the Sensor identifier is 5.5 minutes, thus
+      if the Sensor Identifier is totally colored it was 5.5 minutes ago the
+      glucose value was received from the sensor. If more than 5.5 minutes have passed since the last glucose value was received, the value is no longer displayed. Immediately after a new glucose value has arrived the sensor id
+      isn't colored at all, after one minute it is colored for a nearly a fifth. The
       screen is only refreshed on every minute tick or when the user touches the
       screen, thus not all degrees of age are immediately shown on the screen.
       If you want a number of the time of the measurement, you can save the
@@ -334,7 +332,7 @@ The app has four menus, opened by touching different quarters of the screen. The
       last point of the glucose curve will also display the measurement time of
       that value.</p>
     <h2>Unmeasurable extremes</h2>
-    <p> Values below 2.2 mmol/L (40 mg/dL) are displayed as <b>2.2&gt;</b> (<b>40&gt;</b>), meaning that 2.2
+    <p>Values below 2.2 mmol/L (40 mg/dL) are displayed as <b>2.2&gt;</b> (<b>40&gt;</b>), meaning that 2.2
       mmol/L (40 mg/dL) is larger than the real value. In Librelink this is show as LO. I
       myself didn't consider that very handy, especially in the beginning: at
       the moment you have to eat glucose as quickly as possible you first have
@@ -349,16 +347,10 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p style="line-height: 100%; margin-bottom: 0in"> Sensor errors (373, wait
       10 minutes) are usually generated in Juggluco at exactly the same moment
       they are generated in the Libre app. An exception is that older version of
-      the librelink app sometimes don't generate sensor errors when never
+      the librelink app sometimes don't generate sensor errors when newer
       versions do. So if someone compares the patched Librelink 2.3.0 app with
       Juggluco, he will sometimes see that Juggluco generates a sensor error,
       but the patched Librelink 2.3.0 will not.</p>
-    <h2>FreeStyle Libre 3</h2>
-    <p style="line-height: 100%; margin-bottom: 0in"> With Juggluco 3.0.0, it is
-      also possible to connect Freestyle Libre 3 sensors directly with Juggluco:
-      <a href="https://www.juggluco.nl/Juggluco/libre3">More info</a>.</p>
-    <h3> <a href="https://www.juggluco.nl/Juggluco/bugreport.html">Bug
-        Report</a> </h3>
     <figure> <img src="lockscreen.jpg" style="object-fit:contain;
 		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose
           value on lock screen</span></figcaption> </figure>
@@ -366,32 +358,25 @@ The app has four menus, opened by touching different quarters of the screen. The
 		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose value in status bar</span></figcaption> </figure>
     <h2>Notifications</h2>
     <p> The stream of glucose values received via Bluetooth is also displayed in
-      the Android status bar and a notification. The glucose value in the
-      Android status bar is made as large as possible; this means that values
-      consisting of more digits or containing a point are displayed in a smaller
-      font than values consisting of a single digit. Some may have preferred
-      consistency over readability, but I prefer the latter.</p>
-    <p> On some smartphones you have to change the notifications settings to see
+      the Android status bar and a notification.</p>
+    <p>On some smartphones you have to change the notifications settings to see
       the current glucose value in the Android status bar and/or on the lock
       screen. How you can do this is device dependent. In Android settings you
       can find somewhere notifications. From a list of apps you can select
       Juggluco and under Juggluco glucoseNotification and then you have all kind
       of options, like "Set as silent" (unset), "display on status bar" (set)
       and "hide details on lock screen" (unset).</p>
-    <p>On Android 13 you should give Juggluco <i>Notifications permission</i></p>
+    <p>On Android 13 and later, grant Juggluco <i>notification permission</i>.</p>
     <p>It is possible that with a certain combination of lock screen color
       settings, only the icon is visible. Switching to dark mode helps.</p>
     <p>Don't set <i>"Icon only"</i> in your lock screen settings.</p>
     <p>On some smartphones, only notifications generated after the screen was
-      locked are displayed, so you will not seen immediately whether the the
-      change of settings was effective. </p>
+      locked are displayed, so you will not immediately see whether the settings change was effective.</p>
     <h2 class="western">Floating glucose</h2>
     <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
       Juggluco has the possibility to show the current glucose value received
       via Bluetooth above other apps. In <a href="https://www.juggluco.nl/Jugglucohelp/floatingconfig.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">Left
-        menu-&gt;Settings-&gt;Floating Glucose</a>, you can change the colors,
-      transparency and whether touch end up in the view beneath or touch is used
-      to move the Floating glucose. You can turn it on and off in Left middle
+        menu-&gt;Settings-&gt;Floating Glucose</a>, you can change colors, transparency, and whether touches pass through to the app underneath or move the floating glucose display. You can turn it on and off in Left middle
       menu-&gt;Float.</p>
     <figure> <img src="cycling.png" style="object-fit:contain;
 		    height:4cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose
@@ -408,77 +393,37 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p style="line-height: 100%; margin-bottom: 0in">It is also possible to give
       Juggluco all permissions it uses during install with:</p>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <pre>adb install -g -r Juggluco#CURRENTVERSION#-wear-arm32.apk</pre>
+    <pre>adb install -g -r JugglucoVERSION-wear-arm32.apk</pre>
     <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <p style="line-height: 100%; margin-bottom: 0in">Where
-      Juggluco4.7.0-wear-arm32.apk is the WearOS APK downloaded
-      from:</p>
+    <p style="line-height: 100%; margin-bottom: 0in">Where <i>JugglucoVERSION-wear-arm32.apk</i> is the WearOS APK downloaded from:</p>
     <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a></p>
     <p style="line-height: 100%; margin-bottom: 0in">-g means that you grant all
-      permissions.</p>
+          permissions.</p>
     <h2>Watch</h2>
-    <p>If you have a smartwatch that can receive Android notifications, you can
-      select Notify in the left middle menu of Juggluco to let Juggluco generate
-      an alerting Android notification every time a new glucose value arrived by
-      Bluetooth. If you configure your smartwatch app to send notifications from
-      Juggluco to the watch, you will receive this notification on your watch,
-      so you can look every minute at your watch for you current glucose level.
-      This can by useful during physical activity. Somehow it didn't work on
-      the WearOS watch Samsung Galaxy Watch4, maybe because it is an ongoing
-      notification.</p>
-    <p>There is also a special watch for Garmin watches (see <a href="https://www.juggluco.nl/Kerfstok/index.html">Kerfstok</a>),
-      wherein you can see your current glucose value, enter numbers and display
-      speed and distance during activity and record it. It runs on nearly all Garmin watches that allow third party apps. Since Kerfstok 1.6.0 also on Garmin watches without touchscreen.</p>
+    <p>If your smartwatch can receive Android notifications, select Notify in Juggluco's under left menu->Watch. After configuring your smartwatch app to forward Juggluco notifications, you can see your current glucose level on your watch every minute. This can be useful during physical activity. On most watches you need to specify "Separate" to generate every time a new notification, because their companion app only forwards new notifications.</p>
+<p>There is also a Garmin watch app, <a href="https://www.juggluco.nl/Kerfstok/index.html">Kerfstok</a>, that can show your current glucose value, enter numbers, display speed and distance during activity, and record activity.</p>
     <p>The <a href="https://www.juggluco.nl/Juggluco/webserver.html">web server</a> in Juggluco recognises commands of the xDrip webservice. This
       means that xDrip watch apps can receive glucose values directly from
       Juggluco. You can turn this on in the <i>left menu-&gt;watch</i> of
       Juggluco. Use the Help button there for more information.</p>
-    <p>There is now a Juggluco version that runs on WearOS. See <a href="https://www.juggluco.nl/JugglucoWearOS/index.html"  onclick="location.href=this.href+'?unit='+unitstr;return false;">https://www.juggluco.nl/JugglucoWearOS</a>
-      for more information. </p>
+    <p>Juggluco also runs on Wear OS. See <a href="https://www.juggluco.nl/JugglucoWearOS/index.html"  onclick="location.href=this.href+'?unit='+unitstr;return false;">https://www.juggluco.nl/JugglucoWearOS</a> for more information</p>
+      <p>For all watches, see the help under left menu -> <a href="https://www.juggluco.nl/Jugglucohelp/watchinfo.html">Watch</a>.</p>
+
 <a name="aggregatedata"></a>
     <h1 style=" line-height: 108%; margin-bottom: 0.11in">Aggregate data</h1>
-    <p style="line-height: 108%; margin-bottom: 0.11in">Juggluco can display
-      some summary statistics of the stream data received via Bluetooth. </p>
+<p>Juggluco shows the percentage of measurements in standard glucose ranges and in the target range configured in settings. For each minute of the day, it calculates the distribution of values over the selected period and derives median and percentile bands. See: <a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics help</a></p>
     <figure> <img src="stats.png" alt="Settings" title="Settings" style="object-fit:contain;     width:11.5cm;            height:auto;">
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Statistics</span></figcaption>
     </figure>
     <figure> <img src="summarygraph.png" alt="Scan" title="Scan" style="object-fit:contain;     width:11.5cm;            height:auto;">
       <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Summary
           graph</span></figcaption> </figure>
-    <p>You can see the percentage of measurements falling in certain glucose
-      ranges. Both for the conventional ranges (&gt;13.9 mmol/L, 10.1-13.9
-      mmol/L, 3.9-10 mmol/L, 3.0-3.8 mmol/L, &lt;3.0 mmol/L or &gt;250 mg/dL, 181-250 mg/dL,
-      70-180 mg/dL, 54-69 mg/dL, &lt;54 mg/dL) as the target range
-      specified in settings. In the above image it is 4.0-8.0 mmol/L (or 72-144 mg/dL).</p>
-    <p>Glucose Management Indicator is an empirically determined predictor of
-      HbA1c taken from Bergenstal et al (2018) <a href="https://care.diabetesjournals.org/content/41/11/2275">https://care.diabetesjournals.org/content/41/11/2275</a>.</p>
-    <p> The summary graph is made as follows: Of every minute of the day it is
-      determined how the glucose values were distributed over a given number of
-      days. For example for the first minute of the day, all measurements of
-      this minute for every day in this period are taken and it is determine
-      under which value 50% of the values lie to get the median. For the 100%
-      range, the lowest and highest values on that minute of the day in this
-      period are taken. For the 90% range the values below which 5% of the
-      values lie and the values below which 95% of the values lie is taken. For
-      the 50% range the value below which 25% of the values lie and the value
-      below which 75% of the values lie. This for every minute of the day.
-      Thereafter these borders/lines are smoothed.</p>
-    <p>The specific period for which these calculations are done, can be
-      determined by setting the number of days by pressing <i>Days</i> and by
-      the end position of the screen at the moment <i>Stats</i> in the left
-      middle menu was touched. The time point of the end position of the screen
-      is the end of the period over which these calculations are done, going
-      back the number of days specified in <i>Days</i>, or 14 days by default.</p>
-    <p>With <i>Export</i> in the left middle menu data can be saved in tab
-      separated format (.tsv), thereafter you can also analyze the data using whatever
-      statistics software you like. In the following link is shown how you can
-      do this using the R package Iglu. <a href="https://www.juggluco.nl/Juggluco/iglu.html">https://www.juggluco.nl/Juggluco/iglu.html</a>
-    </p>
+
+
+    <p>Using <i>Export</i> in the left middle menu, you can save data in tab-separated format (.tsv). You can then analyze the file with statistical software such as the R package iglu. <a href="https://www.juggluco.nl/Juggluco/iglu.html">https://www.juggluco.nl/Juggluco/iglu.html</a></p>
     <h1 style="line-height: 108%; margin-top: 0in; margin-bottom: 0.11in">Receive
       glucose values</h1>
-    <p>Starting with Juggluco 4.1.0, other apps can receive glucose values from
-      a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">glucose
-        broadcast</a> </p>
+    <p>Other apps can receive glucose values from Juggluco through <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">glucose broadcasts</a>.</p>
     <p>In Juggluco's settings you can configure Juggluco to send its glucose
       values to other apps. Juggluco can send three types of such broadcasts.</p>
     <p>The <b>Patched Libre broadcast</b> was originally used by the patched Librelink app
@@ -490,22 +435,13 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p>The <b>Glucodata broadcast</b> came with Juggluco and can be sent to <a href="https://play.google.com/store/apps/details?id=sk.trupici.g_watch">G-Watch</a>
       and <a href="https://github.com/pachi81/GlucoDataHandler/releases">GlucoDataHandler</a></p>
 <h2 class="western"><a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">LibreView</a></h2>
-<p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">
-In settings, you can also ask Juggluco to sent
-glucose values to Libreview. This are the
-every 5 (Libre 3) or 15 (Libre 2) minutes history values. In
-Libreview you can select &quot;<i>Download Glucose Data</i>&quot; to download these
-data to a .csv file. This data can be imported in apps like
-Diabetes:M or Glooko. Since Juggluco 9.7.1,
-you can also save data directly in Libreview format in left middle
+<p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">In settings, you can ask Juggluco to send glucose values to LibreView. These are the 5-minute (Libre 3) or 15-minute (Libre 2) history values. In LibreView, you can select Download Glucose Data to export these data to a .csv file. This data can be imported in apps like
+Diabetes:M or Glooko. Juggluco you can also save data directly in Libreview format in left middle
 menu→<a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Export</a>.</p>
 <p>In Libreview under <i>Account Settings-&gt;My Devices</i> you can
 delete all data send to Libreview from a particular device. So if you
 don't like the data or want to send everything anew with a new
-version of Juggluco, you can do that. Maybe it is a good idea, to
-<i>decline to share your glucose and product-related data for the
-purposes of research</i> under <i>Account Settings-&gt;Profile</i> 
-</p>
+version of Juggluco, you can do that. Maybe it is a good idea to <i>decline to share your glucose and product-related data for the purposes of research</i> under <i>Account Settings-&gt;Profile</i></p>
 <p>To send amounts of insulin, carbohydrate, etc. to Libreview you
 have to specify for each label what should be done with it
 (Settings-&gt;Exchange data-&gt;Libreview-&gt;<a href="https://www.juggluco.nl/Jugglucohelp/librenumhelp.html">Send
@@ -526,7 +462,7 @@ added calibration possibilities. It tried to do this in a way that
 makes it possible to keep on eye on the original values and see what
 calibration does. You can use all appropriate blood glucose
 measurements for calibration, but still keep using only the
-uncalibrated values to see what the effect of calibration will before
+uncalibrated values to see what the effect of calibration will be before
 using it.</p>
 <p style="line-height: 100%; margin-bottom: 0in">In the right middle menu,  ✓ before Stream, Scan or History means that the calibrated values are shown. (The [x] after Stream, Scan and History still means the display of the uncalibrated value.)</p>
     <figure> <img src="Calibrated.png" alt="Calibrated" style="object-fit:contain;
@@ -545,10 +481,7 @@ it is during the warm-up period. (A blood glucose measurement less than 30 minut
     <figure> <img src="addCalibration.png" alt="Calibration settings" style="object-fit:contain;
 		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left middle menu-> New amount</span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in">This doesn’t make
-that the calibrated values are used for alarms, notifications, send
-to watches etc. For that you need to set<b> “Active” </b><span style="font-weight: normal">in</span><b>
-</b>left menu→Settings→<a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>.</p>
+<p style="line-height: 100%; margin-bottom: 0in">This does not cause calibrated values to be used for alarms, notifications, watches, or other outputs. To use calibrated values for those purposes, enable <b>Active</b> in Left menu → Settings → <a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>. Adding recent calibrations means the calibration gains weight.</p>
 <p style="line-height: 100%; margin-bottom: 0in">Juggluco uses all
 blood glucose measurements that are not excluded during the lifetime
 of the sensor, but gives older values less weight. Adding recent
@@ -559,11 +492,9 @@ that the calibrated glucose values moves in the direction of
 uncalibrated values with time when there are no new blood glucose
 measurements. </p>
     <figure> <img src="sensorinfo.png" alt="Sensor info" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Sensor information by long pressing glucose curve</span></figcaption>
+		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Long pressing the glucose curve shows sensor information, including <i>Calibrations</i></span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in">By long pressing on
-the glucose curve of a sensor, a view will the shown with the button
-“<a href="https://www.juggluco.nl/Jugglucohelp/calibrationslist.html">Calibrations</a>”.
+<p style="line-height: 100%; margin-bottom: 0in"> By long-pressing the glucose curve for a sensor, a view will be shown with the button “<a href="https://www.juggluco.nl/Jugglucohelp/calibrationslist.html">Calibrations</a>”.
 Pressing it will show all calibrations for this sensor.</p>
 
     <figure> <img src="CalibrationList.png" alt="Calibration List" style="object-fit:contain;
@@ -603,11 +534,7 @@ opposite direction.)</p>
     <p class="P1">Juggluco's source code can be found at: <a href="https://github.com/j-kaltes/Juggluco"
         class="Internet_20_link">https://github.com/j-kaltes/Juggluco</a></p>
     <h2 id="novopens" class="western"> NFC NovoPens</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">Juggluco 4.13.0 and later
-      contains support for <strong>NFC NovoPen® 6</strong> &amp; <strong>NovoPen
-        Echo®Plus</strong> insulin pens. Just hold the back of the pen to the
-      NFC sensor in your phone with Juggluco in the foreground. Thereafter, you
-      can specify with what label the new values have to be saved. For the case
+    <p style="line-height: 100%; margin-bottom: 0in">Juggluco supports <b>NFC NovoPen® 6</b> and <b>NovoPen Echo® Plus</b> insulin pens. Hold the back of the pen to the phone's NFC sensor while Juggluco is in the foreground. Then choose which label should store the new values. For the case
       you have previously entered the insulin dose data by hand, you can specify
       that only doses after a certain date and time should be added.</p>
     <figure> <img src="novopen.png" title="Save NovoPen doses" style="object-fit:contain;     width:11.5cm;            height:auto;">
@@ -631,10 +558,7 @@ opposite direction.)</p>
       connected to the internet via a modem.</p>
     <h2 class="western">Nightscout</h2>
     <p style="line-height: 100%; margin-bottom: 0in">The web server in Juggluco and <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
-        title="Juggluco cmdline">Juggluco server</a> know some <a href="https://www.juggluco.nl/Juggluco/webserver.html">Nightscout server</a> commands, so that  Nightscout followers can connect to it. It can not be used
-      with all Nightscout apps: the Android app NS Client and the IOS apps
-      Nightscout and Nightscout X only work with a particular Nightscout
-      implementation. The last two do nothing more than displaying the
+        title="Juggluco cmdline">Juggluco server</a> know some <a href="https://www.juggluco.nl/Juggluco/webserver.html">Nightscout server</a> commands, so that Nightscout followers can connect to it. It cannot be used with all Nightscout apps: the Android app NSClient and the iOS apps Nightscout and Nightscout X only work with a particular Nightscout implementation. The last two do nothing more than displaying the
       Nightscout web page.</p>
     <p style="line-height: 100%; margin-bottom: 0in">For more information, see
       the help in Juggluco under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left menu-&gt;Settings-&gt;Exchange data-&gt;Webserver</a>.</p>
@@ -644,25 +568,9 @@ opposite direction.)</p>
       See <a href="https://www.juggluco.nl/Jugglucohelp/NightPost.html">Left menu-&gt;Settings-&gt;Exchange data-&gt;Uploader-&gt;Help</a>.</p>
     <h2 class="western">LibreLinkUp</h2>
     <p style="line-height: 100%; margin-bottom: 0in">Glucose values sent to
-      Libreview can also be sent to Abbott's LibrelinkUp app. When <a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">Left
-      menu-&gt;Settings-&gt;Exchange data-&gt;Libreview-&gt;Immediate</a> is set, Juggluco
-      (4.16.0 or above) will send every glucose value received from Libre 2 or 3
-      sensors to Libreview. In Abbott's Libre app under Connected
-      apps-&gt;Librelinkup you can invite an e-mail address to receive these
-      data. </p>
-<h2 id="volunteer">Volunteer work</h2>
-<p>
-Do you want to help diabetics better control their blood sugar levels so they can live longer and have fewer complications from diabetes? Then you can support Juggluco in many ways.
-First of all, there is a need for translations into other languages ​​and updates to the current translations.
-It is also possible to create additional features based on Juggluco's blood sugar readings. For example, one user has requested an app that sends an SMS message when blood sugar levels are low. You could develop an app that receives a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">glucose broadcast</a> from Juggluco and sends an SMS when blood sugar levels are below a certain level.
-In addition, there is a need to transmit the glucose value from Juggluco to other <a href="https://www.juggluco.nl/Juggluco/addwatch.html">smartwatches</a> and fitness watches.
-</p>
-    <h2 class="western">Translations</h2>
-    <p>Juggluco is currently available in Chinese, English, German, Russian, Italian, French,
-      Polish, Ukrainian, Portuguese, Dutch and Belarusian. There is a need for
-      translations into other languages and updates to current translations. See <a
-        href="https://github.com/j-kaltes/Jugglucohelp">Help</a> for more
-      information.</p>
+      Libreview can also be sent to Abbott's LibrelinkUp app. When <a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">Immediate</a> is enabled in Left
+      menu-&gt;Settings-&gt;Exchange data-&gt;Libreview, Juggluco sends every glucose value received from Libre 2 or 3 sensors to LibreView, where it can be shared with LibreLinkUp. In Abbott's Libre app under Connected apps-&gt;Librelinkup you can invite an email address to receive these
+      data.</p>
     <h2 class="western">Data Analysis</h2>
     <p>Juggluco's data can be exported to a file or sent to other apps via
       broadcasts or a web interface. There is demand for the analysis and
@@ -696,10 +604,8 @@ by touching the connection, pressing <i><b>Modify</b></i> followed by
 <h4 id="adb"class="western">adb</h4>
 <p style="line-height: 100%; margin-bottom: 0in">Another possibility
 is to use tar via <a href="https://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/">adb</a>:</p>
-<p>You can’t do this when the Google Play version is installed, you need to install first a debuggable version from:
-<a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a>. Thereafter you need to install with adb install -r -d a working version from the same page, before you can update to the Google Play version.</p>
-<p style="line-height: 100%; margin-bottom: 0in">First install and
-run Juggluco on the new phone, then force stop Juggluco on the new
+<p>On both phones you need to install/update to Juggluco from the <a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a>; <i>run-as</i> doesn't work with the Google Play version.</p> 
+<p style="line-height: 100%; margin-bottom: 0in">Run Juggluco on the new phone, then force stop Juggluco on the new
 phone.</p>
 <p style="line-height: 100%; margin-bottom: 0in">On the computer
 while connected to the old phone:</p>

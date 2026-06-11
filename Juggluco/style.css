@@ -1,0 +1,38 @@
+@page {
+    size: 8.27in 11.69in;
+    margin: 0.79in;
+}
+p {
+    margin-bottom: 0.1in;
+    line-height: 115%;
+    background: transparent;
+}
+.p1 {
+    margin-bottom: 0in;
+    line-height: 100%;
+}
+a:link {
+    color: #000080;
+    text-decoration: underline;
+}
+figure {
+    display: inline-block;
+}
+
+img {
+    object-fit: contain;
+    height: auto;
+    width:auto;
+}
+
+h3 {
+    text-align: right;
+}
+h4 {
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.9em;
+    font-family: Times New Roman;
+}

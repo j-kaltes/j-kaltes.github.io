@@ -7,17 +7,7 @@
     <meta name="generator" content="LibreOffice 7.1.6.2 (Linux)">
     <meta name="created" content="2021-10-13T21:19:06.016650885">
     <meta name="changed" content="2021-10-15T12:35:49.484341909">
-    <style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
-		a:link { color: #000080; text-decoration: underline }
-figure {
-    display: inline-block;
-}
-
-        h3{text-align: right;}
-        h4{text-align: center;}
-	</style>
+    <link rel="stylesheet" href="./style.css">
     <base href="https://www.juggluco.nl/Juggluco/mgdL/" id="baseurl" target="_blank">
     <script type="text/javascript"> 
 var unitstr='mmol/L';
@@ -115,7 +105,7 @@ function setbaseurl(){
    </script>
   </head>
   <body dir="ltr" vlink="#800000" link="#000080" lang="en-US">
-<a href="https://play.google.com/store/apps/details?id=tk.glucodata"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play"   style="object-fit:contain; width:5cm;		    height:auto;" align="left" /></a>
+<a href="https://play.google.com/store/apps/details?id=tk.glucodata"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="width: 5cm;" align="left" /></a>
     <h3 ><a href="https://www.juggluco.nl/Juggluco/download.html" align="right">Download</a> </h3>
     <br>
 <p><a align="left" href="https://www.juggluco.nl/Jugglucohelp/introhelp.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">User
@@ -127,13 +117,12 @@ function setbaseurl(){
     <a href="mailto:jaapkorthalsaltes@gmail.com?subject=Juggluco">Contact</a>
     </p>
     <h1>Juggluco</h1>
-    <p style="margin-bottom: 0in; line-height: 100%">Juggluco (juggle glucose)
+    <p class="p1">Juggluco (juggle glucose)
       is an alternative Android app for Abbott's FreeStyle Libre 1, 2, 2+, 3, 3+, Dexcom G7/ONE+, AccuChek SmartGuide, Sibionics GS1 (Chinese, EU and Hematonix) and GS3, CareSens Air, and Linx/Aidex-X <a href="https://www.juggluco.nl/Juggluco/sensors">sensors</a>, meant for glucose control by people with diabetes. Libre 1 and
       Libre 2 sensors can be scanned via NFC to display the current value and the 15-minute values stored in the sensor memory. For Libre 2 and 3
       sensors it displays the glucose values received every minute via
       Bluetooth.</p>
-    <figure> <img src="bluetoothvalue.png" alt="Juggluco" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+    <figure> <img src="bluetoothvalue.png" alt="Juggluco" style="width:11.5cm;"> <figcaption><span>Juggluco
           showing current glucose value received by Bluetooth</span></figcaption>
     </figure>
     <p>The value received via Bluetooth from Libre 2 sensors, is exactly the
@@ -143,37 +132,29 @@ function setbaseurl(){
       app also display the glucose values received via Bluetooth. Until then,
       they stuck with the idea that NFC scanning was a good idea. And indeed
       they were remarkably successful in terms of sales.</p>
-    <p style="margin-bottom: 0in; line-height: 100%"><span lang="en-US">Apps
+    <p class="p1"><span lang="en-US">Apps
         like the official Librelink app from Abbott display the glucose graph in
         a very reduced form in portrait mode, which maybe allows a doctor to see at a glance how well someone is doing, but is insufficient for a diabetes
         patient to see exactly how the glucose curve (its peaks and troughs)
         relates to other events like carbohydrate intake, insulin doses, and physical activity.</span></p>
-    <figure> <img src="librelink.png" alt="Daily graph Librelink app" style="object-fit:contain;
-		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Abbott's
-          Librelink app. 1 hour in 0.23 cm.</span></figcaption> </figure>
+    <figure> <img src="librelink.png" alt="Daily graph Librelink app" style="height:11.5cm;"> <figcaption><span>Abbott's Librelink app. 1 hour in 0.23 cm.</span></figcaption> </figure>
     <figure> <img src="Freestyle-Libre.jpg" alt="Daily graph Freestyle reader"
-        style="object-fit:contain;
-		    width:7.7cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Freestyle
-          reader. 1 hour in 0.12 cm.</span></figcaption> </figure>
+        style="width:7.7cm;"> <figcaption><span>Freestyle reader. 1 hour in 0.12 cm.</span></figcaption> </figure>
     <figure> <img src="Juggluco-overview.png" alt="Juggluco 1 hour in 0.12 cm"
-        style="object-fit:contain;
-            width:11.5cm;            height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+        style="width:11.5cm;"> <figcaption><span>Juggluco
           1 hour in 0.12 cm. Showing only 15 minutes measurements received by
           scanning. 0-21 mmol/L (0-378 mg/dL)</span></figcaption> </figure>
-    <figure> <img src="Juggluco-detail.png" alt="Juggluco 1 hour in 3.3 cm" style="object-fit:contain;
-            width:11.5cm;            height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Juggluco
+    <figure> <img src="Juggluco-detail.png" alt="Juggluco 1 hour in 3.3 cm" style="width:11.5cm;"> <figcaption><span>Juggluco
           1 hour in 3.3 cm. Showing curve of glucose values arriving every
           minute by Bluetooth and entered amounts of insulin, food and activity.</span></figcaption> </figure>
-    <p style="margin-bottom: 0in; line-height: 100%">Juggluco uses the whole
+    <p class="p1">Juggluco uses the whole
       screen in landscape mode for the glucose curve. With two fingers you can
       zoom the time axis in or out without any restriction (you can disable this
       in settings). Abbott's app uses a fixed vertical range of 0–21 mmol/L (0–378 mg/dL). In Juggluco, you can configure the vertical range in settings (or change it manually by moving up and down if allowed in settings). You can add insulin doses, carbohydrate intake, and activity amounts to the graph, so you can see their relationship to glucose values.</p>
-    <figure> <img src="search.png" alt="Search" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Search
+    <figure> <img src="search.png" alt="Search" style="width:11.5cm;"> <figcaption><span>Search
           for glucose values below 4 mmol/L (70 mg/dL) between 22:00 and 0730</span></figcaption>
     </figure>
-    <figure> <img src="searchresults.jpg" alt="Search" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">A
+    <figure> <img src="searchresults.jpg" alt="Search" style="width:11.5cm;"> <figcaption><span>A
           search result</span></figcaption> </figure>
     <p>By simply moving over the screen left or right you can move the curve
       backwards and forwards in time.</p>
@@ -182,33 +163,31 @@ The app has four menus, opened by touching different quarters of the screen. The
       one day or one week back in time with one extra touch after opening the menu with a first touch. In addition, you can jump to a specific date or search for a glucose value, food amount, insulin dose, or any other entered number.
       </p>
     <p></p>
-    <figure> <img src="first.png" alt="Left menu" title="Left menu" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Menu
+    <figure> <img src="first.png" alt="Left menu" title="Left menu" style="width:11.5cm;">
+      <figcaption><span>Menu
           opened by touching an empty spot in the left most fourth of the screen</span></figcaption>
     </figure>
     <figure> <img src="second.png" alt="Left middle menu" title="Left middle menu"
-        style="object-fit:contain;     width:11.5cm;            height:auto;"><figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Menu opened by
+        style="width:11.5cm;"><figcaption><span>Menu opened by
           touching left of the middle of the screen</span></figcaption></figure>
     <figure> <img src="display.png" alt="Right middle menu" title="Right middle menu"
-        style="object-fit:contain;     width:11.5cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Menu opened by
+        style="width:11.5cm;"> <figcaption><span>Menu opened by
           touching right of the middle of the screen.</span></figcaption> </figure>
-    <figure> <img src="move.png" alt="Right menu" title="Right menu" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Menu
+    <figure> <img src="move.png" alt="Right menu" title="Right menu" style="width:11.5cm;">
+      <figcaption><span>Menu
           opened by touching the rightmost fourth of the screen.</span></figcaption>
     </figure>
-    <p style="margin-bottom: 0in; line-height: 100%">You can set low and high glucose alarms and choose separate ringtones for each. You can also add medication reminders, for example an alarm if no long-acting insulin amount was entered between 21:00 and 22:00.</p>
+    <p class="p1">You can set low and high glucose alarms and choose separate ringtones for each. You can also add medication reminders, for example an alarm if no long-acting insulin amount was entered between 21:00 and 22:00.</p>
     <figure> <img src="ringtone.png" alt="Specify ringtone for low glucose alarm"
-        title="Specify ringtone for low glucose alarm" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Specify
+        title="Specify ringtone for low glucose alarm" style="width:11.5cm;">
+      <figcaption><span>Specify
           separate ringtone for low glucose alarm</span></figcaption> </figure>
-    <figure> <img src="reminders.png" alt="Reminders" title="Reminders" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Reminders
+    <figure> <img src="reminders.png" alt="Reminders" title="Reminders" style="width:11.5cm;">
+      <figcaption><span>Reminders
           to go off if certain amounts were not entered in given period</span></figcaption>
     </figure>
-    <figure> <img src="bothfood.jpg" title="Two sensors" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">A
+    <figure> <img src="bothfood.jpg" title="Two sensors" style="width:11.5cm;">
+      <figcaption><span>A
           Freestyle Libre 3 sensor and a Freestyle Libre 2 sensor at the same
           time</span></figcaption> </figure>
     <br>
@@ -243,11 +222,10 @@ The app has four menus, opened by touching different quarters of the screen. The
     </ul>
     <h2 id="mirror">Mirror</h2>
     <figure> <img src="addconnection.png" alt="Send data to other device" title="Send data to other device"
-        style="object-fit:contain;     width:11.5cm;            height:auto;"> <figcaption><span
-          style="font-size: 0.9em; font-family: Times New Roman;">Configure to
+        style="width:11.5cm;"> <figcaption><span>Configure to
           send data as they arrive to other device running Juggluco</span></figcaption>
     </figure>
-    <p style="margin-bottom: 0in; line-height: 100%">With the mirror function, one Juggluco instance can send data over TCP/IP to another Juggluco instance running on another Android device. This has all kinds of uses: transferring data to a new phone, displaying it on a tablet or emulator. Setting alarms on a mirror device is also possible.
+    <p class="p1">With the mirror function, one Juggluco instance can send data over TCP/IP to another Juggluco instance running on another Android device. This has all kinds of uses: transferring data to a new phone, displaying it on a tablet or emulator. Setting alarms on a mirror device is also possible.
       With the scan data the mirror app also receives the Bluetooth connection data,
       making it possible for <a href="https://www.juggluco.nl/Juggluco/mirror/index.html">devices
         without NFC to connect via Bluetooth with the sensor</a>.&nbsp; You can
@@ -257,8 +235,8 @@ The app has four menus, opened by touching different quarters of the screen. The
       There is also a desktop command line program that can receive data from
       and resend data to Juggluco (with the program found <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
         title="Juggluco cmdline">here</a>).&nbsp; </p>
-    <h2 style=" margin-bottom: 0in; line-height: 100%">Values</h2>
-    <p style="margin-bottom: 0in; line-height: 100%"> The glucose values
+    <h2 class="p1">Values</h2>
+    <p class="p1"> The glucose values
       received by Bluetooth differ little from the scanned values of Abbott's
       Libre/Librelink app. The values displayed in Juggluco and Abbott's Libre
       app are determined the same way, but previous readings influence displayed
@@ -295,11 +273,11 @@ The app has four menus, opened by touching different quarters of the screen. The
       apps on the same phone in parallel. The same is true for all Libre 3
       sensors. </p>
     <p> </p>
-    <figure> <img src="settings.png" alt="Settings" title="Settings" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Settings</span></figcaption>
+    <figure> <img src="settings.png" alt="Settings" title="Settings" style="width:11.5cm;">
+      <figcaption><span>Settings</span></figcaption>
     </figure>
-    <figure> <img src="scan.png" alt="Scan" title="Scan" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Scan
+    <figure> <img src="scan.png" alt="Scan" title="Scan" style="width:11.5cm;">
+      <figcaption><span>Scan
           showing the current glucose value and the past 16 minutes trend</span></figcaption>
     </figure>
     <h2 class="western" id="scan">Scan</h2>
@@ -315,8 +293,8 @@ The app has four menus, opened by touching different quarters of the screen. The
       sensor, enable Bluetooth streaming and now and then to find out what is
       wrong and to get the sensor working again. </p>
     <h2 class="western" id="age"> Age</h2>
-    <figure> <img src="agevalue.jpg" alt="Scan" title="Scan" style="object-fit:contain;     width:15cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Coloring
+    <figure> <img src="agevalue.jpg" alt="Scan" title="Scan" style="width:15cm;">
+      <figcaption><span>Coloring
           of a two minute old value</span></figcaption> </figure>
     <p style="line-height: 100%; margin-bottom: 0in">To display the age of the
       displayed glucose value, the Sensor Identifier under the glucose value, is
@@ -351,11 +329,9 @@ The app has four menus, opened by touching different quarters of the screen. The
       versions do. So if someone compares the patched Librelink 2.3.0 app with
       Juggluco, he will sometimes see that Juggluco generates a sensor error,
       but the patched Librelink 2.3.0 will not.</p>
-    <figure> <img src="lockscreen.jpg" style="object-fit:contain;
-		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose
+    <figure> <img src="lockscreen.jpg" style="height:11.5cm;"> <figcaption><span>Glucose
           value on lock screen</span></figcaption> </figure>
-    <figure> <img src="statusbar.jpg" style="object-fit:contain;
-		    height:11.5cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose value in status bar</span></figcaption> </figure>
+    <figure> <img src="statusbar.jpg" style="height:11.5cm;"> <figcaption><span>Glucose value in status bar</span></figcaption> </figure>
     <h2>Notifications</h2>
     <p> The stream of glucose values received via Bluetooth is also displayed in
       the Android status bar and a notification.</p>
@@ -373,31 +349,29 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p>On some smartphones, only notifications generated after the screen was
       locked are displayed, so you will not immediately see whether the settings change was effective.</p>
     <h2 class="western">Floating glucose</h2>
-    <p style="line-height: 100%; margin-bottom: 0in; background: transparent">
+    <p class="p1">
       Juggluco has the possibility to show the current glucose value received
       via Bluetooth above other apps. In <a href="https://www.juggluco.nl/Jugglucohelp/floatingconfig.html" onclick="location.href=this.href+'?unit='+unitstr;return false;">Left
         menu-&gt;Settings-&gt;Floating Glucose</a>, you can change colors, transparency, and whether touches pass through to the app underneath or move the floating glucose display. You can turn it on and off in Left middle
       menu-&gt;Float.</p>
-    <figure> <img src="cycling.png" style="object-fit:contain;
-		    height:4cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose
+    <figure> <img src="cycling.png" style="height:4cm;"> <figcaption><span>Glucose
           over cycling watch app</span></figcaption> </figure>
-    <figure> <img src="floatingglucose.jpg" style="object-fit:contain;
-		    height:9cm;		    width:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Glucose
+    <figure> <img src="floatingglucose.jpg" style="height:9cm;"> <figcaption><span>Glucose
           floating over Komoot</span></figcaption> </figure>
-    <p style="line-height: 100%; margin-bottom: 0in">To use Floating Glucose
+    <p class="p1">To use Floating Glucose
       under Android Automotive and WearOS you need to give Juggluco permission
       to display over other apps with the following command:</p>
-    <p style="line-height: 100%; margin-bottom: 0in"> </p>
+    <p class="p1"> </p>
     <pre><b>adb shell pm grant tk.glucodata android.permission.SYSTEM_ALERT_WINDOW</b></pre>
-    <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <p style="line-height: 100%; margin-bottom: 0in">It is also possible to give
+    <p class="p1"> </p>
+    <p class="p1">It is also possible to give
       Juggluco all permissions it uses during install with:</p>
-    <p style="line-height: 100%; margin-bottom: 0in"> </p>
+    <p class="p1"> </p>
     <pre>adb install -g -r JugglucoVERSION-wear-arm32.apk</pre>
-    <p style="line-height: 100%; margin-bottom: 0in"> </p>
-    <p style="line-height: 100%; margin-bottom: 0in">Where <i>JugglucoVERSION-wear-arm32.apk</i> is the WearOS APK downloaded from:</p>
-    <p style="line-height: 100%; margin-bottom: 0in"><a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a></p>
-    <p style="line-height: 100%; margin-bottom: 0in">-g means that you grant all
+    <p class="p1"> </p>
+    <p class="p1">Where <i>JugglucoVERSION-wear-arm32.apk</i> is the WearOS APK downloaded from:</p>
+    <p class="p1"><a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a></p>
+    <p class="p1">-g means that you grant all
           permissions.</p>
     <h2>Watch</h2>
     <p>If your smartwatch can receive Android notifications, select Notify in Juggluco's under left menu->Watch. After configuring your smartwatch app to forward Juggluco notifications, you can see your current glucose level on your watch every minute. This can be useful during physical activity. On most watches you need to specify "Separate" to generate every time a new notification, because their companion app only forwards new notifications.</p>
@@ -410,13 +384,13 @@ The app has four menus, opened by touching different quarters of the screen. The
       <p>For all watches, see the help under left menu -> <a href="https://www.juggluco.nl/Jugglucohelp/watchinfo.html">Watch</a>.</p>
 
 <a name="aggregatedata"></a>
-    <h1 style=" line-height: 108%; margin-bottom: 0.11in">Aggregate data</h1>
+    <h1 style="line-height: 108%; margin-bottom: 0.11in">Aggregate data</h1>
 <p>Juggluco shows the percentage of measurements in standard glucose ranges and in the target range configured in settings. For each minute of the day, it calculates the distribution of values over the selected period and derives median and percentile bands. See: <a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics help</a></p>
-    <figure> <img src="stats.png" alt="Settings" title="Settings" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Statistics</span></figcaption>
+    <figure> <img src="stats.png" alt="Settings" title="Settings" style="width:11.5cm;">
+      <figcaption><span>Statistics</span></figcaption>
     </figure>
-    <figure> <img src="summarygraph.png" alt="Scan" title="Scan" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Summary
+    <figure> <img src="summarygraph.png" alt="Scan" title="Scan" style="width:11.5cm;">
+      <figcaption><span>Summary
           graph</span></figcaption> </figure>
 
 
@@ -435,7 +409,7 @@ The app has four menus, opened by touching different quarters of the screen. The
     <p>The <b>Glucodata broadcast</b> came with Juggluco and can be sent to <a href="https://play.google.com/store/apps/details?id=sk.trupici.g_watch">G-Watch</a>
       and <a href="https://github.com/pachi81/GlucoDataHandler/releases">GlucoDataHandler</a></p>
 <h2 class="western"><a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">LibreView</a></h2>
-<p style="font-variant: normal; font-style: normal; line-height: 100%; margin-bottom: 0in">In settings, you can ask Juggluco to send glucose values to LibreView. These are the 5-minute (Libre 3) or 15-minute (Libre 2) history values. In LibreView, you can select Download Glucose Data to export these data to a .csv file. This data can be imported in apps like
+<p class="p1" style="font-variant: normal; font-style: normal;">In settings, you can ask Juggluco to send glucose values to LibreView. These are the 5-minute (Libre 3) or 15-minute (Libre 2) history values. In LibreView, you can select Download Glucose Data to export these data to a .csv file. This data can be imported in apps like
 Diabetes:M or Glooko. Juggluco you can also save data directly in Libreview format in left middle
 menu→<a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Export</a>.</p>
 <p>In Libreview under <i>Account Settings-&gt;My Devices</i> you can
@@ -446,43 +420,40 @@ version of Juggluco, you can do that. Maybe it is a good idea to <i>decline to s
 have to specify for each label what should be done with it
 (Settings-&gt;Exchange data-&gt;Libreview-&gt;<a href="https://www.juggluco.nl/Jugglucohelp/librenumhelp.html">Send
 amounts</a>).</p>
-<p style="line-height: 100%; margin-bottom: 0in">I have to mention that you can also save glucose values in Juggluco
+<p class="p1">I have to mention that you can also save glucose values in Juggluco
 itself, by going to Left middle menu-&gt; <a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html">Export</a> and select Stream, in this case you get a value for every minute. To
 view some statistics of these data you can go to Left middle menu-&gt;
 <a href="https://www.juggluco.nl/Jugglucohelp/stathelp.html">Statistics</a>
 (see <a href="index.html#aggregatedata">Aggregate data</a>).</p>
 <h1 id="calibration">Calibration</h1>
-<p style="line-height: 100%; margin-bottom: 0in">
+<p class="p1">
 Before version 10.0.0 Juggluco didn’t allow
 manual calibration of glucose values with
 the following justification: <a href="https://www.juggluco.nl/Juggluco/nocalibration.html">nocalibration.html</a>
 </p>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco 10.0.0
+<p class="p1">Juggluco 10.0.0
 added calibration possibilities. It tried to do this in a way that
 makes it possible to keep on eye on the original values and see what
 calibration does. You can use all appropriate blood glucose
 measurements for calibration, but still keep using only the
 uncalibrated values to see what the effect of calibration will be before
 using it.</p>
-<p style="line-height: 100%; margin-bottom: 0in">In the right middle menu,  ✓ before Stream, Scan or History means that the calibrated values are shown. (The [x] after Stream, Scan and History still means the display of the uncalibrated value.)</p>
-    <figure> <img src="Calibrated.png" alt="Calibrated" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;"> Set ✓ to view curve with calibrated values</span></figcaption>
+<p class="p1">In the right middle menu,  ✓ before Stream, Scan or History means that the calibrated values are shown. (The [x] after Stream, Scan and History still means the display of the uncalibrated value.)</p>
+    <figure> <img src="Calibrated.png" alt="Calibrated" style="width:11.5cm;"> <figcaption><span> Set ✓ to view curve with calibrated values</span></figcaption>
     </figure>
-    <figure> <img src="CalibrationSettings.png" alt="Calibration settings" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left menu->Settings->Calibration</span></figcaption>
+    <figure> <img src="CalibrationSettings.png" alt="Calibration settings" style="width:11.5cm;"> <figcaption><span>Left menu->Settings->Calibration</span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in">To calibrate, you
+<p class="p1">To calibrate, you
 specify in left menu→Settings→<a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>, the label under which blood glucose values are entered. Thereafter,
 every value entered under that label in left middle menu→New
 Amount, is used for calibration, except when “Exclude” is
 checked. You need to check “Exclude” for all values that are
 inappropriate for calibration, because the glucose is not steady, or
 it is during the warm-up period. (A blood glucose measurement less than 30 minutes before a second blood glucose measurement is automatically excluded.)</p>
-    <figure> <img src="addCalibration.png" alt="Calibration settings" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left middle menu-> New amount</span></figcaption>
+    <figure> <img src="addCalibration.png" alt="Calibration settings" style="width:11.5cm;"> <figcaption><span>Left middle menu-> New amount</span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in">This does not cause calibrated values to be used for alarms, notifications, watches, or other outputs. To use calibrated values for those purposes, enable <b>Active</b> in Left menu → Settings → <a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>. Adding recent calibrations means the calibration gains weight.</p>
-<p style="line-height: 100%; margin-bottom: 0in">Juggluco uses all
+<p class="p1">This does not cause calibrated values to be used for alarms, notifications, watches, or other outputs. To use calibrated values for those purposes, enable <b>Active</b> in Left menu → Settings → <a href="https://www.juggluco.nl/Jugglucohelp/calibrationhelp.html">Calibration</a>. Adding recent calibrations means the calibration gains weight.</p>
+<p class="p1">Juggluco uses all
 blood glucose measurements that are not excluded during the lifetime
 of the sensor, but gives older values less weight. Adding recent
 calibrations mean that the calibration gains wait. With less weight
@@ -491,31 +462,29 @@ a calibration that is older will be given less weight, which means
 that the calibrated glucose values moves in the direction of
 uncalibrated values with time when there are no new blood glucose
 measurements. </p>
-    <figure> <img src="sensorinfo.png" alt="Sensor info" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Long pressing the glucose curve shows sensor information, including <i>Calibrations</i></span></figcaption>
+    <figure> <img src="sensorinfo.png" alt="Sensor info" style="width:11.5cm;"> <figcaption><span>Long pressing the glucose curve shows sensor information, including <i>Calibrations</i></span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in"> By long-pressing the glucose curve for a sensor, a view will be shown with the button “<a href="https://www.juggluco.nl/Jugglucohelp/calibrationslist.html">Calibrations</a>”.
+<p class="p1"> By long-pressing the glucose curve for a sensor, a view will be shown with the button “<a href="https://www.juggluco.nl/Jugglucohelp/calibrationslist.html">Calibrations</a>”.
 Pressing it will show all calibrations for this sensor.</p>
 
-    <figure> <img src="CalibrationList.png" alt="Calibration List" style="object-fit:contain;
-		    width:11.5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">List of calibrations</span></figcaption>
+    <figure> <img src="CalibrationList.png" alt="Calibration List" style="width:11.5cm;"> <figcaption><span>List of calibrations</span></figcaption>
     </figure>
 <p>
 A calibration is recalculated after pressing “<i>Save</i>” in
 “<i>New amount</i>”. This can give a different value because of
 the following reasons:</p>
 <ul>
-	<li><p style="line-height: 100%; margin-bottom: 0in">The “<i>Exclude</i>”
+	<li><p class="p1">The “<i>Exclude</i>”
 	setting changed;</p></li>
-	<li><p style="line-height: 100%; margin-bottom: 0in">The setting of
+	<li><p class="p1">The setting of
 	left menu→Settings→”<i>Change slope</i>” changed;</p></li>
-	<li><p style="line-height: 100%; margin-bottom: 0in">With time CGM
+	<li><p class="p1">With time CGM
 	glucose values are available that were not present when the blood
 	glucose value was first entered; Later a better matching glucose
 	value can arrive that will be taken instead of an earlier one to
 	compare with the blood glucose value.</p></li>
 </ul>
-<p style="line-height: 100%; margin-bottom: 0in">With the entered
+<p class="p1">With the entered
 numbers (amounts), calibrations are also sent to mirror devices, for
 example from the phone to the watch when “Enter numbers (amounts)
 on watch” is not checked. (If it is checked it is sent in the
@@ -534,40 +503,40 @@ opposite direction.)</p>
     <p class="P1">Juggluco's source code can be found at: <a href="https://github.com/j-kaltes/Juggluco"
         class="Internet_20_link">https://github.com/j-kaltes/Juggluco</a></p>
     <h2 id="novopens" class="western"> NFC NovoPens</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">Juggluco supports <b>NFC NovoPen® 6</b> and <b>NovoPen Echo® Plus</b> insulin pens. Hold the back of the pen to the phone's NFC sensor while Juggluco is in the foreground. Then choose which label should store the new values. For the case
+    <p class="p1">Juggluco supports <b>NFC NovoPen® 6</b> and <b>NovoPen Echo® Plus</b> insulin pens. Hold the back of the pen to the phone's NFC sensor while Juggluco is in the foreground. Then choose which label should store the new values. For the case
       you have previously entered the insulin dose data by hand, you can specify
       that only doses after a certain date and time should be added.</p>
-    <figure> <img src="novopen.png" title="Save NovoPen doses" style="object-fit:contain;     width:11.5cm;            height:auto;">
-      <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">After
+    <figure> <img src="novopen.png" title="Save NovoPen doses" style="width:11.5cm;">
+      <figcaption><span>After
           you have scanned the NFC NovoPen you can select the label for the
           insulin</span></figcaption> </figure>
     <h1 id="followers" class="western">Followers</h1>
-    <p style="line-height: 100%; margin-bottom: 0in">Juggluco has multiple
+    <p class="p1">Juggluco has multiple
       possibilities to send glucose values to other devices in real-time so that
       someone else can follow the glucose readings from Freestyle Libre 2 or 3
       sensors with little delay. </p>
     <h2 class="western">Mirror</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">With <a href="https://www.juggluco.nl/Juggluco/index.html#mirror" onclick="location.href='https://www.juggluco.nl/Juggluco/index.html?unit='+unitstr+'#mirror';return false;" >mirror</a>
+    <p class="p1">With <a href="https://www.juggluco.nl/Juggluco/index.html#mirror" onclick="location.href='https://www.juggluco.nl/Juggluco/index.html?unit='+unitstr+'#mirror';return false;" >mirror</a>
       you can display all data of Juggluco to another instance of Juggluco
       running on an Android device or Android emulator running under Windows,
       Macintosh or Linux.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">To connect two phones it is
+    <p class="p1">To connect two phones it is
       mostly necessary to connect both to <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
         title="Juggluco cmdline">Juggluco server</a> running on a computer or to
       the Android Juggluco app running on a phone or tablet left at home
       connected to the internet via a modem.</p>
     <h2 class="western">Nightscout</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">The web server in Juggluco and <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
+    <p class="p1">The web server in Juggluco and <a href="https://www.juggluco.nl/Juggluco/cmdline/index.html"
         title="Juggluco cmdline">Juggluco server</a> know some <a href="https://www.juggluco.nl/Juggluco/webserver.html">Nightscout server</a> commands, so that Nightscout followers can connect to it. It cannot be used with all Nightscout apps: the Android app NSClient and the iOS apps Nightscout and Nightscout X only work with a particular Nightscout implementation. The last two do nothing more than displaying the
       Nightscout web page.</p>
-    <p style="line-height: 100%; margin-bottom: 0in">For more information, see
+    <p class="p1">For more information, see
       the help in Juggluco under <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">Left menu-&gt;Settings-&gt;Exchange data-&gt;Webserver</a>.</p>
     If you want to make a program making use of it, see <a href="https://www.juggluco.nl/Juggluco/webserver.html">https://www.juggluco.nl/Juggluco/webserver.html</a>
-    <p style="line-height: 100%; margin-bottom: 0in">You can also upload glucose
+    <p class="p1">You can also upload glucose
       values from Juggluco to <a href="https://github.com/nightscout/cgm-remote-monitor">https://github.com/nightscout/cgm-remote-monitor</a>.
       See <a href="https://www.juggluco.nl/Jugglucohelp/NightPost.html">Left menu-&gt;Settings-&gt;Exchange data-&gt;Uploader-&gt;Help</a>.</p>
     <h2 class="western">LibreLinkUp</h2>
-    <p style="line-height: 100%; margin-bottom: 0in">Glucose values sent to
+    <p class="p1">Glucose values sent to
       Libreview can also be sent to Abbott's LibrelinkUp app. When <a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">Immediate</a> is enabled in Left
       menu-&gt;Settings-&gt;Exchange data-&gt;Libreview, Juggluco sends every glucose value received from Libre 2 or 3 sensors to LibreView, where it can be shared with LibreLinkUp. In Abbott's Libre app under Connected apps-&gt;Librelinkup you can invite an email address to receive these
       data.</p>
@@ -581,16 +550,13 @@ opposite direction.)</p>
  <h2 id="newphone" class="western">Transfer data to a new phone</h2>
 <h4 class="western">
 <a href="https://www.juggluco.nl/Jugglucohelp/connectionoverview.html">Mirror/Clone</a></h4>
-    <figure> <img src="mirror.png" alt="Juggluco" style="object-fit:contain;
-		    width:15cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Left middle menu -> Mirror in Juggluco </span></figcaption>
+    <figure> <img src="mirror.png" alt="Juggluco" style="width:15cm;"> <figcaption><span>Left middle menu -> Mirror in Juggluco </span></figcaption>
     </figure>
-    <figure> <img src="autoQR.png" alt="Juggluco" style="object-fit:contain;
-		    width:15cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">After pressing <i>Auto QR</i></span></figcaption>
+    <figure> <img src="autoQR.png" alt="Juggluco" style="width:15cm;"> <figcaption><span>After pressing <i>Auto QR</i></span></figcaption>
     </figure>
-    <figure> <img src="QRcode.png" alt="Juggluco" style="object-fit:contain;
-		    width:15cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">After pressing <i>OK</i></span></figcaption>
+    <figure> <img src="QRcode.png" alt="Juggluco" style="width:15cm;"> <figcaption><span>After pressing <i>OK</i></span></figcaption>
     </figure>
-<p style="line-height: 100%; margin-bottom: 0in">The simplest way to
+<p class="p1">The simplest way to
 transfer to a new phone is to use mirror/clone. On the old phone you
 press left middle menu→Mirror→<a href="https://www.juggluco.nl/Jugglucohelp/QRmirror.html">Auto
 QR</a>.  On the new phone you install Juggluco and go to left
@@ -602,20 +568,20 @@ left middle menu→ <a href="https://www.juggluco.nl/Jugglucohelp/connectionover
 by touching the connection, pressing <i><b>Modify</b></i> followed by
 <i><b>Delete</b></i>.</p>
 <h4 id="adb"class="western">adb</h4>
-<p style="line-height: 100%; margin-bottom: 0in">Another possibility
+<p class="p1">Another possibility
 is to use tar via <a href="https://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/">adb</a>:</p>
 <p>On both phones you need to install/update to Juggluco from the <a href="https://www.juggluco.nl/Juggluco/download.html">https://www.juggluco.nl/Juggluco/download.html</a>; <i>run-as</i> doesn't work with the Google Play version.</p> 
-<p style="line-height: 100%; margin-bottom: 0in">Run Juggluco on the new phone, then force stop Juggluco on the new
+<p class="p1">Run Juggluco on the new phone, then force stop Juggluco on the new
 phone.</p>
-<p style="line-height: 100%; margin-bottom: 0in">On the computer
+<p class="p1">On the computer
 while connected to the old phone:</p>
-<p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-out run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
-<p style="line-height: 100%; margin-bottom: 0in">On the computer while connected to the new phone:</p>
+<p class="p1"><b>adb exec-out run-as tk.glucodata tar -cf    -     ./files > all.tar</b></p>
+<p class="p1">On the computer while connected to the new phone:</p>
 <p>Under sh (Linux) and Command Prompt (Windows):</p>
-<p style="line-height: 100%; margin-bottom: 0in"><b>adb exec-in run-as tk.glucodata tar -xf -     < all.tar </b></p>
+<p class="p1"><b>adb exec-in run-as tk.glucodata tar -xf -     < all.tar </b></p>
 <p>Or under Powershell or sh: </p>
-<p style="line-height: 100%; margin-bottom: 0in"><b>cat all.tar|adb exec-in run-as tk.glucodata tar -xf - </b></p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<p class="p1"><b>cat all.tar|adb exec-in run-as tk.glucodata tar -xf - </b></p>
+<p class="p1"><br/>
 
 </p>
   </body>

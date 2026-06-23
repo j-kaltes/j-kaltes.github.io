@@ -74,8 +74,7 @@ whereby <i>somethingsecret</i> is the api_secret.</p>
 server</a>. Android or WearOS apps can, instead of making use of the
 web server, also receive a <a href="https://www.juggluco.nl/Juggluco/glucosebroadcast.html">broadcast</a>
 every time a new glucose value is received from the sensor.</p>
-<p style="margin-bottom: 0cm">Juggluco web server 9.7.0 and later
-contain the following graphic additions:</p>
+<p style="margin-bottom: 0cm">Juggluco web server contains the following graphic features:</p>
 <h3 class="western">Glucose Curve</h3>
 <p style="margin-bottom: 0cm"><a href="http://127.0.0.1:17580/x/curve" onclick="location.href=urlstart+'/x/curve';return false;">http://127.0.0.1:17580/x/curve</a></p>
 <p style="margin-bottom: 0cm">This contains a part of the glucose
@@ -222,16 +221,16 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 		<td width="450" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm"><p>
 			<font size="4" style="font-size: 14pt">Start time in Unix time
 			(seconds since 00:00 1 January
-			197<a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963" onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a>0
+			1970
 			GMT). If it starts with - , the following number is subtracted
-			from the current time. (Since Juggluco Server 9.7.4-4)</font></p>
+			from the current time.</font></p>
 		</td>
 		<td width="899" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p>
-			<br/>
-<br/>
-
 			</p>
-			<p><a href="http://127.0.0.1:17580/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300" onclick="location.href=urlstart+'/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300';return false;"><font size="4" style="font-size: 14pt">http://127.0.0.1:17580/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300</font></a></p>
+<font size="4" style="font-size: 14pt">
+			<p><a href="http://127.0.0.1:17580/x/amounts?starttime=1698266963" onclick="location.href=urlstart+'/x/amounts?starttime=1698266963';return false;">http://127.0.0.1:17580/x/amounts?starttime=1698266963</a></p>
+            <p><a href="http://127.0.0.1:17580/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300" onclick="location.href=urlstart+'/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300';return false;">http://127.0.0.1:17580/x/curve?stream&amp;scans&amp;darkmode&amp;width=800&amp;starttime=-9300</a></p>
+</font>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -479,7 +478,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 		</td>
 		<td width="450" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm"><p>
 			<font size="4" style="font-size: 14pt">Used by curve, stats and
-			summarygraph. Give width of curve. From Juggluco Server 9.7.4-4.</font></p>
+			summarygraph. Give width of curve.</font></p>
 		</td>
 		<td width="899" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p>
 			<a href="http://127.0.0.1:17580/x/curve?width=600&amp;height=270" onclick="location.href=urlstart+'/x/curve?width=600&amp;height=270';return false;"><font size="4" style="font-size: 14pt">http://127.0.0.1:17580/x/curve?width=600&amp;height=270</font></a></p>
@@ -491,7 +490,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 		</td>
 		<td width="450" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm"><p>
 			<font size="4" style="font-size: 14pt">Used by curve, stats and
-			summarygraph. Give height of curve. From Juggluco Server 9.7.4-4.</font></p>
+			summarygraph. Give height of curve.</font></p>
 		</td>
 		<td width="899" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p>
 			<br/>
@@ -506,8 +505,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 		<td width="450" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm"><p>
 			<font size="4" style="font-size: 14pt">Gives lowest value of the
 			graph range, as in left menu→Settings→Display. Only applies
-			when all values in view are below this value. From Juggluco Server
-			9.7.4-4.</font></p>
+			when all values in view are below this value.</font></p>
 		</td>
 		<td width="899" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p>
 			<a href="http://127.0.0.1:17580/x/curve?width=600&amp;height=270&amp;mmol/L&amp;glow=3.9" onclick="location.href=urlstart+'/x/curve?width=600&amp;height=270&amp;mmol/L&amp;glow=3.9';return false;"><font size="4" style="font-size: 14pt">http://127.0.0.1:17580/x/curve?width=600&amp;height=270&amp;mmol/L&amp;glow=3.9</font></a></p>
@@ -520,7 +518,7 @@ by a list of the following options separated by <b>'&amp;&quot;</b>.</p><a name=
 		<td width="450" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm"><p>
 			<font size="4" style="font-size: 14pt">Gives highest value of the
 			graph range. Only applies when all values in view are below this
-			value. From Juggluco Server 9.7.4-4.</font></p>
+			value.</font></p>
 		</td>
 		<td width="899" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p>
 			<a href="http://127.0.0.1:17580/x/curve?mmol/L&amp;ghigh=8" onclick="location.href=urlstart+'/x/curve?mmol/L&amp;ghigh=8';return false;"><font size="4" style="font-size: 14pt">http://127.0.0.1:17580/x/curve?mmol/L&amp;ghigh=8</font></a></p>
@@ -818,7 +816,7 @@ Mathematica:</h4>
 this data out of a html table. 
 </p>
 <h3 class="western"><a name="libreview"></a>Libreview</h3>
-<p>(Juggluco server 9.7.0-2 and later:) To save data in the same
+<p>To save data in the same
 format as Libreview, use the following command:</p>
 <p><a href="http://127.0.0.1:17580/x/libreview?header&amp;days=14" onclick="location.href=urlstart+'/x/libreview?header&amp;days=14';return false;">http://127.0.0.1:17580/x/libreview?header&amp;days=14</a></p>
 <p>You can add some of the options described in the <a href="#options">options

@@ -370,6 +370,7 @@
           <input id="token" type="password" autocomplete="off"
                  placeholder="Leave empty if not used" />
         </label>
+        <label class="inline"><input id="showToken" type="checkbox" /> Show api_secret</label>
 
         <div class="row">
           <label>
@@ -593,6 +594,7 @@
       sensorLegend: $("sensorLegend"),
       baseUrl: $("baseUrl"),
       token: $("token"),
+      showToken: $("showToken"),
       unit: $("unit"),
       windowHours: $("windowHours"),
       dateToView: $("dateToView"),
@@ -1217,8 +1219,9 @@
       } catch (err) {
         if (err.name === "AbortError") return;
 
+        const details = err && err.message ? err.message : String(err);
         setStatus(
-          "Could not load data. Check the URL, Juggluco web-server settings, network access, api_secret/token, and browser CORS restrictions. Details: " + err.message,
+          "Could not load data directly from Juggluco. If this URL works when opened directly in a browser tab but fails in the viewer, the browser is probably blocking JavaScript access from this page to that address. Check Juggluco CORS/web-server settings, private-network access restrictions, HTTPS-to-HTTP mixed content, and api_secret/token. Note: 127.0.0.1 means the computer running this browser, not the computer hosting this viewer. Details: " + details,
           true
         );
         requestDraw();
@@ -3152,6 +3155,9 @@
       els.loadBtn.addEventListener("click", () => {
         clearLoadedCacheRange();
         loadData({ force: true });
+      });
+      els.showToken.addEventListener("change", () => {
+        els.token.type = els.showToken.checked ? "text" : "password";
       });
       els.goDateBtn.addEventListener("click", goToSelectedDate);
       els.todayDateBtn.addEventListener("click", () => {

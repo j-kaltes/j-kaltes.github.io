@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Juggluco Viewer</title>
+  <title>Juggluco Glucose Viewer</title>
   <style>
     :root {
       --bg: #f6f7f9;
@@ -371,6 +371,11 @@
                  placeholder="Leave empty if not used" />
         </label>
 
+        <label class="inline"><input id="useProxy" type="checkbox" /> Use web-server proxy at /juggluco-proxy</label>
+        <p class="hint">
+          Leave this unchecked for direct access to Juggluco. Enable it only when this HTML is served by
+          a web server that also provides a /juggluco-proxy endpoint.
+        </p>
 
         <div class="row">
           <label>
@@ -594,6 +599,7 @@
       sensorLegend: $("sensorLegend"),
       baseUrl: $("baseUrl"),
       token: $("token"),
+      useProxy: $("useProxy"),
       unit: $("unit"),
       windowHours: $("windowHours"),
       dateToView: $("dateToView"),
@@ -991,6 +997,12 @@
     }
 
     function shouldUseLocalProxyFor(url) {
+      // Static web servers normally do not provide /juggluco-proxy. Earlier
+      // versions automatically used that same-origin proxy whenever the HTML was
+      // opened over http(s) and Juggluco was on another origin. That made static
+      // deployments fail with a 404. Direct Juggluco access is now the default;
+      // enable the checkbox only if your web server really implements the proxy.
+      if (!els.useProxy?.checked) return false;
       if (!(location.protocol === "http:" || location.protocol === "https:")) return false;
 
       try {
@@ -1013,7 +1025,8 @@
       });
 
       if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText} for ${url}`);
+        const target = useProxy ? `${requestUrl} while proxying ${url}` : url;
+        throw new Error(`${response.status} ${response.statusText} for ${target}`);
       }
 
       return response.text();

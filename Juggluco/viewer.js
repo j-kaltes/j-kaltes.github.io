@@ -59,6 +59,7 @@
       scrollTransformPx: 0,
       webglOverscanWindows: 3,
       controlsCollapsed: false,
+      toolbarCollapsed: false,
       liveFollowNow: true
     };
 
@@ -95,6 +96,7 @@
       zoomOutBtn: $("zoomOutBtn"),
       nowBtn: $("nowBtn"),
       toggleOptionsBtn: $("toggleOptionsBtn"),
+      toggleToolbarBtn: $("toggleToolbarBtn"),
       showStream: $("showStream"),
       showScans: $("showScans"),
       showHistory: $("showHistory"),
@@ -407,15 +409,20 @@
       return 1.5;
     }
 
+    function currentLabelFontSize(area) {
+      if (area.width < 380 || area.height < 230) return 26;
+      if (area.width < 520 || area.height < 300) return 34;
+      return 55;
+    }
+
     function estimatedCurrentLabelRequiredPx(area) {
       // Keep enough empty plot space to the right of the newest stream point for
-      // the native-style rate arrow and current glucose value. The actual label
-      // is drawn later in drawCurrentGlucoseLabel(); this estimate is used only
-      // to position the live viewport before the first data paint and after
-      // layout changes such as Show/Hide options.
-      const fontSize = (area.width < 520 ? 18 : 22) * 2.5;
+      // the native-style rate arrow and current glucose value. Use a smaller
+      // reservation on phones, otherwise the annotation consumes too much of the
+      // horizontal glucose history in portrait mode.
+      const fontSize = currentLabelFontSize(area);
       const sampleText = state.unit === "mg/dL" ? "000" : "00.0";
-      let textWidth = 96;
+      let textWidth = Math.max(60, fontSize * 2.2);
 
       try {
         ctx.save();
@@ -424,18 +431,21 @@
         ctx.restore();
       } catch {}
 
-      const arrowSpace = 56;
-      const rightPad = 8;
-      const safetyPad = 14;
-      return Math.min(area.w * 0.45, Math.max(120, textWidth + arrowSpace + rightPad + safetyPad));
+      const compact = area.width < 520 || area.height < 300;
+      const arrowSpace = compact ? 34 : 56;
+      const rightPad = compact ? 4 : 8;
+      const safetyPad = compact ? 6 : 14;
+      const minPad = compact ? 72 : 120;
+      const maxFraction = compact ? 0.34 : 0.45;
+      return Math.min(area.w * maxFraction, Math.max(minPad, textWidth + arrowSpace + rightPad + safetyPad));
     }
 
     function liveFollowCenterMs(now = Date.now()) {
       const rect = els.chartWrap?.getBoundingClientRect?.();
-      const width = Math.max(320, Math.floor(
+      const width = Math.max(180, Math.floor(
         rect?.width || state.resize.width || els.canvas?.clientWidth || window.innerWidth || 900
       ));
-      const height = Math.max(320, Math.floor(
+      const height = Math.max(80, Math.floor(
         rect?.height || state.resize.height || els.canvas?.clientHeight || 420
       ));
       const area = plotAreaFromSize(width, height);
@@ -882,10 +892,15 @@
     }
 
     function plotAreaFromSize(width, height) {
-      const left = width < 520 ? 58 : 70;
-      const right = 20;
-      const top = 18;
-      const bottom = 26;
+      const compactWidth = width < 520;
+      const compactHeight = height < 300;
+      const veryNarrow = width < 380;
+      const veryShort = height < 210;
+
+      const left = veryNarrow ? 40 : (compactWidth ? 48 : 62);
+      const right = compactWidth ? 4 : 10;
+      const top = veryShort ? 3 : (compactHeight ? 6 : 12);
+      const bottom = veryShort ? 14 : (compactHeight ? 18 : 24);
 
       return {
         x: left,
@@ -900,8 +915,8 @@
     function resizeCanvas() {
       const rect = els.chartWrap.getBoundingClientRect();
       const rawDpr = window.devicePixelRatio || 1;
-      const width = Math.max(320, Math.floor(rect.width));
-      const height = Math.max(320, Math.floor(rect.height));
+      const width = Math.max(180, Math.floor(rect.width));
+      const height = Math.max(80, Math.floor(rect.height));
       const overscan = state.webglOverscanWindows || 3;
       const area = plotAreaFromSize(width, height);
 
@@ -971,8 +986,8 @@
     }
 
     function getPlotArea() {
-      const width = state.resize.width || els.canvas.clientWidth || 320;
-      const height = state.resize.height || els.canvas.clientHeight || 320;
+      const width = state.resize.width || els.canvas.clientWidth || 180;
+      const height = state.resize.height || els.canvas.clientHeight || 80;
       return plotAreaFromSize(width, height);
     }
 
@@ -1287,14 +1302,16 @@
       ctx.lineTo(area.x + area.w, area.y + area.h);
       ctx.stroke();
 
-      ctx.save();
-      ctx.translate(16, area.y + area.h / 2);
-      ctx.rotate(-Math.PI / 2);
-      ctx.fillStyle = COLORS.text;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(`Glucose (${state.unit})`, 0, 0);
-      ctx.restore();
+      if (area.width >= 360 && area.h >= 120) {
+        ctx.save();
+        ctx.translate(14, area.y + area.h / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillStyle = COLORS.text;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(`Glucose (${state.unit})`, 0, 0);
+        ctx.restore();
+      }
     }
 
     function drawLimitLine(area, y, label) {
@@ -1415,7 +1432,8 @@
       const pointX = scales.xScale(point.t);
       const plotRight = area.x + area.w;
       const y = area.y + area.h / 2;
-      const rightPad = 8;
+      const compact = area.width < 520 || area.height < 300;
+      const rightPad = compact ? 4 : 8;
       const rightX = plotRight - rightPad;
 
       if (pointX < area.x || pointX > plotRight) return;
@@ -1424,7 +1442,7 @@
 
       if (!status.isFresh) {
         const message = `No new value since ${formatMeasurementTimestamp(point.t)}`;
-        const fontSize = area.width < 700 ? 20 : 24;
+        const fontSize = compact ? 14 : (area.width < 700 ? 20 : 24);
 
         ctx.font = `700 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
         ctx.textAlign = "right";
@@ -1455,8 +1473,8 @@
         return;
       }
 
-      const fontSize = (area.width < 520 ? 18 : 22) * 2.5;
-      const timeFontSize = 12;
+      const fontSize = currentLabelFontSize(area);
+      const timeFontSize = compact ? 10 : 12;
       const timeText = formatMeasurementTimestamp(point.t);
 
       ctx.font = `800 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
@@ -1464,7 +1482,7 @@
       ctx.textBaseline = "middle";
 
       const textWidth = ctx.measureText(valueText).width;
-      const arrowSpace = 56;
+      const arrowSpace = compact ? 34 : 56;
       const requiredSpace = textWidth + arrowSpace + rightPad;
 
       // The current label is only drawn when there is enough empty room at the
@@ -2576,24 +2594,59 @@
       loadData({ force: true });
     }
 
-    function setControlsCollapsed(collapsed) {
+    function refreshAfterLayoutChange() {
+      requestFullDrawAfterLayout();
+      setTimeout(requestFullDrawAfterLayout, 80);
+      setTimeout(requestFullDrawAfterLayout, 250);
+    }
+
+    function setControlsCollapsed(collapsed, options = {}) {
       state.controlsCollapsed = Boolean(collapsed);
       document.body.classList.toggle("controls-collapsed", state.controlsCollapsed);
       if (els.toggleOptionsBtn) {
         els.toggleOptionsBtn.textContent = state.controlsCollapsed ? "Show options" : "Hide options";
       }
-      try {
-        localStorage.setItem("jugglucoViewerControlsCollapsed", state.controlsCollapsed ? "1" : "0");
-      } catch {}
-      requestFullDrawAfterLayout();
-      setTimeout(requestFullDrawAfterLayout, 80);
+      if (options.persist !== false) {
+        try {
+          localStorage.setItem("jugglucoViewerControlsCollapsed", state.controlsCollapsed ? "1" : "0");
+        } catch {}
+      }
+      refreshAfterLayoutChange();
     }
 
-    function restoreControlsCollapsedPreference() {
+    function setToolbarCollapsed(collapsed, options = {}) {
+      state.toolbarCollapsed = Boolean(collapsed);
+      document.body.classList.toggle("toolbar-collapsed", state.toolbarCollapsed);
+      if (els.toggleToolbarBtn) {
+        els.toggleToolbarBtn.textContent = state.toolbarCollapsed ? "Buttons" : "Hide buttons";
+      }
+      if (options.persist !== false) {
+        try {
+          localStorage.setItem("jugglucoViewerToolbarCollapsed", state.toolbarCollapsed ? "1" : "0");
+        } catch {}
+      }
+      refreshAfterLayoutChange();
+    }
+
+    function defaultCompactLayout() {
+      return window.matchMedia && window.matchMedia("(max-width: 900px), (max-height: 560px)").matches;
+    }
+
+    function restoreCollapsedPreferences() {
+      const compact = defaultCompactLayout();
+
       try {
-        setControlsCollapsed(localStorage.getItem("jugglucoViewerControlsCollapsed") === "1");
+        const controlsPref = localStorage.getItem("jugglucoViewerControlsCollapsed");
+        setControlsCollapsed(controlsPref === null ? compact : controlsPref === "1", { persist: controlsPref !== null });
       } catch {
-        setControlsCollapsed(false);
+        setControlsCollapsed(compact, { persist: false });
+      }
+
+      try {
+        const toolbarPref = localStorage.getItem("jugglucoViewerToolbarCollapsed");
+        setToolbarCollapsed(toolbarPref === null ? compact : toolbarPref === "1", { persist: toolbarPref !== null });
+      } catch {
+        setToolbarCollapsed(compact, { persist: false });
       }
     }
 
@@ -2658,6 +2711,11 @@
       els.toggleOptionsBtn.addEventListener("click", () => {
         setControlsCollapsed(!state.controlsCollapsed);
       });
+      if (els.toggleToolbarBtn) {
+        els.toggleToolbarBtn.addEventListener("click", () => {
+          setToolbarCollapsed(!state.toolbarCollapsed);
+        });
+      }
       els.autoRefresh.addEventListener("change", () => {
         state.lastAutoRefreshFetchMs = 0;
         autoRefreshTick();
@@ -2835,6 +2893,15 @@
         requestFullDrawAfterLayout();
       });
 
+      window.addEventListener("orientationchange", () => {
+        refreshAfterLayoutChange();
+      });
+
+      if (window.ResizeObserver) {
+        const observer = new ResizeObserver(() => requestFullDrawAfterLayout());
+        observer.observe(els.chartWrap);
+      }
+
       window.addEventListener("keydown", event => {
         if (["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
 
@@ -2864,7 +2931,7 @@
 
     attachEvents();
     installAutoRefresh();
-    restoreControlsCollapsedPreference();
+    restoreCollapsedPreferences();
 
     const didApplyUrlStart = applyUrlStartConfig();
 

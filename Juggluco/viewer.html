@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Juggluco Viewer</title>
   <style>
     :root {
@@ -23,6 +23,13 @@
       height: 100%;
     }
 
+    @supports (height: 100dvh) {
+      html,
+      body {
+        height: 100dvh;
+      }
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -31,6 +38,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-height: 100%;
     }
 
     header {
@@ -53,21 +61,21 @@
     main {
       flex: 1 1 auto;
       min-height: 0;
-      padding: 10px 20px 14px;
+      padding: 6px clamp(4px, 1vw, 12px) 8px;
       display: grid;
-      grid-template-columns: 350px minmax(0, 1fr);
-      gap: 16px;
+      grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+      gap: 8px;
     }
 
     .panel {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 10px;
       box-shadow: var(--shadow);
     }
 
     .controls {
-      padding: 16px;
+      padding: 12px;
       align-self: stretch;
       min-height: 0;
       overflow: auto;
@@ -101,22 +109,70 @@
       display: grid;
       grid-template-rows: auto minmax(0, 1fr) auto;
       overflow: hidden;
+      position: relative;
     }
+
+    .chart-toolbar { grid-row: 1; }
+    .chart-wrap { grid-row: 2; }
+    .status { grid-row: 3; }
+
+    body.toolbar-collapsed .chart-panel {
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    body.toolbar-collapsed .chart-wrap { grid-row: 1; }
+    body.toolbar-collapsed .status { grid-row: 2; }
 
     .chart-toolbar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
       border-bottom: 1px solid var(--border);
-      padding: 12px 14px;
+      padding: 7px 8px;
     }
 
-    .chart-actions {
+    .chart-actions,
+    .chart-permanent-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
+    }
+
+    body.toolbar-collapsed .chart-toolbar {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      z-index: 20;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    body.toolbar-collapsed .graph-actions,
+    body.toolbar-collapsed .summary {
+      display: none;
+    }
+
+    body.toolbar-collapsed .chart-permanent-actions {
+      gap: 4px;
+      padding: 2px;
+      border: 1px solid rgba(208, 213, 221, 0.75);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(4px);
+    }
+
+    body.toolbar-collapsed #toggleOptionsBtn {
+      display: none;
+    }
+
+    body.toolbar-collapsed .chart-permanent-actions button {
+      padding: 3px 6px;
+      border-radius: 7px;
+      font-size: 12px;
     }
 
     .summary {
@@ -271,8 +327,8 @@
       border: 1px solid var(--border);
       background: white;
       color: var(--ink);
-      padding: 9px 12px;
-      border-radius: 10px;
+      padding: 7px 9px;
+      border-radius: 9px;
       font-weight: 650;
       cursor: pointer;
       font-size: 14px;
@@ -339,13 +395,57 @@
     }
 
     @media (max-width: 900px) {
-      main,
+      main {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        padding: 4px;
+        gap: 6px;
+      }
+
       body.controls-collapsed main {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+      }
+
+      .controls {
+        max-height: min(42dvh, 360px);
       }
 
       .chart-panel {
-        min-height: 420px;
+        min-height: 0;
+      }
+
+      .chart-toolbar {
+        padding: 5px 6px;
+      }
+
+      .summary {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (max-height: 560px) {
+      main {
+        padding: 2px;
+        gap: 4px;
+      }
+
+      .panel {
+        border-radius: 7px;
+      }
+
+      .chart-toolbar {
+        padding: 3px 4px;
+      }
+
+      button {
+        padding: 5px 7px;
+        border-radius: 7px;
+        font-size: 12px;
+      }
+
+      .summary {
+        display: none;
       }
     }
   </style>
@@ -491,8 +591,11 @@
 
     <section class="panel chart-panel" aria-label="Glucose chart">
       <div class="chart-toolbar">
-        <div class="chart-actions">
+        <div class="chart-permanent-actions">
           <button id="toggleOptionsBtn" type="button">Hide options</button>
+          <button id="toggleToolbarBtn" type="button">Hide buttons</button>
+        </div>
+        <div class="chart-actions graph-actions">
           <button id="prevBtn" type="button">◀ Back</button>
           <button id="nextBtn" type="button">Forward ▶</button>
           <button id="zoomInBtn" type="button">Zoom in</button>
@@ -515,7 +618,7 @@
     </section>
   </main>
 
-  <script type="text/javascript" src="https://www.juggluco.nl/Juggluco/viewer.js"></script>
+  <script type="text/javascript" src="http://www.juggluco.nl/Juggluco/viewer.js"></script>
 
 </body>
 </html>

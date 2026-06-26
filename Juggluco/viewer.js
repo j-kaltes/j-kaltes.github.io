@@ -542,7 +542,6 @@
         const y = glucoseColumn ? parseNumber(row[glucoseColumn]) : NaN;
         const raw = row.Raw !== undefined ? parseNumber(row.Raw) : NaN;
         const rate = row.Rate !== undefined ? parseNumber(row.Rate) : NaN;
-
         return {
           type,
           t,
@@ -873,11 +872,13 @@
     function updateSummary() {
       const { startMs, endMs } = currentRange();
       const sensorCount = state.cache.sensorStats.length;
+      /*
       const sensors = sensorCount
         ? ` · ${sensorCount} sensor${sensorCount === 1 ? "" : "s"}`
         : "";
-
       els.summary.textContent = `${formatDateTime(startMs)} – ${formatDateTime(endMs)}${sensors}`;
+*/
+      els.summary.textContent = `${formatDateTime(startMs)} – ${formatDateTime(endMs)}`;
     }
 
     function plotAreaFromSize(width, height) {
@@ -1749,11 +1750,11 @@
     function tooltipHtmlForNearest(nearest) {
       return nearest.map(item => {
         if (item.type === "amount") {
-          return `<strong>${escapeHtml(item.label || "Amount")}</strong><br>${escapeHtml(item.hitText || niceNumber(item.value, 1))}<br>${escapeHtml(formatDateTime(item.t))}`;
+          return `${escapeHtml(formatDateTime(item.t))}<br><strong><div style="display: flex; justify-content: space-between;"><span>${escapeHtml(item.label || "Amount")}</span><span>${escapeHtml(item.hitText || niceNumber(item.value, 1))}</span></div></strong>`;
         }
 
-        const rate = Number.isFinite(item.rate) ? `<br>Rate of change: ${niceNumber(item.rate, 2)} ${escapeHtml(item.label || "")}` : "";
-        return `<strong>${escapeHtml(item.display)}</strong><br>${escapeHtml(formatDateTime(item.t))}${rate}`;
+        const rate = Number.isFinite(item.rate) ? `<div style="display: flex; justify-content: space-between;"><span>${escapeHtml(item.label || "")}</span><span>${niceNumber(item.rate, 2)}</span></div>` : "";
+        return `<span style="display: block; text-align: center;">${item.sensor}</span>${escapeHtml(formatDateTime(item.t))}<span style="display: block; text-align: right;"><strong>${escapeHtml(item.display)}</strong></span>${rate}`;
       }).join("<hr style='border:0;border-top:1px solid rgba(255,255,255,.2);margin:6px 0'>");
     }
 

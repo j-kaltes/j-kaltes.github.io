@@ -2605,7 +2605,7 @@
       document.body.classList.toggle("controls-collapsed", state.controlsCollapsed);
       if (els.toggleOptionsBtn) {
         const label = state.controlsCollapsed ? "Show options" : "Hide options";
-        els.toggleOptionsBtn.textContent = state.controlsCollapsed ? "☰" : "×";
+        els.toggleOptionsBtn.textContent = label;
         els.toggleOptionsBtn.title = label;
         els.toggleOptionsBtn.setAttribute("aria-label", label);
       }
@@ -2621,7 +2621,10 @@
       state.toolbarCollapsed = Boolean(collapsed);
       document.body.classList.toggle("toolbar-collapsed", state.toolbarCollapsed);
       if (els.toggleToolbarBtn) {
-        els.toggleToolbarBtn.textContent = state.toolbarCollapsed ? "Show buttons" : "Hide buttons";
+        const label = state.toolbarCollapsed ? "Show buttons" : "Hide buttons";
+        els.toggleToolbarBtn.textContent = state.toolbarCollapsed ? "▾" : "▴";
+        els.toggleToolbarBtn.title = label;
+        els.toggleToolbarBtn.setAttribute("aria-label", label);
       }
       if (options.persist !== false) {
         try {

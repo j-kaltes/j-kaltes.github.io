@@ -131,7 +131,7 @@
       justify-content: flex-start;
       gap: 6px;
       border-bottom: 1px solid var(--border);
-      padding: 6px 116px 6px 8px;
+      padding: 6px 8px 6px 34px;
       min-width: 0;
     }
 
@@ -160,19 +160,16 @@
       white-space: nowrap;
     }
 
-    #toggleToolbarBtn {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      z-index: 25;
-      min-width: 104px;
+    #toggleOptionsBtn {
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
 
-    #toggleOptionsBtn {
+    #toggleToolbarBtn {
       position: absolute;
       left: 0;
       top: 8px;
-      z-index: 6;
+      z-index: 25;
       width: 26px;
       min-width: 0;
       height: 34px;
@@ -181,13 +178,13 @@
       background: rgba(255, 255, 255, 0.84);
       backdrop-filter: blur(4px);
       box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1;
       text-align: center;
       opacity: 0.88;
     }
 
-    #toggleOptionsBtn:hover {
+    #toggleToolbarBtn:hover {
       opacity: 1;
     }
 
@@ -209,18 +206,7 @@
       display: none;
     }
 
-    body.toolbar-collapsed #toggleOptionsBtn {
-      display: none;
-    }
-
     body.toolbar-collapsed #toggleToolbarBtn {
-      top: 6px;
-      right: 6px;
-      padding: 3px 6px;
-      border-radius: 7px;
-      font-size: 12px;
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(4px);
       pointer-events: auto;
     }
 
@@ -470,7 +456,7 @@
       }
 
       .chart-toolbar {
-        padding: 5px 110px 5px 5px;
+        padding: 5px 5px 5px 31px;
       }
 
       .summary {
@@ -518,11 +504,6 @@
     @media (max-width: 520px) {
       .chart-toolbar {
         gap: 4px;
-        padding-right: 94px;
-      }
-
-      #toggleToolbarBtn {
-        min-width: 86px;
       }
 
       .graph-actions {
@@ -546,13 +527,15 @@
       }
 
       .chart-toolbar {
-        padding: 3px 94px 3px 4px;
+        padding: 3px 4px 3px 30px;
       }
 
       #toggleToolbarBtn {
-        top: 3px;
-        right: 3px;
-        min-width: 86px;
+        top: 4px;
+        width: 24px;
+        height: 30px;
+        border-radius: 0 7px 7px 0;
+        font-size: 14px;
       }
 
       button {
@@ -708,8 +691,9 @@
 
     <section class="panel chart-panel" aria-label="Glucose chart">
       <div class="chart-toolbar">
-        <button id="toggleToolbarBtn" type="button">Hide buttons</button>
+        <button id="toggleToolbarBtn" type="button" title="Hide buttons" aria-label="Hide buttons">▴</button>
         <div class="chart-actions graph-actions">
+          <button id="toggleOptionsBtn" type="button">Hide options</button>
           <button id="prevBtn" type="button" title="Back" aria-label="Back">◀</button>
           <button id="nextBtn" type="button" title="Forward" aria-label="Forward">▶</button>
           <button id="zoomInBtn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
@@ -720,7 +704,6 @@
       </div>
 
       <div class="chart-wrap" id="chartWrap">
-        <button id="toggleOptionsBtn" type="button" title="Hide options" aria-label="Hide options">×</button>
         <div id="plotClip" class="plot-clip" aria-hidden="true">
           <canvas id="glChart"></canvas>
           <canvas id="amountChart"></canvas>

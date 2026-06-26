@@ -902,25 +902,25 @@
 
       let left;
       if (veryNarrow) {
-        left = unitIsMg ? 46 : 38;
+        left = unitIsMg ? 42 : 34;
       } else if (tightLandscape) {
-        left = unitIsMg ? 44 : 34;
+        left = unitIsMg ? 42 : 32;
       } else if (shortLandscape) {
-        left = unitIsMg ? 48 : 38;
+        left = unitIsMg ? 44 : 34;
       } else if (compactWidth) {
-        // Keep the phone portrait y-axis spacing close to the previous version:
-        // the space beside the rotated label is already about right there.
-        left = unitIsMg ? 54 : 46;
+        // Phone portrait still needs room for the rotated label and y-axis text,
+        // but not the wider gutter that slipped into the previous build.
+        left = unitIsMg ? 48 : 40;
       } else {
         // Desktop and tablet layouts do not need the large original y-axis gutter.
-        left = unitIsMg ? 56 : 48;
+        left = unitIsMg ? 50 : 42;
       }
 
       const right = shortLandscape ? 1 : (compactWidth ? 2 : 4);
       const top = veryShort ? 1 : (shortLandscape ? 2 : (compactHeight ? 4 : 6));
       const bottom = veryShort ? 11 : (shortLandscape ? 13 : (compactHeight ? 16 : 18));
       const labelX = shortLandscape ? 8 : (compactWidth ? 12 : 12);
-      const yTickGap = shortLandscape ? 3 : 5;
+      const yTickGap = shortLandscape ? 2 : 3;
 
       return {
         x: left,

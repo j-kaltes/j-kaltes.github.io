@@ -2618,7 +2618,7 @@
       state.toolbarCollapsed = Boolean(collapsed);
       document.body.classList.toggle("toolbar-collapsed", state.toolbarCollapsed);
       if (els.toggleToolbarBtn) {
-        els.toggleToolbarBtn.textContent = state.toolbarCollapsed ? "Buttons" : "Hide buttons";
+        els.toggleToolbarBtn.textContent = state.toolbarCollapsed ? "Show buttons" : "Hide buttons";
       }
       if (options.persist !== false) {
         try {

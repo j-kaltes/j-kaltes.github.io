@@ -124,13 +124,14 @@
     body.toolbar-collapsed .status { grid-row: 2; }
 
     .chart-toolbar {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
       border-bottom: 1px solid var(--border);
-      padding: 7px 8px;
+      padding: 7px 118px 7px 8px;
     }
 
     .chart-actions,
@@ -140,15 +141,25 @@
       gap: 6px;
     }
 
+    #toggleToolbarBtn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 25;
+      min-width: 104px;
+    }
+
     body.toolbar-collapsed .chart-toolbar {
       position: absolute;
-      top: 4px;
-      right: 4px;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 20;
       padding: 0;
       border: 0;
       background: transparent;
       box-shadow: none;
+      pointer-events: none;
     }
 
     body.toolbar-collapsed .graph-actions,
@@ -157,22 +168,26 @@
     }
 
     body.toolbar-collapsed .chart-permanent-actions {
-      gap: 4px;
-      padding: 2px;
-      border: 1px solid rgba(208, 213, 221, 0.75);
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(4px);
+      display: block;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     body.toolbar-collapsed #toggleOptionsBtn {
       display: none;
     }
 
-    body.toolbar-collapsed .chart-permanent-actions button {
+    body.toolbar-collapsed #toggleToolbarBtn {
+      top: 6px;
+      right: 6px;
       padding: 3px 6px;
       border-radius: 7px;
       font-size: 12px;
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(4px);
+      pointer-events: auto;
     }
 
     .summary {
@@ -416,7 +431,7 @@
       }
 
       .chart-toolbar {
-        padding: 5px 6px;
+        padding: 5px 116px 5px 6px;
       }
 
       .summary {
@@ -435,7 +450,7 @@
       }
 
       .chart-toolbar {
-        padding: 3px 4px;
+        padding: 3px 112px 3px 4px;
       }
 
       button {
@@ -618,7 +633,7 @@
     </section>
   </main>
 
-  <script type="text/javascript" src="http://www.juggluco.nl/Juggluco/viewer.js"></script>
+  <script type="text/javascript" src="viewer.js"></script>
 
 </body>
 </html>

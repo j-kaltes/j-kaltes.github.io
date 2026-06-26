@@ -126,27 +126,69 @@
     .chart-toolbar {
       position: relative;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 6px;
       border-bottom: 1px solid var(--border);
-      padding: 7px 118px 7px 8px;
+      padding: 6px 116px 6px 8px;
+      min-width: 0;
     }
 
-    .chart-actions,
-    .chart-permanent-actions {
+    .chart-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
+    .graph-actions {
+      flex: 1 1 auto;
+      min-width: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .graph-actions::-webkit-scrollbar {
+      display: none;
+    }
+
+    .graph-actions button {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
     #toggleToolbarBtn {
       position: absolute;
-      top: 6px;
-      right: 6px;
+      top: 5px;
+      right: 5px;
       z-index: 25;
       min-width: 104px;
+    }
+
+    #toggleOptionsBtn {
+      position: absolute;
+      left: 0;
+      top: 8px;
+      z-index: 6;
+      width: 26px;
+      min-width: 0;
+      height: 34px;
+      padding: 0;
+      border-radius: 0 8px 8px 0;
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);
+      font-size: 17px;
+      line-height: 1;
+      text-align: center;
+      opacity: 0.88;
+    }
+
+    #toggleOptionsBtn:hover {
+      opacity: 1;
     }
 
     body.toolbar-collapsed .chart-toolbar {
@@ -167,14 +209,6 @@
       display: none;
     }
 
-    body.toolbar-collapsed .chart-permanent-actions {
-      display: block;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      box-shadow: none;
-    }
-
     body.toolbar-collapsed #toggleOptionsBtn {
       display: none;
     }
@@ -191,6 +225,11 @@
     }
 
     .summary {
+      flex: 0 1 auto;
+      min-width: 8em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       color: var(--muted);
       font-size: 13px;
     }
@@ -431,11 +470,68 @@
       }
 
       .chart-toolbar {
-        padding: 5px 116px 5px 6px;
+        padding: 5px 110px 5px 5px;
       }
 
       .summary {
-        flex-basis: 100%;
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),
+           (max-height: 560px) and (min-width: 640px) {
+      main {
+        grid-template-columns: clamp(220px, 32vw, 300px) minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+      }
+
+      body.controls-collapsed main {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+      }
+
+      .controls {
+        max-height: none;
+        padding: 8px;
+      }
+
+      fieldset {
+        margin-bottom: 8px;
+        padding: 8px;
+      }
+
+      label {
+        margin-bottom: 7px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="password"],
+      input[type="date"],
+      input[type="time"],
+      select {
+        padding: 6px 8px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .chart-toolbar {
+        gap: 4px;
+        padding-right: 94px;
+      }
+
+      #toggleToolbarBtn {
+        min-width: 86px;
+      }
+
+      .graph-actions {
+        gap: 4px;
+      }
+
+      .graph-actions button {
+        padding-left: 8px;
+        padding-right: 8px;
       }
     }
 
@@ -450,7 +546,13 @@
       }
 
       .chart-toolbar {
-        padding: 3px 112px 3px 4px;
+        padding: 3px 94px 3px 4px;
+      }
+
+      #toggleToolbarBtn {
+        top: 3px;
+        right: 3px;
+        min-width: 86px;
       }
 
       button {
@@ -606,21 +708,19 @@
 
     <section class="panel chart-panel" aria-label="Glucose chart">
       <div class="chart-toolbar">
-        <div class="chart-permanent-actions">
-          <button id="toggleOptionsBtn" type="button">Hide options</button>
-          <button id="toggleToolbarBtn" type="button">Hide buttons</button>
-        </div>
+        <button id="toggleToolbarBtn" type="button">Hide buttons</button>
         <div class="chart-actions graph-actions">
-          <button id="prevBtn" type="button">◀ Back</button>
-          <button id="nextBtn" type="button">Forward ▶</button>
-          <button id="zoomInBtn" type="button">Zoom in</button>
-          <button id="zoomOutBtn" type="button">Zoom out</button>
+          <button id="prevBtn" type="button" title="Back" aria-label="Back">◀</button>
+          <button id="nextBtn" type="button" title="Forward" aria-label="Forward">▶</button>
+          <button id="zoomInBtn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+          <button id="zoomOutBtn" type="button" title="Zoom out" aria-label="Zoom out">−</button>
           <button id="nowBtn" type="button">Now</button>
         </div>
         <div id="summary" class="summary">No data loaded yet.</div>
       </div>
 
       <div class="chart-wrap" id="chartWrap">
+        <button id="toggleOptionsBtn" type="button" title="Hide options" aria-label="Hide options">×</button>
         <div id="plotClip" class="plot-clip" aria-hidden="true">
           <canvas id="glChart"></canvas>
           <canvas id="amountChart"></canvas>

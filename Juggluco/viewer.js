@@ -2604,7 +2604,10 @@
       state.controlsCollapsed = Boolean(collapsed);
       document.body.classList.toggle("controls-collapsed", state.controlsCollapsed);
       if (els.toggleOptionsBtn) {
-        els.toggleOptionsBtn.textContent = state.controlsCollapsed ? "Show options" : "Hide options";
+        const label = state.controlsCollapsed ? "Show options" : "Hide options";
+        els.toggleOptionsBtn.textContent = state.controlsCollapsed ? "☰" : "×";
+        els.toggleOptionsBtn.title = label;
+        els.toggleOptionsBtn.setAttribute("aria-label", label);
       }
       if (options.persist !== false) {
         try {

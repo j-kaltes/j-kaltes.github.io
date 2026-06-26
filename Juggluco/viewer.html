@@ -61,17 +61,17 @@
     main {
       flex: 1 1 auto;
       min-height: 0;
-      padding: 6px clamp(4px, 1vw, 12px) 8px;
+      padding: 0;
       display: grid;
-      grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
-      gap: 8px;
+      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+      gap: 0;
     }
 
     .panel {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .controls {
@@ -438,8 +438,8 @@
       main {
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto minmax(0, 1fr);
-        padding: 4px;
-        gap: 6px;
+        padding: 0;
+        gap: 0;
       }
 
       body.controls-collapsed main {
@@ -467,7 +467,7 @@
     @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),
            (max-height: 560px) and (min-width: 640px) {
       main {
-        grid-template-columns: clamp(210px, 30vw, 286px) minmax(0, 1fr);
+        grid-template-columns: clamp(204px, 29vw, 276px) minmax(0, 1fr);
         grid-template-rows: minmax(0, 1fr);
       }
 
@@ -519,7 +519,7 @@
     @media (max-height: 560px) {
       main {
         padding: 0;
-        gap: 2px;
+        gap: 0;
       }
 
       .panel {

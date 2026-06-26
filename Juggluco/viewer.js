@@ -896,11 +896,28 @@
       const compactHeight = height < 300;
       const veryNarrow = width < 380;
       const veryShort = height < 210;
+      const shortLandscape = width >= 520 && height <= 360;
+      const tightLandscape = width >= 620 && height <= 300;
+      const unitIsMg = state.unit === "mg/dL";
 
-      const left = veryNarrow ? 40 : (compactWidth ? 48 : 62);
-      const right = compactWidth ? 4 : 10;
-      const top = veryShort ? 3 : (compactHeight ? 6 : 12);
-      const bottom = veryShort ? 14 : (compactHeight ? 18 : 24);
+      let left;
+      if (veryNarrow) {
+        left = unitIsMg ? 46 : 38;
+      } else if (tightLandscape) {
+        left = unitIsMg ? 46 : 36;
+      } else if (shortLandscape) {
+        left = unitIsMg ? 50 : 40;
+      } else if (compactWidth) {
+        left = unitIsMg ? 54 : 46;
+      } else {
+        left = unitIsMg ? 64 : 58;
+      }
+
+      const right = shortLandscape ? 2 : (compactWidth ? 4 : 8);
+      const top = veryShort ? 2 : (shortLandscape ? 3 : (compactHeight ? 6 : 10));
+      const bottom = veryShort ? 12 : (shortLandscape ? 14 : (compactHeight ? 18 : 22));
+      const labelX = shortLandscape ? 9 : (compactWidth ? 12 : 15);
+      const yTickGap = shortLandscape ? 4 : 7;
 
       return {
         x: left,
@@ -908,7 +925,9 @@
         w: Math.max(10, width - left - right),
         h: Math.max(10, height - top - bottom),
         width,
-        height
+        height,
+        labelX,
+        yTickGap
       };
     }
 
@@ -1256,7 +1275,7 @@
 
         ctx.fillText(
           niceNumber(yValue, yDigits),
-          area.x - 8,
+          area.x - (area.yTickGap || 7),
           y
         );
       }

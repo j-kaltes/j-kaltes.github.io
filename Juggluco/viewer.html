@@ -467,7 +467,7 @@
     @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),
            (max-height: 560px) and (min-width: 640px) {
       main {
-        grid-template-columns: clamp(220px, 32vw, 300px) minmax(0, 1fr);
+        grid-template-columns: clamp(210px, 30vw, 286px) minmax(0, 1fr);
         grid-template-rows: minmax(0, 1fr);
       }
 
@@ -518,12 +518,18 @@
 
     @media (max-height: 560px) {
       main {
-        padding: 2px;
-        gap: 4px;
+        padding: 0;
+        gap: 2px;
       }
 
       .panel {
-        border-radius: 7px;
+        border-radius: 5px;
+        box-shadow: none;
+      }
+
+      .chart-panel {
+        border-left-width: 0;
+        border-right-width: 0;
       }
 
       .chart-toolbar {

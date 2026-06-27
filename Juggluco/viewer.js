@@ -440,8 +440,10 @@
     }
 
     function currentLabelFontSize(area) {
-      if (area.width < 380 || area.height < 230) return 26;
-      if (area.width < 520 || area.height < 300) return 34;
+      // Keep the phone annotation readable: the value should dominate the
+      // direction arrow, not the other way around.
+      if (area.width < 380 || area.height < 230) return 30;
+      if (area.width < 520 || area.height < 300) return 40;
       return 55;
     }
 
@@ -462,7 +464,7 @@
       } catch {}
 
       const compact = area.width < 520 || area.height < 300;
-      const arrowSpace = compact ? 34 : 56;
+      const arrowSpace = compact ? 24 : 48;
       const rightPad = compact ? 4 : 8;
       const safetyPad = compact ? 6 : 14;
       const minPad = compact ? 72 : 120;
@@ -1420,12 +1422,12 @@
       return null;
     }
 
-    function drawRateArrow(context, rate, getx, gety) {
+    function drawRateArrow(context, rate, getx, gety, scale = 1) {
       if (!Number.isFinite(rate)) return;
 
-      const density = 1;
-      const headHeight = 24;
-      const strokeWidth = Math.max(2, curveThicknessPx() * 0.85) * 2.5;
+      const density = Math.max(0.35, Math.min(1.2, scale));
+      const headHeight = 24 * density;
+      const strokeWidth = Math.max(1.8, curveThicknessPx() * 0.85 * density * 1.9);
       let tipY = gety;
 
       if (rate <= 0.0) tipY -= headHeight / 12.5;
@@ -1534,7 +1536,8 @@
       ctx.textBaseline = "middle";
 
       const textWidth = ctx.measureText(valueText).width;
-      const arrowSpace = compact ? 34 : 56;
+      const arrowScale = compact ? 0.62 : 0.86;
+      const arrowSpace = compact ? 24 : 48;
       const requiredSpace = textWidth + arrowSpace + rightPad;
 
       // The current label is only drawn when there is enough empty room at the
@@ -1552,7 +1555,7 @@
       ctx.lineWidth = 4;
       ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
       ctx.strokeText(valueText, textX, y);
-      drawRateArrow(ctx, point.rate, arrowTipX, y);
+      drawRateArrow(ctx, point.rate, arrowTipX, y, arrowScale);
       ctx.fillStyle = COLORS.textStrong;
       ctx.fillText(valueText, textX, y);
 
@@ -2326,9 +2329,10 @@
         const maxGapMs = options.maxGapMs ?? 45 * 60 * 1000;
         const dashed = Boolean(options.dashed);
         const alpha = options.alpha ?? 1;
+        const fixedColor = options.color || null;
 
         for (const [sensor, group] of groups) {
-          const rgba = hexToRgba(colorForSensor(sensor), alpha);
+          const rgba = hexToRgba(fixedColor || colorForSensor(sensor), alpha);
           for (let i = 1; i < group.length; i++) {
             const a = group[i - 1];
             const b = group[i];
@@ -2375,9 +2379,8 @@
 
         replaceBuffers({
           streamLines: buildLineDataset(state.cache.streamGroups, { maxGapMs: 45 * 60 * 1000 }),
-          historyLines: buildLineDataset(state.cache.historyGroups, { maxGapMs: 45 * 60 * 1000, alpha: 0.88 }),
-          scansPoints: buildPointDataset(state.data.scans, 1),
-          historyPoints: buildPointDataset(state.data.history, 0.95)
+          historyLines: buildLineDataset(state.cache.historyGroups, { maxGapMs: 45 * 60 * 1000, alpha: 0.92, color: COLORS.history }),
+          scansPoints: buildPointDataset(state.data.scans, 1)
         });
       }
 
@@ -2504,10 +2507,6 @@
 
         gl.useProgram(pointProgram);
         setSharedUniforms(pointLoc, startMin, endMin, glArea, yDom, renderWidth, height);
-
-        if (visible.history) {
-          drawPointDataset(renderer.buffers.historyPoints, startMin, endMin, 2, Math.max(6.5, curveThicknessPx() * 1.8), glDpr);
-        }
 
         if (visible.scans) {
           drawPointDataset(renderer.buffers.scansPoints, startMin, endMin, 1, Math.max(9, curveThicknessPx() * 2.3), glDpr);

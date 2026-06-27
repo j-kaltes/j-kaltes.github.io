@@ -465,7 +465,7 @@
       } catch {}
 
       const compact = area.width < 520 || area.height < 300;
-      const arrowSpace = compact ? 24 : 48;
+      const arrowSpace = compact ? 29 : 58;
       const rightPad = compact ? 4 : 8;
       const safetyPad = compact ? 6 : 14;
       const minPad = compact ? 72 : 120;
@@ -1537,8 +1537,8 @@
       ctx.textBaseline = "middle";
 
       const textWidth = ctx.measureText(valueText).width;
-      const arrowScale = compact ? 0.62 : 0.86;
-      const arrowSpace = compact ? 24 : 48;
+      const arrowScale = compact ? 0.74 : 1.03;
+      const arrowSpace = compact ? 29 : 58;
       const requiredSpace = textWidth + arrowSpace + rightPad;
 
       // The current label is only drawn when there is enough empty room at the

@@ -397,7 +397,11 @@
       let path = String(pathname || "");
       try { path = decodeURIComponent(path); } catch {}
       path = path.replace(/^\/+|\/+$/g, "");
-      path = path.replace(/\/+(?:inapp)?viewer\.html$/i, "");
+      // Remove the viewer filename itself. With the old regexp, "/viewer.html"
+      // became "viewer.html", so a self-hosted viewer without an api_secret
+      // showed "viewer.html" in the api_secret field.
+      path = path.replace(/(?:^|\/)(?:inapp)?viewer\.html$/i, "");
+      path = path.replace(/\/+$/g, "");
       return path;
     }
 
@@ -440,16 +444,7 @@
     }
 
     function applyUrlStartConfig() {
-      let config = getUrlStartConfig();
-      const pathConfig = getViewerPathConfig();
-
-      // If the page itself is served from the same Juggluco origin as
-      // /api_secret/viewer.html, prefer that path-derived secret. It prevents
-      // accidentally treating "viewer.html" as part of the api_secret and makes
-      // self-hosted HTTPS links behave like the externally hosted viewer.
-      if (pathConfig && (!config || config.baseUrl === pathConfig.baseUrl)) {
-        config = pathConfig;
-      }
+      const config = getUrlStartConfig();
 
       if (!config) return false;
 

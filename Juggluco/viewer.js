@@ -109,12 +109,15 @@
     const amountCtx = els.amountCanvas.getContext("2d", { alpha: true });
     let glRenderer = null;
 
-    function normalizeBaseUrl(value) {
+/*    function normalizeBaseUrl(value) {
       const raw = String(value || "").trim();
       if (!raw) throw new Error("Please enter the Juggluco server URL.");
       return raw.replace(/\/+$/, "");
-    }
-
+    } */
+    function normalizeBaseUrl(value) {
+      const raw = String(value || "").trim();
+      return (raw || window.location.origin).replace(/\/+$/, "");
+      }
     function unixSeconds(ms) {
       return Math.floor(ms / 1000);
     }
@@ -2962,6 +2965,9 @@
     restoreCollapsedPreferences();
 
     const didApplyUrlStart = applyUrlStartConfig();
+    if(els.baseUrl && window.location.protocol === "http:" && window.location.port === "17580" && /^http:\/\/127\.0\.0\.1:17580\/?$/.test(els.baseUrl.value.trim())) {
+      els.baseUrl.value = window.location.origin;
+     }
 
     state.centerMs = liveFollowCenterMs();
     setDateInputsFromRangeStart();

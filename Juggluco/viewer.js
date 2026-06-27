@@ -1,32 +1,5 @@
     "use strict";
 
-
-    (function installNewViewerHtmlForInAppViewer() {
-      // The in-app HTML shipped in older app versions can load this hosted
-      // viewer.js, but it does not contain the latest mobile/landscape layout
-      // markup and CSS. Install the new HTML shell before the rest of this file
-      // looks up elements by id. When this file is used by newviewer.html, this
-      // block does nothing.
-      const hasNewShell = Boolean(document.getElementById("toggleToolbarBtn")) &&
-        Boolean(document.getElementById("glChart")) &&
-        Boolean(document.getElementById("amountChart")) &&
-        Boolean(document.getElementById("plotClip"));
-
-      if (hasNewShell) return;
-
-      const hasOldViewerShell = Boolean(document.getElementById("chart")) &&
-        Boolean(document.getElementById("chartWrap")) &&
-        Boolean(document.getElementById("baseUrl"));
-
-      if (!hasOldViewerShell) return;
-
-      const newHeadHtml = "\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\n  <title>Juggluco Viewer</title>\n  <style>\n    :root {\n      --bg: #f6f7f9;\n      --panel: #ffffff;\n      --ink: #1b1f24;\n      --muted: #667085;\n      --border: #d0d5dd;\n      --accent: #2563eb;\n      --danger: #b42318;\n      --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);\n    }\n\n    * { box-sizing: border-box; }\n\n    html,\n    body {\n      height: 100%;\n    }\n\n    @supports (height: 100dvh) {\n      html,\n      body {\n        height: 100dvh;\n      }\n    }\n\n    body {\n      margin: 0;\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n      background: var(--bg);\n      color: var(--ink);\n      display: flex;\n      flex-direction: column;\n      overflow: hidden;\n      min-height: 100%;\n    }\n\n    header {\n      flex: 0 0 auto;\n      padding: 12px 20px 6px;\n    }\n\n    h1 {\n      margin: 0 0 4px;\n      font-size: 22px;\n      line-height: 1.2;\n    }\n\n    .subtitle {\n      margin: 0;\n      color: var(--muted);\n      font-size: 14px;\n    }\n\n    main {\n      flex: 1 1 auto;\n      min-height: 0;\n      padding: 0;\n      display: grid;\n      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);\n      gap: 0;\n    }\n\n    .panel {\n      background: var(--panel);\n      border: 1px solid var(--border);\n      border-radius: 0;\n      box-shadow: none;\n    }\n\n    .controls {\n      padding: 12px;\n      align-self: stretch;\n      min-height: 0;\n      overflow: auto;\n      overscroll-behavior: contain;\n    }\n\n    .options-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      gap: 10px;\n      margin-bottom: 12px;\n    }\n\n    .options-header strong {\n      font-size: 14px;\n    }\n\n    body.controls-collapsed main {\n      grid-template-columns: minmax(0, 1fr);\n    }\n\n    body.controls-collapsed .controls {\n      display: none;\n    }\n\n    .chart-panel {\n      min-width: 0;\n      min-height: 0;\n      align-self: stretch;\n      display: grid;\n      grid-template-rows: auto minmax(0, 1fr) auto;\n      overflow: hidden;\n      position: relative;\n    }\n\n    .chart-toolbar { grid-row: 1; }\n    .chart-wrap { grid-row: 2; }\n    .status { grid-row: 3; }\n\n    body.toolbar-collapsed .chart-panel {\n      grid-template-rows: minmax(0, 1fr) auto;\n    }\n\n    body.toolbar-collapsed .chart-wrap { grid-row: 1; }\n    body.toolbar-collapsed .status { grid-row: 2; }\n\n    .chart-toolbar {\n      position: relative;\n      display: flex;\n      flex-wrap: nowrap;\n      align-items: center;\n      justify-content: flex-start;\n      gap: 6px;\n      border-bottom: 1px solid var(--border);\n      padding: 6px 8px 6px 34px;\n      min-width: 0;\n    }\n\n    .chart-actions {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 6px;\n    }\n\n    .graph-actions {\n      flex: 1 1 auto;\n      min-width: 0;\n      flex-wrap: nowrap;\n      overflow-x: auto;\n      overflow-y: hidden;\n      -webkit-overflow-scrolling: touch;\n      scrollbar-width: none;\n    }\n\n    .graph-actions::-webkit-scrollbar {\n      display: none;\n    }\n\n    .graph-actions button {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleOptionsBtn {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleToolbarBtn {\n      position: absolute;\n      left: 0;\n      top: 8px;\n      z-index: 25;\n      width: 26px;\n      min-width: 0;\n      height: 34px;\n      padding: 0;\n      border-radius: 0 8px 8px 0;\n      background: rgba(255, 255, 255, 0.84);\n      backdrop-filter: blur(4px);\n      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);\n      font-size: 16px;\n      line-height: 1;\n      text-align: center;\n      opacity: 0.88;\n    }\n\n    #toggleToolbarBtn:hover {\n      opacity: 1;\n    }\n\n    body.toolbar-collapsed .chart-toolbar {\n      position: absolute;\n      top: 0;\n      left: 0;\n      right: 0;\n      z-index: 20;\n      padding: 0;\n      border: 0;\n      background: transparent;\n      box-shadow: none;\n      pointer-events: none;\n    }\n\n    body.toolbar-collapsed .graph-actions,\n    body.toolbar-collapsed .summary {\n      display: none;\n    }\n\n    body.toolbar-collapsed #toggleToolbarBtn {\n      pointer-events: auto;\n    }\n\n    .summary {\n      flex: 0 1 auto;\n      min-width: 8em;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .chart-wrap {\n      position: relative;\n      min-width: 0;\n      min-height: 0;\n      overflow: hidden;\n      background:\n        linear-gradient(180deg, rgba(37, 99, 235, 0.04), rgba(255, 255, 255, 0));\n    }\n\n    .chart-wrap canvas {\n      position: absolute;\n      inset: 0;\n      display: block;\n      width: 100%;\n      height: 100%;\n      touch-action: none;\n    }\n\n    .plot-clip {\n      position: absolute;\n      z-index: 1;\n      overflow: hidden;\n      pointer-events: none;\n      background: #ffffff;\n      contain: strict;\n    }\n\n    #glChart {\n      z-index: 1;\n      background: #ffffff;\n      will-change: transform;\n      transform: translate3d(0, 0, 0);\n      pointer-events: none;\n      inset: auto;\n    }\n\n    #amountChart {\n      z-index: 2;\n      background: transparent;\n      will-change: transform;\n      transform: translate3d(0, 0, 0);\n      pointer-events: none;\n      inset: auto;\n    }\n\n    #chart {\n      z-index: 3;\n      cursor: grab;\n      background: transparent;\n    }\n\n    #chart.dragging {\n      cursor: grabbing;\n    }\n\n    .tooltip {\n      position: absolute;\n      display: none;\n      pointer-events: none;\n      z-index: 5;\n      max-width: 280px;\n      padding: 8px 10px;\n      border-radius: 10px;\n      background: rgba(17, 24, 39, 0.94);\n      color: white;\n      font-size: 12px;\n      line-height: 1.35;\n      box-shadow: 0 10px 20px rgba(0,0,0,.25);\n      white-space: normal;\n    }\n\n    .status {\n      display: none;\n      padding: 10px 14px;\n      min-height: 42px;\n      color: var(--muted);\n      border-top: 1px solid var(--border);\n      font-size: 13px;\n    }\n\n    .status.error {\n      display: block;\n      color: var(--danger);\n    }\n\n    fieldset {\n      margin: 0 0 16px;\n      padding: 12px;\n      border: 1px solid var(--border);\n      border-radius: 12px;\n    }\n\n    legend {\n      padding: 0 6px;\n      color: var(--muted);\n      font-size: 13px;\n      font-weight: 700;\n    }\n\n    label {\n      display: block;\n      margin: 0 0 10px;\n      font-size: 13px;\n      color: var(--ink);\n    }\n\n    label.inline {\n      display: flex;\n      align-items: center;\n      gap: 8px;\n      margin-bottom: 8px;\n    }\n\n    input[type=\"text\"],\n    input[type=\"number\"],\n    input[type=\"password\"],\n    input[type=\"date\"],\n    input[type=\"time\"],\n    select {\n      width: 100%;\n      margin-top: 4px;\n      padding: 9px 10px;\n      border: 1px solid var(--border);\n      border-radius: 10px;\n      background: white;\n      color: var(--ink);\n      font: inherit;\n      font-size: 14px;\n    }\n\n    input[type=\"checkbox\"] {\n      width: 16px;\n      height: 16px;\n      margin: 0;\n    }\n\n    .row {\n      display: grid;\n      grid-template-columns: 1fr 1fr;\n      gap: 10px;\n    }\n\n    button {\n      appearance: none;\n      border: 1px solid var(--border);\n      background: white;\n      color: var(--ink);\n      padding: 7px 9px;\n      border-radius: 9px;\n      font-weight: 650;\n      cursor: pointer;\n      font-size: 14px;\n    }\n\n    button:hover {\n      border-color: #98a2b3;\n      background: #f9fafb;\n    }\n\n    button.primary {\n      background: var(--accent);\n      border-color: var(--accent);\n      color: white;\n    }\n\n    button.primary:hover {\n      filter: brightness(.96);\n    }\n\n    .hint {\n      color: var(--muted);\n      font-size: 12px;\n      line-height: 1.45;\n      margin: 8px 0 0;\n    }\n\n    .legend-list {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 10px;\n      margin-top: 8px;\n    }\n\n    .legend-item {\n      display: inline-flex;\n      align-items: center;\n      gap: 6px;\n      color: var(--muted);\n      font-size: 12px;\n    }\n\n    .swatch {\n      display: inline-block;\n      width: 18px;\n      height: 3px;\n      border-radius: 4px;\n      background: #111;\n    }\n\n    .dashed-swatch {\n      background: repeating-linear-gradient(\n        90deg,\n        currentColor 0 5px,\n        transparent 5px 8px\n      ) !important;\n      color: #9333ea;\n    }\n\n    .dot {\n      width: 9px;\n      height: 9px;\n      border-radius: 999px;\n    }\n\n    @media (max-width: 900px) {\n      main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: auto minmax(0, 1fr);\n        padding: 0;\n        gap: 0;\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: min(42dvh, 360px);\n      }\n\n      .chart-panel {\n        min-height: 0;\n      }\n\n      .chart-toolbar {\n        padding: 5px 5px 5px 31px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n\n    @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),\n           (max-height: 560px) and (min-width: 640px) {\n      main {\n        grid-template-columns: clamp(204px, 29vw, 276px) minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: none;\n        padding: 8px;\n      }\n\n      fieldset {\n        margin-bottom: 8px;\n        padding: 8px;\n      }\n\n      label {\n        margin-bottom: 7px;\n      }\n\n      input[type=\"text\"],\n      input[type=\"number\"],\n      input[type=\"password\"],\n      input[type=\"date\"],\n      input[type=\"time\"],\n      select {\n        padding: 6px 8px;\n        font-size: 13px;\n      }\n    }\n\n    @media (max-width: 520px) {\n      .chart-toolbar {\n        gap: 4px;\n      }\n\n      .graph-actions {\n        gap: 4px;\n      }\n\n      .graph-actions button {\n        padding-left: 8px;\n        padding-right: 8px;\n      }\n    }\n\n    @media (max-height: 560px) {\n      main {\n        padding: 0;\n        gap: 0;\n      }\n\n      .panel {\n        border-radius: 5px;\n        box-shadow: none;\n      }\n\n      .chart-panel {\n        border-left-width: 0;\n        border-right-width: 0;\n      }\n\n      .chart-toolbar {\n        padding: 3px 4px 3px 30px;\n      }\n\n      #toggleToolbarBtn {\n        top: 4px;\n        width: 24px;\n        height: 30px;\n        border-radius: 0 7px 7px 0;\n        font-size: 14px;\n      }\n\n      button {\n        padding: 5px 7px;\n        border-radius: 7px;\n        font-size: 12px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n  </style>\n";
-      const newBodyHtml = "\n  <main>\n    <section class=\"panel controls\" aria-label=\"Controls\">\n      <div class=\"options-header\">\n        <strong class=\"options-title\">Options</strong>\n      </div>\n      <fieldset>\n        <legend>Connection</legend>\n\n        <label>\n          Juggluco server URL\n          <input id=\"baseUrl\" type=\"text\" value=\"http://127.0.0.1:17580\"\n                 placeholder=\"http://127.0.0.1:17580 or http://192.168.1.69:17580\" />\n        </label>\n\n        <label>\n          API token / api_secret, optional\n          <input id=\"token\" type=\"password\" autocomplete=\"off\"\n                 placeholder=\"Leave empty if not used\" />\n        </label>\n        <label class=\"inline\"><input id=\"showToken\" type=\"checkbox\" /> Show api_secret</label>\n\n        <div class=\"row\">\n          <label>\n            Unit\n            <select id=\"unit\">\n              <option value=\"mmol/L\" selected>mmol/L</option>\n              <option value=\"mg/dL\">mg/dL</option>\n            </select>\n          </label>\n\n          <label>\n            Window\n            <select id=\"windowHours\">\n              <option value=\"3\">3 hours</option>\n              <option value=\"6\" selected>6 hours</option>\n              <option value=\"12\">12 hours</option>\n              <option value=\"24\">24 hours</option>\n              <option value=\"48\">48 hours</option>\n              <option value=\"168\">7 days</option>\n            </select>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Start date\n            <input id=\"dateToView\" type=\"date\" />\n          </label>\n\n          <label>\n            Start time\n            <input id=\"timeOnDate\" type=\"time\" value=\"00:00\" />\n          </label>\n        </div>\n\n        <div class=\"chart-actions\" style=\"margin-bottom:10px\">\n          <button id=\"goDateBtn\" type=\"button\">Go to start</button>\n          <button id=\"todayDateBtn\" type=\"button\">Today 00:00</button>\n        </div>\n\n        <button id=\"loadBtn\" class=\"primary\" type=\"button\">Load data</button>\n        <p class=\"hint\">\n          The start date/time is the left edge of the graph. The Window setting determines\n          how much time is shown from that start. Use the buttons, mouse wheel, drag, or arrow keys to move through time.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Display</legend>\n\n        <label class=\"inline\"><input id=\"showStream\" type=\"checkbox\" checked /> Stream curve</label>\n        <label class=\"inline\"><input id=\"showScans\" type=\"checkbox\" checked /> Libre scans as dots</label>\n        <label class=\"inline\"><input id=\"showHistory\" type=\"checkbox\" /> History values</label>\n        <label class=\"inline\"><input id=\"showAmounts\" type=\"checkbox\" checked /> Entered amounts</label>\n        <label class=\"inline\"><input id=\"useCalibrated\" type=\"checkbox\" checked /> Calibrated</label>\n        <label class=\"inline\"><input id=\"autoRefresh\" type=\"checkbox\" checked /> Auto-refresh when viewing latest data</label>\n\n        <div class=\"row\">\n          <label>\n            Low line\n            <input id=\"lowLimit\" type=\"number\" step=\"0.1\" value=\"3.9\" />\n          </label>\n          <label>\n            High line\n            <input id=\"highLimit\" type=\"number\" step=\"0.1\" value=\"10.0\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Graph min\n            <input id=\"graphMin\" type=\"number\" step=\"0.5\" value=\"2\" />\n          </label>\n          <label>\n            Graph max\n            <input id=\"graphMax\" type=\"number\" step=\"0.5\" value=\"11\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Curve thickness\n            <input id=\"curveThickness\" type=\"number\" min=\"1\" max=\"12\" step=\"0.5\" value=\"2\" />\n          </label>\n        </div>\n\n        <p class=\"hint\">\n          The graph min/max is the normal vertical range. The graph expands only when\n          visible values or limit lines fall outside that range. The curve uses the sharp\n          WebGL render path and quietly prefetches neighboring time ranges while you scroll.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Legend</legend>\n        <p class=\"hint\">\n          Colors identify sensors. Shape and line style identify the data source.\n        </p>\n        <div class=\"legend-list\">\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#2563eb\"></span>Stream: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#2563eb\"></span>Scans: dots</span>\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#9333ea\"></span>History: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#047857\"></span>Amounts: green tags</span>\n        </div>\n        <p class=\"hint\" style=\"margin-top:12px\">Sensors in the loaded data:</p>\n        <div id=\"sensorLegend\" class=\"legend-list\">\n          <span class=\"legend-item\">No sensors loaded yet.</span>\n        </div>\n      </fieldset>\n\n      <fieldset>\n        <legend>Keyboard</legend>\n        <p class=\"hint\">\n          \u2190 / \u2192 pan half a window. + / \u2212 zoom. Home jumps to now.\n        </p>\n      </fieldset>\n    </section>\n\n    <section class=\"panel chart-panel\" aria-label=\"Glucose chart\">\n      <div class=\"chart-toolbar\">\n        <button id=\"toggleToolbarBtn\" type=\"button\" title=\"Hide buttons\" aria-label=\"Hide buttons\">\u25b4</button>\n        <div class=\"chart-actions graph-actions\">\n          <button id=\"toggleOptionsBtn\" type=\"button\">Hide options</button>\n          <button id=\"prevBtn\" type=\"button\" title=\"Back\" aria-label=\"Back\">\u25c0</button>\n          <button id=\"nextBtn\" type=\"button\" title=\"Forward\" aria-label=\"Forward\">\u25b6</button>\n          <button id=\"zoomInBtn\" type=\"button\" title=\"Zoom in\" aria-label=\"Zoom in\">+</button>\n          <button id=\"zoomOutBtn\" type=\"button\" title=\"Zoom out\" aria-label=\"Zoom out\">\u2212</button>\n          <button id=\"nowBtn\" type=\"button\">Now</button>\n        </div>\n        <div id=\"summary\" class=\"summary\">No data loaded yet.</div>\n      </div>\n\n      <div class=\"chart-wrap\" id=\"chartWrap\">\n        <div id=\"plotClip\" class=\"plot-clip\" aria-hidden=\"true\">\n          <canvas id=\"glChart\"></canvas>\n          <canvas id=\"amountChart\"></canvas>\n        </div>\n        <canvas id=\"chart\" aria-label=\"Glucose graph\"></canvas>\n        <div id=\"tooltip\" class=\"tooltip\"></div>\n      </div>\n\n      <div id=\"status\" class=\"status\" role=\"alert\"></div>\n    </section>\n  </main>\n";
-
-      document.head.innerHTML = newHeadHtml;
-      document.body.innerHTML = newBodyHtml;
-    }());
-
     const COLORS = {
       grid: "#e5e7eb",
       text: "#475467",
@@ -440,10 +413,8 @@
     }
 
     function currentLabelFontSize(area) {
-      // Keep the phone annotation readable: the value should dominate the
-      // direction arrow, not the other way around.
-      if (area.width < 380 || area.height < 230) return 30;
-      if (area.width < 520 || area.height < 300) return 40;
+      if (area.width < 380 || area.height < 230) return 26;
+      if (area.width < 520 || area.height < 300) return 34;
       return 55;
     }
 
@@ -464,7 +435,7 @@
       } catch {}
 
       const compact = area.width < 520 || area.height < 300;
-      const arrowSpace = compact ? 24 : 48;
+      const arrowSpace = compact ? 34 : 56;
       const rightPad = compact ? 4 : 8;
       const safetyPad = compact ? 6 : 14;
       const minPad = compact ? 72 : 120;
@@ -1422,12 +1393,12 @@
       return null;
     }
 
-    function drawRateArrow(context, rate, getx, gety, scale = 1) {
+    function drawRateArrow(context, rate, getx, gety) {
       if (!Number.isFinite(rate)) return;
 
-      const density = Math.max(0.35, Math.min(1.2, scale));
-      const headHeight = 24 * density;
-      const strokeWidth = Math.max(1.8, curveThicknessPx() * 0.85 * density * 1.9);
+      const density = 1;
+      const headHeight = 24;
+      const strokeWidth = Math.max(2, curveThicknessPx() * 0.85) * 2.5;
       let tipY = gety;
 
       if (rate <= 0.0) tipY -= headHeight / 12.5;
@@ -1536,8 +1507,7 @@
       ctx.textBaseline = "middle";
 
       const textWidth = ctx.measureText(valueText).width;
-      const arrowScale = compact ? 0.62 : 0.86;
-      const arrowSpace = compact ? 24 : 48;
+      const arrowSpace = compact ? 34 : 56;
       const requiredSpace = textWidth + arrowSpace + rightPad;
 
       // The current label is only drawn when there is enough empty room at the
@@ -1555,7 +1525,7 @@
       ctx.lineWidth = 4;
       ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
       ctx.strokeText(valueText, textX, y);
-      drawRateArrow(ctx, point.rate, arrowTipX, y, arrowScale);
+      drawRateArrow(ctx, point.rate, arrowTipX, y);
       ctx.fillStyle = COLORS.textStrong;
       ctx.fillText(valueText, textX, y);
 
@@ -2329,10 +2299,9 @@
         const maxGapMs = options.maxGapMs ?? 45 * 60 * 1000;
         const dashed = Boolean(options.dashed);
         const alpha = options.alpha ?? 1;
-        const fixedColor = options.color || null;
 
         for (const [sensor, group] of groups) {
-          const rgba = hexToRgba(fixedColor || colorForSensor(sensor), alpha);
+          const rgba = hexToRgba(colorForSensor(sensor), alpha);
           for (let i = 1; i < group.length; i++) {
             const a = group[i - 1];
             const b = group[i];
@@ -2379,8 +2348,9 @@
 
         replaceBuffers({
           streamLines: buildLineDataset(state.cache.streamGroups, { maxGapMs: 45 * 60 * 1000 }),
-          historyLines: buildLineDataset(state.cache.historyGroups, { maxGapMs: 45 * 60 * 1000, alpha: 0.92, color: COLORS.history }),
-          scansPoints: buildPointDataset(state.data.scans, 1)
+          historyLines: buildLineDataset(state.cache.historyGroups, { maxGapMs: 45 * 60 * 1000, alpha: 0.88 }),
+          scansPoints: buildPointDataset(state.data.scans, 1),
+          historyPoints: buildPointDataset(state.data.history, 0.95)
         });
       }
 
@@ -2507,6 +2477,10 @@
 
         gl.useProgram(pointProgram);
         setSharedUniforms(pointLoc, startMin, endMin, glArea, yDom, renderWidth, height);
+
+        if (visible.history) {
+          drawPointDataset(renderer.buffers.historyPoints, startMin, endMin, 2, Math.max(6.5, curveThicknessPx() * 1.8), glDpr);
+        }
 
         if (visible.scans) {
           drawPointDataset(renderer.buffers.scansPoints, startMin, endMin, 1, Math.max(9, curveThicknessPx() * 2.3), glDpr);

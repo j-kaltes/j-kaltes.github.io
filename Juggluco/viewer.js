@@ -393,37 +393,68 @@
       return Number.isFinite(n) ? n : NaN;
     }
 
+    function cleanViewerTokenPath(pathname) {
+      let path = String(pathname || "");
+      try { path = decodeURIComponent(path); } catch {}
+      path = path.replace(/^\/+|\/+$/g, "");
+      path = path.replace(/\/+(?:inapp)?viewer\.html$/i, "");
+      return path;
+    }
+
+    function getViewerPathConfig() {
+      const token = cleanViewerTokenPath(window.location.pathname);
+      if (!token) return null;
+      return {
+        baseUrl: window.location.origin,
+        token
+      };
+    }
+
     function getUrlStartConfig() {
       const params = new URLSearchParams(window.location.search);
       const raw = params.get("urlstart");
-      if (!raw) return null;
 
-      const valuesToTry = [raw];
-      try {
-        const decoded = decodeURIComponent(raw);
-        if (decoded !== raw) valuesToTry.push(decoded);
-      } catch {}
-
-      for (const value of valuesToTry) {
+      if (raw) {
+        const valuesToTry = [raw];
         try {
-          const url = new URL(value);
-          const secret = decodeURIComponent(url.pathname.replace(/^\/+/, ""));
-          return {
-            baseUrl: url.origin,
-            token: secret
-          };
+          const decoded = decodeURIComponent(raw);
+          if (decoded !== raw) valuesToTry.push(decoded);
         } catch {}
+
+        for (const value of valuesToTry) {
+          try {
+            const url = new URL(value, window.location.href);
+            const token = cleanViewerTokenPath(url.pathname);
+            return {
+              baseUrl: url.origin,
+              token
+            };
+          } catch {}
+        }
       }
 
-      return null;
+      // Also support opening the in-app viewer itself as /api_secret/viewer.html.
+      // This makes https://host:port/secret/viewer.html work even when urlstart
+      // is absent, ignored, or mangled by an old wrapper/link.
+      return getViewerPathConfig();
     }
 
     function applyUrlStartConfig() {
-      const config = getUrlStartConfig();
+      let config = getUrlStartConfig();
+      const pathConfig = getViewerPathConfig();
+
+      // If the page itself is served from the same Juggluco origin as
+      // /api_secret/viewer.html, prefer that path-derived secret. It prevents
+      // accidentally treating "viewer.html" as part of the api_secret and makes
+      // self-hosted HTTPS links behave like the externally hosted viewer.
+      if (pathConfig && (!config || config.baseUrl === pathConfig.baseUrl)) {
+        config = pathConfig;
+      }
+
       if (!config) return false;
 
       if (config.baseUrl) els.baseUrl.value = config.baseUrl;
-      if (config.token) els.token.value = config.token;
+      els.token.value = config.token || "";
       return true;
     }
 
@@ -521,6 +552,8 @@
         method: "GET",
         cache: "no-store",
         mode: "cors",
+        credentials: "omit",
+        referrerPolicy: "no-referrer",
         signal
       });
 

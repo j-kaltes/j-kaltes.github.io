@@ -904,6 +904,7 @@
       drawGrid(area, yDom, scales);
       drawAmountsOverlay(area, scales, yDom);
       drawCurrentGlucoseLabel(area, scales);
+      drawHover(area, scales, yDom);
     }
 
     function updateCompositedPan() {
@@ -1906,6 +1907,58 @@
       return shown;
     }
 
+    function drawHoverMarker(hit, area) {
+      if (!hit) return;
+
+      const x = hit.hitX;
+      const y = hit.hitY;
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.x, area.y, area.w, area.h);
+      ctx.clip();
+
+      if (hit.type === "amount" && Number.isFinite(hit.hitW) && Number.isFinite(hit.hitH)) {
+        const padX = 7;
+        const padY = 5;
+        const w = hit.hitW + 2 * padX;
+        const h = hit.hitH + 2 * padY;
+        const left = x - w / 2;
+        const top = y - h / 2;
+
+        ctx.lineJoin = "round";
+        roundRect(ctx, left, top, w, h, 6);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.95)";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        roundRect(ctx, left, top, w, h, 6);
+        ctx.strokeStyle = COLORS.amounts;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+        return;
+      }
+
+      const color = hit.markerColor || colorForSensor(hit.sensor);
+      const radius = Math.max(5, curveThicknessPx() + 4);
+
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.96)";
+      ctx.lineWidth = Math.max(4, curveThicknessPx() + 3);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = Math.max(2, Math.min(4, curveThicknessPx()));
+      ctx.stroke();
+      ctx.restore();
+    }
+
     function drawHover(area, scales, yDom) {
       if (!state.hover) return;
 
@@ -1921,14 +1974,9 @@
         return;
       }
 
-      ctx.save();
-      ctx.strokeStyle = "rgba(17, 24, 39, 0.35)";
-      ctx.setLineDash([3, 3]);
-      ctx.beginPath();
-      ctx.moveTo(x, area.y);
-      ctx.lineTo(x, area.y + area.h);
-      ctx.stroke();
-      ctx.restore();
+      for (const hit of nearest) {
+        drawHoverMarker(hit, area);
+      }
 
       els.tooltip.innerHTML = tooltipHtmlForNearest(nearest);
       els.tooltip.style.display = "block";
@@ -1960,7 +2008,12 @@
         const d = Math.hypot(x - mouseX, y - mouseY);
         if (d < bestDistance) {
           bestDistance = d;
-          best = p;
+          best = {
+            ...p,
+            hitX: x,
+            hitY: y,
+            markerColor: colorForSensor(p.sensor)
+          };
         }
       }
 
@@ -1992,7 +2045,10 @@
             t,
             y: glucose,
             display: `${formatGlucoseValue(glucose)} ${state.unit}`,
-            interpolated: true
+            interpolated: true,
+            hitX: x,
+            hitY: y,
+            markerColor: colorForSensor(p2.sensor)
           };
         }
       }
@@ -2059,7 +2115,12 @@
                 type: "amount",
                 label: hit.item.label,
                 display: `${hit.item.text} ${hit.item.label}`,
-                hitText: hit.item.text
+                hitText: hit.item.text,
+                hitX: hit.item.x,
+                hitY: hit.item.y,
+                hitW: hit.item.w,
+                hitH: hit.item.h,
+                markerColor: COLORS.amounts
               });
             }
           });

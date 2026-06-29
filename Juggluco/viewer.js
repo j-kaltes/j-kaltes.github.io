@@ -411,8 +411,19 @@
     }
 
     function getViewerPathConfig() {
+      // Only infer an api_secret from the current path for pages served over
+      // HTTP(S), e.g. http://host:17580/secret/viewer.html. When the viewer is
+      // opened from file:// for testing, the pathname is the local filename;
+      // that must not be copied into the api_secret field.
+      const protocol = window.location && window.location.protocol;
+      if (protocol !== "http:" && protocol !== "https:") return null;
+
       const token = cleanViewerTokenPath(window.location.pathname);
       if (!token) return null;
+
+      // Avoid treating the hosted viewer directory itself as an api_secret.
+      if (/^(?:Juggluco|viewer|newviewer)$/i.test(token)) return null;
+
       return {
         baseUrl: window.location.origin,
         token
@@ -1906,6 +1917,7 @@
     }
 
     function showTooltipAtPoint(x, y, options = {}) {
+      resizeCanvas();
       const area = getPlotArea();
       if (x < area.x || x > area.x + area.w || y < area.y || y > area.y + area.h) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
@@ -1942,37 +1954,50 @@
       return null;
     }
 
-    function chartCoordScaleFromCanvasRect(rect) {
-      const width = state.resize.width || els.canvas?.clientWidth || rect?.width || 1;
-      const height = state.resize.height || els.canvas?.clientHeight || rect?.height || 1;
-      return {
-        x: width / Math.max(1, rect?.width || width),
-        y: height / Math.max(1, rect?.height || height)
-      };
-    }
-
     function chartCoordsFromPointerEvent(event) {
       if (!event || !els.canvas) return null;
-      const rect = els.canvas.getBoundingClientRect();
-      const scale = chartCoordScaleFromCanvasRect(rect);
 
-      // For the event target itself, offsetX/offsetY are usually the most
-      // reliable coordinates: they are already relative to the overlay canvas.
-      // This avoids tablet-specific client/visual-viewport discrepancies.
+      // Keep the cached canvas size in sync before hit-testing. The tablet
+      // failure after hiding options was consistent with the overlay using stale
+      // width/height while the visible plot had already been re-laid out.
+      resizeCanvas();
+
+      const point = clientPointFromPointerEvent(event);
+      const area = getPlotArea();
+
+      // Prefer the visible plot clip rectangle, not the full overlay canvas.
+      // The WebGL curve is drawn inside #plotClip, so mapping the pointer through
+      // this rectangle makes hit-testing and the filled marker use the same
+      // coordinate system as the curve, even after the options panel is hidden.
+      if (point && els.plotClip) {
+        const clipRect = els.plotClip.getBoundingClientRect();
+        if (clipRect.width > 0 && clipRect.height > 0) {
+          return {
+            x: area.x + ((point.clientX - clipRect.left) / clipRect.width) * area.w,
+            y: area.y + ((point.clientY - clipRect.top) / clipRect.height) * area.h
+          };
+        }
+      }
+
+      const rect = els.canvas.getBoundingClientRect();
+      const width = els.canvas.clientWidth || state.resize.width || rect.width || 1;
+      const height = els.canvas.clientHeight || state.resize.height || rect.height || 1;
+      const scaleX = width / Math.max(1, rect.width || width);
+      const scaleY = height / Math.max(1, rect.height || height);
+
       if (event.target === els.canvas &&
           Number.isFinite(event.offsetX) && Number.isFinite(event.offsetY)) {
         return {
-          x: event.offsetX * scale.x,
-          y: event.offsetY * scale.y
+          x: event.offsetX * scaleX,
+          y: event.offsetY * scaleY
         };
       }
 
-      const point = clientPointFromPointerEvent(event);
       if (!point) return null;
 
       return {
-        x: (point.clientX - rect.left) * scale.x,
-        y: (point.clientY - rect.top) * scale.y
+        x: (point.clientX - rect.left) * scaleX,
+        y: (point.clientY - rect.top) * scaleY
       };
     }
 

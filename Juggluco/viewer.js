@@ -1,5 +1,7 @@
     "use strict";
 
+    const VIEWER_BUILD_ID = "hitmarker-cacheprobe-20260629-2245";
+
 
     (function installNewViewerHtmlForInAppViewer() {
       // The in-app HTML shipped in older app versions can load this hosted
@@ -140,6 +142,10 @@
     const ctx = els.canvas.getContext("2d", { alpha: true });
     const amountCtx = els.amountCanvas.getContext("2d", { alpha: true });
     let glRenderer = null;
+
+    window.JUGGLUCO_VIEWER_BUILD = VIEWER_BUILD_ID;
+    try { console.log("Juggluco viewer build", VIEWER_BUILD_ID); } catch {}
+    try { document.body.setAttribute("data-viewer-build", VIEWER_BUILD_ID); } catch {}
 
 /*    function normalizeBaseUrl(value) {
       const raw = String(value || "").trim();
@@ -967,6 +973,7 @@
       els.summary.textContent = `${formatDateTime(startMs)} – ${formatDateTime(endMs)}${sensors}`;
 */
       els.summary.textContent = `${formatDateTime(startMs)} – ${formatDateTime(endMs)}`;
+      els.summary.title = `Build ${VIEWER_BUILD_ID}`;
     }
 
     function plotAreaFromSize(width, height) {
@@ -1957,27 +1964,11 @@
     function chartCoordsFromPointerEvent(event) {
       if (!event || !els.canvas) return null;
 
-      // Keep the cached canvas size in sync before hit-testing. The tablet
-      // failure after hiding options was consistent with the overlay using stale
-      // width/height while the visible plot had already been re-laid out.
+      // Re-read the real layout before every touch/mouse hit-test. This is more
+      // important than avoiding a few layout reads: after the options panel is
+      // hidden, some tablet browsers keep delivering pointer events while the
+      // canvas has just changed size/position.
       resizeCanvas();
-
-      const point = clientPointFromPointerEvent(event);
-      const area = getPlotArea();
-
-      // Prefer the visible plot clip rectangle, not the full overlay canvas.
-      // The WebGL curve is drawn inside #plotClip, so mapping the pointer through
-      // this rectangle makes hit-testing and the filled marker use the same
-      // coordinate system as the curve, even after the options panel is hidden.
-      if (point && els.plotClip) {
-        const clipRect = els.plotClip.getBoundingClientRect();
-        if (clipRect.width > 0 && clipRect.height > 0) {
-          return {
-            x: area.x + ((point.clientX - clipRect.left) / clipRect.width) * area.w,
-            y: area.y + ((point.clientY - clipRect.top) / clipRect.height) * area.h
-          };
-        }
-      }
 
       const rect = els.canvas.getBoundingClientRect();
       const width = els.canvas.clientWidth || state.resize.width || rect.width || 1;
@@ -1985,6 +1976,11 @@
       const scaleX = width / Math.max(1, rect.width || width);
       const scaleY = height / Math.max(1, rect.height || height);
 
+      // Use the overlay canvas coordinate system as the source of truth. The
+      // marker is drawn on this same canvas, and the WebGL curve is positioned
+      // from the same plotAreaFromSize(width, height). Mapping through plotClip
+      // helped on some desktop layouts but can double-apply the plot offset on
+      // older Android/tablet browsers after the options panel is hidden.
       if (event.target === els.canvas &&
           Number.isFinite(event.offsetX) && Number.isFinite(event.offsetY)) {
         return {
@@ -1993,6 +1989,7 @@
         };
       }
 
+      const point = clientPointFromPointerEvent(event);
       if (!point) return null;
 
       return {
@@ -2861,9 +2858,22 @@
     }
 
     function refreshAfterLayoutChange() {
+      state.hover = null;
+      if (els.tooltip) els.tooltip.style.display = "none";
+      state.resize = { width: 0, height: 0, dpr: 0, glDpr: 0 };
+      state.lastYDomain = null;
+      state.scrollRenderBaseCenterMs = null;
+      resetPlotTransform();
+
+      // Force one synchronous measurement immediately, then repeat after the
+      // browser has completed the grid/flex reflow. This prevents the tablet
+      // from keeping the old plot rectangle for the hit marker after options
+      // are hidden.
+      try { els.chartWrap.getBoundingClientRect(); resizeCanvas(); } catch {}
       requestFullDrawAfterLayout();
-      setTimeout(requestFullDrawAfterLayout, 80);
-      setTimeout(requestFullDrawAfterLayout, 250);
+      setTimeout(requestFullDrawAfterLayout, 60);
+      setTimeout(requestFullDrawAfterLayout, 180);
+      setTimeout(requestFullDrawAfterLayout, 420);
     }
 
     function setControlsCollapsed(collapsed, options = {}) {

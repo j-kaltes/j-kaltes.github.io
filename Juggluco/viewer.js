@@ -996,7 +996,32 @@
       };
     }
 
+    function ensureGraphLayerStyles() {
+      // Some older in-app viewer.html shells have older canvas CSS. Force the
+      // graph layers to share the same CSS coordinate system before sizing and
+      // hit-testing, so touch positions match the visible WebGL curve.
+      if (els.chartWrap) {
+        const position = window.getComputedStyle ? getComputedStyle(els.chartWrap).position : "";
+        if (!position || position === "static") els.chartWrap.style.position = "relative";
+        els.chartWrap.style.overflow = "hidden";
+      }
+
+      [els.canvas, els.glCanvas, els.amountCanvas].forEach(canvas => {
+        if (!canvas) return;
+        canvas.style.position = "absolute";
+        canvas.style.display = "block";
+        canvas.style.touchAction = "none";
+      });
+
+      if (els.plotClip) {
+        els.plotClip.style.position = "absolute";
+        els.plotClip.style.overflow = "hidden";
+        els.plotClip.style.pointerEvents = "none";
+      }
+    }
+
     function resizeCanvas() {
+      ensureGraphLayerStyles();
       const rect = els.chartWrap.getBoundingClientRect();
       const rawDpr = window.devicePixelRatio || 1;
       const width = Math.max(180, Math.floor(rect.width));
@@ -1897,12 +1922,56 @@
       return true;
     }
 
+    function clientPointFromPointerEvent(event) {
+      if (!event) return null;
+
+      if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY)) {
+        return { clientX: event.clientX, clientY: event.clientY };
+      }
+
+      const touch = event.changedTouches?.[0] || event.touches?.[0];
+      if (touch && Number.isFinite(touch.clientX) && Number.isFinite(touch.clientY)) {
+        return { clientX: touch.clientX, clientY: touch.clientY };
+      }
+
+      return null;
+    }
+
+    function chartCoordsFromClientPoint(point) {
+      if (!point) return null;
+
+      // Drawing, tooltip placement and plot area sizing all use chartWrap CSS
+      // pixels. Use the same rectangle for pointer conversion. Using the canvas
+      // rectangle can be wrong with older viewer.html shells where the canvas has
+      // stale CSS, browser zoom, or a delayed layout update.
+      const rect = (els.chartWrap || els.canvas).getBoundingClientRect();
+      return {
+        x: point.clientX - rect.left,
+        y: point.clientY - rect.top
+      };
+    }
+
+    function currentHoverChartCoords() {
+      if (!state.hover) return null;
+      if (Number.isFinite(state.hover.clientX) && Number.isFinite(state.hover.clientY)) {
+        return chartCoordsFromClientPoint(state.hover);
+      }
+      if (Number.isFinite(state.hover.x) && Number.isFinite(state.hover.y)) {
+        return { x: state.hover.x, y: state.hover.y };
+      }
+      return null;
+    }
+
     function showTooltipFromEvent(event, options = {}) {
-      const rect = els.canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      state.hover = { x, y };
-      const shown = showTooltipAtPoint(x, y, options);
+      const clientPoint = clientPointFromPointerEvent(event);
+      const chartPoint = chartCoordsFromClientPoint(clientPoint);
+      if (!chartPoint) {
+        if (!options.keepExisting) els.tooltip.style.display = "none";
+        return false;
+      }
+
+      state.hover = clientPoint;
+      const shown = showTooltipAtPoint(chartPoint.x, chartPoint.y, options);
       if (shown || options.redraw !== false) requestDraw();
       return shown;
     }
@@ -1941,28 +2010,35 @@
       }
 
       const color = hit.markerColor || colorForSensor(hit.sensor);
-      const radius = Math.max(5, curveThicknessPx() + 4);
+      const radius = Math.max(3, curveThicknessPx() * 1.5);
 
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
+
+      // Smaller filled point marker. The white halo keeps it visible on dark or
+      // overlapping curves, while the colored core marks the touched value.
       ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.96)";
-      ctx.lineWidth = Math.max(4, curveThicknessPx() + 3);
-      ctx.stroke();
+      ctx.arc(x, y, radius + 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+      ctx.fill();
 
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = color;
-      ctx.lineWidth = Math.max(2, Math.min(4, curveThicknessPx()));
-      ctx.stroke();
+      ctx.fillStyle = color;
+      ctx.fill();
       ctx.restore();
     }
 
     function drawHover(area, scales, yDom) {
       if (!state.hover) return;
 
-      const { x, y } = state.hover;
+      const hoverPoint = currentHoverChartCoords();
+      if (!hoverPoint) {
+        els.tooltip.style.display = "none";
+        return;
+      }
+
+      const { x, y } = hoverPoint;
       if (x < area.x || x > area.x + area.w || y < area.y || y > area.y + area.h) {
         els.tooltip.style.display = "none";
         return;

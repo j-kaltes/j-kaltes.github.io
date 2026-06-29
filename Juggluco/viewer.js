@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-cacheprobe-20260629-2245";
+    const VIEWER_BUILD_ID = "hitmarker-touchselect-20260629-2320";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -1926,14 +1926,17 @@
     function showTooltipAtPoint(x, y, options = {}) {
       resizeCanvas();
       const area = getPlotArea();
-      if (x < area.x || x > area.x + area.w || y < area.y || y > area.y + area.h) {
+      const boundaryPad = (Number(options.toleranceScale) || 1) > 1 ? 120 : 0;
+      if (x < area.x - boundaryPad || x > area.x + area.w + boundaryPad ||
+          y < area.y - boundaryPad || y > area.y + area.h + boundaryPad) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
+        clearHitMarkers();
         return false;
       }
 
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      const nearest = findNearest(x, y, area, scales);
+      const nearest = findNearest(x, y, area, scales, { toleranceScale: options.toleranceScale || 1 });
 
       if (!nearest.length) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
@@ -1961,41 +1964,131 @@
       return null;
     }
 
-    function chartCoordsFromPointerEvent(event) {
-      if (!event || !els.canvas) return null;
+    function isTouchLikeEvent(event) {
+      if (!event) return false;
+      if (event.pointerType === "touch" || event.pointerType === "pen") return true;
+      if (event.touches?.length || event.changedTouches?.length) return true;
+      try {
+        return window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+      } catch {
+        return false;
+      }
+    }
 
-      // Re-read the real layout before every touch/mouse hit-test. This is more
-      // important than avoiding a few layout reads: after the options panel is
-      // hidden, some tablet browsers keep delivering pointer events while the
-      // canvas has just changed size/position.
+    function addChartCoordCandidate(list, label, x, y, toleranceScale = 1) {
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+      for (const item of list) {
+        if (Math.abs(item.x - x) < 0.5 && Math.abs(item.y - y) < 0.5) return;
+      }
+      list.push({ label, x, y, toleranceScale });
+    }
+
+    function chartCoordCandidatesFromPointerEvent(event) {
+      const list = [];
+      if (!event || !els.canvas) return list;
+
+      // Re-read the real layout before every touch/mouse hit-test. Some Android
+      // tablet builds report offsetX/offsetY in a different coordinate space
+      // after a grid/flex layout change. Rather than trusting one browser field,
+      // compute all sane coordinate interpretations and select the one that is
+      // actually closest to a rendered data curve.
       resizeCanvas();
 
-      const rect = els.canvas.getBoundingClientRect();
-      const width = els.canvas.clientWidth || state.resize.width || rect.width || 1;
-      const height = els.canvas.clientHeight || state.resize.height || rect.height || 1;
-      const scaleX = width / Math.max(1, rect.width || width);
-      const scaleY = height / Math.max(1, rect.height || height);
+      const touchLike = isTouchLikeEvent(event);
+      const toleranceScale = touchLike ? 6 : 1;
+      const point = clientPointFromPointerEvent(event);
+      const canvasRect = els.canvas.getBoundingClientRect();
+      const canvasWidth = els.canvas.clientWidth || state.resize.width || canvasRect.width || 1;
+      const canvasHeight = els.canvas.clientHeight || state.resize.height || canvasRect.height || 1;
+      const canvasScaleX = canvasWidth / Math.max(1, canvasRect.width || canvasWidth);
+      const canvasScaleY = canvasHeight / Math.max(1, canvasRect.height || canvasHeight);
 
-      // Use the overlay canvas coordinate system as the source of truth. The
-      // marker is drawn on this same canvas, and the WebGL curve is positioned
-      // from the same plotAreaFromSize(width, height). Mapping through plotClip
-      // helped on some desktop layouts but can double-apply the plot offset on
-      // older Android/tablet browsers after the options panel is hidden.
       if (event.target === els.canvas &&
           Number.isFinite(event.offsetX) && Number.isFinite(event.offsetY)) {
-        return {
-          x: event.offsetX * scaleX,
-          y: event.offsetY * scaleY
-        };
+        addChartCoordCandidate(list, "offset", event.offsetX * canvasScaleX, event.offsetY * canvasScaleY, toleranceScale);
       }
 
-      const point = clientPointFromPointerEvent(event);
-      if (!point) return null;
+      if (point) {
+        addChartCoordCandidate(
+          list,
+          "canvas-client",
+          (point.clientX - canvasRect.left) * canvasScaleX,
+          (point.clientY - canvasRect.top) * canvasScaleY,
+          toleranceScale
+        );
 
-      return {
-        x: (point.clientX - rect.left) * scaleX,
-        y: (point.clientY - rect.top) * scaleY
-      };
+        if (els.chartWrap) {
+          const wrapRect = els.chartWrap.getBoundingClientRect();
+          const wrapWidth = els.chartWrap.clientWidth || state.resize.width || wrapRect.width || 1;
+          const wrapHeight = els.chartWrap.clientHeight || state.resize.height || wrapRect.height || 1;
+          addChartCoordCandidate(
+            list,
+            "wrap-client",
+            (point.clientX - wrapRect.left) * (wrapWidth / Math.max(1, wrapRect.width || wrapWidth)),
+            (point.clientY - wrapRect.top) * (wrapHeight / Math.max(1, wrapRect.height || wrapHeight)),
+            toleranceScale
+          );
+        }
+
+        if (els.plotClip) {
+          const clipRect = els.plotClip.getBoundingClientRect();
+          const area = getPlotArea();
+          if (clipRect.width > 0 && clipRect.height > 0) {
+            addChartCoordCandidate(
+              list,
+              "plotclip-client",
+              area.x + ((point.clientX - clipRect.left) / clipRect.width) * area.w,
+              area.y + ((point.clientY - clipRect.top) / clipRect.height) * area.h,
+              toleranceScale
+            );
+          }
+        }
+
+        if (Number.isFinite(event.pageX) && Number.isFinite(event.pageY)) {
+          const docLeft = canvasRect.left + (window.scrollX || window.pageXOffset || 0);
+          const docTop = canvasRect.top + (window.scrollY || window.pageYOffset || 0);
+          addChartCoordCandidate(
+            list,
+            "canvas-page",
+            (event.pageX - docLeft) * canvasScaleX,
+            (event.pageY - docTop) * canvasScaleY,
+            toleranceScale
+          );
+        }
+      }
+
+      return list;
+    }
+
+    function chooseBestChartCoordCandidate(candidates) {
+      if (!candidates.length) return null;
+      if (candidates.length === 1) return candidates[0];
+
+      const area = getPlotArea();
+      const yDom = state.lastYDomain || yDomainVisible();
+      const scales = createScales(area, yDom);
+      let best = null;
+
+      for (const candidate of candidates) {
+        const nearest = findNearest(candidate.x, candidate.y, area, scales, {
+          toleranceScale: candidate.toleranceScale || 1
+        });
+        if (!nearest.length) continue;
+
+        const distance = Math.min(...nearest.map(hit =>
+          Number.isFinite(hit.hitDistancePx) ? hit.hitDistancePx : 999999
+        ));
+
+        if (!best || distance < best.distance) {
+          best = { candidate, distance };
+        }
+      }
+
+      return best ? best.candidate : candidates[0];
+    }
+
+    function chartCoordsFromPointerEvent(event) {
+      return chooseBestChartCoordCandidate(chartCoordCandidatesFromPointerEvent(event));
     }
 
     function currentHoverChartCoords() {
@@ -2009,17 +2102,104 @@
     function showTooltipAtChartPoint(point, options = {}) {
       if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
+        clearHitMarkers();
         return false;
       }
 
-      state.hover = { x: point.x, y: point.y };
-      const shown = showTooltipAtPoint(point.x, point.y, options);
+      const toleranceScale = Number.isFinite(point.toleranceScale) ? point.toleranceScale : (options.toleranceScale || 1);
+      state.hover = { x: point.x, y: point.y, toleranceScale };
+      const shown = showTooltipAtPoint(point.x, point.y, { ...options, toleranceScale });
       if (shown || options.redraw !== false) requestDraw();
       return shown;
     }
 
     function showTooltipFromEvent(event, options = {}) {
       return showTooltipAtChartPoint(chartCoordsFromPointerEvent(event), options);
+    }
+
+    let hitMarkerLayer = null;
+
+    function ensureHitMarkerLayer() {
+      if (hitMarkerLayer && hitMarkerLayer.parentNode === els.chartWrap) return hitMarkerLayer;
+      if (!els.chartWrap) return null;
+
+      hitMarkerLayer = document.getElementById("hitMarkerLayer");
+      if (!hitMarkerLayer) {
+        hitMarkerLayer = document.createElement("div");
+        hitMarkerLayer.id = "hitMarkerLayer";
+        els.chartWrap.appendChild(hitMarkerLayer);
+      }
+
+      hitMarkerLayer.style.position = "absolute";
+      hitMarkerLayer.style.left = "0";
+      hitMarkerLayer.style.top = "0";
+      hitMarkerLayer.style.right = "0";
+      hitMarkerLayer.style.bottom = "0";
+      hitMarkerLayer.style.zIndex = "4";
+      hitMarkerLayer.style.pointerEvents = "none";
+      hitMarkerLayer.style.overflow = "hidden";
+      hitMarkerLayer.style.display = "block";
+      return hitMarkerLayer;
+    }
+
+    function clearHitMarkers() {
+      const layer = hitMarkerLayer || document.getElementById("hitMarkerLayer");
+      if (!layer) return;
+      layer.textContent = "";
+      layer.style.display = "none";
+    }
+
+    function updateDomHitMarkers(hits, area) {
+      const layer = ensureHitMarkerLayer();
+      if (!layer) return;
+      layer.textContent = "";
+
+      if (!hits || !hits.length) {
+        layer.style.display = "none";
+        return;
+      }
+
+      layer.style.display = "block";
+      for (const hit of hits) {
+        const x = hit.hitX;
+        const y = hit.hitY;
+        if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+        if (x < area.x - 20 || x > area.x + area.w + 20 || y < area.y - 20 || y > area.y + area.h + 20) continue;
+
+        const node = document.createElement("div");
+        node.setAttribute("aria-hidden", "true");
+        node.style.position = "absolute";
+        node.style.pointerEvents = "none";
+        node.style.boxSizing = "border-box";
+
+        if (hit.type === "amount" && Number.isFinite(hit.hitW) && Number.isFinite(hit.hitH)) {
+          const padX = 7;
+          const padY = 5;
+          const w = hit.hitW + 2 * padX;
+          const h = hit.hitH + 2 * padY;
+          node.style.left = `${x - w / 2}px`;
+          node.style.top = `${y - h / 2}px`;
+          node.style.width = `${w}px`;
+          node.style.height = `${h}px`;
+          node.style.border = `2px solid ${COLORS.amounts}`;
+          node.style.borderRadius = "6px";
+          node.style.boxShadow = "0 0 0 3px rgba(255,255,255,0.95)";
+        } else {
+          const color = hit.markerColor || colorForSensor(hit.sensor);
+          const radius = Math.max(2, curveThicknessPx() * 0.75);
+          const diameter = radius * 2;
+          node.style.left = `${x}px`;
+          node.style.top = `${y}px`;
+          node.style.width = `${diameter}px`;
+          node.style.height = `${diameter}px`;
+          node.style.borderRadius = "999px";
+          node.style.background = color;
+          node.style.transform = "translate(-50%, -50%)";
+          node.style.boxShadow = "0 0 0 1.5px rgba(255,255,255,0.95)";
+        }
+
+        layer.appendChild(node);
+      }
     }
 
     function drawHoverMarker(hit, area) {
@@ -2076,41 +2256,46 @@
     }
 
     function drawHover(area, scales, yDom) {
-      if (!state.hover) return;
+      if (!state.hover) {
+        clearHitMarkers();
+        return;
+      }
 
       const hoverPoint = currentHoverChartCoords();
       if (!hoverPoint) {
         els.tooltip.style.display = "none";
+        clearHitMarkers();
         return;
       }
 
       const { x, y } = hoverPoint;
-      if (x < area.x || x > area.x + area.w || y < area.y || y > area.y + area.h) {
+      const toleranceScale = Number.isFinite(state.hover.toleranceScale) ? state.hover.toleranceScale : 1;
+      if (x < area.x - 120 || x > area.x + area.w + 120 || y < area.y - 120 || y > area.y + area.h + 120) {
         els.tooltip.style.display = "none";
+        clearHitMarkers();
         return;
       }
 
-      const nearest = findNearest(x, y, area, scales);
+      const nearest = findNearest(x, y, area, scales, { toleranceScale });
       if (!nearest.length) {
         els.tooltip.style.display = "none";
+        clearHitMarkers();
         return;
       }
 
-      for (const hit of nearest) {
-        drawHoverMarker(hit, area);
-      }
-
+      updateDomHitMarkers(nearest, area);
       els.tooltip.innerHTML = tooltipHtmlForNearest(nearest);
       els.tooltip.style.display = "block";
-      positionTooltip(x, y);
+      positionTooltip(Math.max(area.x, Math.min(area.x + area.w, x)), Math.max(area.y, Math.min(area.y + area.h, y)));
     }
 
-    function findNearest(mouseX, mouseY, area, scales) {
+    function findNearest(mouseX, mouseY, area, scales, options = {}) {
       const results = [];
+      const toleranceScale = Math.max(1, Math.min(8, Number(options.toleranceScale) || 1));
       const targetMs = scales.xInv(mouseX);
-      const glucoseToleranceMs = Math.max(60 * 1000, (18 / area.w) * state.windowMs);
-      const pointTolerancePx = 18;
-      const lineTolerancePx = 14;
+      const glucoseToleranceMs = Math.max(60 * 1000, ((18 * toleranceScale) / area.w) * state.windowMs);
+      const pointTolerancePx = 18 * toleranceScale;
+      const lineTolerancePx = 14 * toleranceScale;
 
       let best = null;
       let bestDistance = Infinity;
@@ -2205,6 +2390,7 @@
       }
 
       if (best && bestDistance <= (best.interpolated ? lineTolerancePx : pointTolerancePx)) {
+        best.hitDistancePx = bestDistance;
         results.push(best);
       }
 
@@ -2242,6 +2428,7 @@
                 hitY: hit.item.y,
                 hitW: hit.item.w,
                 hitH: hit.item.h,
+                hitDistancePx: hit.distance * Math.max(hit.item.w, hit.item.h, 1),
                 markerColor: COLORS.amounts
               });
             }
@@ -2860,6 +3047,7 @@
     function refreshAfterLayoutChange() {
       state.hover = null;
       if (els.tooltip) els.tooltip.style.display = "none";
+      clearHitMarkers();
       state.resize = { width: 0, height: 0, dpr: 0, glDpr: 0 };
       state.lastYDomain = null;
       state.scrollRenderBaseCenterMs = null;
@@ -3062,6 +3250,7 @@
         els.canvas.setPointerCapture(event.pointerId);
         state.hover = null;
         els.tooltip.style.display = "none";
+        clearHitMarkers();
         const chartPoint = chartCoordsFromPointerEvent(event);
         state.drag = {
           startX: event.clientX,

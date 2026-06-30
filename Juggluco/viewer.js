@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-directpan-20260630-2245";
+    const VIEWER_BUILD_ID = "canvas-only-directpan-axislabels-20260630-2255";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -899,7 +899,7 @@
 
       drawGrid(area, yDom, scales, {
         fillPlotBackground: true,
-        simpleLabels: fastPan
+        simpleLabels: false
       });
       draw2DGlucosePlot(area, scales);
       drawNoData(area);
@@ -2575,7 +2575,7 @@
 
       drawGrid(area, yDom, scales, {
         fillPlotBackground: true,
-        simpleLabels: fast
+        simpleLabels: false
       });
       draw2DGlucosePlot(area, scales);
       drawNoData(area);

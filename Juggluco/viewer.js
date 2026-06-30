@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-directpan-currentlabel-20260630-2305";
+    const VIEWER_BUILD_ID = "canvas-only-directpan-marker-size-20260630-2315";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -2278,8 +2278,8 @@
         if (hit.type === "amount" && Number.isFinite(hit.hitW) && Number.isFinite(hit.hitH)) {
           const padX = 7;
           const padY = 5;
-          const w = hit.hitW + 2 * padX;
-          const h = hit.hitH + 2 * padY;
+          const w = (hit.hitW + 2 * padX) * 0.85;
+          const h = (hit.hitH + 2 * padY) * 0.85;
           node.style.left = `${x - w / 2}px`;
           node.style.top = `${y - h / 2}px`;
           node.style.width = `${w}px`;
@@ -2289,7 +2289,7 @@
           node.style.boxShadow = "0 0 0 3px rgba(255,255,255,0.95)";
         } else {
           const color = hit.markerColor || colorForSensor(hit.sensor);
-          const radius = Math.max(2, curveThicknessPx() * 0.75);
+          const radius = Math.max(2, curveThicknessPx() * 0.75) * 1.10;
           const diameter = radius * 2;
           node.style.left = `${x}px`;
           node.style.top = `${y}px`;
@@ -2320,8 +2320,8 @@
       if (hit.type === "amount" && Number.isFinite(hit.hitW) && Number.isFinite(hit.hitH)) {
         const padX = 7;
         const padY = 5;
-        const w = hit.hitW + 2 * padX;
-        const h = hit.hitH + 2 * padY;
+        const w = (hit.hitW + 2 * padX) * 0.85;
+        const h = (hit.hitH + 2 * padY) * 0.85;
         const left = x - w / 2;
         const top = y - h / 2;
 
@@ -2339,7 +2339,7 @@
       }
 
       const color = hit.markerColor || colorForSensor(hit.sensor);
-      const radius = Math.max(2, curveThicknessPx() * 0.75);
+      const radius = Math.max(2, curveThicknessPx() * 0.75) * 1.10;
 
       ctx.lineCap = "round";
       ctx.lineJoin = "round";

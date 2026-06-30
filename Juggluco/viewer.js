@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-plotlayer-20260630-2230";
+    const VIEWER_BUILD_ID = "canvas-only-directpan-20260630-2245";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -64,6 +64,8 @@
       cache: {
         streamGroups: [],
         historyGroups: [],
+        amountGroups: [],
+        amountColorMap: new Map(),
         allGlucoseSorted: [],
         sensorStats: [],
         loadedStartMs: null,
@@ -100,7 +102,6 @@
 
     const els = {
       plotClip: $("plotClip"),
-      plotCanvas: $("plot2dCanvas"),
       canvas: $("chart"),
       chartWrap: $("chartWrap"),
       tooltip: $("tooltip"),
@@ -138,7 +139,6 @@
     };
 
     const ctx = els.canvas.getContext("2d", { alpha: true });
-    let plotCtx = null;
     window.JUGGLUCO_VIEWER_BUILD = VIEWER_BUILD_ID;
     try { console.log("Juggluco viewer build", VIEWER_BUILD_ID); } catch {}
     try { document.body.setAttribute("data-viewer-build", VIEWER_BUILD_ID); } catch {}
@@ -887,75 +887,32 @@
 
     function resetPlotTransform() {
       state.scrollTransformPx = 0;
-      if (els.plotCanvas) {
-        els.plotCanvas.style.transform = "translate3d(0, 0, 0)";
-      }
-    }
-
-    function setCanvasPanTransform(px) {
-      const value = Math.round(px);
-      if (Math.abs(value - state.scrollTransformPx) < 0.5) return;
-      state.scrollTransformPx = value;
-      if (els.plotCanvas) {
-        els.plotCanvas.style.transform = `translate3d(${value}px, 0, 0)`;
-      }
     }
 
 
     function drawOverlayForCurrentRange(options = {}) {
-      if (!options.skipResize || !state.resize.width || !state.resize.height) {
-        resizeCanvas();
-      }
+      if (!options.skipResize) resizeCanvas();
       const area = getPlotArea();
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      renderPlotLayer(area, yDom);
+      const fastPan = Boolean(options.fastPan);
+
       drawGrid(area, yDom, scales, {
-        fillPlotBackground: false,
-        drawTargetFill: false,
-        simpleLabels: Boolean(options.fastPan)
+        fillPlotBackground: true,
+        simpleLabels: fastPan
       });
-      if (!options.fastPan) {
+      draw2DGlucosePlot(area, scales);
+      drawNoData(area);
+      drawAmountsOverlay(area, scales, yDom);
+      if (!fastPan) {
         drawCurrentGlucoseLabel(area, scales);
         drawHover(area, scales, yDom);
       }
     }
 
     function updateCompositedPan() {
-      if (state.drag?.moved) return;
-      drawOverlayForCurrentRange({ skipResize: true });
-    }
-
-    function renderPlotLayer(area, yDom) {
-      if (!plotCtx || !els.plotCanvas) return;
-
-      const width = area.w * 3;
-      const height = area.h;
-      const plotArea = { x: 0, y: 0, w: width, h: height, width, height };
-      const { startMs, endMs } = currentRange();
-      const windowMs = endMs - startMs;
-      const centerMs = (startMs + endMs) / 2;
-      const range = {
-        startMs: centerMs - windowMs * 1.5,
-        endMs: centerMs + windowMs * 1.5
-      };
-      const scales = createScalesForRange(plotArea, yDom, range);
-
-      plotCtx.clearRect(0, 0, width, height);
-      plotCtx.fillStyle = COLORS.background;
-      plotCtx.fillRect(0, 0, width, height);
-
-      const low = parseNumber(els.lowLimit.value);
-      const high = parseNumber(els.highLimit.value);
-      if (Number.isFinite(low) && Number.isFinite(high)) {
-        const yHigh = scales.yScale(high);
-        const yLow = scales.yScale(low);
-        plotCtx.fillStyle = COLORS.targetFill;
-        plotCtx.fillRect(0, Math.min(yLow, yHigh), width, Math.abs(yLow - yHigh));
-      }
-
-      draw2DGlucosePlot(plotArea, scales, { context: plotCtx, range });
-      drawAmountsOverlay(plotArea, scales, yDom, { context: plotCtx, range });
+      resetPlotTransform();
+      drawOverlayForCurrentRange({ fastPan: true, skipResize: true });
     }
 
     function updateSummary() {
@@ -1023,41 +980,14 @@
         els.chartWrap.style.overflow = "hidden";
       }
 
-      if (!els.plotClip && els.chartWrap) {
-        els.plotClip = document.createElement("div");
-        els.plotClip.id = "plotClip";
-        els.chartWrap.insertBefore(els.plotClip, els.canvas || els.chartWrap.firstChild);
-      }
-
-      if (!els.plotCanvas && els.plotClip) {
-        els.plotCanvas = document.createElement("canvas");
-        els.plotCanvas.id = "plot2dCanvas";
-        els.plotClip.appendChild(els.plotCanvas);
-      }
-
-      if (els.plotClip) {
-        els.plotClip.style.position = "absolute";
-        els.plotClip.style.overflow = "hidden";
-        els.plotClip.style.pointerEvents = "none";
-        els.plotClip.style.background = COLORS.background;
-        els.plotClip.style.display = "block";
-        els.plotClip.style.zIndex = "1";
-      }
-
-      if (els.plotCanvas) {
-        els.plotCanvas.style.position = "absolute";
-        els.plotCanvas.style.display = "block";
-        els.plotCanvas.style.pointerEvents = "none";
-        els.plotCanvas.style.willChange = "transform";
-        plotCtx = plotCtx || els.plotCanvas.getContext("2d", { alpha: false });
-      }
-
       if (els.canvas) {
         els.canvas.style.position = "absolute";
         els.canvas.style.display = "block";
         els.canvas.style.touchAction = "none";
-        els.canvas.style.zIndex = "3";
-        els.canvas.style.background = "transparent";
+      }
+
+      if (els.plotClip) {
+        els.plotClip.style.display = "none";
       }
     }
 
@@ -1083,22 +1013,6 @@
         els.canvas.style.top = "0px";
         els.canvas.style.bottom = "auto";
 
-        const area = plotAreaFromSize(width, height);
-        if (els.plotClip) {
-          els.plotClip.style.left = `${area.x}px`;
-          els.plotClip.style.top = `${area.y}px`;
-          els.plotClip.style.width = `${area.w}px`;
-          els.plotClip.style.height = `${area.h}px`;
-        }
-        if (els.plotCanvas) {
-          els.plotCanvas.width = Math.max(1, Math.floor(area.w * 3 * overlayDpr));
-          els.plotCanvas.height = Math.max(1, Math.floor(area.h * overlayDpr));
-          els.plotCanvas.style.left = `${-area.w}px`;
-          els.plotCanvas.style.top = "0px";
-          els.plotCanvas.style.width = `${area.w * 3}px`;
-          els.plotCanvas.style.height = `${area.h}px`;
-        }
-
         state.resize = { width, height, dpr: overlayDpr };
         state.lastYDomain = null;
         state.scrollRenderBaseCenterMs = null;
@@ -1106,7 +1020,6 @@
       }
 
       ctx.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
-      if (plotCtx) plotCtx.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
     }
 
     function getPlotArea() {
@@ -1170,6 +1083,38 @@
         });
     }
 
+    function rebuildAmountRenderCache() {
+      const groups = new Map();
+      const labelFirstSeen = new Map();
+
+      for (const amount of state.data.amounts) {
+        if (!amount || !Number.isFinite(amount.t) || !Number.isFinite(amount.value)) continue;
+
+        const label = normalizedAmountLabel(amount.label);
+        if (!labelFirstSeen.has(label)) labelFirstSeen.set(label, amount.t);
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(amount);
+      }
+
+      const orderedLabels = Array.from(labelFirstSeen.entries())
+        .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+        .map(([label]) => label);
+
+      const colorMap = new Map(
+        orderedLabels.map((label, idx) => [label, AMOUNT_PALETTE[idx % AMOUNT_PALETTE.length]])
+      );
+
+      const amountGroups = Array.from(groups.entries())
+        .map(([label, items]) => ({
+          label,
+          items: items.sort((a, b) => a.t - b.t),
+          firstT: labelFirstSeen.get(label) ?? items[0]?.t ?? 0
+        }))
+        .sort((a, b) => a.firstT - b.firstT || a.label.localeCompare(b.label));
+
+      return { amountGroups, colorMap };
+    }
+
     function lowerBoundByTime(points, targetMs) {
       let lo = 0;
       let hi = points.length;
@@ -1205,6 +1150,9 @@
     function rebuildRenderCache() {
       state.cache.streamGroups = groupPointsBySensor(state.data.stream);
       state.cache.historyGroups = groupPointsBySensor(state.data.history);
+      const amountCache = rebuildAmountRenderCache();
+      state.cache.amountGroups = amountCache.amountGroups;
+      state.cache.amountColorMap = amountCache.colorMap;
       state.cache.allGlucoseSorted = allLoadedGlucose().sort((a, b) => a.t - b.t);
       state.cache.sensorStats = getSensorStats();
       state.lastYDomain = null;
@@ -1334,8 +1282,8 @@
       return { min, max, step };
     }
 
-    function createScalesForRange(area, yDom, range) {
-      const { startMs, endMs } = range;
+    function createScales(area, yDom) {
+      const { startMs, endMs } = currentRange();
 
       const xScale = t => area.x + ((t - startMs) / (endMs - startMs)) * area.w;
       const yScale = y => area.y + area.h - ((y - yDom.min) / (yDom.max - yDom.min)) * area.h;
@@ -1344,13 +1292,9 @@
       return { xScale, yScale, xInv };
     }
 
-    function createScales(area, yDom) {
-      return createScalesForRange(area, yDom, currentRange());
-    }
-
     function drawGrid(area, yDom, scales, options = {}) {
-      const simpleLabels = Boolean(options.simpleLabels);
       ctx.clearRect(0, 0, area.width, area.height);
+      const simpleLabels = Boolean(options.simpleLabels);
 
       if (options.fillPlotBackground) {
         ctx.fillStyle = COLORS.background;
@@ -1422,13 +1366,11 @@
         ctx.lineTo(x, area.y + area.h);
         ctx.stroke();
 
-        if (!simpleLabels) {
-          const label = durationHours > 36
-            ? formatDate(t, { year: "numeric", month: "short", day: "numeric" })
-            : formatTime(t);
+        const label = durationHours > 36
+          ? formatDate(t, { year: "numeric", month: "short", day: "numeric" })
+          : formatTime(t);
 
-          ctx.fillText(label, x, area.y + area.h + 3);
-        }
+        if (!simpleLabels) ctx.fillText(label, x, area.y + area.h + 3);
       }
 
       ctx.strokeStyle = COLORS.textStrong;
@@ -1451,27 +1393,26 @@
     }
 
     function draw2DLineGroups(groups, area, scales, options = {}) {
-      const context = options.context || ctx;
-      const { startMs, endMs } = options.range || currentRange();
+      const { startMs, endMs } = currentRange();
       const maxGapMs = options.maxGapMs ?? 45 * 60 * 1000;
       const lineWidth = options.lineWidth ?? curveThicknessPx();
       const fixedColor = options.color || null;
       const alpha = options.alpha ?? 1;
 
-      context.save();
-      context.beginPath();
-      context.rect(area.x, area.y, area.w, area.h);
-      context.clip();
-      context.lineWidth = lineWidth;
-      context.lineCap = "round";
-      context.lineJoin = "round";
-      context.globalAlpha = alpha;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.x, area.y, area.w, area.h);
+      ctx.clip();
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.globalAlpha = alpha;
 
       for (const [sensor, group] of groups) {
         if (!group.length) continue;
 
-        context.strokeStyle = fixedColor || colorForSensor(sensor);
-        context.beginPath();
+        ctx.strokeStyle = fixedColor || colorForSensor(sensor);
+        ctx.beginPath();
         let hasSegment = false;
         let i = Math.max(0, lowerBoundByTime(group, startMs) - 1);
 
@@ -1483,27 +1424,26 @@
           if (!Number.isFinite(a.t) || !Number.isFinite(a.y) || !Number.isFinite(b.t) || !Number.isFinite(b.y)) continue;
           if (b.t <= a.t || b.t - a.t > maxGapMs) continue;
 
-          context.moveTo(scales.xScale(a.t), scales.yScale(a.y));
-          context.lineTo(scales.xScale(b.t), scales.yScale(b.y));
+          ctx.moveTo(scales.xScale(a.t), scales.yScale(a.y));
+          ctx.lineTo(scales.xScale(b.t), scales.yScale(b.y));
           hasSegment = true;
         }
 
-        if (hasSegment) context.stroke();
+        if (hasSegment) ctx.stroke();
       }
 
-      context.restore();
+      ctx.restore();
     }
 
-    function draw2DScanPoints(points, area, scales, options = {}) {
-      const context = options.context || ctx;
-      const { startMs, endMs } = options.range || currentRange();
+    function draw2DScanPoints(points, area, scales) {
+      const { startMs, endMs } = currentRange();
       const radius = Math.max(4, curveThicknessPx() * 1.2);
       let i = lowerBoundByTime(points, startMs);
 
-      context.save();
-      context.beginPath();
-      context.rect(area.x, area.y, area.w, area.h);
-      context.clip();
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.x, area.y, area.w, area.h);
+      ctx.clip();
 
       for (; i < points.length; i++) {
         const p = points[i];
@@ -1512,24 +1452,23 @@
 
         const x = scales.xScale(p.t);
         const y = scales.yScale(p.y);
-        context.beginPath();
-        context.arc(x, y, radius + 1.5, 0, Math.PI * 2);
-        context.fillStyle = "rgba(255, 255, 255, 0.92)";
-        context.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, radius + 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
+        ctx.fill();
 
-        context.beginPath();
-        context.arc(x, y, radius, 0, Math.PI * 2);
-        context.fillStyle = colorForSensor(p.sensor);
-        context.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = colorForSensor(p.sensor);
+        ctx.fill();
       }
 
-      context.restore();
+      ctx.restore();
     }
 
-    function draw2DGlucosePlot(area, scales, options = {}) {
+    function draw2DGlucosePlot(area, scales) {
       if (els.showHistory.checked) {
         draw2DLineGroups(state.cache.historyGroups, area, scales, {
-          ...options,
           maxGapMs: 45 * 60 * 1000,
           lineWidth: Math.max(1.5, curveThicknessPx() * 0.65),
           color: COLORS.history,
@@ -1539,14 +1478,13 @@
 
       if (els.showStream.checked) {
         draw2DLineGroups(state.cache.streamGroups, area, scales, {
-          ...options,
           maxGapMs: 45 * 60 * 1000,
           lineWidth: curveThicknessPx()
         });
       }
 
       if (els.showScans.checked) {
-        draw2DScanPoints(state.data.scans, area, scales, options);
+        draw2DScanPoints(state.data.scans, area, scales);
       }
     }
 
@@ -1774,6 +1712,10 @@
     }
 
     function amountLabelColorMap() {
+      if (state.cache.amountColorMap && state.cache.amountColorMap.size) {
+        return state.cache.amountColorMap;
+      }
+
       const firstSeen = new Map();
 
       for (const amount of state.data.amounts) {
@@ -1837,40 +1779,67 @@
       context.restore();
     }
 
-    function amountTextWidth(text, font, context = ctx) {
-      context.save();
-      context.font = font;
-      const width = context.measureText(text).width;
-      context.restore();
+    function amountTextWidth(text, font) {
+      ctx.save();
+      ctx.font = font;
+      const width = ctx.measureText(text).width;
+      ctx.restore();
       return width;
     }
 
-    function buildAmountLayout(area, scales, yDom, options = {}) {
+    function buildAmountLayout(area, scales, yDom) {
       if (!els.showAmounts.checked || !state.data.amounts.length) return [];
 
-      const { startMs, endMs } = options.range || currentRange();
-      const context = options.context || ctx;
-      const groups = new Map();
-      const labelFirstSeen = new Map();
+      const { startMs, endMs } = currentRange();
+      const cachedGroups = state.cache.amountGroups && state.cache.amountGroups.length
+        ? state.cache.amountGroups
+        : rebuildAmountRenderCache().amountGroups;
+      const ordered = [];
 
-      for (const amount of state.data.amounts) {
-        if (!amount || !Number.isFinite(amount.t) || !Number.isFinite(amount.value)) continue;
+      for (const group of cachedGroups) {
+        const items = [];
+        let i = lowerBoundByTime(group.items, startMs);
 
-        const label = normalizedAmountLabel(amount.label);
-        if (!labelFirstSeen.has(label)) labelFirstSeen.set(label, amount.t);
+        for (; i < group.items.length; i++) {
+          const amount = group.items[i];
+          if (amount.t > endMs) break;
+          items.push(amount);
+        }
 
-        if (amount.t < startMs || amount.t > endMs) continue;
-        if (!groups.has(label)) groups.set(label, []);
-        groups.get(label).push(amount);
+        if (items.length) {
+          ordered.push({
+            label: group.label,
+            items,
+            firstT: group.firstT
+          });
+        }
       }
 
-      const ordered = Array.from(groups.entries())
-        .map(([label, items]) => ({
+      /*
+        Fallback shape kept here for older in-app sessions that can mutate
+        state.data.amounts before rebuildRenderCache() runs.
+      */
+      if (!ordered.length && !state.cache.amountGroups.length) {
+        const groups = new Map();
+        const labelFirstSeen = new Map();
+
+        for (const amount of state.data.amounts) {
+          if (!amount || !Number.isFinite(amount.t) || !Number.isFinite(amount.value)) continue;
+
+          const label = normalizedAmountLabel(amount.label);
+          if (!labelFirstSeen.has(label)) labelFirstSeen.set(label, amount.t);
+
+          if (amount.t < startMs || amount.t > endMs) continue;
+          if (!groups.has(label)) groups.set(label, []);
+          groups.get(label).push(amount);
+        }
+
+        ordered.push(...Array.from(groups.entries()).map(([label, items]) => ({
           label,
           items: items.sort((a, b) => a.t - b.t),
           firstT: labelFirstSeen.get(label) ?? items[0]?.t ?? 0
-        }))
-        .sort((a, b) => a.firstT - b.firstT || a.label.localeCompare(b.label));
+        })).sort((a, b) => a.firstT - b.firstT || a.label.localeCompare(b.label)));
+      }
 
       if (!ordered.length) return [];
 
@@ -1906,7 +1875,7 @@
         const valueY = midY + (labelFontSize / 2 + rowGap / 2);
         const first = group.items[0];
         const labelText = group.label;
-        const labelW = amountTextWidth(labelText, labelFont, context) + 8;
+        const labelW = amountTextWidth(labelText, labelFont) + 8;
         const labelH = labelFontSize + 4;
         const labelX = Math.max(
           area.x + labelW / 2,
@@ -1930,7 +1899,7 @@
 
         for (const amount of group.items) {
           const text = formatAmountNumber(amount.value);
-          const w = amountTextWidth(text, valueFont, context) + 6;
+          const w = amountTextWidth(text, valueFont) + 6;
           const h = valueFontSize + 4;
           const x = Math.max(
             area.x + w / 2,
@@ -1958,12 +1927,11 @@
       return items;
     }
 
-    function drawAmountsOverlay(area, scales, yDom, options = {}) {
-      const context = options.context || ctx;
-      const items = buildAmountLayout(area, scales, yDom, options);
+    function drawAmountsOverlay(area, scales, yDom) {
+      const items = buildAmountLayout(area, scales, yDom);
 
       for (const item of items) {
-        drawTextChip(context, item.text, item.x, item.y, {
+        drawTextChip(ctx, item.text, item.x, item.y, {
           color: item.color,
           background: null,
           font: item.font,
@@ -2592,7 +2560,6 @@
     }
 
     function draw(options = {}) {
-      if (state.drag?.moved) return;
       resizeCanvas();
 
       const fast = Boolean(options.fast);
@@ -2603,13 +2570,20 @@
 
       resetPlotTransform();
       state.scrollRenderBaseCenterMs = state.centerMs;
-      ctx.clearRect(0, 0, area.width, area.height);
+      ctx.fillStyle = COLORS.background;
+      ctx.fillRect(0, 0, area.width, area.height);
 
-      renderPlotLayer(area, yDom);
-      drawGrid(area, yDom, scales, { fillPlotBackground: false, drawTargetFill: false });
+      drawGrid(area, yDom, scales, {
+        fillPlotBackground: true,
+        simpleLabels: fast
+      });
+      draw2DGlucosePlot(area, scales);
       drawNoData(area);
-      drawCurrentGlucoseLabel(area, scales);
-      drawHover(area, scales, yDom);
+      drawAmountsOverlay(area, scales, yDom);
+      if (!fast) {
+        drawCurrentGlucoseLabel(area, scales);
+        drawHover(area, scales, yDom);
+      }
     }
 
     function pan(fraction, options = {}) {
@@ -2910,6 +2884,7 @@
         clearHitMarkers();
         const touchLike = isTouchLikeEvent(event);
         const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: touchLike });
+        state.lastYDomain = state.lastYDomain || yDomainVisible();
         state.drag = {
           startX: event.clientX,
           startY: event.clientY,
@@ -2921,6 +2896,7 @@
           centerMs: state.centerMs,
           touchLike,
           lastRenderDx: 0,
+          lastRenderAt: 0,
           frameRequested: false,
           moved: false
         };
@@ -2946,17 +2922,25 @@
             leaveLiveFollowNow();
           }
 
-          const renderDx = Math.round(dx);
-          const minStepPx = state.drag.touchLike ? 2 : 1;
-          if (state.drag.moved &&
-              Number.isFinite(state.drag.lastRenderDx) &&
-              Math.abs(renderDx - state.drag.lastRenderDx) < minStepPx) {
-            return;
-          }
-          state.drag.lastRenderDx = renderDx;
-          setCanvasPanTransform(renderDx);
+          if (area.w <= 0) return;
 
-          scheduleDateInputUpdate(120);
+          const pixelStep = state.drag.touchLike ? 2 : 1;
+          const renderDx = Math.round(dx / pixelStep) * pixelStep;
+          if (state.drag.touchLike) {
+            const now = typeof performance !== "undefined" && performance.now
+              ? performance.now()
+              : Date.now();
+            const smallMove = Math.abs(renderDx - state.drag.lastRenderDx) < pixelStep;
+            if (smallMove || now - state.drag.lastRenderAt < 34) return;
+            state.drag.lastRenderAt = now;
+          }
+
+          state.drag.lastRenderDx = renderDx;
+          state.centerMs = clampCenterToDataBounds(state.drag.centerMs - (renderDx / area.w) * state.windowMs);
+
+          scheduleViewportUiUpdate();
+          updateCompositedPan();
+          scheduleFullDraw(260);
         });
       }
 

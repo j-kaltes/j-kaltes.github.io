@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-curvepoint-20260630-1035";
+    const VIEWER_BUILD_ID = "hitmarker-canvas-marker-20260630-1845";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -2315,7 +2315,8 @@
         return;
       }
 
-      updateDomHitMarkers(nearest, area);
+      clearHitMarkers();
+      nearest.forEach(hit => drawHoverMarker(hit, area));
       els.tooltip.innerHTML = tooltipHtmlForNearest(nearest);
       els.tooltip.style.display = "block";
       positionTooltip(Math.max(area.x, Math.min(area.x + area.w, x)), Math.max(area.y, Math.min(area.y + area.h, y)));

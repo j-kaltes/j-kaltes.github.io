@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-directpan-axislabels-20260630-2255";
+    const VIEWER_BUILD_ID = "canvas-only-directpan-currentlabel-20260630-2305";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -904,8 +904,8 @@
       draw2DGlucosePlot(area, scales);
       drawNoData(area);
       drawAmountsOverlay(area, scales, yDom);
+      drawCurrentGlucoseLabel(area, scales);
       if (!fastPan) {
-        drawCurrentGlucoseLabel(area, scales);
         drawHover(area, scales, yDom);
       }
     }
@@ -2580,8 +2580,8 @@
       draw2DGlucosePlot(area, scales);
       drawNoData(area);
       drawAmountsOverlay(area, scales, yDom);
+      drawCurrentGlucoseLabel(area, scales);
       if (!fast) {
-        drawCurrentGlucoseLabel(area, scales);
         drawHover(area, scales, yDom);
       }
     }

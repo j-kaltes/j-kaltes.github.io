@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-touch-clientcoords-20260630-1905";
+    const VIEWER_BUILD_ID = "hitmarker-touch-2dcoords-20260630-1920";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -2127,7 +2127,7 @@
     }
 
     function showTooltipFromEvent(event, options = {}) {
-      const xOnlyGlucose = options.xOnlyGlucose ?? isTouchLikeEvent(event);
+      const xOnlyGlucose = options.xOnlyGlucose ?? false;
       return showTooltipAtChartPoint(
         chartCoordsFromPointerEvent(event, { xOnlyGlucose }),
         { ...options, xOnlyGlucose }
@@ -3288,7 +3288,7 @@
         els.tooltip.style.display = "none";
         clearHitMarkers();
         const touchLike = isTouchLikeEvent(event);
-        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: touchLike });
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
         state.drag = {
           startX: event.clientX,
           startY: event.clientY,
@@ -3296,7 +3296,7 @@
           latestY: event.clientY,
           startChartX: chartPoint?.x,
           startChartY: chartPoint?.y,
-          startChartXOnlyGlucose: Boolean(chartPoint?.xOnlyGlucose),
+          startChartXOnlyGlucose: false,
           centerMs: state.centerMs,
           frameRequested: false,
           moved: false
@@ -3375,7 +3375,7 @@
                 y: state.drag.startChartY,
                 xOnlyGlucose: Boolean(state.drag.startChartXOnlyGlucose)
               }
-            : chartCoordsFromPointerEvent(event, { xOnlyGlucose: isTouchLikeEvent(event) });
+            : chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
 
         els.canvas.classList.remove("dragging");
         state.drag = null;
@@ -3383,8 +3383,8 @@
         if (wasClick) {
           state.suppressNextClickUntil = Date.now() + 800;
           showTooltipAtChartPoint(clickPoint, {
-            toleranceScale: clickPoint?.xOnlyGlucose ? 3 : 1,
-            xOnlyGlucose: Boolean(clickPoint?.xOnlyGlucose)
+            toleranceScale: isTouchLikeEvent(event) ? 3 : 1,
+            xOnlyGlucose: false
           });
           return;
         }
@@ -3401,7 +3401,7 @@
         if (!event.touches || event.touches.length !== 1) return;
 
         const client = clientPointFromPointerEvent(event);
-        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
         if (!client || !chartPoint) return;
 
         // Some older Android/Chrome tablet combinations generate a synthetic
@@ -3441,13 +3441,13 @@
         if (!tap || tap.moved) return;
 
         const point = Number.isFinite(tap.startChartX) && Number.isFinite(tap.startChartY)
-          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 3, xOnlyGlucose: true }
-          : chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
+          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 3, xOnlyGlucose: false }
+          : chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
 
         if (!point) return;
 
         try { event.preventDefault(); } catch {}
-        showTooltipAtChartPoint(point, { toleranceScale: 3, xOnlyGlucose: true });
+        showTooltipAtChartPoint(point, { toleranceScale: 3, xOnlyGlucose: false });
       }
 
       els.canvas.addEventListener("touchstart", beginTouchTap, { passive: true });

@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-20260630-2045";
+    const VIEWER_BUILD_ID = "canvas-only-fastpan-20260630-2110";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -888,21 +888,28 @@
     }
 
 
-    function drawOverlayForCurrentRange() {
-      resizeCanvas();
+    function drawOverlayForCurrentRange(options = {}) {
+      if (!options.skipResize || !state.resize.width || !state.resize.height) {
+        resizeCanvas();
+      }
       const area = getPlotArea();
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      drawGrid(area, yDom, scales, { fillPlotBackground: true });
+      drawGrid(area, yDom, scales, {
+        fillPlotBackground: true,
+        simpleLabels: Boolean(options.fastPan)
+      });
       draw2DGlucosePlot(area, scales);
-      drawAmountsOverlay(area, scales, yDom);
-      drawCurrentGlucoseLabel(area, scales);
-      drawHover(area, scales, yDom);
+      if (!options.fastPan) {
+        drawAmountsOverlay(area, scales, yDom);
+        drawCurrentGlucoseLabel(area, scales);
+        drawHover(area, scales, yDom);
+      }
     }
 
     function updateCompositedPan() {
       resetPlotTransform();
-      drawOverlayForCurrentRange();
+      drawOverlayForCurrentRange({ fastPan: true, skipResize: true });
     }
 
     function updateSummary() {
@@ -1248,6 +1255,7 @@
     }
 
     function drawGrid(area, yDom, scales, options = {}) {
+      const simpleLabels = Boolean(options.simpleLabels);
       ctx.clearRect(0, 0, area.width, area.height);
 
       if (options.fillPlotBackground) {
@@ -1285,15 +1293,17 @@
         ctx.lineTo(area.x + area.w, y);
         ctx.stroke();
 
-        ctx.fillText(
-          niceNumber(yValue, yDigits),
-          area.x - (area.yTickGap || 7),
-          y
-        );
+        if (!simpleLabels) {
+          ctx.fillText(
+            niceNumber(yValue, yDigits),
+            area.x - (area.yTickGap || 7),
+            y
+          );
+        }
       }
 
-      if (Number.isFinite(low)) drawLimitLine(area, scales.yScale(low), `${niceNumber(low)} ${state.unit}`);
-      if (Number.isFinite(high)) drawLimitLine(area, scales.yScale(high), `${niceNumber(high)} ${state.unit}`);
+      if (Number.isFinite(low)) drawLimitLine(area, scales.yScale(low), simpleLabels ? "" : `${niceNumber(low)} ${state.unit}`);
+      if (Number.isFinite(high)) drawLimitLine(area, scales.yScale(high), simpleLabels ? "" : `${niceNumber(high)} ${state.unit}`);
 
       const { startMs, endMs } = currentRange();
       const durationHours = (endMs - startMs) / 3600000;
@@ -1318,12 +1328,13 @@
         ctx.lineTo(x, area.y + area.h);
         ctx.stroke();
 
-        const d = new Date(t);
-        const label = durationHours > 36
-          ? formatDate(t, { year: "numeric", month: "short", day: "numeric" })
-          : formatTime(t);
+        if (!simpleLabels) {
+          const label = durationHours > 36
+            ? formatDate(t, { year: "numeric", month: "short", day: "numeric" })
+            : formatTime(t);
 
-        ctx.fillText(label, x, area.y + area.h + 3);
+          ctx.fillText(label, x, area.y + area.h + 3);
+        }
       }
 
       ctx.strokeStyle = COLORS.textStrong;
@@ -1333,7 +1344,7 @@
       ctx.lineTo(area.x + area.w, area.y + area.h);
       ctx.stroke();
 
-      if (area.width >= 360 && area.h >= 120) {
+      if (!simpleLabels && area.width >= 360 && area.h >= 120) {
         ctx.save();
         ctx.translate(14, area.y + area.h / 2);
         ctx.rotate(-Math.PI / 2);
@@ -1454,11 +1465,13 @@
       ctx.stroke();
       ctx.setLineDash([]);
 
-      ctx.fillStyle = COLORS.lowHigh;
-      ctx.font = "11px system-ui, sans-serif";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "bottom";
-      ctx.fillText(label, area.x + 6, y - 3);
+      if (label) {
+        ctx.fillStyle = COLORS.lowHigh;
+        ctx.font = "11px system-ui, sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(label, area.x + 6, y - 3);
+      }
       ctx.restore();
     }
 

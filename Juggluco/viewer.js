@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-webgl-marker-20260630-1945";
+    const VIEWER_BUILD_ID = "touch-unified-2d-renderer-20260630-2015";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -488,6 +488,31 @@
       return 1.5;
     }
 
+    function forcedRendererMode() {
+      try {
+        const params = new URLSearchParams(window.location.search || "");
+        const mode = String(params.get("renderer") || params.get("render") || "").toLowerCase();
+        if (mode === "2d" || mode === "canvas") return "2d";
+        if (mode === "webgl" || mode === "gl") return "webgl";
+      } catch {}
+      return "";
+    }
+
+    function useUnified2DPlot() {
+      const forced = forcedRendererMode();
+      if (forced === "2d") return true;
+      if (forced === "webgl") return false;
+
+      try {
+        if (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) return true;
+      } catch {}
+      try {
+        return Boolean(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+      } catch {
+        return false;
+      }
+    }
+
     function currentLabelFontSize(area) {
       // Keep the phone annotation readable: the value should dominate the
       // direction arrow, not the other way around.
@@ -924,13 +949,21 @@
       const area = getPlotArea();
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      drawGrid(area, yDom, scales);
+      const use2D = useUnified2DPlot();
+      drawGrid(area, yDom, scales, { fillPlotBackground: use2D });
+      if (use2D) draw2DGlucosePlot(area, scales);
       drawAmountsOverlay(area, scales, yDom);
       drawCurrentGlucoseLabel(area, scales);
       drawHover(area, scales, yDom);
     }
 
     function updateCompositedPan() {
+      if (useUnified2DPlot()) {
+        resetPlotTransform();
+        drawOverlayForCurrentRange();
+        return;
+      }
+
       if (!glRenderer) {
         requestDraw({ fast: true });
         return;
@@ -1354,8 +1387,13 @@
       return { xScale, yScale, xInv };
     }
 
-    function drawGrid(area, yDom, scales) {
+    function drawGrid(area, yDom, scales, options = {}) {
       ctx.clearRect(0, 0, area.width, area.height);
+
+      if (options.fillPlotBackground) {
+        ctx.fillStyle = COLORS.background;
+        ctx.fillRect(area.x, area.y, area.w, area.h);
+      }
 
       const low = parseNumber(els.lowLimit.value);
       const high = parseNumber(els.highLimit.value);
@@ -1444,6 +1482,102 @@
         ctx.textBaseline = "middle";
         ctx.fillText(`Glucose (${state.unit})`, 0, 0);
         ctx.restore();
+      }
+    }
+
+    function draw2DLineGroups(groups, area, scales, options = {}) {
+      const { startMs, endMs } = currentRange();
+      const maxGapMs = options.maxGapMs ?? 45 * 60 * 1000;
+      const lineWidth = options.lineWidth ?? curveThicknessPx();
+      const fixedColor = options.color || null;
+      const alpha = options.alpha ?? 1;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.x, area.y, area.w, area.h);
+      ctx.clip();
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.globalAlpha = alpha;
+
+      for (const [sensor, group] of groups) {
+        if (!group.length) continue;
+
+        ctx.strokeStyle = fixedColor || colorForSensor(sensor);
+        ctx.beginPath();
+        let hasSegment = false;
+        let i = Math.max(0, lowerBoundByTime(group, startMs) - 1);
+
+        for (; i + 1 < group.length; i++) {
+          const a = group[i];
+          const b = group[i + 1];
+          if (a.t > endMs) break;
+          if (b.t < startMs) continue;
+          if (!Number.isFinite(a.t) || !Number.isFinite(a.y) || !Number.isFinite(b.t) || !Number.isFinite(b.y)) continue;
+          if (b.t <= a.t || b.t - a.t > maxGapMs) continue;
+
+          ctx.moveTo(scales.xScale(a.t), scales.yScale(a.y));
+          ctx.lineTo(scales.xScale(b.t), scales.yScale(b.y));
+          hasSegment = true;
+        }
+
+        if (hasSegment) ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    function draw2DScanPoints(points, area, scales) {
+      const { startMs, endMs } = currentRange();
+      const radius = Math.max(4, curveThicknessPx() * 1.2);
+      let i = lowerBoundByTime(points, startMs);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.x, area.y, area.w, area.h);
+      ctx.clip();
+
+      for (; i < points.length; i++) {
+        const p = points[i];
+        if (p.t > endMs) break;
+        if (!Number.isFinite(p.t) || !Number.isFinite(p.y)) continue;
+
+        const x = scales.xScale(p.t);
+        const y = scales.yScale(p.y);
+        ctx.beginPath();
+        ctx.arc(x, y, radius + 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = colorForSensor(p.sensor);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+
+    function draw2DGlucosePlot(area, scales) {
+      if (els.showHistory.checked) {
+        draw2DLineGroups(state.cache.historyGroups, area, scales, {
+          maxGapMs: 45 * 60 * 1000,
+          lineWidth: Math.max(1.5, curveThicknessPx() * 0.65),
+          color: COLORS.history,
+          alpha: 0.92
+        });
+      }
+
+      if (els.showStream.checked) {
+        draw2DLineGroups(state.cache.streamGroups, area, scales, {
+          maxGapMs: 45 * 60 * 1000,
+          lineWidth: curveThicknessPx()
+        });
+      }
+
+      if (els.showScans.checked) {
+        draw2DScanPoints(state.data.scans, area, scales);
       }
     }
 
@@ -2317,7 +2451,10 @@
       }
 
       const amountHits = nearest.filter(hit => hit.type === "amount");
-      if (glRenderer?.drawHitMarkers?.(nearest, area, yDom)) {
+      if (useUnified2DPlot()) {
+        clearHitMarkers();
+        nearest.forEach(hit => drawHoverMarker(hit, area));
+      } else if (glRenderer?.drawHitMarkers?.(nearest, area, yDom)) {
         if (amountHits.length) updateDomHitMarkers(amountHits, area);
         else clearHitMarkers();
       } else {
@@ -3029,8 +3166,9 @@
 
       resetPlotTransform();
       state.scrollRenderBaseCenterMs = state.centerMs;
+      const use2D = useUnified2DPlot();
 
-      if (glRenderer) {
+      if (!use2D && glRenderer) {
         glRenderer.render(area, yDom, {
           stream: els.showStream.checked,
           scans: els.showScans.checked,
@@ -3049,7 +3187,8 @@
       // happen during first load, auto-refresh, resize, or option-panel layout
       // changes; if it exits here, the curve is visible but the grid/axes/text
       // stay blank until the next pan forces drawOverlayForCurrentRange().
-      drawGrid(area, yDom, scales);
+      drawGrid(area, yDom, scales, { fillPlotBackground: use2D });
+      if (use2D) draw2DGlucosePlot(area, scales);
       drawNoData(area);
       drawAmountsOverlay(area, scales, yDom);
       drawCurrentGlucoseLabel(area, scales);

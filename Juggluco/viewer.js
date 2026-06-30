@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-touchfix-20260629-2345";
+    const VIEWER_BUILD_ID = "hitmarker-curvepoint-20260630-1035";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -1928,8 +1928,9 @@
       resizeCanvas();
       const area = getPlotArea();
       const boundaryPad = (Number(options.toleranceScale) || 1) > 1 ? 120 : 0;
+      const xOnlyGlucose = Boolean(options.xOnlyGlucose);
       if (x < area.x - boundaryPad || x > area.x + area.w + boundaryPad ||
-          y < area.y - boundaryPad || y > area.y + area.h + boundaryPad) {
+          (!xOnlyGlucose && (y < area.y - boundaryPad || y > area.y + area.h + boundaryPad))) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
         clearHitMarkers();
         return false;
@@ -1937,7 +1938,10 @@
 
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      const nearest = findNearest(x, y, area, scales, { toleranceScale: options.toleranceScale || 1 });
+      const nearest = findNearest(x, y, area, scales, {
+        toleranceScale: options.toleranceScale || 1,
+        xOnlyGlucose
+      });
 
       if (!nearest.length) {
         if (!options.keepExisting) els.tooltip.style.display = "none";
@@ -1996,7 +2000,7 @@
       resizeCanvas();
 
       const touchLike = isTouchLikeEvent(event);
-      const toleranceScale = touchLike ? 6 : 1;
+      const toleranceScale = touchLike ? 3 : 1;
       const point = clientPointFromPointerEvent(event);
       const canvasRect = els.canvas.getBoundingClientRect();
       const canvasWidth = els.canvas.clientWidth || state.resize.width || canvasRect.width || 1;
@@ -2061,18 +2065,20 @@
       return list;
     }
 
-    function chooseBestChartCoordCandidate(candidates) {
+    function chooseBestChartCoordCandidate(candidates, options = {}) {
       if (!candidates.length) return null;
       if (candidates.length === 1) return candidates[0];
 
       const area = getPlotArea();
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
+      const xOnlyGlucose = Boolean(options.xOnlyGlucose);
       let best = null;
 
       for (const candidate of candidates) {
         const nearest = findNearest(candidate.x, candidate.y, area, scales, {
-          toleranceScale: candidate.toleranceScale || 1
+          toleranceScale: candidate.toleranceScale || 1,
+          xOnlyGlucose
         });
         if (!nearest.length) continue;
 
@@ -2088,8 +2094,10 @@
       return best ? best.candidate : candidates[0];
     }
 
-    function chartCoordsFromPointerEvent(event) {
-      return chooseBestChartCoordCandidate(chartCoordCandidatesFromPointerEvent(event));
+    function chartCoordsFromPointerEvent(event, options = {}) {
+      const point = chooseBestChartCoordCandidate(chartCoordCandidatesFromPointerEvent(event), options);
+      if (point && options.xOnlyGlucose) point.xOnlyGlucose = true;
+      return point;
     }
 
     function currentHoverChartCoords() {
@@ -2107,15 +2115,22 @@
         return false;
       }
 
-      const toleranceScale = Number.isFinite(point.toleranceScale) ? point.toleranceScale : (options.toleranceScale || 1);
-      state.hover = { x: point.x, y: point.y, toleranceScale };
-      const shown = showTooltipAtPoint(point.x, point.y, { ...options, toleranceScale });
+      const toleranceScale = Number.isFinite(options.toleranceScale)
+        ? options.toleranceScale
+        : (Number.isFinite(point.toleranceScale) ? point.toleranceScale : 1);
+      const xOnlyGlucose = Boolean(options.xOnlyGlucose || point.xOnlyGlucose);
+      state.hover = { x: point.x, y: point.y, toleranceScale, xOnlyGlucose };
+      const shown = showTooltipAtPoint(point.x, point.y, { ...options, toleranceScale, xOnlyGlucose });
       if (shown || options.redraw !== false) requestDraw();
       return shown;
     }
 
     function showTooltipFromEvent(event, options = {}) {
-      return showTooltipAtChartPoint(chartCoordsFromPointerEvent(event), options);
+      const xOnlyGlucose = options.xOnlyGlucose ?? isTouchLikeEvent(event);
+      return showTooltipAtChartPoint(
+        chartCoordsFromPointerEvent(event, { xOnlyGlucose }),
+        { ...options, xOnlyGlucose }
+      );
     }
 
     let hitMarkerLayer = null;
@@ -2151,23 +2166,9 @@
     }
 
     function chartToCssPoint(x, y, area) {
-      // The WebGL curve and amount labels are displayed inside #plotClip, while
-      // hit-testing works in chart-area coordinates. On some Android tablets,
-      // after the options panel is hidden, the CSS rectangle used to display
-      // #plotClip can differ from the last integer canvas measurement. Place
-      // the marker using the actual DOM rectangle of #plotClip so it follows
-      // the rendered curve instead of the overlay canvas bookkeeping.
-      try {
-        const wrapRect = els.chartWrap?.getBoundingClientRect?.();
-        const clipRect = els.plotClip?.getBoundingClientRect?.();
-        if (wrapRect && clipRect && clipRect.width > 0 && clipRect.height > 0 && area.w > 0 && area.h > 0) {
-          return {
-            x: (clipRect.left - wrapRect.left) + ((x - area.x) / area.w) * clipRect.width,
-            y: (clipRect.top - wrapRect.top) + ((y - area.y) / area.h) * clipRect.height
-          };
-        }
-      } catch {}
-
+      // hitX/hitY are already in the same CSS pixel coordinate system as the
+      // overlay canvas. Mapping them through getBoundingClientRect() again made
+      // tablets/e-readers place the visible marker above or below the curve.
       return { x, y };
     }
 
@@ -2296,13 +2297,18 @@
 
       const { x, y } = hoverPoint;
       const toleranceScale = Number.isFinite(state.hover.toleranceScale) ? state.hover.toleranceScale : 1;
-      if (x < area.x - 120 || x > area.x + area.w + 120 || y < area.y - 120 || y > area.y + area.h + 120) {
+      const xOnlyGlucose = Boolean(state.hover.xOnlyGlucose);
+      if (x < area.x - 120 || x > area.x + area.w + 120 ||
+          (!xOnlyGlucose && (y < area.y - 120 || y > area.y + area.h + 120))) {
         els.tooltip.style.display = "none";
         clearHitMarkers();
         return;
       }
 
-      const nearest = findNearest(x, y, area, scales, { toleranceScale });
+      const nearest = findNearest(x, y, area, scales, {
+        toleranceScale,
+        xOnlyGlucose
+      });
       if (!nearest.length) {
         els.tooltip.style.display = "none";
         clearHitMarkers();
@@ -2318,6 +2324,7 @@
     function findNearest(mouseX, mouseY, area, scales, options = {}) {
       const results = [];
       const toleranceScale = Math.max(1, Math.min(8, Number(options.toleranceScale) || 1));
+      const xOnlyGlucose = Boolean(options.xOnlyGlucose);
       const targetMs = scales.xInv(mouseX);
       const glucoseToleranceMs = Math.max(60 * 1000, ((18 * toleranceScale) / area.w) * state.windowMs);
       const pointTolerancePx = 18 * toleranceScale;
@@ -2338,7 +2345,7 @@
       function considerPoint(p) {
         const x = scales.xScale(p.t);
         const y = scales.yScale(p.y);
-        const d = Math.hypot(x - mouseX, y - mouseY);
+        const d = xOnlyGlucose ? Math.abs(x - mouseX) : Math.hypot(x - mouseX, y - mouseY);
         if (d < bestDistance) {
           bestDistance = d;
           best = {
@@ -2364,10 +2371,12 @@
         const len2 = dx * dx + dy * dy;
         if (len2 <= 0.0001) return;
 
-        const u = Math.max(0, Math.min(1, ((mouseX - x1) * dx + (mouseY - y1) * dy) / len2));
+        const u = xOnlyGlucose && Math.abs(dx) > 0.0001
+          ? Math.max(0, Math.min(1, (mouseX - x1) / dx))
+          : Math.max(0, Math.min(1, ((mouseX - x1) * dx + (mouseY - y1) * dy) / len2));
         const x = x1 + u * dx;
         const y = y1 + u * dy;
-        const d = Math.hypot(x - mouseX, y - mouseY);
+        const d = xOnlyGlucose ? Math.abs(x - mouseX) : Math.hypot(x - mouseX, y - mouseY);
 
         if (d < bestDistance) {
           const t = p1.t + (p2.t - p1.t) * u;
@@ -3277,7 +3286,8 @@
         state.hover = null;
         els.tooltip.style.display = "none";
         clearHitMarkers();
-        const chartPoint = chartCoordsFromPointerEvent(event);
+        const touchLike = isTouchLikeEvent(event);
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: touchLike });
         state.drag = {
           startX: event.clientX,
           startY: event.clientY,
@@ -3285,6 +3295,7 @@
           latestY: event.clientY,
           startChartX: chartPoint?.x,
           startChartY: chartPoint?.y,
+          startChartXOnlyGlucose: Boolean(chartPoint?.xOnlyGlucose),
           centerMs: state.centerMs,
           frameRequested: false,
           moved: false
@@ -3358,15 +3369,22 @@
         const clickPoint = wasClick &&
           Number.isFinite(state.drag.startChartX) &&
           Number.isFinite(state.drag.startChartY)
-            ? { x: state.drag.startChartX, y: state.drag.startChartY }
-            : chartCoordsFromPointerEvent(event);
+            ? {
+                x: state.drag.startChartX,
+                y: state.drag.startChartY,
+                xOnlyGlucose: Boolean(state.drag.startChartXOnlyGlucose)
+              }
+            : chartCoordsFromPointerEvent(event, { xOnlyGlucose: isTouchLikeEvent(event) });
 
         els.canvas.classList.remove("dragging");
         state.drag = null;
 
         if (wasClick) {
           state.suppressNextClickUntil = Date.now() + 800;
-          showTooltipAtChartPoint(clickPoint);
+          showTooltipAtChartPoint(clickPoint, {
+            toleranceScale: clickPoint?.xOnlyGlucose ? 3 : 1,
+            xOnlyGlucose: Boolean(clickPoint?.xOnlyGlucose)
+          });
           return;
         }
 
@@ -3382,7 +3400,7 @@
         if (!event.touches || event.touches.length !== 1) return;
 
         const client = clientPointFromPointerEvent(event);
-        const chartPoint = chartCoordsFromPointerEvent(event);
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
         if (!client || !chartPoint) return;
 
         // Some older Android/Chrome tablet combinations generate a synthetic
@@ -3422,13 +3440,13 @@
         if (!tap || tap.moved) return;
 
         const point = Number.isFinite(tap.startChartX) && Number.isFinite(tap.startChartY)
-          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 8 }
-          : chartCoordsFromPointerEvent(event);
+          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 3, xOnlyGlucose: true }
+          : chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
 
         if (!point) return;
 
         try { event.preventDefault(); } catch {}
-        showTooltipAtChartPoint(point, { toleranceScale: 8 });
+        showTooltipAtChartPoint(point, { toleranceScale: 3, xOnlyGlucose: true });
       }
 
       els.canvas.addEventListener("touchstart", beginTouchTap, { passive: true });

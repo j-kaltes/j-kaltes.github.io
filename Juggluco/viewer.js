@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "touch-unified-2d-renderer-20260630-2015";
+    const VIEWER_BUILD_ID = "canvas-only-20260630-2045";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -10,9 +10,8 @@
       // looks up elements by id. When this file is used by newviewer.html, this
       // block does nothing.
       const hasNewShell = Boolean(document.getElementById("toggleToolbarBtn")) &&
-        Boolean(document.getElementById("glChart")) &&
-        Boolean(document.getElementById("amountChart")) &&
-        Boolean(document.getElementById("plotClip"));
+        Boolean(document.getElementById("chart")) &&
+        Boolean(document.getElementById("chartWrap"));
 
       if (hasNewShell) return;
 
@@ -26,8 +25,8 @@
       // not need their bundled viewer.html changed.
       if (!hasOldViewerShell) return;
 
-      const newHeadHtml = "\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\n  <title>Juggluco Viewer</title>\n  <style>\n    :root {\n      --bg: #f6f7f9;\n      --panel: #ffffff;\n      --ink: #1b1f24;\n      --muted: #667085;\n      --border: #d0d5dd;\n      --accent: #2563eb;\n      --danger: #b42318;\n      --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);\n    }\n\n    * { box-sizing: border-box; }\n\n    html,\n    body {\n      height: 100%;\n    }\n\n    @supports (height: 100dvh) {\n      html,\n      body {\n        height: 100dvh;\n      }\n    }\n\n    body {\n      margin: 0;\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n      background: var(--bg);\n      color: var(--ink);\n      display: flex;\n      flex-direction: column;\n      overflow: hidden;\n      min-height: 100%;\n    }\n\n    header {\n      flex: 0 0 auto;\n      padding: 12px 20px 6px;\n    }\n\n    h1 {\n      margin: 0 0 4px;\n      font-size: 22px;\n      line-height: 1.2;\n    }\n\n    .subtitle {\n      margin: 0;\n      color: var(--muted);\n      font-size: 14px;\n    }\n\n    main {\n      flex: 1 1 auto;\n      min-height: 0;\n      padding: 0;\n      display: grid;\n      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);\n      gap: 0;\n    }\n\n    .panel {\n      background: var(--panel);\n      border: 1px solid var(--border);\n      border-radius: 0;\n      box-shadow: none;\n    }\n\n    .controls {\n      padding: 12px;\n      align-self: stretch;\n      min-height: 0;\n      overflow: auto;\n      overscroll-behavior: contain;\n    }\n\n    .options-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      gap: 10px;\n      margin-bottom: 12px;\n    }\n\n    .options-header strong {\n      font-size: 14px;\n    }\n\n    body.controls-collapsed main {\n      grid-template-columns: minmax(0, 1fr);\n    }\n\n    body.controls-collapsed .controls {\n      display: none;\n    }\n\n    .chart-panel {\n      min-width: 0;\n      min-height: 0;\n      align-self: stretch;\n      display: grid;\n      grid-template-rows: auto minmax(0, 1fr) auto;\n      overflow: hidden;\n      position: relative;\n    }\n\n    .chart-toolbar { grid-row: 1; }\n    .chart-wrap { grid-row: 2; }\n    .status { grid-row: 3; }\n\n    body.toolbar-collapsed .chart-panel {\n      grid-template-rows: minmax(0, 1fr) auto;\n    }\n\n    body.toolbar-collapsed .chart-wrap { grid-row: 1; }\n    body.toolbar-collapsed .status { grid-row: 2; }\n\n    .chart-toolbar {\n      position: relative;\n      display: flex;\n      flex-wrap: nowrap;\n      align-items: center;\n      justify-content: flex-start;\n      gap: 6px;\n      border-bottom: 1px solid var(--border);\n      padding: 6px 8px 6px 34px;\n      min-width: 0;\n    }\n\n    .chart-actions {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 6px;\n    }\n\n    .graph-actions {\n      flex: 1 1 auto;\n      min-width: 0;\n      flex-wrap: nowrap;\n      overflow-x: auto;\n      overflow-y: hidden;\n      -webkit-overflow-scrolling: touch;\n      scrollbar-width: none;\n    }\n\n    .graph-actions::-webkit-scrollbar {\n      display: none;\n    }\n\n    .graph-actions button {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleOptionsBtn {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleToolbarBtn {\n      position: absolute;\n      left: 0;\n      top: 8px;\n      z-index: 25;\n      width: 26px;\n      min-width: 0;\n      height: 34px;\n      padding: 0;\n      border-radius: 0 8px 8px 0;\n      background: rgba(255, 255, 255, 0.84);\n      backdrop-filter: blur(4px);\n      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);\n      font-size: 16px;\n      line-height: 1;\n      text-align: center;\n      opacity: 0.88;\n    }\n\n    #toggleToolbarBtn:hover {\n      opacity: 1;\n    }\n\n    body.toolbar-collapsed .chart-toolbar {\n      position: absolute;\n      top: 0;\n      left: 0;\n      right: 0;\n      z-index: 20;\n      padding: 0;\n      border: 0;\n      background: transparent;\n      box-shadow: none;\n      pointer-events: none;\n    }\n\n    body.toolbar-collapsed .graph-actions,\n    body.toolbar-collapsed .summary {\n      display: none;\n    }\n\n    body.toolbar-collapsed #toggleToolbarBtn {\n      pointer-events: auto;\n    }\n\n    .summary {\n      flex: 0 1 auto;\n      min-width: 8em;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .chart-wrap {\n      position: relative;\n      min-width: 0;\n      min-height: 0;\n      overflow: hidden;\n      background:\n        linear-gradient(180deg, rgba(37, 99, 235, 0.04), rgba(255, 255, 255, 0));\n    }\n\n    .chart-wrap canvas {\n      position: absolute;\n      inset: 0;\n      display: block;\n      width: 100%;\n      height: 100%;\n      touch-action: none;\n    }\n\n    .plot-clip {\n      position: absolute;\n      z-index: 1;\n      overflow: hidden;\n      pointer-events: none;\n      background: #ffffff;\n      contain: strict;\n    }\n\n    #glChart {\n      z-index: 1;\n      background: #ffffff;\n      will-change: transform;\n      transform: translate3d(0, 0, 0);\n      pointer-events: none;\n      inset: auto;\n    }\n\n    #amountChart {\n      z-index: 2;\n      background: transparent;\n      will-change: transform;\n      transform: translate3d(0, 0, 0);\n      pointer-events: none;\n      inset: auto;\n    }\n\n    #chart {\n      z-index: 3;\n      cursor: grab;\n      background: transparent;\n    }\n\n    #chart.dragging {\n      cursor: grabbing;\n    }\n\n    .tooltip {\n      position: absolute;\n      display: none;\n      pointer-events: none;\n      z-index: 5;\n      max-width: 280px;\n      padding: 8px 10px;\n      border-radius: 10px;\n      background: rgba(17, 24, 39, 0.94);\n      color: white;\n      font-size: 12px;\n      line-height: 1.35;\n      box-shadow: 0 10px 20px rgba(0,0,0,.25);\n      white-space: normal;\n    }\n\n    .status {\n      display: none;\n      padding: 10px 14px;\n      min-height: 42px;\n      color: var(--muted);\n      border-top: 1px solid var(--border);\n      font-size: 13px;\n    }\n\n    .status.error {\n      display: block;\n      color: var(--danger);\n    }\n\n    fieldset {\n      margin: 0 0 16px;\n      padding: 12px;\n      border: 1px solid var(--border);\n      border-radius: 12px;\n    }\n\n    legend {\n      padding: 0 6px;\n      color: var(--muted);\n      font-size: 13px;\n      font-weight: 700;\n    }\n\n    label {\n      display: block;\n      margin: 0 0 10px;\n      font-size: 13px;\n      color: var(--ink);\n    }\n\n    label.inline {\n      display: flex;\n      align-items: center;\n      gap: 8px;\n      margin-bottom: 8px;\n    }\n\n    input[type=\"text\"],\n    input[type=\"number\"],\n    input[type=\"password\"],\n    input[type=\"date\"],\n    input[type=\"time\"],\n    select {\n      width: 100%;\n      margin-top: 4px;\n      padding: 9px 10px;\n      border: 1px solid var(--border);\n      border-radius: 10px;\n      background: white;\n      color: var(--ink);\n      font: inherit;\n      font-size: 14px;\n    }\n\n    input[type=\"checkbox\"] {\n      width: 16px;\n      height: 16px;\n      margin: 0;\n    }\n\n    .row {\n      display: grid;\n      grid-template-columns: 1fr 1fr;\n      gap: 10px;\n    }\n\n    button {\n      appearance: none;\n      border: 1px solid var(--border);\n      background: white;\n      color: var(--ink);\n      padding: 7px 9px;\n      border-radius: 9px;\n      font-weight: 650;\n      cursor: pointer;\n      font-size: 14px;\n    }\n\n    button:hover {\n      border-color: #98a2b3;\n      background: #f9fafb;\n    }\n\n    button.primary {\n      background: var(--accent);\n      border-color: var(--accent);\n      color: white;\n    }\n\n    button.primary:hover {\n      filter: brightness(.96);\n    }\n\n    .hint {\n      color: var(--muted);\n      font-size: 12px;\n      line-height: 1.45;\n      margin: 8px 0 0;\n    }\n\n    .legend-list {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 10px;\n      margin-top: 8px;\n    }\n\n    .legend-item {\n      display: inline-flex;\n      align-items: center;\n      gap: 6px;\n      color: var(--muted);\n      font-size: 12px;\n    }\n\n    .swatch {\n      display: inline-block;\n      width: 18px;\n      height: 3px;\n      border-radius: 4px;\n      background: #111;\n    }\n\n    .dashed-swatch {\n      background: repeating-linear-gradient(\n        90deg,\n        currentColor 0 5px,\n        transparent 5px 8px\n      ) !important;\n      color: #9333ea;\n    }\n\n    .dot {\n      width: 9px;\n      height: 9px;\n      border-radius: 999px;\n    }\n\n    @media (max-width: 900px) {\n      main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: auto minmax(0, 1fr);\n        padding: 0;\n        gap: 0;\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: min(42dvh, 360px);\n      }\n\n      .chart-panel {\n        min-height: 0;\n      }\n\n      .chart-toolbar {\n        padding: 5px 5px 5px 31px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n\n    @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),\n           (max-height: 560px) and (min-width: 640px) {\n      main {\n        grid-template-columns: clamp(204px, 29vw, 276px) minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: none;\n        padding: 8px;\n      }\n\n      fieldset {\n        margin-bottom: 8px;\n        padding: 8px;\n      }\n\n      label {\n        margin-bottom: 7px;\n      }\n\n      input[type=\"text\"],\n      input[type=\"number\"],\n      input[type=\"password\"],\n      input[type=\"date\"],\n      input[type=\"time\"],\n      select {\n        padding: 6px 8px;\n        font-size: 13px;\n      }\n    }\n\n    @media (max-width: 520px) {\n      .chart-toolbar {\n        gap: 4px;\n      }\n\n      .graph-actions {\n        gap: 4px;\n      }\n\n      .graph-actions button {\n        padding-left: 8px;\n        padding-right: 8px;\n      }\n    }\n\n    @media (max-height: 560px) {\n      main {\n        padding: 0;\n        gap: 0;\n      }\n\n      .panel {\n        border-radius: 5px;\n        box-shadow: none;\n      }\n\n      .chart-panel {\n        border-left-width: 0;\n        border-right-width: 0;\n      }\n\n      .chart-toolbar {\n        padding: 3px 4px 3px 30px;\n      }\n\n      #toggleToolbarBtn {\n        top: 4px;\n        width: 24px;\n        height: 30px;\n        border-radius: 0 7px 7px 0;\n        font-size: 14px;\n      }\n\n      button {\n        padding: 5px 7px;\n        border-radius: 7px;\n        font-size: 12px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n  </style>\n";
-      const newBodyHtml = "\n  <main>\n    <section class=\"panel controls\" aria-label=\"Controls\">\n      <div class=\"options-header\">\n        <strong class=\"options-title\">Options</strong>\n      </div>\n      <fieldset>\n        <legend>Connection</legend>\n\n        <label>\n          Juggluco server URL\n          <input id=\"baseUrl\" type=\"text\" value=\"http://127.0.0.1:17580\"\n                 placeholder=\"http://127.0.0.1:17580 or http://192.168.1.69:17580\" />\n        </label>\n\n        <label>\n          API token / api_secret, optional\n          <input id=\"token\" type=\"password\" autocomplete=\"off\"\n                 placeholder=\"Leave empty if not used\" />\n        </label>\n        <label class=\"inline\"><input id=\"showToken\" type=\"checkbox\" /> Show api_secret</label>\n\n        <div class=\"row\">\n          <label>\n            Unit\n            <select id=\"unit\">\n              <option value=\"mmol/L\" selected>mmol/L</option>\n              <option value=\"mg/dL\">mg/dL</option>\n            </select>\n          </label>\n\n          <label>\n            Window\n            <select id=\"windowHours\">\n              <option value=\"3\">3 hours</option>\n              <option value=\"6\" selected>6 hours</option>\n              <option value=\"12\">12 hours</option>\n              <option value=\"24\">24 hours</option>\n              <option value=\"48\">48 hours</option>\n              <option value=\"168\">7 days</option>\n            </select>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Start date\n            <input id=\"dateToView\" type=\"date\" />\n          </label>\n\n          <label>\n            Start time\n            <input id=\"timeOnDate\" type=\"time\" value=\"00:00\" />\n          </label>\n        </div>\n\n        <div class=\"chart-actions\" style=\"margin-bottom:10px\">\n          <button id=\"goDateBtn\" type=\"button\">Go to start</button>\n          <button id=\"todayDateBtn\" type=\"button\">Today 00:00</button>\n        </div>\n\n        <button id=\"loadBtn\" class=\"primary\" type=\"button\">Load data</button>\n        <p class=\"hint\">\n          The start date/time is the left edge of the graph. The Window setting determines\n          how much time is shown from that start. Use the buttons, mouse wheel, drag, or arrow keys to move through time.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Display</legend>\n\n        <label class=\"inline\"><input id=\"showStream\" type=\"checkbox\" checked /> Stream curve</label>\n        <label class=\"inline\"><input id=\"showScans\" type=\"checkbox\" checked /> Libre scans as dots</label>\n        <label class=\"inline\"><input id=\"showHistory\" type=\"checkbox\" /> History values</label>\n        <label class=\"inline\"><input id=\"showAmounts\" type=\"checkbox\" checked /> Entered amounts</label>\n        <label class=\"inline\"><input id=\"useCalibrated\" type=\"checkbox\" checked /> Calibrated</label>\n        <label class=\"inline\"><input id=\"autoRefresh\" type=\"checkbox\" checked /> Auto-refresh when viewing latest data</label>\n\n        <div class=\"row\">\n          <label>\n            Low line\n            <input id=\"lowLimit\" type=\"number\" step=\"0.1\" value=\"3.9\" />\n          </label>\n          <label>\n            High line\n            <input id=\"highLimit\" type=\"number\" step=\"0.1\" value=\"10.0\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Graph min\n            <input id=\"graphMin\" type=\"number\" step=\"0.5\" value=\"2\" />\n          </label>\n          <label>\n            Graph max\n            <input id=\"graphMax\" type=\"number\" step=\"0.5\" value=\"11\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Curve thickness\n            <input id=\"curveThickness\" type=\"number\" min=\"1\" max=\"12\" step=\"0.5\" value=\"2\" />\n          </label>\n        </div>\n\n        <p class=\"hint\">\n          The graph min/max is the normal vertical range. The graph expands only when\n          visible values or limit lines fall outside that range. The curve uses the sharp\n          WebGL render path and quietly prefetches neighboring time ranges while you scroll.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Legend</legend>\n        <p class=\"hint\">\n          Colors identify sensors. Shape and line style identify the data source.\n        </p>\n        <div class=\"legend-list\">\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#2563eb\"></span>Stream: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#2563eb\"></span>Scans: dots</span>\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#9333ea\"></span>History: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#047857\"></span>Amounts: green tags</span>\n        </div>\n        <p class=\"hint\" style=\"margin-top:12px\">Sensors in the loaded data:</p>\n        <div id=\"sensorLegend\" class=\"legend-list\">\n          <span class=\"legend-item\">No sensors loaded yet.</span>\n        </div>\n      </fieldset>\n\n      <fieldset>\n        <legend>Keyboard</legend>\n        <p class=\"hint\">\n          \u2190 / \u2192 pan half a window. + / \u2212 zoom. Home jumps to now.\n        </p>\n      </fieldset>\n    </section>\n\n    <section class=\"panel chart-panel\" aria-label=\"Glucose chart\">\n      <div class=\"chart-toolbar\">\n        <button id=\"toggleToolbarBtn\" type=\"button\" title=\"Hide buttons\" aria-label=\"Hide buttons\">\u25b4</button>\n        <div class=\"chart-actions graph-actions\">\n          <button id=\"toggleOptionsBtn\" type=\"button\">Hide options</button>\n          <button id=\"prevBtn\" type=\"button\" title=\"Back\" aria-label=\"Back\">\u25c0</button>\n          <button id=\"nextBtn\" type=\"button\" title=\"Forward\" aria-label=\"Forward\">\u25b6</button>\n          <button id=\"zoomInBtn\" type=\"button\" title=\"Zoom in\" aria-label=\"Zoom in\">+</button>\n          <button id=\"zoomOutBtn\" type=\"button\" title=\"Zoom out\" aria-label=\"Zoom out\">\u2212</button>\n          <button id=\"nowBtn\" type=\"button\">Now</button>\n        </div>\n        <div id=\"summary\" class=\"summary\">No data loaded yet.</div>\n      </div>\n\n      <div class=\"chart-wrap\" id=\"chartWrap\">\n        <div id=\"plotClip\" class=\"plot-clip\" aria-hidden=\"true\">\n          <canvas id=\"glChart\"></canvas>\n          <canvas id=\"amountChart\"></canvas>\n        </div>\n        <canvas id=\"chart\" aria-label=\"Glucose graph\"></canvas>\n        <div id=\"tooltip\" class=\"tooltip\"></div>\n      </div>\n\n      <div id=\"status\" class=\"status\" role=\"alert\"></div>\n    </section>\n  </main>\n";
+      const newHeadHtml = "\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\n  <title>Juggluco Viewer</title>\n  <style>\n    :root {\n      --bg: #f6f7f9;\n      --panel: #ffffff;\n      --ink: #1b1f24;\n      --muted: #667085;\n      --border: #d0d5dd;\n      --accent: #2563eb;\n      --danger: #b42318;\n      --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);\n    }\n\n    * { box-sizing: border-box; }\n\n    html,\n    body {\n      height: 100%;\n    }\n\n    @supports (height: 100dvh) {\n      html,\n      body {\n        height: 100dvh;\n      }\n    }\n\n    body {\n      margin: 0;\n      font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n      background: var(--bg);\n      color: var(--ink);\n      display: flex;\n      flex-direction: column;\n      overflow: hidden;\n      min-height: 100%;\n    }\n\n    header {\n      flex: 0 0 auto;\n      padding: 12px 20px 6px;\n    }\n\n    h1 {\n      margin: 0 0 4px;\n      font-size: 22px;\n      line-height: 1.2;\n    }\n\n    .subtitle {\n      margin: 0;\n      color: var(--muted);\n      font-size: 14px;\n    }\n\n    main {\n      flex: 1 1 auto;\n      min-height: 0;\n      padding: 0;\n      display: grid;\n      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);\n      gap: 0;\n    }\n\n    .panel {\n      background: var(--panel);\n      border: 1px solid var(--border);\n      border-radius: 0;\n      box-shadow: none;\n    }\n\n    .controls {\n      padding: 12px;\n      align-self: stretch;\n      min-height: 0;\n      overflow: auto;\n      overscroll-behavior: contain;\n    }\n\n    .options-header {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      gap: 10px;\n      margin-bottom: 12px;\n    }\n\n    .options-header strong {\n      font-size: 14px;\n    }\n\n    body.controls-collapsed main {\n      grid-template-columns: minmax(0, 1fr);\n    }\n\n    body.controls-collapsed .controls {\n      display: none;\n    }\n\n    .chart-panel {\n      min-width: 0;\n      min-height: 0;\n      align-self: stretch;\n      display: grid;\n      grid-template-rows: auto minmax(0, 1fr) auto;\n      overflow: hidden;\n      position: relative;\n    }\n\n    .chart-toolbar { grid-row: 1; }\n    .chart-wrap { grid-row: 2; }\n    .status { grid-row: 3; }\n\n    body.toolbar-collapsed .chart-panel {\n      grid-template-rows: minmax(0, 1fr) auto;\n    }\n\n    body.toolbar-collapsed .chart-wrap { grid-row: 1; }\n    body.toolbar-collapsed .status { grid-row: 2; }\n\n    .chart-toolbar {\n      position: relative;\n      display: flex;\n      flex-wrap: nowrap;\n      align-items: center;\n      justify-content: flex-start;\n      gap: 6px;\n      border-bottom: 1px solid var(--border);\n      padding: 6px 8px 6px 34px;\n      min-width: 0;\n    }\n\n    .chart-actions {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 6px;\n    }\n\n    .graph-actions {\n      flex: 1 1 auto;\n      min-width: 0;\n      flex-wrap: nowrap;\n      overflow-x: auto;\n      overflow-y: hidden;\n      -webkit-overflow-scrolling: touch;\n      scrollbar-width: none;\n    }\n\n    .graph-actions::-webkit-scrollbar {\n      display: none;\n    }\n\n    .graph-actions button {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleOptionsBtn {\n      flex: 0 0 auto;\n      white-space: nowrap;\n    }\n\n    #toggleToolbarBtn {\n      position: absolute;\n      left: 0;\n      top: 8px;\n      z-index: 25;\n      width: 26px;\n      min-width: 0;\n      height: 34px;\n      padding: 0;\n      border-radius: 0 8px 8px 0;\n      background: rgba(255, 255, 255, 0.84);\n      backdrop-filter: blur(4px);\n      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);\n      font-size: 16px;\n      line-height: 1;\n      text-align: center;\n      opacity: 0.88;\n    }\n\n    #toggleToolbarBtn:hover {\n      opacity: 1;\n    }\n\n    body.toolbar-collapsed .chart-toolbar {\n      position: absolute;\n      top: 0;\n      left: 0;\n      right: 0;\n      z-index: 20;\n      padding: 0;\n      border: 0;\n      background: transparent;\n      box-shadow: none;\n      pointer-events: none;\n    }\n\n    body.toolbar-collapsed .graph-actions,\n    body.toolbar-collapsed .summary {\n      display: none;\n    }\n\n    body.toolbar-collapsed #toggleToolbarBtn {\n      pointer-events: auto;\n    }\n\n    .summary {\n      flex: 0 1 auto;\n      min-width: 8em;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .chart-wrap {\n      position: relative;\n      min-width: 0;\n      min-height: 0;\n      overflow: hidden;\n      background:\n        linear-gradient(180deg, rgba(37, 99, 235, 0.04), rgba(255, 255, 255, 0));\n    }\n\n    .chart-wrap canvas {\n      position: absolute;\n      inset: 0;\n      display: block;\n      width: 100%;\n      height: 100%;\n      touch-action: none;\n    }\n\n    #chart {\n      z-index: 3;\n      cursor: grab;\n      background: transparent;\n    }\n\n    #chart.dragging {\n      cursor: grabbing;\n    }\n\n    .tooltip {\n      position: absolute;\n      display: none;\n      pointer-events: none;\n      z-index: 5;\n      max-width: 280px;\n      padding: 8px 10px;\n      border-radius: 10px;\n      background: rgba(17, 24, 39, 0.94);\n      color: white;\n      font-size: 12px;\n      line-height: 1.35;\n      box-shadow: 0 10px 20px rgba(0,0,0,.25);\n      white-space: normal;\n    }\n\n    .status {\n      display: none;\n      padding: 10px 14px;\n      min-height: 42px;\n      color: var(--muted);\n      border-top: 1px solid var(--border);\n      font-size: 13px;\n    }\n\n    .status.error {\n      display: block;\n      color: var(--danger);\n    }\n\n    fieldset {\n      margin: 0 0 16px;\n      padding: 12px;\n      border: 1px solid var(--border);\n      border-radius: 12px;\n    }\n\n    legend {\n      padding: 0 6px;\n      color: var(--muted);\n      font-size: 13px;\n      font-weight: 700;\n    }\n\n    label {\n      display: block;\n      margin: 0 0 10px;\n      font-size: 13px;\n      color: var(--ink);\n    }\n\n    label.inline {\n      display: flex;\n      align-items: center;\n      gap: 8px;\n      margin-bottom: 8px;\n    }\n\n    input[type=\"text\"],\n    input[type=\"number\"],\n    input[type=\"password\"],\n    input[type=\"date\"],\n    input[type=\"time\"],\n    select {\n      width: 100%;\n      margin-top: 4px;\n      padding: 9px 10px;\n      border: 1px solid var(--border);\n      border-radius: 10px;\n      background: white;\n      color: var(--ink);\n      font: inherit;\n      font-size: 14px;\n    }\n\n    input[type=\"checkbox\"] {\n      width: 16px;\n      height: 16px;\n      margin: 0;\n    }\n\n    .row {\n      display: grid;\n      grid-template-columns: 1fr 1fr;\n      gap: 10px;\n    }\n\n    button {\n      appearance: none;\n      border: 1px solid var(--border);\n      background: white;\n      color: var(--ink);\n      padding: 7px 9px;\n      border-radius: 9px;\n      font-weight: 650;\n      cursor: pointer;\n      font-size: 14px;\n    }\n\n    button:hover {\n      border-color: #98a2b3;\n      background: #f9fafb;\n    }\n\n    button.primary {\n      background: var(--accent);\n      border-color: var(--accent);\n      color: white;\n    }\n\n    button.primary:hover {\n      filter: brightness(.96);\n    }\n\n    .hint {\n      color: var(--muted);\n      font-size: 12px;\n      line-height: 1.45;\n      margin: 8px 0 0;\n    }\n\n    .legend-list {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 10px;\n      margin-top: 8px;\n    }\n\n    .legend-item {\n      display: inline-flex;\n      align-items: center;\n      gap: 6px;\n      color: var(--muted);\n      font-size: 12px;\n    }\n\n    .swatch {\n      display: inline-block;\n      width: 18px;\n      height: 3px;\n      border-radius: 4px;\n      background: #111;\n    }\n\n    .dashed-swatch {\n      background: repeating-linear-gradient(\n        90deg,\n        currentColor 0 5px,\n        transparent 5px 8px\n      ) !important;\n      color: #9333ea;\n    }\n\n    .dot {\n      width: 9px;\n      height: 9px;\n      border-radius: 999px;\n    }\n\n    @media (max-width: 900px) {\n      main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: auto minmax(0, 1fr);\n        padding: 0;\n        gap: 0;\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: min(42dvh, 360px);\n      }\n\n      .chart-panel {\n        min-height: 0;\n      }\n\n      .chart-toolbar {\n        padding: 5px 5px 5px 31px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n\n    @media (max-width: 900px) and (orientation: landscape) and (min-width: 640px),\n           (max-height: 560px) and (min-width: 640px) {\n      main {\n        grid-template-columns: clamp(204px, 29vw, 276px) minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      body.controls-collapsed main {\n        grid-template-columns: minmax(0, 1fr);\n        grid-template-rows: minmax(0, 1fr);\n      }\n\n      .controls {\n        max-height: none;\n        padding: 8px;\n      }\n\n      fieldset {\n        margin-bottom: 8px;\n        padding: 8px;\n      }\n\n      label {\n        margin-bottom: 7px;\n      }\n\n      input[type=\"text\"],\n      input[type=\"number\"],\n      input[type=\"password\"],\n      input[type=\"date\"],\n      input[type=\"time\"],\n      select {\n        padding: 6px 8px;\n        font-size: 13px;\n      }\n    }\n\n    @media (max-width: 520px) {\n      .chart-toolbar {\n        gap: 4px;\n      }\n\n      .graph-actions {\n        gap: 4px;\n      }\n\n      .graph-actions button {\n        padding-left: 8px;\n        padding-right: 8px;\n      }\n    }\n\n    @media (max-height: 560px) {\n      main {\n        padding: 0;\n        gap: 0;\n      }\n\n      .panel {\n        border-radius: 5px;\n        box-shadow: none;\n      }\n\n      .chart-panel {\n        border-left-width: 0;\n        border-right-width: 0;\n      }\n\n      .chart-toolbar {\n        padding: 3px 4px 3px 30px;\n      }\n\n      #toggleToolbarBtn {\n        top: 4px;\n        width: 24px;\n        height: 30px;\n        border-radius: 0 7px 7px 0;\n        font-size: 14px;\n      }\n\n      button {\n        padding: 5px 7px;\n        border-radius: 7px;\n        font-size: 12px;\n      }\n\n      .summary {\n        display: none;\n      }\n    }\n  </style>\n";
+      const newBodyHtml = "\n  <main>\n    <section class=\"panel controls\" aria-label=\"Controls\">\n      <div class=\"options-header\">\n        <strong class=\"options-title\">Options</strong>\n      </div>\n      <fieldset>\n        <legend>Connection</legend>\n\n        <label>\n          Juggluco server URL\n          <input id=\"baseUrl\" type=\"text\" value=\"http://127.0.0.1:17580\"\n                 placeholder=\"http://127.0.0.1:17580 or http://192.168.1.69:17580\" />\n        </label>\n\n        <label>\n          API token / api_secret, optional\n          <input id=\"token\" type=\"password\" autocomplete=\"off\"\n                 placeholder=\"Leave empty if not used\" />\n        </label>\n        <label class=\"inline\"><input id=\"showToken\" type=\"checkbox\" /> Show api_secret</label>\n\n        <div class=\"row\">\n          <label>\n            Unit\n            <select id=\"unit\">\n              <option value=\"mmol/L\" selected>mmol/L</option>\n              <option value=\"mg/dL\">mg/dL</option>\n            </select>\n          </label>\n\n          <label>\n            Window\n            <select id=\"windowHours\">\n              <option value=\"3\">3 hours</option>\n              <option value=\"6\" selected>6 hours</option>\n              <option value=\"12\">12 hours</option>\n              <option value=\"24\">24 hours</option>\n              <option value=\"48\">48 hours</option>\n              <option value=\"168\">7 days</option>\n            </select>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Start date\n            <input id=\"dateToView\" type=\"date\" />\n          </label>\n\n          <label>\n            Start time\n            <input id=\"timeOnDate\" type=\"time\" value=\"00:00\" />\n          </label>\n        </div>\n\n        <div class=\"chart-actions\" style=\"margin-bottom:10px\">\n          <button id=\"goDateBtn\" type=\"button\">Go to start</button>\n          <button id=\"todayDateBtn\" type=\"button\">Today 00:00</button>\n        </div>\n\n        <button id=\"loadBtn\" class=\"primary\" type=\"button\">Load data</button>\n        <p class=\"hint\">\n          The start date/time is the left edge of the graph. The Window setting determines\n          how much time is shown from that start. Use the buttons, mouse wheel, drag, or arrow keys to move through time.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Display</legend>\n\n        <label class=\"inline\"><input id=\"showStream\" type=\"checkbox\" checked /> Stream curve</label>\n        <label class=\"inline\"><input id=\"showScans\" type=\"checkbox\" checked /> Libre scans as dots</label>\n        <label class=\"inline\"><input id=\"showHistory\" type=\"checkbox\" /> History values</label>\n        <label class=\"inline\"><input id=\"showAmounts\" type=\"checkbox\" checked /> Entered amounts</label>\n        <label class=\"inline\"><input id=\"useCalibrated\" type=\"checkbox\" checked /> Calibrated</label>\n        <label class=\"inline\"><input id=\"autoRefresh\" type=\"checkbox\" checked /> Auto-refresh when viewing latest data</label>\n\n        <div class=\"row\">\n          <label>\n            Low line\n            <input id=\"lowLimit\" type=\"number\" step=\"0.1\" value=\"3.9\" />\n          </label>\n          <label>\n            High line\n            <input id=\"highLimit\" type=\"number\" step=\"0.1\" value=\"10.0\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Graph min\n            <input id=\"graphMin\" type=\"number\" step=\"0.5\" value=\"2\" />\n          </label>\n          <label>\n            Graph max\n            <input id=\"graphMax\" type=\"number\" step=\"0.5\" value=\"11\" />\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <label>\n            Curve thickness\n            <input id=\"curveThickness\" type=\"number\" min=\"1\" max=\"12\" step=\"0.5\" value=\"2\" />\n          </label>\n        </div>\n\n        <p class=\"hint\">\n          The graph min/max is the normal vertical range. The graph expands only when\n          visible values or limit lines fall outside that range. The curve uses the optimized\n          canvas render path and quietly prefetches neighboring time ranges while you scroll.\n        </p>\n      </fieldset>\n\n      <fieldset>\n        <legend>Legend</legend>\n        <p class=\"hint\">\n          Colors identify sensors. Shape and line style identify the data source.\n        </p>\n        <div class=\"legend-list\">\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#2563eb\"></span>Stream: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#2563eb\"></span>Scans: dots</span>\n          <span class=\"legend-item\"><span class=\"swatch\" style=\"background:#9333ea\"></span>History: solid line</span>\n          <span class=\"legend-item\"><span class=\"dot\" style=\"background:#047857\"></span>Amounts: green tags</span>\n        </div>\n        <p class=\"hint\" style=\"margin-top:12px\">Sensors in the loaded data:</p>\n        <div id=\"sensorLegend\" class=\"legend-list\">\n          <span class=\"legend-item\">No sensors loaded yet.</span>\n        </div>\n      </fieldset>\n\n      <fieldset>\n        <legend>Keyboard</legend>\n        <p class=\"hint\">\n          \u2190 / \u2192 pan half a window. + / \u2212 zoom. Home jumps to now.\n        </p>\n      </fieldset>\n    </section>\n\n    <section class=\"panel chart-panel\" aria-label=\"Glucose chart\">\n      <div class=\"chart-toolbar\">\n        <button id=\"toggleToolbarBtn\" type=\"button\" title=\"Hide buttons\" aria-label=\"Hide buttons\">\u25b4</button>\n        <div class=\"chart-actions graph-actions\">\n          <button id=\"toggleOptionsBtn\" type=\"button\">Hide options</button>\n          <button id=\"prevBtn\" type=\"button\" title=\"Back\" aria-label=\"Back\">\u25c0</button>\n          <button id=\"nextBtn\" type=\"button\" title=\"Forward\" aria-label=\"Forward\">\u25b6</button>\n          <button id=\"zoomInBtn\" type=\"button\" title=\"Zoom in\" aria-label=\"Zoom in\">+</button>\n          <button id=\"zoomOutBtn\" type=\"button\" title=\"Zoom out\" aria-label=\"Zoom out\">\u2212</button>\n          <button id=\"nowBtn\" type=\"button\">Now</button>\n        </div>\n        <div id=\"summary\" class=\"summary\">No data loaded yet.</div>\n      </div>\n\n      <div class=\"chart-wrap\" id=\"chartWrap\">\n        <canvas id=\"chart\" aria-label=\"Glucose graph\"></canvas>\n        <div id=\"tooltip\" class=\"tooltip\"></div>\n      </div>\n\n      <div id=\"status\" class=\"status\" role=\"alert\"></div>\n    </section>\n  </main>\n";
 
       document.head.innerHTML = newHeadHtml;
       document.body.innerHTML = newBodyHtml;
@@ -79,7 +78,7 @@
       viewportUiTimer: null,
       pendingWheelPan: 0,
       wheelPanRequested: false,
-      resize: { width: 0, height: 0, dpr: 0, glDpr: 0 },
+      resize: { width: 0, height: 0, dpr: 0 },
       drag: null,
       hover: null,
       lastFetchKey: "",
@@ -90,7 +89,6 @@
       lastYDomain: null,
       scrollRenderBaseCenterMs: null,
       scrollTransformPx: 0,
-      webglOverscanWindows: 3,
       controlsCollapsed: false,
       toolbarCollapsed: false,
       liveFollowNow: true,
@@ -102,8 +100,6 @@
 
     const els = {
       plotClip: $("plotClip"),
-      glCanvas: $("glChart"),
-      amountCanvas: $("amountChart"),
       canvas: $("chart"),
       chartWrap: $("chartWrap"),
       tooltip: $("tooltip"),
@@ -141,9 +137,6 @@
     };
 
     const ctx = els.canvas.getContext("2d", { alpha: true });
-    const amountCtx = els.amountCanvas.getContext("2d", { alpha: true });
-    let glRenderer = null;
-
     window.JUGGLUCO_VIEWER_BUILD = VIEWER_BUILD_ID;
     try { console.log("Juggluco viewer build", VIEWER_BUILD_ID); } catch {}
     try { document.body.setAttribute("data-viewer-build", VIEWER_BUILD_ID); } catch {}
@@ -174,7 +167,7 @@
       const hour = 60 * 60 * 1000;
       const day = 24 * hour;
 
-      // Fetch well beyond the visible window. The WebGL renderer can now scroll
+      // Fetch well beyond the visible window. The canvas renderer can now scroll
       // quickly enough that the viewport may otherwise outrun the TSV buffer and
       // briefly show an empty plot while the server catches up. Five windows of
       // padding gives smooth wheel/drag prefetching without making normal 3-24 h
@@ -280,7 +273,7 @@
             updateSummary();
           }
 
-          // Direct draw avoids being coalesced behind a pending fast WebGL redraw.
+          // Direct draw avoids being coalesced behind a pending fast redraw.
           draw();
         });
       });
@@ -480,37 +473,6 @@
       const value = parseNumber(els.curveThickness?.value);
       if (!Number.isFinite(value)) return 2;
       return Math.max(1, Math.min(12, value));
-    }
-
-    function curveResolutionScale() {
-      // The user-validated sweet spot: sharp enough to look like the native
-      // Juggluco curve, without the Retina/full-DPR fullscreen cost.
-      return 1.5;
-    }
-
-    function forcedRendererMode() {
-      try {
-        const params = new URLSearchParams(window.location.search || "");
-        const mode = String(params.get("renderer") || params.get("render") || "").toLowerCase();
-        if (mode === "2d" || mode === "canvas") return "2d";
-        if (mode === "webgl" || mode === "gl") return "webgl";
-      } catch {}
-      return "";
-    }
-
-    function useUnified2DPlot() {
-      const forced = forcedRendererMode();
-      if (forced === "2d") return true;
-      if (forced === "webgl") return false;
-
-      try {
-        if (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) return true;
-      } catch {}
-      try {
-        return Boolean(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-      } catch {
-        return false;
-      }
     }
 
     function currentLabelFontSize(area) {
@@ -921,26 +883,8 @@
       }, delayMs);
     }
 
-    function setPlotTransform(px) {
-      const value = Math.round(px * 10) / 10;
-      if (Math.abs(value - state.scrollTransformPx) < 0.05) return;
-      state.scrollTransformPx = value;
-      if (els.glCanvas) {
-        els.glCanvas.style.transform = `translate3d(${value}px, 0, 0)`;
-      }
-      if (els.amountCanvas) {
-        els.amountCanvas.style.transform = `translate3d(${value}px, 0, 0)`;
-      }
-    }
-
     function resetPlotTransform() {
       state.scrollTransformPx = 0;
-      if (els.glCanvas) {
-        els.glCanvas.style.transform = "translate3d(0, 0, 0)";
-      }
-      if (els.amountCanvas) {
-        els.amountCanvas.style.transform = "translate3d(0, 0, 0)";
-      }
     }
 
 
@@ -949,52 +893,16 @@
       const area = getPlotArea();
       const yDom = state.lastYDomain || yDomainVisible();
       const scales = createScales(area, yDom);
-      const use2D = useUnified2DPlot();
-      drawGrid(area, yDom, scales, { fillPlotBackground: use2D });
-      if (use2D) draw2DGlucosePlot(area, scales);
+      drawGrid(area, yDom, scales, { fillPlotBackground: true });
+      draw2DGlucosePlot(area, scales);
       drawAmountsOverlay(area, scales, yDom);
       drawCurrentGlucoseLabel(area, scales);
       drawHover(area, scales, yDom);
     }
 
     function updateCompositedPan() {
-      if (useUnified2DPlot()) {
-        resetPlotTransform();
-        drawOverlayForCurrentRange();
-        return;
-      }
-
-      if (!glRenderer) {
-        requestDraw({ fast: true });
-        return;
-      }
-
-      const area = getPlotArea();
-      if (state.scrollRenderBaseCenterMs === null) {
-        state.scrollRenderBaseCenterMs = state.centerMs;
-      }
-
-      const offsetPx = -((state.centerMs - state.scrollRenderBaseCenterMs) / state.windowMs) * area.w;
-      setPlotTransform(offsetPx);
+      resetPlotTransform();
       drawOverlayForCurrentRange();
-
-      // The WebGL canvas is rendered three windows wide. Rebase only when the
-      // current composited shift approaches the overscan edge, instead of
-      // redrawing on every wheel/pointer event.
-      const sidePad = ((state.webglOverscanWindows || 3) - 1) / 2;
-      const rebaseThreshold = area.w * Math.max(0.25, sidePad * 0.82);
-      if (Math.abs(offsetPx) > rebaseThreshold) {
-        schedulePrefetchData(50);
-
-        // Only rebase/redraw if the visible range is already in the TSV cache.
-        // Otherwise keep translating the last rendered plot until the quiet
-        // prefetch finishes, avoiding the blank-then-fill visual gap.
-        if (!isCurrentVisibleRangeLoaded(0.15)) return;
-
-        resetPlotTransform();
-        state.scrollRenderBaseCenterMs = state.centerMs;
-        requestDraw({ fast: true });
-      }
     }
 
     function updateSummary() {
@@ -1055,25 +963,21 @@
 
     function ensureGraphLayerStyles() {
       // Some older in-app viewer.html shells have older canvas CSS. Force the
-      // graph layers to share the same CSS coordinate system before sizing and
-      // hit-testing, so touch positions match the visible WebGL curve.
+      // active canvas to fill the graph area before sizing and hit-testing.
       if (els.chartWrap) {
         const position = window.getComputedStyle ? getComputedStyle(els.chartWrap).position : "";
         if (!position || position === "static") els.chartWrap.style.position = "relative";
         els.chartWrap.style.overflow = "hidden";
       }
 
-      [els.canvas, els.glCanvas, els.amountCanvas].forEach(canvas => {
-        if (!canvas) return;
-        canvas.style.position = "absolute";
-        canvas.style.display = "block";
-        canvas.style.touchAction = "none";
-      });
+      if (els.canvas) {
+        els.canvas.style.position = "absolute";
+        els.canvas.style.display = "block";
+        els.canvas.style.touchAction = "none";
+      }
 
       if (els.plotClip) {
-        els.plotClip.style.position = "absolute";
-        els.plotClip.style.overflow = "hidden";
-        els.plotClip.style.pointerEvents = "none";
+        els.plotClip.style.display = "none";
       }
     }
 
@@ -1083,27 +987,12 @@
       const rawDpr = window.devicePixelRatio || 1;
       const width = Math.max(180, Math.floor(rect.width));
       const height = Math.max(80, Math.floor(rect.height));
-      const overscan = state.webglOverscanWindows || 3;
-      const area = plotAreaFromSize(width, height);
-
-      // Full-screen slowness was mostly fill-rate: rendering a 3x-wide WebGL
-      // canvas at full devicePixelRatio can become enormous. The earlier cap made
-      // scrolling fast, but also made the curve jagged/soft at fullscreen. This
-      // version uses a user-selectable curve-resolution target and a pixel budget
-      // tied to that target. Scrolling itself remains cheap because panning is a
-      // compositor transform; the higher-resolution redraw happens after motion settles.
       const overlayDpr = Math.min(rawDpr, 1.5);
-      const targetGlDpr = curveResolutionScale();
-      const maxGlPixels = 3600000 * targetGlDpr * targetGlDpr;
-      const idealGlPixels = Math.max(1, area.w * overscan * area.h);
-      const budgetScale = Math.sqrt(maxGlPixels / idealGlPixels);
-      const glDpr = Math.max(0.5, Math.min(rawDpr, targetGlDpr, budgetScale));
 
       if (
         state.resize.width !== width ||
         state.resize.height !== height ||
-        state.resize.dpr !== overlayDpr ||
-        state.resize.glDpr !== glDpr
+        state.resize.dpr !== overlayDpr
       ) {
         els.canvas.width = Math.floor(width * overlayDpr);
         els.canvas.height = Math.floor(height * overlayDpr);
@@ -1114,41 +1003,13 @@
         els.canvas.style.top = "0px";
         els.canvas.style.bottom = "auto";
 
-        // Clip the GPU-rendered curve to the actual plot rectangle. This prevents
-        // the curve from sliding under the y-axis numbers and the "Glucose" label
-        // while composited panning is active.
-        els.plotClip.style.left = `${area.x}px`;
-        els.plotClip.style.top = `${area.y}px`;
-        els.plotClip.style.width = `${area.w}px`;
-        els.plotClip.style.height = `${area.h}px`;
-
-        const sidePad = (overscan - 1) / 2;
-        els.glCanvas.width = Math.max(1, Math.floor(area.w * overscan * glDpr));
-        els.glCanvas.height = Math.max(1, Math.floor(area.h * glDpr));
-        els.glCanvas.style.width = `${area.w * overscan}px`;
-        els.glCanvas.style.height = `${area.h}px`;
-        els.glCanvas.style.left = `${-area.w * sidePad}px`;
-        els.glCanvas.style.right = "auto";
-        els.glCanvas.style.top = "0px";
-        els.glCanvas.style.bottom = "auto";
-
-        els.amountCanvas.width = Math.max(1, Math.floor(area.w * overscan * overlayDpr));
-        els.amountCanvas.height = Math.max(1, Math.floor(area.h * overlayDpr));
-        els.amountCanvas.style.width = `${area.w * overscan}px`;
-        els.amountCanvas.style.height = `${area.h}px`;
-        els.amountCanvas.style.left = `${-area.w * sidePad}px`;
-        els.amountCanvas.style.right = "auto";
-        els.amountCanvas.style.top = "0px";
-        els.amountCanvas.style.bottom = "auto";
-
-        state.resize = { width, height, dpr: overlayDpr, glDpr };
+        state.resize = { width, height, dpr: overlayDpr };
         state.lastYDomain = null;
         state.scrollRenderBaseCenterMs = null;
         resetPlotTransform();
       }
 
       ctx.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
-      amountCtx.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
     }
 
     function getPlotArea() {
@@ -1252,7 +1113,6 @@
       state.lastYDomain = null;
       state.scrollRenderBaseCenterMs = null;
       resetPlotTransform();
-      if (glRenderer) glRenderer.rebuild();
     }
 
     function updateSensorLegend() {
@@ -2450,16 +2310,8 @@
         return;
       }
 
-      const amountHits = nearest.filter(hit => hit.type === "amount");
-      if (useUnified2DPlot()) {
-        clearHitMarkers();
-        nearest.forEach(hit => drawHoverMarker(hit, area));
-      } else if (glRenderer?.drawHitMarkers?.(nearest, area, yDom)) {
-        if (amountHits.length) updateDomHitMarkers(amountHits, area);
-        else clearHitMarkers();
-      } else {
-        updateDomHitMarkers(nearest, area);
-      }
+      clearHitMarkers();
+      nearest.forEach(hit => drawHoverMarker(hit, area));
       els.tooltip.innerHTML = tooltipHtmlForNearest(nearest);
       els.tooltip.style.display = "block";
       positionTooltip(Math.max(area.x, Math.min(area.x + area.w, x)), Math.max(area.y, Math.min(area.y + area.h, y)));
@@ -2626,535 +2478,6 @@
         .replaceAll("'", "&#039;");
     }
 
-
-
-    function hexToRgba(hex, alpha = 1) {
-      const value = String(hex || "#000000").replace("#", "");
-      const n = Number.parseInt(value.length === 3
-        ? value.split("").map(ch => ch + ch).join("")
-        : value, 16);
-
-      return [
-        ((n >> 16) & 255) / 255,
-        ((n >> 8) & 255) / 255,
-        (n & 255) / 255,
-        alpha
-      ];
-    }
-
-    function createShader(gl, type, source) {
-      const shader = gl.createShader(type);
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        const message = gl.getShaderInfoLog(shader) || "Unknown shader error";
-        gl.deleteShader(shader);
-        throw new Error(message);
-      }
-      return shader;
-    }
-
-    function createProgram(gl, vertexSource, fragmentSource) {
-      const program = gl.createProgram();
-      gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vertexSource));
-      gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fragmentSource));
-      gl.linkProgram(program);
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        const message = gl.getProgramInfoLog(program) || "Unknown program link error";
-        gl.deleteProgram(program);
-        throw new Error(message);
-      }
-      return program;
-    }
-
-    function createWebGlPlotRenderer(canvas) {
-      const gl = canvas.getContext("webgl", {
-        alpha: false,
-        antialias: true,
-        depth: false,
-        stencil: false,
-        preserveDrawingBuffer: false,
-        powerPreference: "high-performance"
-      });
-
-      if (!gl) return null;
-
-      const lineVertexSource = `
-        precision highp float;
-
-        attribute vec2 a_start;
-        attribute vec2 a_end;
-        attribute vec4 a_color;
-        attribute float a_side;
-        attribute float a_endpoint;
-
-        uniform vec2 u_time;
-        uniform vec2 u_y;
-        uniform vec4 u_area;
-        uniform vec2 u_resolution;
-        uniform float u_lineWidth;
-
-        varying vec4 v_color;
-
-        vec2 dataToPixel(vec2 p) {
-          float xNorm = (p.x - u_time.x) / max(u_time.y - u_time.x, 0.000001);
-          float yNorm = (p.y - u_y.x) / max(u_y.y - u_y.x, 0.000001);
-          return vec2(
-            u_area.x + xNorm * u_area.z,
-            u_area.y + (1.0 - yNorm) * u_area.w
-          );
-        }
-
-        void main() {
-          vec2 startPx = dataToPixel(a_start);
-          vec2 endPx = dataToPixel(a_end);
-          vec2 dir = endPx - startPx;
-          float len = length(dir);
-          vec2 normal = len > 0.0001 ? vec2(-dir.y, dir.x) / len : vec2(0.0, 1.0);
-          vec2 posPx = mix(startPx, endPx, a_endpoint) + normal * a_side * u_lineWidth * 0.5;
-
-          vec2 clip = vec2(
-            (posPx.x / u_resolution.x) * 2.0 - 1.0,
-            1.0 - (posPx.y / u_resolution.y) * 2.0
-          );
-
-          gl_Position = vec4(clip, 0.0, 1.0);
-          v_color = a_color;
-        }`;
-
-      const pointVertexSource = `
-        precision highp float;
-
-        attribute vec2 a_pos;
-        attribute vec4 a_color;
-
-        uniform vec2 u_time;
-        uniform vec2 u_y;
-        uniform vec4 u_area;
-        uniform vec2 u_resolution;
-        uniform float u_pointSize;
-
-        varying vec4 v_color;
-
-        void main() {
-          float xNorm = (a_pos.x - u_time.x) / max(u_time.y - u_time.x, 0.000001);
-          float yNorm = (a_pos.y - u_y.x) / max(u_y.y - u_y.x, 0.000001);
-
-          float xPx = u_area.x + xNorm * u_area.z;
-          float yPx = u_area.y + (1.0 - yNorm) * u_area.w;
-
-          vec2 clip = vec2(
-            (xPx / u_resolution.x) * 2.0 - 1.0,
-            1.0 - (yPx / u_resolution.y) * 2.0
-          );
-
-          gl_Position = vec4(clip, 0.0, 1.0);
-          gl_PointSize = u_pointSize;
-          v_color = a_color;
-        }`;
-
-      const lineFragmentSource = `
-        precision mediump float;
-        varying vec4 v_color;
-        void main() {
-          gl_FragColor = v_color;
-        }`;
-
-      const pointFragmentSource = `
-        precision mediump float;
-
-        varying vec4 v_color;
-        uniform int u_shape;
-
-        void main() {
-          vec2 p = gl_PointCoord - vec2(0.5, 0.5);
-          float d = length(p);
-          if (d > 0.5) discard;
-          if (u_shape == 2 && d < 0.30) {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-          } else {
-            gl_FragColor = v_color;
-          }
-        }`;
-
-      let lineProgram;
-      let pointProgram;
-      try {
-        lineProgram = createProgram(gl, lineVertexSource, lineFragmentSource);
-        pointProgram = createProgram(gl, pointVertexSource, pointFragmentSource);
-      } catch (err) {
-        console.error("WebGL setup failed", err);
-        return null;
-      }
-
-      const lineLoc = {
-        start: gl.getAttribLocation(lineProgram, "a_start"),
-        end: gl.getAttribLocation(lineProgram, "a_end"),
-        color: gl.getAttribLocation(lineProgram, "a_color"),
-        side: gl.getAttribLocation(lineProgram, "a_side"),
-        endpoint: gl.getAttribLocation(lineProgram, "a_endpoint"),
-        time: gl.getUniformLocation(lineProgram, "u_time"),
-        y: gl.getUniformLocation(lineProgram, "u_y"),
-        area: gl.getUniformLocation(lineProgram, "u_area"),
-        resolution: gl.getUniformLocation(lineProgram, "u_resolution"),
-        lineWidth: gl.getUniformLocation(lineProgram, "u_lineWidth")
-      };
-
-      const pointLoc = {
-        pos: gl.getAttribLocation(pointProgram, "a_pos"),
-        color: gl.getAttribLocation(pointProgram, "a_color"),
-        time: gl.getUniformLocation(pointProgram, "u_time"),
-        y: gl.getUniformLocation(pointProgram, "u_y"),
-        area: gl.getUniformLocation(pointProgram, "u_area"),
-        resolution: gl.getUniformLocation(pointProgram, "u_resolution"),
-        pointSize: gl.getUniformLocation(pointProgram, "u_pointSize"),
-        shape: gl.getUniformLocation(pointProgram, "u_shape")
-      };
-
-      const renderer = {
-        originMs: Date.now(),
-        buffers: {},
-        rebuild,
-        render,
-        drawHitMarkers
-      };
-      const markerBuffer = gl.createBuffer();
-
-      function makeLineBuffer(vertices, starts) {
-        const buffer = gl.createBuffer();
-        const data = new Float32Array(vertices);
-        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
-        return { buffer, segmentCount: starts.length, starts: new Float32Array(starts) };
-      }
-
-      function makePointBuffer(vertices, times) {
-        const buffer = gl.createBuffer();
-        const data = new Float32Array(vertices);
-        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
-        return { buffer, count: times.length, times: new Float32Array(times) };
-      }
-
-      function deleteDataset(dataset) {
-        if (dataset?.buffer) gl.deleteBuffer(dataset.buffer);
-      }
-
-      function replaceBuffers(next) {
-        for (const key of Object.keys(renderer.buffers)) deleteDataset(renderer.buffers[key]);
-        renderer.buffers = next;
-      }
-
-      function pointMin(point) {
-        return (point.t - renderer.originMs) / 60000;
-      }
-
-      function pushLineVertex(out, startMin, startY, endMin, endY, rgba, side, endpoint) {
-        out.push(
-          startMin, startY,
-          endMin, endY,
-          rgba[0], rgba[1], rgba[2], rgba[3],
-          side,
-          endpoint
-        );
-      }
-
-      function pushSegment(out, startMin, startY, endMin, endY, rgba) {
-        // Two triangles forming a screen-space quad. This avoids gl.lineWidth(),
-        // which is effectively fixed at 1 px in many browser/GPU combinations.
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba, -1, 0);
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba, -1, 1);
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba,  1, 1);
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba, -1, 0);
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba,  1, 1);
-        pushLineVertex(out, startMin, startY, endMin, endY, rgba,  1, 0);
-      }
-
-      function addSolidSegment(segments, a, b, rgba) {
-        const startMin = pointMin(a);
-        const endMin = pointMin(b);
-        if (!Number.isFinite(startMin) || !Number.isFinite(endMin)) return;
-        segments.push({
-          start: Math.min(startMin, endMin),
-          values: [startMin, a.y, endMin, b.y, rgba]
-        });
-      }
-
-      function addDashedSegment(segments, a, b, rgba) {
-        const totalMin = Math.max(0.001, (b.t - a.t) / 60000);
-        const dashMin = 9;
-        const gapMin = 5;
-        const cycleMin = dashMin + gapMin;
-
-        for (let start = 0; start < totalMin; start += cycleMin) {
-          const end = Math.min(totalMin, start + dashMin);
-          if (end <= start) continue;
-
-          const startRatio = start / totalMin;
-          const endRatio = end / totalMin;
-          const p1 = {
-            t: a.t + (b.t - a.t) * startRatio,
-            y: a.y + (b.y - a.y) * startRatio
-          };
-          const p2 = {
-            t: a.t + (b.t - a.t) * endRatio,
-            y: a.y + (b.y - a.y) * endRatio
-          };
-          addSolidSegment(segments, p1, p2, rgba);
-        }
-      }
-
-      function buildLineDataset(groups, options = {}) {
-        const segments = [];
-        const maxGapMs = options.maxGapMs ?? 45 * 60 * 1000;
-        const dashed = Boolean(options.dashed);
-        const alpha = options.alpha ?? 1;
-        const fixedColor = options.color || null;
-
-        for (const [sensor, group] of groups) {
-          const rgba = hexToRgba(fixedColor || colorForSensor(sensor), alpha);
-          for (let i = 1; i < group.length; i++) {
-            const a = group[i - 1];
-            const b = group[i];
-            if (b.t - a.t <= 0 || b.t - a.t > maxGapMs) continue;
-            if (dashed) addDashedSegment(segments, a, b, rgba);
-            else addSolidSegment(segments, a, b, rgba);
-          }
-        }
-
-        segments.sort((a, b) => a.start - b.start);
-
-        const vertices = [];
-        const starts = [];
-        for (const segment of segments) {
-          const [startMin, startY, endMin, endY, rgba] = segment.values;
-          starts.push(segment.start);
-          pushSegment(vertices, startMin, startY, endMin, endY, rgba);
-        }
-
-        return makeLineBuffer(vertices, starts);
-      }
-
-      function buildPointDataset(points, alpha = 1) {
-        const rows = [];
-        for (const p of points) {
-          const tMin = pointMin(p);
-          if (!Number.isFinite(tMin)) continue;
-          rows.push({ tMin, y: p.y, rgba: hexToRgba(colorForSensor(p.sensor), alpha) });
-        }
-        rows.sort((a, b) => a.tMin - b.tMin);
-
-        const vertices = [];
-        const times = [];
-        for (const row of rows) {
-          times.push(row.tMin);
-          vertices.push(row.tMin, row.y, row.rgba[0], row.rgba[1], row.rgba[2], row.rgba[3]);
-        }
-
-        return makePointBuffer(vertices, times);
-      }
-
-      function rebuild() {
-        renderer.originMs = state.cache.loadedStartMs ?? currentRange().startMs;
-
-        replaceBuffers({
-          streamLines: buildLineDataset(state.cache.streamGroups, { maxGapMs: 45 * 60 * 1000 }),
-          historyLines: buildLineDataset(state.cache.historyGroups, { maxGapMs: 45 * 60 * 1000, alpha: 0.92, color: COLORS.history }),
-          scansPoints: buildPointDataset(state.data.scans, 1)
-        });
-      }
-
-      function lowerBoundFloat(values, target) {
-        let lo = 0;
-        let hi = values.length;
-        while (lo < hi) {
-          const mid = (lo + hi) >> 1;
-          if (values[mid] < target) lo = mid + 1;
-          else hi = mid;
-        }
-        return lo;
-      }
-
-      function upperBoundFloat(values, target) {
-        let lo = 0;
-        let hi = values.length;
-        while (lo < hi) {
-          const mid = (lo + hi) >> 1;
-          if (values[mid] <= target) lo = mid + 1;
-          else hi = mid;
-        }
-        return lo;
-      }
-
-      function bindLineDataset(dataset) {
-        gl.bindBuffer(gl.ARRAY_BUFFER, dataset.buffer);
-        gl.enableVertexAttribArray(lineLoc.start);
-        gl.enableVertexAttribArray(lineLoc.end);
-        gl.enableVertexAttribArray(lineLoc.color);
-        gl.enableVertexAttribArray(lineLoc.side);
-        gl.enableVertexAttribArray(lineLoc.endpoint);
-        gl.vertexAttribPointer(lineLoc.start, 2, gl.FLOAT, false, 40, 0);
-        gl.vertexAttribPointer(lineLoc.end, 2, gl.FLOAT, false, 40, 8);
-        gl.vertexAttribPointer(lineLoc.color, 4, gl.FLOAT, false, 40, 16);
-        gl.vertexAttribPointer(lineLoc.side, 1, gl.FLOAT, false, 40, 32);
-        gl.vertexAttribPointer(lineLoc.endpoint, 1, gl.FLOAT, false, 40, 36);
-      }
-
-      function drawLineDataset(dataset, startMin, endMin, lineWidthPx) {
-        if (!dataset || !dataset.segmentCount) return;
-
-        const leftPadMin = 60;
-        const firstSegment = lowerBoundFloat(dataset.starts, startMin - leftPadMin);
-        const lastSegment = upperBoundFloat(dataset.starts, endMin);
-        const segmentCount = Math.max(0, lastSegment - firstSegment);
-        if (!segmentCount) return;
-
-        bindLineDataset(dataset);
-        gl.uniform1f(lineLoc.lineWidth, Math.max(1, lineWidthPx));
-        gl.drawArrays(gl.TRIANGLES, firstSegment * 6, segmentCount * 6);
-      }
-
-      function bindPointDataset(dataset) {
-        gl.bindBuffer(gl.ARRAY_BUFFER, dataset.buffer);
-        gl.enableVertexAttribArray(pointLoc.pos);
-        gl.enableVertexAttribArray(pointLoc.color);
-        gl.vertexAttribPointer(pointLoc.pos, 2, gl.FLOAT, false, 24, 0);
-        gl.vertexAttribPointer(pointLoc.color, 4, gl.FLOAT, false, 24, 8);
-      }
-
-      function drawPointDataset(dataset, startMin, endMin, shape, pointSizeCss, dpr) {
-        if (!dataset || !dataset.count) return;
-
-        const firstPoint = lowerBoundFloat(dataset.times, startMin);
-        const lastPoint = upperBoundFloat(dataset.times, endMin);
-        const pointCount = Math.max(0, lastPoint - firstPoint);
-        if (!pointCount) return;
-
-        bindPointDataset(dataset);
-        gl.uniform1i(pointLoc.shape, shape);
-        gl.uniform1f(pointLoc.pointSize, pointSizeCss * dpr);
-        gl.drawArrays(gl.POINTS, firstPoint, pointCount);
-      }
-
-      function bindDynamicPointVertices(vertices) {
-        gl.bindBuffer(gl.ARRAY_BUFFER, markerBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.DYNAMIC_DRAW);
-        gl.enableVertexAttribArray(pointLoc.pos);
-        gl.enableVertexAttribArray(pointLoc.color);
-        gl.vertexAttribPointer(pointLoc.pos, 2, gl.FLOAT, false, 24, 0);
-        gl.vertexAttribPointer(pointLoc.color, 4, gl.FLOAT, false, 24, 8);
-      }
-
-      function setSharedUniforms(programLoc, startMin, endMin, area, yDom, width, height) {
-        gl.uniform2f(programLoc.time, startMin, endMin);
-        gl.uniform2f(programLoc.y, yDom.min, yDom.max);
-        gl.uniform4f(programLoc.area, area.x, area.y, area.w, area.h);
-        gl.uniform2f(programLoc.resolution, width, height);
-      }
-
-      function currentRenderGeometry(area) {
-        const glDpr = state.resize.glDpr || Math.min(window.devicePixelRatio || 1, 1);
-        const visualWidth = area.w;
-        const height = area.h;
-        const overscan = state.webglOverscanWindows || 3;
-        const renderWidth = visualWidth * overscan;
-        const { startMs, endMs } = currentRange();
-        const windowMs = endMs - startMs;
-        const centerMs = (startMs + endMs) / 2;
-        const renderStartMs = centerMs - (windowMs * overscan) / 2;
-        const renderEndMs = centerMs + (windowMs * overscan) / 2;
-        const startMin = (renderStartMs - renderer.originMs) / 60000;
-        const endMin = (renderEndMs - renderer.originMs) / 60000;
-        const glArea = {
-          x: 0,
-          y: 0,
-          w: renderWidth,
-          h: height,
-          width: renderWidth,
-          height
-        };
-        return { glDpr, renderWidth, height, startMin, endMin, glArea };
-      }
-
-      function drawDynamicPoints(points, sizeCss, dpr, rgbaForPoint) {
-        if (!points.length) return;
-
-        const vertices = [];
-        for (const point of points) {
-          if (!Number.isFinite(point.t) || !Number.isFinite(point.y)) continue;
-          const tMin = pointMin(point);
-          if (!Number.isFinite(tMin)) continue;
-          const rgba = rgbaForPoint(point);
-          vertices.push(tMin, point.y, rgba[0], rgba[1], rgba[2], rgba[3]);
-        }
-
-        const count = vertices.length / 6;
-        if (!count) return;
-
-        bindDynamicPointVertices(vertices);
-        gl.uniform1i(pointLoc.shape, 1);
-        gl.uniform1f(pointLoc.pointSize, sizeCss * dpr);
-        gl.drawArrays(gl.POINTS, 0, count);
-      }
-
-      function drawHitMarkers(hits, area, yDom) {
-        const glucoseHits = (hits || []).filter(hit =>
-          hit?.type !== "amount" &&
-          Number.isFinite(hit.t) &&
-          Number.isFinite(hit.y)
-        );
-        if (!glucoseHits.length) return false;
-
-        const geometry = currentRenderGeometry(area);
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.disable(gl.SCISSOR_TEST);
-        gl.enable(gl.BLEND);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-        gl.useProgram(pointProgram);
-        setSharedUniforms(pointLoc, geometry.startMin, geometry.endMin, geometry.glArea, yDom, geometry.renderWidth, geometry.height);
-
-        const radius = Math.max(2, curveThicknessPx() * 0.75);
-        drawDynamicPoints(glucoseHits, (radius + 1.8) * 2, geometry.glDpr, () => [1, 1, 1, 0.95]);
-        drawDynamicPoints(glucoseHits, radius * 2, geometry.glDpr, hit => hexToRgba(hit.markerColor || colorForSensor(hit.sensor), 1));
-        return true;
-      }
-
-      function render(area, yDom, visible) {
-        const { glDpr, renderWidth, height, startMin, endMin, glArea } = currentRenderGeometry(area);
-        const lineWidth = curveThicknessPx();
-
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.disable(gl.SCISSOR_TEST);
-        gl.clearColor(1, 1, 1, 1);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-
-        gl.enable(gl.BLEND);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-        gl.useProgram(lineProgram);
-        setSharedUniforms(lineLoc, startMin, endMin, glArea, yDom, renderWidth, height);
-
-        if (visible.history) {
-          drawLineDataset(renderer.buffers.historyLines, startMin, endMin, Math.max(1.5, lineWidth * 0.65));
-        }
-
-        if (visible.stream) {
-          drawLineDataset(renderer.buffers.streamLines, startMin, endMin, lineWidth);
-        }
-
-        gl.useProgram(pointProgram);
-        setSharedUniforms(pointLoc, startMin, endMin, glArea, yDom, renderWidth, height);
-
-        if (visible.scans) {
-          drawPointDataset(renderer.buffers.scansPoints, startMin, endMin, 1, Math.max(9, curveThicknessPx() * 2.3), glDpr);
-        }
-
-        gl.disable(gl.SCISSOR_TEST);
-      }
-
-      return renderer;
-    }
-
     function draw(options = {}) {
       resizeCanvas();
 
@@ -3166,29 +2489,11 @@
 
       resetPlotTransform();
       state.scrollRenderBaseCenterMs = state.centerMs;
-      const use2D = useUnified2DPlot();
+      ctx.fillStyle = COLORS.background;
+      ctx.fillRect(0, 0, area.width, area.height);
 
-      if (!use2D && glRenderer) {
-        glRenderer.render(area, yDom, {
-          stream: els.showStream.checked,
-          scans: els.showScans.checked,
-          history: els.showHistory.checked
-        });
-      } else {
-        ctx.fillStyle = COLORS.background;
-        ctx.fillRect(0, 0, area.width, area.height);
-      }
-
-      // The previous drawMovingAmounts(...) call referenced no defined function.
-      // That stopped draw() after the WebGL curve was rendered, leaving the
-      // 2D overlay canvas blank until drag scrolling called drawOverlayForCurrentRange().
-
-      // Always repaint the 2D overlay after the WebGL curve. A fast redraw can
-      // happen during first load, auto-refresh, resize, or option-panel layout
-      // changes; if it exits here, the curve is visible but the grid/axes/text
-      // stay blank until the next pan forces drawOverlayForCurrentRange().
-      drawGrid(area, yDom, scales, { fillPlotBackground: use2D });
-      if (use2D) draw2DGlucosePlot(area, scales);
+      drawGrid(area, yDom, scales, { fillPlotBackground: true });
+      draw2DGlucosePlot(area, scales);
       drawNoData(area);
       drawAmountsOverlay(area, scales, yDom);
       drawCurrentGlucoseLabel(area, scales);
@@ -3288,7 +2593,7 @@
       state.hover = null;
       if (els.tooltip) els.tooltip.style.display = "none";
       clearHitMarkers();
-      state.resize = { width: 0, height: 0, dpr: 0, glDpr: 0 };
+      state.resize = { width: 0, height: 0, dpr: 0 };
       state.lastYDomain = null;
       state.scrollRenderBaseCenterMs = null;
       resetPlotTransform();
@@ -3711,11 +3016,6 @@
           jumpToNow();
         }
       });
-    }
-
-    glRenderer = createWebGlPlotRenderer(els.glCanvas);
-    if (!glRenderer) {
-      setStatus("WebGL is not available in this browser, so the accelerated plot layer cannot be shown.", true);
     }
 
     attachEvents();

@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-touchselect-20260629-2320";
+    const VIEWER_BUILD_ID = "hitmarker-touchfix-20260629-2345";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -94,7 +94,8 @@
       controlsCollapsed: false,
       toolbarCollapsed: false,
       liveFollowNow: true,
-      suppressNextClickUntil: 0
+      suppressNextClickUntil: 0,
+      touchTap: null
     };
 
     const $ = id => document.getElementById(id);
@@ -2149,6 +2150,27 @@
       layer.style.display = "none";
     }
 
+    function chartToCssPoint(x, y, area) {
+      // The WebGL curve and amount labels are displayed inside #plotClip, while
+      // hit-testing works in chart-area coordinates. On some Android tablets,
+      // after the options panel is hidden, the CSS rectangle used to display
+      // #plotClip can differ from the last integer canvas measurement. Place
+      // the marker using the actual DOM rectangle of #plotClip so it follows
+      // the rendered curve instead of the overlay canvas bookkeeping.
+      try {
+        const wrapRect = els.chartWrap?.getBoundingClientRect?.();
+        const clipRect = els.plotClip?.getBoundingClientRect?.();
+        if (wrapRect && clipRect && clipRect.width > 0 && clipRect.height > 0 && area.w > 0 && area.h > 0) {
+          return {
+            x: (clipRect.left - wrapRect.left) + ((x - area.x) / area.w) * clipRect.width,
+            y: (clipRect.top - wrapRect.top) + ((y - area.y) / area.h) * clipRect.height
+          };
+        }
+      } catch {}
+
+      return { x, y };
+    }
+
     function updateDomHitMarkers(hits, area) {
       const layer = ensureHitMarkerLayer();
       if (!layer) return;
@@ -2161,10 +2183,14 @@
 
       layer.style.display = "block";
       for (const hit of hits) {
-        const x = hit.hitX;
-        const y = hit.hitY;
-        if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
-        if (x < area.x - 20 || x > area.x + area.w + 20 || y < area.y - 20 || y > area.y + area.h + 20) continue;
+        const hitX = hit.hitX;
+        const hitY = hit.hitY;
+        if (!Number.isFinite(hitX) || !Number.isFinite(hitY)) continue;
+        if (hitX < area.x - 20 || hitX > area.x + area.w + 20 || hitY < area.y - 20 || hitY > area.y + area.h + 20) continue;
+
+        const cssPoint = chartToCssPoint(hitX, hitY, area);
+        const x = cssPoint.x;
+        const y = cssPoint.y;
 
         const node = document.createElement("div");
         node.setAttribute("aria-hidden", "true");
@@ -3351,6 +3377,64 @@
 
       els.canvas.addEventListener("pointerup", endPointerPan);
       els.canvas.addEventListener("pointercancel", endPointerPan);
+
+      function beginTouchTap(event) {
+        if (!event.touches || event.touches.length !== 1) return;
+
+        const client = clientPointFromPointerEvent(event);
+        const chartPoint = chartCoordsFromPointerEvent(event);
+        if (!client || !chartPoint) return;
+
+        // Some older Android/Chrome tablet combinations generate a synthetic
+        // mouse click after touch with a vertically shifted clientY. Remember
+        // the real TouchEvent coordinates and use those on touchend instead.
+        state.touchTap = {
+          startClientX: client.clientX,
+          startClientY: client.clientY,
+          latestClientX: client.clientX,
+          latestClientY: client.clientY,
+          startChartX: chartPoint.x,
+          startChartY: chartPoint.y,
+          moved: false
+        };
+        state.suppressNextClickUntil = Date.now() + 1200;
+      }
+
+      function moveTouchTap(event) {
+        if (!state.touchTap) return;
+        const client = clientPointFromPointerEvent(event);
+        if (!client) return;
+
+        state.touchTap.latestClientX = client.clientX;
+        state.touchTap.latestClientY = client.clientY;
+        if (Math.hypot(
+          client.clientX - state.touchTap.startClientX,
+          client.clientY - state.touchTap.startClientY
+        ) >= 8) {
+          state.touchTap.moved = true;
+        }
+      }
+
+      function endTouchTap(event) {
+        const tap = state.touchTap;
+        state.touchTap = null;
+        state.suppressNextClickUntil = Date.now() + 1500;
+        if (!tap || tap.moved) return;
+
+        const point = Number.isFinite(tap.startChartX) && Number.isFinite(tap.startChartY)
+          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 8 }
+          : chartCoordsFromPointerEvent(event);
+
+        if (!point) return;
+
+        try { event.preventDefault(); } catch {}
+        showTooltipAtChartPoint(point, { toleranceScale: 8 });
+      }
+
+      els.canvas.addEventListener("touchstart", beginTouchTap, { passive: true });
+      els.canvas.addEventListener("touchmove", moveTouchTap, { passive: true });
+      els.canvas.addEventListener("touchend", endTouchTap, { passive: false });
+      els.canvas.addEventListener("touchcancel", () => { state.touchTap = null; }, { passive: true });
 
       els.canvas.addEventListener("wheel", event => {
         event.preventDefault();

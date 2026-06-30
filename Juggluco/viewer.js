@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "hitmarker-touch-2dcoords-20260630-1920";
+    const VIEWER_BUILD_ID = "hitmarker-webgl-marker-20260630-1945";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -2127,7 +2127,7 @@
     }
 
     function showTooltipFromEvent(event, options = {}) {
-      const xOnlyGlucose = options.xOnlyGlucose ?? false;
+      const xOnlyGlucose = options.xOnlyGlucose ?? isTouchLikeEvent(event);
       return showTooltipAtChartPoint(
         chartCoordsFromPointerEvent(event, { xOnlyGlucose }),
         { ...options, xOnlyGlucose }
@@ -2316,7 +2316,13 @@
         return;
       }
 
-      updateDomHitMarkers(nearest, area);
+      const amountHits = nearest.filter(hit => hit.type === "amount");
+      if (glRenderer?.drawHitMarkers?.(nearest, area, yDom)) {
+        if (amountHits.length) updateDomHitMarkers(amountHits, area);
+        else clearHitMarkers();
+      } else {
+        updateDomHitMarkers(nearest, area);
+      }
       els.tooltip.innerHTML = tooltipHtmlForNearest(nearest);
       els.tooltip.style.display = "block";
       positionTooltip(Math.max(area.x, Math.min(area.x + area.w, x)), Math.max(area.y, Math.min(area.y + area.h, y)));
@@ -2672,8 +2678,10 @@
         originMs: Date.now(),
         buffers: {},
         rebuild,
-        render
+        render,
+        drawHitMarkers
       };
+      const markerBuffer = gl.createBuffer();
 
       function makeLineBuffer(vertices, starts) {
         const buffer = gl.createBuffer();
@@ -2891,6 +2899,15 @@
         gl.drawArrays(gl.POINTS, firstPoint, pointCount);
       }
 
+      function bindDynamicPointVertices(vertices) {
+        gl.bindBuffer(gl.ARRAY_BUFFER, markerBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.DYNAMIC_DRAW);
+        gl.enableVertexAttribArray(pointLoc.pos);
+        gl.enableVertexAttribArray(pointLoc.color);
+        gl.vertexAttribPointer(pointLoc.pos, 2, gl.FLOAT, false, 24, 0);
+        gl.vertexAttribPointer(pointLoc.color, 4, gl.FLOAT, false, 24, 8);
+      }
+
       function setSharedUniforms(programLoc, startMin, endMin, area, yDom, width, height) {
         gl.uniform2f(programLoc.time, startMin, endMin);
         gl.uniform2f(programLoc.y, yDom.min, yDom.max);
@@ -2898,7 +2915,7 @@
         gl.uniform2f(programLoc.resolution, width, height);
       }
 
-      function render(area, yDom, visible) {
+      function currentRenderGeometry(area) {
         const glDpr = state.resize.glDpr || Math.min(window.devicePixelRatio || 1, 1);
         const visualWidth = area.w;
         const height = area.h;
@@ -2911,7 +2928,6 @@
         const renderEndMs = centerMs + (windowMs * overscan) / 2;
         const startMin = (renderStartMs - renderer.originMs) / 60000;
         const endMin = (renderEndMs - renderer.originMs) / 60000;
-        const lineWidth = curveThicknessPx();
         const glArea = {
           x: 0,
           y: 0,
@@ -2920,6 +2936,55 @@
           width: renderWidth,
           height
         };
+        return { glDpr, renderWidth, height, startMin, endMin, glArea };
+      }
+
+      function drawDynamicPoints(points, sizeCss, dpr, rgbaForPoint) {
+        if (!points.length) return;
+
+        const vertices = [];
+        for (const point of points) {
+          if (!Number.isFinite(point.t) || !Number.isFinite(point.y)) continue;
+          const tMin = pointMin(point);
+          if (!Number.isFinite(tMin)) continue;
+          const rgba = rgbaForPoint(point);
+          vertices.push(tMin, point.y, rgba[0], rgba[1], rgba[2], rgba[3]);
+        }
+
+        const count = vertices.length / 6;
+        if (!count) return;
+
+        bindDynamicPointVertices(vertices);
+        gl.uniform1i(pointLoc.shape, 1);
+        gl.uniform1f(pointLoc.pointSize, sizeCss * dpr);
+        gl.drawArrays(gl.POINTS, 0, count);
+      }
+
+      function drawHitMarkers(hits, area, yDom) {
+        const glucoseHits = (hits || []).filter(hit =>
+          hit?.type !== "amount" &&
+          Number.isFinite(hit.t) &&
+          Number.isFinite(hit.y)
+        );
+        if (!glucoseHits.length) return false;
+
+        const geometry = currentRenderGeometry(area);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.disable(gl.SCISSOR_TEST);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        gl.useProgram(pointProgram);
+        setSharedUniforms(pointLoc, geometry.startMin, geometry.endMin, geometry.glArea, yDom, geometry.renderWidth, geometry.height);
+
+        const radius = Math.max(2, curveThicknessPx() * 0.75);
+        drawDynamicPoints(glucoseHits, (radius + 1.8) * 2, geometry.glDpr, () => [1, 1, 1, 0.95]);
+        drawDynamicPoints(glucoseHits, radius * 2, geometry.glDpr, hit => hexToRgba(hit.markerColor || colorForSensor(hit.sensor), 1));
+        return true;
+      }
+
+      function render(area, yDom, visible) {
+        const { glDpr, renderWidth, height, startMin, endMin, glArea } = currentRenderGeometry(area);
+        const lineWidth = curveThicknessPx();
 
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.disable(gl.SCISSOR_TEST);
@@ -3288,7 +3353,7 @@
         els.tooltip.style.display = "none";
         clearHitMarkers();
         const touchLike = isTouchLikeEvent(event);
-        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: touchLike });
         state.drag = {
           startX: event.clientX,
           startY: event.clientY,
@@ -3296,7 +3361,7 @@
           latestY: event.clientY,
           startChartX: chartPoint?.x,
           startChartY: chartPoint?.y,
-          startChartXOnlyGlucose: false,
+          startChartXOnlyGlucose: Boolean(chartPoint?.xOnlyGlucose),
           centerMs: state.centerMs,
           frameRequested: false,
           moved: false
@@ -3375,7 +3440,7 @@
                 y: state.drag.startChartY,
                 xOnlyGlucose: Boolean(state.drag.startChartXOnlyGlucose)
               }
-            : chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
+            : chartCoordsFromPointerEvent(event, { xOnlyGlucose: isTouchLikeEvent(event) });
 
         els.canvas.classList.remove("dragging");
         state.drag = null;
@@ -3383,8 +3448,8 @@
         if (wasClick) {
           state.suppressNextClickUntil = Date.now() + 800;
           showTooltipAtChartPoint(clickPoint, {
-            toleranceScale: isTouchLikeEvent(event) ? 3 : 1,
-            xOnlyGlucose: false
+            toleranceScale: clickPoint?.xOnlyGlucose ? 3 : 1,
+            xOnlyGlucose: Boolean(clickPoint?.xOnlyGlucose)
           });
           return;
         }
@@ -3401,7 +3466,7 @@
         if (!event.touches || event.touches.length !== 1) return;
 
         const client = clientPointFromPointerEvent(event);
-        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
+        const chartPoint = chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
         if (!client || !chartPoint) return;
 
         // Some older Android/Chrome tablet combinations generate a synthetic
@@ -3441,13 +3506,13 @@
         if (!tap || tap.moved) return;
 
         const point = Number.isFinite(tap.startChartX) && Number.isFinite(tap.startChartY)
-          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 3, xOnlyGlucose: false }
-          : chartCoordsFromPointerEvent(event, { xOnlyGlucose: false });
+          ? { x: tap.startChartX, y: tap.startChartY, toleranceScale: 3, xOnlyGlucose: true }
+          : chartCoordsFromPointerEvent(event, { xOnlyGlucose: true });
 
         if (!point) return;
 
         try { event.preventDefault(); } catch {}
-        showTooltipAtChartPoint(point, { toleranceScale: 3, xOnlyGlucose: false });
+        showTooltipAtChartPoint(point, { toleranceScale: 3, xOnlyGlucose: true });
       }
 
       els.canvas.addEventListener("touchstart", beginTouchTap, { passive: true });

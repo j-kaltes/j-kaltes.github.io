@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-fastpan-20260630-2110";
+    const VIEWER_BUILD_ID = "canvas-only-dragtransform-20260630-2200";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -885,6 +885,18 @@
 
     function resetPlotTransform() {
       state.scrollTransformPx = 0;
+      if (els.canvas) {
+        els.canvas.style.transform = "translate3d(0, 0, 0)";
+      }
+    }
+
+    function setCanvasPanTransform(px) {
+      const value = Math.round(px);
+      if (Math.abs(value - state.scrollTransformPx) < 0.5) return;
+      state.scrollTransformPx = value;
+      if (els.canvas) {
+        els.canvas.style.transform = `translate3d(${value}px, 0, 0)`;
+      }
     }
 
 
@@ -900,8 +912,8 @@
         simpleLabels: Boolean(options.fastPan)
       });
       draw2DGlucosePlot(area, scales);
+      drawAmountsOverlay(area, scales, yDom);
       if (!options.fastPan) {
-        drawAmountsOverlay(area, scales, yDom);
         drawCurrentGlucoseLabel(area, scales);
         drawHover(area, scales, yDom);
       }
@@ -981,6 +993,7 @@
         els.canvas.style.position = "absolute";
         els.canvas.style.display = "block";
         els.canvas.style.touchAction = "none";
+        els.canvas.style.willChange = "transform";
       }
 
       if (els.plotClip) {
@@ -2492,6 +2505,7 @@
     }
 
     function draw(options = {}) {
+      if (state.drag?.moved) return;
       resizeCanvas();
 
       const fast = Boolean(options.fast);
@@ -2820,6 +2834,8 @@
           startChartY: chartPoint?.y,
           startChartXOnlyGlucose: Boolean(chartPoint?.xOnlyGlucose),
           centerMs: state.centerMs,
+          touchLike,
+          lastRenderDx: 0,
           frameRequested: false,
           moved: false
         };
@@ -2845,11 +2861,17 @@
             leaveLiveFollowNow();
           }
 
-          state.centerMs = clampCenterToDataBounds(state.drag.centerMs - (dx / area.w) * state.windowMs);
+          const renderDx = Math.round(dx);
+          const minStepPx = state.drag.touchLike ? 2 : 1;
+          if (state.drag.moved &&
+              Number.isFinite(state.drag.lastRenderDx) &&
+              Math.abs(renderDx - state.drag.lastRenderDx) < minStepPx) {
+            return;
+          }
+          state.drag.lastRenderDx = renderDx;
+          setCanvasPanTransform(renderDx);
 
-          scheduleViewportUiUpdate();
-          updateCompositedPan();
-          scheduleFullDraw();
+          scheduleDateInputUpdate(120);
         });
       }
 

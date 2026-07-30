@@ -1,6 +1,6 @@
     "use strict";
 
-    const VIEWER_BUILD_ID = "canvas-only-directpan-marker-size-20260630-2315";
+    const VIEWER_BUILD_ID = "canvas-only-directpan-marker-size-live-sse-20260730";
 
 
     (function installNewViewerHtmlForInAppViewer() {
@@ -94,6 +94,16 @@
       controlsCollapsed: false,
       toolbarCollapsed: false,
       liveFollowNow: true,
+      liveUpdates: {
+        source: null,
+        mode: "idle",
+        url: "",
+        opened: false,
+        generation: 0,
+        detectionTimer: null,
+        lastReading: null,
+        lastEventId: ""
+      },
       suppressNextClickUntil: 0,
       touchTap: null
     };
@@ -554,6 +564,18 @@
       return `${base}/x/${endpoint}?${query.join("&")}`;
     }
 
+    function makeLiveUrl() {
+      const base = normalizeBaseUrl(els.baseUrl.value);
+      const query = [];
+
+      if (els.useCalibrated.checked) query.push("calibrated");
+
+      const token = els.token.value.trim();
+      if (token) query.push(`token=${encodeURIComponent(token)}`);
+
+      return `${base}/x/live${query.length ? `?${query.join("&")}` : ""}`;
+    }
+
     async function fetchText(url, signal) {
       const response = await fetch(url, {
         method: "GET",
@@ -638,6 +660,275 @@
         };
       }).filter(p => Number.isFinite(p.t) && Number.isFinite(p.y))
         .sort((a, b) => a.t - b.t);
+    }
+
+    function sensorNameForLiveReading(sensorId) {
+      const wanted = String(sensorId);
+      const sources = [
+        state.data.stream,
+        state.data.scans,
+        state.data.history
+      ];
+
+      for (const points of sources) {
+        for (let i = points.length - 1; i >= 0; i--) {
+          const point = points[i];
+          if (String(point?.nr ?? "") === wanted && point.sensor) {
+            return point.sensor;
+          }
+        }
+      }
+
+      return wanted;
+    }
+
+    function liveReadingToPoint(reading) {
+      if (!reading || typeof reading !== "object") return null;
+
+      const timestamp = Number(reading.timestamp);
+      const sensorId = Number(reading.sensorId);
+      const recordId = Number(reading.recordId);
+      const mgdl = Number(reading.glucoseMgDl);
+      const mmol = Number(reading.glucoseMmolL);
+      const t = timestamp * 1000;
+      const y = state.unit === "mg/dL" ? mgdl : mmol;
+
+      if (!Number.isFinite(t) || !Number.isFinite(y) ||
+          !Number.isInteger(sensorId) || sensorId < 0 ||
+          !Number.isInteger(recordId) || recordId < 0) {
+        return null;
+      }
+
+      const rateMgdl = reading.rateMgDlPerMinute == null
+        ? NaN
+        : Number(reading.rateMgDlPerMinute);
+      // The existing TSV Rate column also remains in mg/dL/min for both
+      // display units, so preserve that behavior for arrow rendering.
+      const rate = Number.isFinite(rateMgdl) ? rateMgdl : NaN;
+
+      return {
+        type: "stream",
+        t,
+        y,
+        raw: NaN,
+        rate,
+        sensor: sensorNameForLiveReading(sensorId),
+        nr: String(sensorId),
+        recordId: String(recordId),
+        eventId: `${sensorId}:${recordId}`,
+        label: String(reading.direction || ""),
+        calibrated: Boolean(reading.calibrated),
+        display: `${formatGlucoseValue(y)} ${state.unit}`
+      };
+    }
+
+    function upsertLivePoint(point) {
+      if (!point) return false;
+
+      const points = state.data.stream;
+      let replaceIndex = -1;
+
+      for (let i = points.length - 1; i >= 0; i--) {
+        const existing = points[i];
+        if (String(existing?.nr ?? "") !== String(point.nr)) continue;
+
+        const sameRecord = existing.recordId !== undefined &&
+          String(existing.recordId) === String(point.recordId);
+        if (sameRecord || existing.t === point.t) {
+          replaceIndex = i;
+          if (existing.sensor) point.sensor = existing.sensor;
+          break;
+        }
+      }
+
+      if (replaceIndex >= 0) {
+        points[replaceIndex] = { ...points[replaceIndex], ...point };
+      } else {
+        points.push(point);
+      }
+
+      points.sort((a, b) => a.t - b.t);
+      return true;
+    }
+
+    function mergeLastLiveReading(range = null) {
+      const point = liveReadingToPoint(state.liveUpdates.lastReading);
+      if (!point) return false;
+
+      if (range && (point.t < range.startMs || point.t > range.endMs)) {
+        return false;
+      }
+
+      return upsertLivePoint(point);
+    }
+
+    function renderLiveReading() {
+      if (state.liveFollowNow) {
+        alignLiveFollowViewport();
+        updateDateInputsNow();
+      }
+
+      rebuildRenderCache();
+      updateSummary();
+      updateSensorLegend();
+      requestDraw();
+      scheduleFullDraw(60);
+    }
+
+    function setLiveUpdateMode(mode) {
+      state.liveUpdates.mode = mode;
+      try {
+        document.body.setAttribute("data-live-updates", mode);
+      } catch {}
+    }
+
+    function clearLiveDetectionTimer() {
+      clearTimeout(state.liveUpdates.detectionTimer);
+      state.liveUpdates.detectionTimer = null;
+    }
+
+    function closeLiveUpdates(mode = "idle") {
+      state.liveUpdates.generation++;
+      clearLiveDetectionTimer();
+
+      const source = state.liveUpdates.source;
+      state.liveUpdates.source = null;
+      state.liveUpdates.opened = false;
+      if (source) {
+        try { source.close(); } catch {}
+      }
+
+      setLiveUpdateMode(mode);
+    }
+
+    function usePollingFallback(reason, generation = state.liveUpdates.generation) {
+      if (generation !== state.liveUpdates.generation) return;
+
+      closeLiveUpdates("polling");
+      if (!state.loading) state.lastAutoRefreshFetchMs = 0;
+      try {
+        console.info("Juggluco live updates unavailable; using polling.", reason || "");
+      } catch {}
+      autoRefreshTick();
+    }
+
+    function handleLiveGlucoseEvent(event, generation) {
+      if (generation !== state.liveUpdates.generation) return;
+
+      let reading;
+      try {
+        reading = JSON.parse(event.data);
+      } catch {
+        return;
+      }
+
+      const point = liveReadingToPoint(reading);
+      if (!point) return;
+
+      state.liveUpdates.lastReading = reading;
+      state.liveUpdates.lastEventId = event.lastEventId || point.eventId;
+      state.liveUpdates.opened = true;
+      clearLiveDetectionTimer();
+      setLiveUpdateMode("live");
+
+      const inLoadedRange =
+        state.cache.loadedStartMs !== null &&
+        state.cache.loadedEndMs !== null &&
+        point.t >= state.cache.loadedStartMs &&
+        point.t <= state.cache.loadedEndMs;
+
+      if (state.liveFollowNow || isCurrentTimeInOrNearView() || inLoadedRange) {
+        upsertLivePoint(point);
+        setStatus("");
+        renderLiveReading();
+      }
+    }
+
+    function startLiveUpdates(options = {}) {
+      const force = Boolean(options.force);
+
+      if (!els.autoRefresh.checked || !els.showStream.checked) {
+        closeLiveUpdates("disabled");
+        return false;
+      }
+
+      if (typeof window.EventSource !== "function") {
+        usePollingFallback("EventSource is not supported by this browser.");
+        return false;
+      }
+
+      let url;
+      try {
+        url = makeLiveUrl();
+      } catch (err) {
+        usePollingFallback(err?.message || String(err));
+        return false;
+      }
+
+      if (!force && state.liveUpdates.url === url &&
+          ["connecting", "live", "reconnecting", "polling"].includes(state.liveUpdates.mode)) {
+        return state.liveUpdates.mode !== "polling";
+      }
+
+      const previousUrl = state.liveUpdates.url;
+      closeLiveUpdates("connecting");
+      state.liveUpdates.url = url;
+
+      if (previousUrl && previousUrl !== url) {
+        state.liveUpdates.lastReading = null;
+        state.liveUpdates.lastEventId = "";
+      }
+
+      const generation = state.liveUpdates.generation;
+      let source;
+      try {
+        source = new window.EventSource(url);
+      } catch (err) {
+        usePollingFallback(err?.message || String(err), generation);
+        return false;
+      }
+
+      state.liveUpdates.source = source;
+      state.liveUpdates.opened = false;
+      state.liveUpdates.detectionTimer = setTimeout(() => {
+        if (generation === state.liveUpdates.generation &&
+            !state.liveUpdates.opened) {
+          usePollingFallback("The server did not open /x/live.", generation);
+        }
+      }, 8000);
+
+      source.onopen = () => {
+        if (generation !== state.liveUpdates.generation) return;
+        state.liveUpdates.opened = true;
+        clearLiveDetectionTimer();
+        setLiveUpdateMode("live");
+      };
+
+      source.onerror = () => {
+        if (generation !== state.liveUpdates.generation) return;
+
+        if (!state.liveUpdates.opened) {
+          // A 400/404 response from an older Juggluco server closes EventSource.
+          // Other startup failures get the short detection window above.
+          if (source.readyState === 2) {
+            usePollingFallback("The server has no live endpoint.", generation);
+          }
+          return;
+        }
+
+        // Keep this EventSource so its built-in retry and Last-Event-ID handling
+        // remain active. While it reconnects, the existing polling path provides
+        // a fallback for the current value.
+        setLiveUpdateMode("reconnecting");
+        state.lastAutoRefreshFetchMs = 0;
+        autoRefreshTick();
+      };
+
+      source.addEventListener("glucose", event => {
+        handleLiveGlucoseEvent(event, generation);
+      });
+
+      return true;
     }
 
     function parseAmountRows(text) {
@@ -761,6 +1052,11 @@
 
         state.cache.loadedStartMs = fetchRange.startMs;
         state.cache.loadedEndMs = fetchRange.endMs;
+        if (settings.stream) {
+          // A buffered request can finish after an SSE event. Reinsert that live
+          // event so the older response cannot make the current value disappear.
+          mergeLastLiveReading(fetchRange);
+        }
         rebuildRenderCache();
         if (state.liveFollowNow) {
           alignLiveFollowViewport();
@@ -2772,7 +3068,13 @@
         return;
       }
 
-      const fetchDue = now - state.lastAutoRefreshFetchMs >= 30 * 1000;
+      // SSE supplies the current stream value immediately. Keep a much slower
+      // reconciliation fetch for scans, history, amounts, and cache extension.
+      // Poll at the original interval while live is unavailable or reconnecting.
+      const refreshInterval = state.liveUpdates.mode === "live"
+        ? 5 * 60 * 1000
+        : 30 * 1000;
+      const fetchDue = now - state.lastAutoRefreshFetchMs >= refreshInterval;
       const cacheNeedsExtension = !isCurrentVisibleRangeLoaded(0.25);
 
       if (!state.loading && (fetchDue || cacheNeedsExtension)) {
@@ -2785,12 +3087,14 @@
       clearInterval(state.autoTimer);
       state.lastAutoRefreshFetchMs = 0;
       state.autoTimer = setInterval(autoRefreshTick, 5 * 1000);
+      startLiveUpdates({ force: true });
       autoRefreshTick();
     }
 
     function attachEvents() {
       els.loadBtn.addEventListener("click", () => {
         clearLoadedCacheRange();
+        startLiveUpdates({ force: true });
         loadData({ force: true });
       });
       els.showToken.addEventListener("change", () => {
@@ -2819,6 +3123,11 @@
       }
       els.autoRefresh.addEventListener("change", () => {
         state.lastAutoRefreshFetchMs = 0;
+        if (els.autoRefresh.checked) {
+          startLiveUpdates({ force: true });
+        } else {
+          closeLiveUpdates("disabled");
+        }
         autoRefreshTick();
       });
 
@@ -2844,6 +3153,9 @@
         state.lastYDomain = null;
         state.scrollRenderBaseCenterMs = null;
         resetPlotTransform();
+        if (input === els.showStream || input === els.useCalibrated) {
+          startLiveUpdates({ force: true });
+        }
         requestDraw();
         loadData({ force: true });
       }));
@@ -3120,13 +3432,16 @@
           jumpToNow();
         }
       });
+
+      window.addEventListener("beforeunload", () => {
+        closeLiveUpdates("disabled");
+      });
     }
 
     attachEvents();
-    installAutoRefresh();
     restoreCollapsedPreferences();
 
-    const didApplyUrlStart = applyUrlStartConfig();
+    applyUrlStartConfig();
     if(els.baseUrl && window.location.protocol === "http:" && window.location.port === "17580" && /^http:\/\/127\.0\.0\.1:17580\/?$/.test(els.baseUrl.value.trim())) {
       els.baseUrl.value = window.location.origin;
      }
@@ -3137,7 +3452,4 @@
     updateSensorLegend();
     draw();
     requestFullDrawAfterLayout();
-
-    if (didApplyUrlStart) {
-      loadData({ force: true, quiet: true });
-    }
+    installAutoRefresh();

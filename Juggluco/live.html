@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>External Juggluco live client</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: system-ui, sans-serif;
+    }
+    body {
+      margin: 0;
+    }
+    main {
+      max-width: 44rem;
+      margin: 4vh auto;
+      padding: 1.5rem;
+    }
+    form, section {
+      border: 1px solid #8888;
+      border-radius: .75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin: .75rem 0;
+    }
+    input[type="url"], input[type="password"], select {
+      box-sizing: border-box;
+      width: 100%;
+      padding: .6rem;
+      margin-top: .25rem;
+    }
+    button {
+      padding: .6rem 1rem;
+      margin-right: .5rem;
+    }
+    #glucose {
+      font-size: clamp(3rem, 15vw, 7rem);
+      font-weight: 700;
+      line-height: 1;
+      margin: 1rem 0;
+    }
+    dl {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .5rem 1rem;
+    }
+    dt {
+      font-weight: 600;
+    }
+    dd {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+    .note {
+      opacity: .8;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>External Juggluco live client</h1>
+
+  <form id="connection">
+    <label>
+      Juggluco server
+      <input id="server" type="url" value="http://127.0.0.1:17580" required>
+    </label>
+
+    <label>
+      API secret
+      <input id="token" type="password" autocomplete="off"
+             placeholder="Leave empty when the server has no secret">
+    </label>
+
+    <label>
+      Display unit
+      <select id="unit">
+        <option value="mgdl">mg/dL</option>
+        <option value="mmol">mmol/L</option>
+      </select>
+    </label>
+
+    <label>
+      <input id="calibrated" type="checkbox">
+      Request calibrated glucose
+    </label>
+
+    <button type="submit">Connect</button>
+    <button id="disconnect" type="button" disabled>Disconnect</button>
+  </form>
+
+  <section aria-live="polite">
+    <div id="glucose">—</div>
+    <div id="status">Not connected</div>
+    <dl>
+      <dt>Direction</dt><dd id="direction">—</dd>
+      <dt>Rate</dt><dd id="rate">—</dd>
+      <dt>Time</dt><dd id="time">—</dd>
+      <dt>Event ID</dt><dd id="eventid">—</dd>
+      <dt>Endpoint</dt><dd id="endpoint">—</dd>
+    </dl>
+    <details>
+      <summary>Raw event data</summary>
+      <pre id="raw">—</pre>
+    </details>
+  </section>
+
+  <p class="note">
+    This page is independent of Juggluco. When it is opened from another
+    website or as a local file, the Juggluco server must allow the page's
+    Origin. Use HTTPS for the Juggluco URL when this page itself is served
+    over HTTPS.
+  </p>
+</main>
+
+<script>
+  let events = null;
+
+  const form = document.getElementById("connection");
+  const disconnectButton = document.getElementById("disconnect");
+  const statusElement = document.getElementById("status");
+
+  function closeConnection(message = "Disconnected") {
+    if (events) {
+      events.close();
+      events = null;
+    }
+    statusElement.textContent = message;
+    disconnectButton.disabled = true;
+  }
+
+  function makeEndpoint() {
+    const endpoint = new URL(document.getElementById("server").value);
+    endpoint.pathname =
+      `${endpoint.pathname.replace(/\/+$/, "")}/x/live`;
+    endpoint.search = "";
+    endpoint.hash = "";
+
+    const token = document.getElementById("token").value;
+    if (token) {
+      // Browser EventSource cannot set an Authorization header, so the
+      // existing Juggluco token query parameter is used.
+      endpoint.searchParams.set("token", token);
+    }
+    if (document.getElementById("calibrated").checked) {
+      endpoint.searchParams.set("calibrated", "");
+    }
+    return endpoint;
+  }
+
+  function showReading(event) {
+    const reading = JSON.parse(event.data);
+    const mmol = document.getElementById("unit").value === "mmol";
+
+    document.getElementById("glucose").textContent = mmol
+      ? `${reading.glucoseMmolL.toFixed(1)} mmol/L`
+      : `${reading.glucoseMgDl} mg/dL`;
+    document.getElementById("direction").textContent =
+      reading.direction || "—";
+    document.getElementById("rate").textContent =
+      reading.rateMgDlPerMinute == null
+        ? "—"
+        : `${reading.rateMgDlPerMinute.toFixed(2)} mg/dL/min`;
+    document.getElementById("time").textContent =
+      new Date(reading.timestamp * 1000).toLocaleString();
+
+    // Juggluco emits this as "sensorId:recordId", for example "7:913".
+    // EventSource sends it back automatically as Last-Event-ID if its
+    // automatic reconnect mechanism has to reconnect.
+    document.getElementById("eventid").textContent = event.lastEventId;
+    document.getElementById("raw").textContent =
+      JSON.stringify(reading, null, 2);
+  }
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    closeConnection("Connecting…");
+
+    let endpoint;
+    try {
+      endpoint = makeEndpoint();
+    } catch {
+      statusElement.textContent = "Invalid server URL";
+      return;
+    }
+
+    const displayedEndpoint = new URL(endpoint);
+    if (displayedEndpoint.searchParams.has("token")) {
+      displayedEndpoint.searchParams.set("token", "REDACTED");
+    }
+    document.getElementById("endpoint").textContent =
+      displayedEndpoint.href;
+
+    events = new EventSource(endpoint);
+    disconnectButton.disabled = false;
+    events.onopen = () => {
+      statusElement.textContent = "Connected";
+    };
+    events.onerror = () => {
+      statusElement.textContent =
+        "Connection interrupted; EventSource will reconnect automatically…";
+    };
+    events.addEventListener("glucose", showReading);
+  });
+
+  disconnectButton.addEventListener("click", () => closeConnection());
+  addEventListener("beforeunload", () => closeConnection());
+</script>
+</body>
+</html>

@@ -23,6 +23,46 @@
       padding: 1rem;
       margin-bottom: 1rem;
     }
+    .current-panel {
+      text-align: center;
+    }
+    .current-reading {
+      min-height: clamp(5rem, 18vw, 8rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(.35rem, 2vw, 1rem);
+      margin: .25rem 0 .75rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .rate-arrow {
+      width: clamp(3.2rem, 12vw, 5.5rem);
+      height: clamp(2.4rem, 9vw, 4rem);
+      flex: 0 0 auto;
+      overflow: visible;
+      transform-origin: center;
+      transition: transform .2s ease;
+    }
+    .rate-arrow line {
+      stroke: currentColor;
+      stroke-width: 5.5;
+      stroke-linecap: round;
+    }
+    .rate-arrow path {
+      fill: currentColor;
+    }
+    .no-value {
+      min-height: clamp(5rem, 18vw, 8rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: .25rem 0 .75rem;
+      font-size: clamp(1.25rem, 5vw, 2rem);
+      font-weight: 700;
+    }
+    [hidden] {
+      display: none !important;
+    }
     label {
       display: block;
       margin: .75rem 0;
@@ -41,7 +81,10 @@
       font-size: clamp(3rem, 15vw, 7rem);
       font-weight: 700;
       line-height: 1;
-      margin: 1rem 0;
+      white-space: nowrap;
+    }
+    #status {
+      min-height: 1.5em;
     }
     dl {
       display: grid;
@@ -68,6 +111,20 @@
 <body>
 <main>
   <h1>External Juggluco live client</h1>
+
+  <section class="current-panel" aria-live="polite"
+           aria-label="Current glucose">
+    <div id="current-reading" class="current-reading" hidden>
+      <svg id="rate-arrow" class="rate-arrow" viewBox="0 0 64 48"
+           aria-hidden="true">
+        <line x1="4" y1="24" x2="43" y2="24"></line>
+        <path d="M34 8 L62 24 L34 40 L41 24 Z"></path>
+      </svg>
+      <div id="glucose">—</div>
+    </div>
+    <div id="no-value" class="no-value">No current value</div>
+    <div id="status">Not connected</div>
+  </section>
 
   <form id="connection">
     <label>
@@ -98,9 +155,7 @@
     <button id="disconnect" type="button" disabled>Disconnect</button>
   </form>
 
-  <section aria-live="polite">
-    <div id="glucose">—</div>
-    <div id="status">Not connected</div>
+  <section aria-label="Latest event details">
     <dl>
       <dt>Direction</dt><dd id="direction">—</dd>
       <dt>Rate</dt><dd id="rate">—</dd>
@@ -123,11 +178,134 @@
 </main>
 
 <script>
+  const MAX_READING_AGE_MS = 5.5 * 60 * 1000;
+
   let events = null;
+  let lastReading = null;
+  let staleTimer = null;
 
   const form = document.getElementById("connection");
   const disconnectButton = document.getElementById("disconnect");
   const statusElement = document.getElementById("status");
+  const currentReadingElement = document.getElementById("current-reading");
+  const glucoseElement = document.getElementById("glucose");
+  const noValueElement = document.getElementById("no-value");
+  const rateArrowElement = document.getElementById("rate-arrow");
+
+  function cleanUrlStartTokenPath(pathname) {
+    let path = String(pathname || "");
+    try {
+      path = decodeURIComponent(path);
+    } catch {}
+    return path.replace(/^\/+|\/+$/g, "");
+  }
+
+  function applyUrlStartConfig() {
+    const raw = new URLSearchParams(document.location.search)
+      .get("urlstart");
+    if (!raw) return false;
+
+    // URLSearchParams normally decodes the value once. Also try one additional
+    // decoding pass so links made by older wrappers continue to work.
+    const valuesToTry = [raw];
+    try {
+      const decoded = decodeURIComponent(raw);
+      if (decoded !== raw) valuesToTry.push(decoded);
+    } catch {}
+
+    for (const value of valuesToTry) {
+      try {
+        const url = new URL(value, document.location.href);
+        if (url.protocol !== "http:" && url.protocol !== "https:") {
+          continue;
+        }
+
+        document.getElementById("server").value = url.origin;
+        document.getElementById("token").value =
+          cleanUrlStartTokenPath(url.pathname);
+        return true;
+      } catch {}
+    }
+
+    return false;
+  }
+
+  function clearStaleTimer() {
+    if (staleTimer !== null) {
+      clearTimeout(staleTimer);
+      staleTimer = null;
+    }
+  }
+
+  function showNoValue(message) {
+    currentReadingElement.hidden = true;
+    noValueElement.hidden = false;
+    noValueElement.textContent = message;
+  }
+
+  function rateArrowAngle(rate) {
+    // This uses the same geometry as the viewer: 40 horizontal pixels and
+    // 30 vertical pixels per mg/dL/min.
+    return Math.atan2(-rate * 30, 40) * 180 / Math.PI;
+  }
+
+  function renderCurrentReading() {
+    clearStaleTimer();
+
+    if (!lastReading) {
+      showNoValue("No current value");
+      return;
+    }
+
+    const timestampMs = Number(lastReading.timestamp) * 1000;
+    if (!Number.isFinite(timestampMs)) {
+      showNoValue("No current value");
+      return;
+    }
+
+    const ageMs = Date.now() - timestampMs;
+    if (ageMs >= MAX_READING_AGE_MS) {
+      showNoValue(
+        `No new value since ${new Date(timestampMs).toLocaleString()}`
+      );
+      return;
+    }
+
+    const mmol = document.getElementById("unit").value === "mmol";
+    const glucose = mmol
+      ? Number(lastReading.glucoseMmolL)
+      : Number(lastReading.glucoseMgDl);
+
+    if (!Number.isFinite(glucose)) {
+      showNoValue("No current value");
+      return;
+    }
+
+    glucoseElement.textContent = mmol
+      ? `${glucose.toFixed(1)} mmol/L`
+      : `${Math.round(glucose)} mg/dL`;
+
+    const rate = lastReading.rateMgDlPerMinute == null
+      ? NaN
+      : Number(lastReading.rateMgDlPerMinute);
+    if (Number.isFinite(rate)) {
+      rateArrowElement.hidden = false;
+      rateArrowElement.style.transform =
+        `rotate(${rateArrowAngle(rate)}deg)`;
+    } else {
+      rateArrowElement.hidden = true;
+    }
+
+    noValueElement.hidden = true;
+    currentReadingElement.hidden = false;
+
+    // Recheck just after the exact 5.5-minute boundary even when no SSE event
+    // arrives in the meantime.
+    staleTimer = setTimeout(
+      renderCurrentReading,
+      Math.max(100, MAX_READING_AGE_MS - ageMs + 50)
+    );
+  }
 
   function closeConnection(message = "Disconnected") {
     if (events) {
@@ -158,12 +336,17 @@
   }
 
   function showReading(event) {
-    const reading = JSON.parse(event.data);
-    const mmol = document.getElementById("unit").value === "mmol";
+    let reading;
+    try {
+      reading = JSON.parse(event.data);
+    } catch {
+      statusElement.textContent = "Received invalid glucose data";
+      return;
+    }
 
-    document.getElementById("glucose").textContent = mmol
-      ? `${reading.glucoseMmolL.toFixed(1)} mmol/L`
-      : `${reading.glucoseMgDl} mg/dL`;
+    lastReading = reading;
+    renderCurrentReading();
+
     document.getElementById("direction").textContent =
       reading.direction || "—";
     document.getElementById("rate").textContent =
@@ -212,8 +395,16 @@
     events.addEventListener("glucose", showReading);
   });
 
+  document.getElementById("unit").addEventListener(
+    "change",
+    renderCurrentReading
+  );
+  applyUrlStartConfig();
   disconnectButton.addEventListener("click", () => closeConnection());
-  addEventListener("beforeunload", () => closeConnection());
+  addEventListener("beforeunload", () => {
+    clearStaleTimer();
+    closeConnection();
+  });
 </script>
 </body>
 </html>

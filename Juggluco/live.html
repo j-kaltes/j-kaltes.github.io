@@ -368,13 +368,17 @@
     event.preventDefault();
     closeConnection("Connecting…");
 
-    let endpoint;
-    try {
-      endpoint = makeEndpoint();
-    } catch {
-      statusElement.textContent = "Invalid server URL";
-      return;
-    }
+    const endpoint = makeEndpoint();
+
+    await fetch(endpoint, {
+      method: "HEAD",
+      mode: "cors",
+      credentials: "omit",
+      cache: "no-store",
+      targetAddressSpace: "local"
+    });
+
+
 
     const displayedEndpoint = new URL(endpoint);
     if (displayedEndpoint.searchParams.has("token")) {

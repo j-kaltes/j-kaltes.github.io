@@ -161,6 +161,7 @@
       <dt>Rate</dt><dd id="rate">—</dd>
       <dt>Time</dt><dd id="time">—</dd>
       <dt>Event ID</dt><dd id="eventid">—</dd>
+      <dt>Transport</dt><dd id="transport">—</dd>
       <dt>Endpoint</dt><dd id="endpoint">—</dd>
     </dl>
     <details>
@@ -174,7 +175,9 @@
     When connecting to a home-network address, a current Chromium browser
     asks permission to access devices on the local network. Juggluco must
     also allow this page's Origin. Browsers without that permission feature
-    require an HTTPS Juggluco URL.
+    require an HTTPS Juggluco URL. For a public hostname, use HTTPS for both
+    this page and the Juggluco endpoint; browsers block HTTPS-to-HTTP public
+    connections as mixed content.
   </p>
 </main>
 
@@ -376,46 +379,239 @@
     return null;
   }
 
-  async function requestLocalNetworkAccess(endpoint) {
-    const addressSpace = endpointAddressSpace(endpoint);
-    if (addressSpace && !window.isSecureContext) {
-      throw new Error(
-        "Open this client over HTTPS before connecting to Juggluco."
-      );
-    }
-
+  function fetchOptions(endpoint, method, signal = null) {
     const options = {
-      method: "HEAD",
+      method,
       mode: "cors",
       credentials: "omit",
       cache: "no-store"
     };
+    if (signal) options.signal = signal;
 
-    // This annotation lets current Chromium treat HTTP private hostnames as
-    // local-network requests before DNS resolution. Private IP literals and
-    // .local names are recognized automatically, but being explicit is useful
-    // and older browsers safely ignore an unknown RequestInit member.
-    if (addressSpace === "local") {
-      options.targetAddressSpace = "local";
+    // Keep this annotation on both the permission probe and the live GET.
+    // Native EventSource has no equivalent constructor option.
+    const addressSpace = endpointAddressSpace(endpoint);
+    if (addressSpace) {
+      options.targetAddressSpace = addressSpace;
     }
+    return options;
+  }
 
-    const response = await fetch(endpoint, options);
+  async function requestLocalNetworkAccess(endpoint) {
+    const response = await fetch(endpoint, fetchOptions(endpoint, "HEAD"));
     if (!response.ok) {
       throw new Error(`Juggluco returned HTTP ${response.status}`);
     }
   }
 
-  function accessErrorMessage(endpoint, error) {
+  async function permissionState(endpoint) {
+    const addressSpace = endpointAddressSpace(endpoint);
+    if (!addressSpace || !navigator.permissions?.query) return null;
+
+    const name = addressSpace === "loopback"
+      ? "loopback-network"
+      : "local-network";
+    try {
+      return (await navigator.permissions.query({name})).state;
+    } catch {
+      return null;
+    }
+  }
+
+  async function accessErrorMessage(endpoint, error) {
     const detail = error instanceof Error && error.message
       ? ` (${error.message})`
       : "";
 
-    if (endpointAddressSpace(endpoint)) {
-      return "Cannot access Juggluco. Open this page over HTTPS, allow " +
-        "Local network access when the browser asks, and check the server " +
-        `address, API secret, and Juggluco Origin settings${detail}`;
+    const addressSpace = endpointAddressSpace(endpoint);
+    if (addressSpace) {
+      const permission = await permissionState(endpoint);
+      if (permission === "denied") {
+        return "Local network access is denied for this site. Change the " +
+          `permission in the browser's site settings and reconnect${detail}`;
+      }
+      if (!window.isSecureContext) {
+        return "This browser blocks local-network access from an HTTP page. " +
+          `Open the HTTPS version of this client and reconnect${detail}`;
+      }
+      return "Cannot access Juggluco. Allow Local network access when the " +
+        "browser asks, and check the server address, API secret, Juggluco " +
+        `Origin settings, and Local only setting${detail}`;
     }
     return `Cannot access Juggluco${detail}`;
+  }
+
+  function openNativeEventSource(endpoint) {
+    document.getElementById("transport").textContent = "EventSource";
+    const connection = new EventSource(endpoint);
+    events = connection;
+
+    connection.onopen = () => {
+      if (events !== connection) return;
+      statusElement.textContent = "Connected";
+    };
+    connection.onerror = () => {
+      if (events !== connection) return;
+      statusElement.textContent =
+        "Connection interrupted; EventSource will reconnect automatically…";
+    };
+    connection.addEventListener("glucose", showReading);
+  }
+
+  async function readEventStream(body, handle) {
+    const reader = body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let eventName = "";
+    let dataLines = [];
+    let pendingId = null;
+
+    function dispatch() {
+      if (pendingId !== null) handle.lastEventId = pendingId;
+      if (dataLines.length) {
+        const event = {
+          data: dataLines.join("\n"),
+          lastEventId: handle.lastEventId
+        };
+        if (!eventName || eventName === "message" || eventName === "glucose") {
+          showReading(event);
+        }
+      }
+      eventName = "";
+      dataLines = [];
+      pendingId = null;
+    }
+
+    function processLine(line) {
+      if (line.endsWith("\r")) line = line.slice(0, -1);
+      if (!line) {
+        dispatch();
+        return;
+      }
+      if (line.startsWith(":")) return;
+
+      const colon = line.indexOf(":");
+      const field = colon < 0 ? line : line.slice(0, colon);
+      let value = colon < 0 ? "" : line.slice(colon + 1);
+      if (value.startsWith(" ")) value = value.slice(1);
+
+      if (field === "event") {
+        eventName = value;
+      } else if (field === "data") {
+        dataLines.push(value);
+      } else if (field === "id" && !value.includes("\0")) {
+        pendingId = value;
+      } else if (field === "retry" && /^\d+$/.test(value)) {
+        handle.retryMs = Math.min(60000, Number(value));
+      }
+    }
+
+    try {
+      while (!handle.closed) {
+        const {value, done} = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, {stream: true});
+
+        let newline;
+        while ((newline = buffer.indexOf("\n")) >= 0) {
+          processLine(buffer.slice(0, newline));
+          buffer = buffer.slice(newline + 1);
+        }
+      }
+    } finally {
+      reader.releaseLock?.();
+    }
+  }
+
+  function waitForReconnect(handle) {
+    return new Promise(resolve => {
+      const finish = () => {
+        if (handle.retryTimer !== null) clearTimeout(handle.retryTimer);
+        handle.retryTimer = null;
+        handle.wakeReconnect = null;
+        resolve();
+      };
+      handle.wakeReconnect = finish;
+      handle.retryTimer = setTimeout(finish, handle.retryMs);
+    });
+  }
+
+  function openFetchEventStream(endpoint, generation) {
+    document.getElementById("transport").textContent =
+      `fetch() SSE (${endpointAddressSpace(endpoint)})`;
+
+    const handle = {
+      closed: false,
+      controller: null,
+      retryTimer: null,
+      wakeReconnect: null,
+      retryMs: 3000,
+      lastEventId: "",
+      close() {
+        this.closed = true;
+        this.controller?.abort();
+        this.wakeReconnect?.();
+      }
+    };
+    events = handle;
+
+    void (async () => {
+      let connectedOnce = false;
+      while (
+        !handle.closed && events === handle &&
+        generation === connectionGeneration
+      ) {
+        const controller = new AbortController();
+        handle.controller = controller;
+        statusElement.textContent = "Connecting…";
+
+        try {
+          const response = await fetch(
+            endpoint,
+            fetchOptions(endpoint, "GET", controller.signal)
+          );
+          if (!response.ok) {
+            throw new Error(`Juggluco returned HTTP ${response.status}`);
+          }
+          if (!response.body?.getReader) {
+            throw new Error("This browser cannot read a streaming response");
+          }
+          const contentType = response.headers?.get("content-type") || "";
+          if (!contentType.toLowerCase().startsWith("text/event-stream")) {
+            throw new Error(`Unexpected response type: ${contentType || "unknown"}`);
+          }
+
+          connectedOnce = true;
+          statusElement.textContent = "Connected";
+          await readEventStream(response.body, handle);
+          if (!handle.closed) {
+            statusElement.textContent = "Live stream ended; reconnecting…";
+          }
+        } catch (error) {
+          if (handle.closed || error?.name === "AbortError") return;
+          if (!connectedOnce) {
+            statusElement.textContent = await accessErrorMessage(endpoint, error);
+            return;
+          }
+          statusElement.textContent = "Connection interrupted; reconnecting…";
+        } finally {
+          if (handle.controller === controller) handle.controller = null;
+        }
+
+        await waitForReconnect(handle);
+      }
+    })();
+  }
+
+  function openLiveConnection(endpoint, generation) {
+    // Keep targetAddressSpace on the long-lived request for home-network
+    // addresses. Loopback already works with native EventSource and therefore
+    // retains its automatic Last-Event-ID reconnect behavior.
+    if (endpointAddressSpace(endpoint) === "local") {
+      openFetchEventStream(endpoint, generation);
+    } else {
+      openNativeEventSource(endpoint);
+    }
   }
 
   function showReading(event) {
@@ -440,8 +636,8 @@
       new Date(reading.timestamp * 1000).toLocaleString();
 
     // Juggluco emits this as "sensorId:recordId", for example "7:913".
-    // EventSource sends it back automatically as Last-Event-ID if its
-    // automatic reconnect mechanism has to reconnect.
+    // Native EventSource sends it back automatically as Last-Event-ID when it
+    // reconnects. The annotated fetch transport also parses and displays it.
     document.getElementById("eventid").textContent = event.lastEventId;
     document.getElementById("raw").textContent =
       JSON.stringify(reading, null, 2);
@@ -473,11 +669,12 @@
 
     try {
       // A short, user-initiated request makes current Chromium show its Local
-      // Network Access prompt before the long-lived EventSource is opened.
+      // Network Access prompt before the long-lived live request is opened.
       await requestLocalNetworkAccess(endpoint);
     } catch (error) {
       if (generation !== connectionGeneration) return;
-      statusElement.textContent = accessErrorMessage(endpoint, error);
+      statusElement.textContent = await accessErrorMessage(endpoint, error);
+      if (generation !== connectionGeneration) return;
       connectButton.disabled = false;
       disconnectButton.disabled = true;
       return;
@@ -485,22 +682,9 @@
 
     if (generation !== connectionGeneration) return;
 
-    statusElement.textContent = "Connecting…";
-    const connection = new EventSource(endpoint);
-    events = connection;
+    openLiveConnection(endpoint, generation);
     connectButton.disabled = false;
     disconnectButton.disabled = false;
-
-    connection.onopen = () => {
-      if (events !== connection) return;
-      statusElement.textContent = "Connected";
-    };
-    connection.onerror = () => {
-      if (events !== connection) return;
-      statusElement.textContent =
-        "Connection interrupted; EventSource will reconnect automatically…";
-    };
-    connection.addEventListener("glucose", showReading);
   });
 
   document.getElementById("unit").addEventListener(

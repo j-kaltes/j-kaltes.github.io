@@ -819,9 +819,7 @@ Mathematica:</h4>
 <p><img src="mathematica.png" name="Mathematica" align="bottom" width="602" height="249" border="0"/>
 
 </p>
-<p>For Julia, C and C++ I couldn’t find a library that easily gets
-this data out of a html table. 
-</p>
+<p><a href="read_html_tables.cpp">read_html_tables.cpp</a> show how to do it in C++.</p>
 <h3 class="western"><a name="libreview"></a>Libreview</h3>
 <p>To save data in the same
 format as Libreview, use the following command:</p>
@@ -1046,7 +1044,7 @@ milli seconds since 00:00 1 January 1970 GMT For example:
 <p>gives results at or before datemsec</p>
 <p style="line-height: 100%; margin-bottom: 0cm">By using dateString
 or created_at instead of date, you can use a date in the format
-YYYY-mm-DDThh:MM:ss, were mm is the month and MM the minutes. For
+YYYY-mm-DDThh:MM:ss, where mm is the month and MM the minutes. For
 example 
 </p>
 <p style="line-height: 100%; margin-bottom: 0cm"><a href="http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01" onclick="location.href=urlstarter+'/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01';return false;">http://127.0.0.1:17580/api/v1/entries.json?count=5&amp;find[dateString][$lt]=2023-03-02T08:04:01</a></p>
@@ -1356,7 +1354,7 @@ menu-&gt;Settings-&gt;Exchange data-&gt;Web server</a> and in the
 in the source of Juggluco server. For Juggluco server, you need to
 put the the private key in a file named <b>prevkey.pem</b> and the
 fullchain in a file named <b>fullchain.pem</b> in <em>jugglucodata</em>.
-<em>jugglucodata</em> is the directory were Juggluco server saves its
+<em>jugglucodata</em> is the directory where Juggluco server saves its
 data: 
 </p>
 <pre class="western">ls -l jugglucodata/

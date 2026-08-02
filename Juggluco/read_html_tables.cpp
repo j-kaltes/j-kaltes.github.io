@@ -1,5 +1,4 @@
 /*Example of reading a html table with c++. 
-
 The same as meals = Import["http:/127.0.0.1:17580/x/meals?days=6", "Data"] in Mathematica.
 
 std::string url="http://127.0.0.1:17580/x/meals?days=6";
@@ -13,7 +12,19 @@ Compile it with:
  g++ -O3 -std=c++26 read_html_tables.cpp  $(pkg-config --cflags --libs libcurl libxml-2.0)  -o read_html_tables
 
 (Or use clang++ instead of g++).
+
+To test it out, run something like:
+./read_html_tables "http://127.0.0.1:17580/x/meals?days=6"
+or
+./read_html_tables "https://www.worldometers.info/demographics/life-expectancy"
+
+
+Made by GPT-5.6 Sol on request of Jaap Korthals Altes
+
+GPL-3.0 license
 */
+
+
 #include <curl/curl.h>
 
 #include <libxml/HTMLparser.h>
@@ -23,36 +34,40 @@ Compile it with:
 #include <algorithm>
 #include <cctype>
 #include <climits>
-#include <coroutine>
+#include <cstddef>
 #include <deque>
 #include <exception>
+#include <filesystem>
 #include <generator>
+#include <iostream>
+#include <limits>
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <system_error>
 #include <utility>
 #include <vector>
-#include <iostream>
-#include <limits>
-using Row   = std::vector<std::string>;
+
+using Row = std::vector<std::string>;
 using Table = std::vector<Row>;
 
-#include <iostream>
-#define LOGGER(...) 
-//#define LOGGER(...) std::cout<<__VA_ARGS__;
+namespace {
 
-static std::string normalize_space(std::string_view text)
+std::string normalize_space(std::string_view text)
 {
     std::string result;
+    result.reserve(text.size());
+
     bool pending_space = false;
 
     for (unsigned char c : text) {
         if (std::isspace(c)) {
             pending_space = !result.empty();
         } else {
-            if (pending_space)
+            if (pending_space) {
                 result.push_back(' ');
+            }
 
             result.push_back(static_cast<char>(c));
             pending_space = false;
@@ -62,7 +77,7 @@ static std::string normalize_space(std::string_view text)
     return result;
 }
 
-static bool is_name(const xmlChar* name, const char* expected)
+bool is_name(const xmlChar* name, const char* expected)
 {
     return name != nullptr &&
            xmlStrEqual(
@@ -76,13 +91,14 @@ struct TableBuilder {
     Row row;
     std::string cell;
 
-    bool row_open  = false;
+    bool row_open = false;
     bool cell_open = false;
 
     void finish_cell()
     {
-        if (!cell_open)
+        if (!cell_open) {
             return;
+        }
 
         row.push_back(normalize_space(cell));
         cell.clear();
@@ -91,12 +107,12 @@ struct TableBuilder {
 
     void finish_row()
     {
-        if (!row_open)
+        if (!row_open) {
             return;
+        }
 
         finish_cell();
         table.push_back(std::move(row));
-
         row.clear();
         row_open = false;
     }
@@ -112,21 +128,14 @@ struct StreamState {
     CURL* easy = nullptr;
     htmlParserCtxtPtr parser = nullptr;
 
-    /*
-     * Bytes received from libcurl but not yet supplied to libxml2.
-     */
+    // Bytes received from libcurl but not yet fully supplied to libxml2.
     std::string input;
     std::size_t input_position = 0;
 
-    /*
-     * One builder per active <table>. This also handles nested tables.
-     */
+    // One builder per active <table>; this also handles nested tables.
     std::vector<TableBuilder> builders;
 
-    /*
-     * Usually contains zero or one table. Malformed HTML can cause several
-     * implied closing tags to be reported together.
-     */
+    // Completed tables waiting to be yielded.
     std::deque<Table> ready;
 
     std::exception_ptr failure;
@@ -136,10 +145,11 @@ struct StreamState {
 };
 
 template<class Function>
-static void sax_guard(StreamState& state, Function&& function) noexcept
+void sax_guard(StreamState& state, Function&& function) noexcept
 {
-    if (state.failure)
+    if (state.failure) {
         return;
+    }
 
     try {
         std::forward<Function>(function)();
@@ -148,7 +158,7 @@ static void sax_guard(StreamState& state, Function&& function) noexcept
     }
 }
 
-static void sax_start_element(
+void sax_start_element(
     void* context,
     const xmlChar* name,
     const xmlChar**
@@ -169,12 +179,10 @@ static void sax_start_element(
         TableBuilder& builder = state.builders.back();
 
         if (is_name(name, "tr")) {
+            // Defensive handling for omitted or malformed closing tags.
             builder.finish_row();
             builder.row_open = true;
-        } else if (
-            is_name(name, "td") ||
-            is_name(name, "th")
-        ) {
+        } else if (is_name(name, "td") || is_name(name, "th")) {
             if (!builder.row_open) {
                 builder.row_open = true;
             }
@@ -185,7 +193,7 @@ static void sax_start_element(
     });
 }
 
-static void sax_characters(
+void sax_characters(
     void* context,
     const xmlChar* characters,
     int length
@@ -194,12 +202,13 @@ static void sax_characters(
     auto& state = *static_cast<StreamState*>(context);
 
     sax_guard(state, [&] {
-        if (state.builders.empty())
+        if (state.builders.empty()) {
             return;
+        }
 
         TableBuilder& builder = state.builders.back();
 
-        if (builder.cell_open) {
+        if (builder.cell_open && length > 0) {
             builder.cell.append(
                 reinterpret_cast<const char*>(characters),
                 static_cast<std::size_t>(length)
@@ -208,7 +217,7 @@ static void sax_characters(
     });
 }
 
-static void sax_end_element(
+void sax_end_element(
     void* context,
     const xmlChar* name
 ) noexcept
@@ -222,16 +231,12 @@ static void sax_end_element(
 
         TableBuilder& builder = state.builders.back();
 
-        if (
-            is_name(name, "td") ||
-            is_name(name, "th")
-        ) {
+        if (is_name(name, "td") || is_name(name, "th")) {
             builder.finish_cell();
         } else if (is_name(name, "tr")) {
             builder.finish_row();
         } else if (is_name(name, "table")) {
             Table table = builder.finish_table();
-
             state.builders.pop_back();
             state.ready.push_back(std::move(table));
         }
@@ -248,23 +253,19 @@ struct HtmlParserDeleter {
 using HtmlParserPtr =
     std::unique_ptr<htmlParserCtxt, HtmlParserDeleter>;
 
-static HtmlParserPtr make_parser(
+HtmlParserPtr make_parser(
     StreamState& state,
     const std::string& source_name
 )
 {
     htmlSAXHandler sax{};
 
-    /*
-     * libxml2's HTML parser uses the non-namespace SAX element
-     * callbacks. Setting initialized to 1 explicitly requests the
-     * legacy SAX1 interface.
-     */
-    sax.initialized  = 1;
+    // The HTML push parser uses the SAX1 element callbacks.
+    sax.initialized = 1;
     sax.startElement = sax_start_element;
-    sax.endElement   = sax_end_element;
-    sax.characters   = sax_characters;
-    sax.cdataBlock   = sax_characters;
+    sax.endElement = sax_end_element;
+    sax.characters = sax_characters;
+    sax.cdataBlock = sax_characters;
 
     HtmlParserPtr parser{
         htmlCreatePushParserCtxt(
@@ -278,9 +279,7 @@ static HtmlParserPtr make_parser(
     };
 
     if (!parser) {
-        throw std::runtime_error(
-            "Could not create HTML push parser"
-        );
+        throw std::runtime_error("Could not create HTML push parser");
     }
 
     constexpr int options =
@@ -299,9 +298,7 @@ static HtmlParserPtr make_parser(
     return parser;
 }
 
-
-
-static std::size_t curl_write(
+std::size_t curl_write(
     char* data,
     std::size_t size,
     std::size_t count,
@@ -317,13 +314,10 @@ static std::size_t curl_write(
         }
 
         const std::size_t bytes = size * count;
-
         state.input.append(data, bytes);
 
-        /*
-         * The complete callback buffer has been accepted. Pause future
-         * receiving until the generator asks for more input.
-         */
+        // Consume this callback buffer, then pause future receiving until
+        // the generator needs more input.
         const CURLcode result =
             curl_easy_pause(state.easy, CURLPAUSE_RECV);
 
@@ -349,18 +343,19 @@ static std::size_t curl_write(
 
 class CurlTransfer {
 public:
-    CurlTransfer(std::string url, StreamState& state)
+    CurlTransfer(std::string source_url, StreamState& state)
         : state_(state)
     {
         easy_ = curl_easy_init();
         multi_ = curl_multi_init();
 
-        if (!easy_ || !multi_)
+        if (!easy_ || !multi_) {
             throw std::runtime_error("Could not initialize libcurl");
+        }
 
         state_.easy = easy_;
 
-        set(CURLOPT_URL, url.c_str());
+        set(CURLOPT_URL, source_url.c_str());
         set(CURLOPT_FOLLOWLOCATION, 1L);
         set(CURLOPT_WRITEFUNCTION, curl_write);
         set(CURLOPT_WRITEDATA, &state_);
@@ -369,10 +364,8 @@ public:
         set(CURLOPT_NOSIGNAL, 1L);
         set(CURLOPT_ERRORBUFFER, error_buffer_);
 
-        /*
-         * This is a request, not a guarantee. Smaller buffers reduce how
-         * far network input can run ahead of table consumption.
-         */
+        // This is a request, not a guarantee. Smaller callback buffers reduce
+        // how far input can run ahead of table consumption.
         set(CURLOPT_BUFFERSIZE, 1024L);
 
         check_multi(curl_multi_add_handle(multi_, easy_));
@@ -384,14 +377,17 @@ public:
 
     ~CurlTransfer()
     {
-        if (added_)
+        if (added_) {
             curl_multi_remove_handle(multi_, easy_);
+        }
 
-        if (multi_)
+        if (multi_) {
             curl_multi_cleanup(multi_);
+        }
 
-        if (easy_)
+        if (easy_) {
             curl_easy_cleanup(easy_);
+        }
     }
 
     bool done() const noexcept
@@ -401,13 +397,12 @@ public:
 
     void resume()
     {
-        if (!state_.curl_paused)
+        if (!state_.curl_paused) {
             return;
+        }
 
-        /*
-         * Set false before unpausing because libcurl may synchronously call
-         * curl_write(), which can immediately set it true again.
-         */
+        // Unpausing can synchronously invoke curl_write(), which may pause
+        // the transfer again, so clear the flag before the call.
         state_.curl_paused = false;
 
         const CURLcode result =
@@ -426,22 +421,21 @@ public:
         while (!done_ && !state_.curl_paused) {
             int running = 0;
 
-            check_multi(
-                curl_multi_perform(multi_, &running)
-            );
-
+            check_multi(curl_multi_perform(multi_, &running));
             collect_messages();
 
-            if (done_ || state_.curl_paused)
+            if (done_ || state_.curl_paused) {
                 return;
+            }
 
             if (running == 0) {
                 collect_messages();
 
-                if (!done_)
+                if (!done_) {
                     throw std::runtime_error(
                         "libcurl stopped without a completion message"
                     );
+                }
 
                 return;
             }
@@ -460,8 +454,9 @@ public:
 
     void validate_result() const
     {
-        if (state_.failure)
+        if (state_.failure) {
             std::rethrow_exception(state_.failure);
+        }
 
         if (result_ != CURLE_OK) {
             const char* explanation =
@@ -470,8 +465,7 @@ public:
                     : curl_easy_strerror(result_);
 
             throw std::runtime_error(
-                std::string("HTTP transfer failed: ") +
-                explanation
+                std::string("Input transfer failed: ") + explanation
             );
         }
 
@@ -484,10 +478,12 @@ public:
                 &status
             );
 
-        if (info_result != CURLE_OK)
-            throw std::runtime_error("Could not read HTTP status");
+        if (info_result != CURLE_OK) {
+            throw std::runtime_error("Could not read response status");
+        }
 
-        if (status < 200 || status >= 300) {
+        // file:// and other non-HTTP protocols report status zero.
+        if (status != 0 && (status < 200 || status >= 300)) {
             throw std::runtime_error(
                 "Server returned HTTP status " +
                 std::to_string(status)
@@ -525,10 +521,7 @@ private:
         int messages_left = 0;
 
         while (CURLMsg* message =
-                   curl_multi_info_read(
-                       multi_,
-                       &messages_left
-                   )) {
+                   curl_multi_info_read(multi_, &messages_left)) {
             if (message->msg == CURLMSG_DONE &&
                 message->easy_handle == easy_) {
                 done_ = true;
@@ -549,34 +542,25 @@ private:
     char error_buffer_[CURL_ERROR_SIZE]{};
 };
 
-static void parse_available_input(StreamState& state)
+void parse_available_input(StreamState& state)
 {
-    /*
-     * Stop immediately after a table becomes available.
-     *
-     * Splitting at '>' means the incremental parser is checked after each
-     * possible tag boundary instead of consuming the complete curl buffer.
-     */
-    while (
-        state.input_position < state.input.size() &&
-        state.ready.empty()
-    ) {
+    // Stop as soon as one table is available. Splitting at '>' gives the
+    // parser frequent suspension points around markup boundaries.
+    while (state.input_position < state.input.size() &&
+           state.ready.empty()) {
         const std::size_t closing_bracket =
-            state.input.find(
-                '>',
-                state.input_position
-            );
+            state.input.find('>', state.input_position);
 
         const std::size_t end =
             closing_bracket == std::string::npos
                 ? state.input.size()
                 : closing_bracket + 1;
 
-        const std::size_t length =
-            end - state.input_position;
+        const std::size_t length = end - state.input_position;
 
-        if (length > static_cast<std::size_t>(INT_MAX))
+        if (length > static_cast<std::size_t>(INT_MAX)) {
             throw std::overflow_error("HTML parser chunk too large");
+        }
 
         const int result =
             htmlParseChunk(
@@ -588,11 +572,13 @@ static void parse_available_input(StreamState& state)
 
         state.input_position = end;
 
-        if (state.failure)
+        if (state.failure) {
             std::rethrow_exception(state.failure);
+        }
 
-        if (result != XML_ERR_OK)
+        if (result != XML_ERR_OK) {
             throw std::runtime_error("Incremental HTML parsing failed");
+        }
     }
 
     if (state.input_position == state.input.size()) {
@@ -601,42 +587,127 @@ static void parse_available_input(StreamState& state)
     }
 }
 
-static void finish_parser(StreamState& state)
+void finish_parser(StreamState& state)
 {
-    if (state.parser_finished)
+    if (state.parser_finished) {
         return;
+    }
 
     const int result =
-        htmlParseChunk(
-            state.parser,
-            nullptr,
-            0,
-            1
-        );
+        htmlParseChunk(state.parser, nullptr, 0, 1);
 
     state.parser_finished = true;
 
-    if (state.failure)
+    if (state.failure) {
         std::rethrow_exception(state.failure);
+    }
 
-    if (result != XML_ERR_OK)
+    if (result != XML_ERR_OK) {
         throw std::runtime_error("Could not finish HTML parsing");
+    }
 }
 
-std::generator<Table> read_html_tables(std::string url)
+bool looks_like_uri(std::string_view value)
 {
-    /*
-     * In a larger application, curl_global_init/cleanup should usually be
-     * managed once at program scope.
-     */
+    const std::size_t colon = value.find(':');
+
+    if (colon == std::string_view::npos || colon == 0) {
+        return false;
+    }
+
+    if (!std::isalpha(
+            static_cast<unsigned char>(value.front()))) {
+        return false;
+    }
+
+    for (std::size_t i = 1; i < colon; ++i) {
+        const unsigned char c =
+            static_cast<unsigned char>(value[i]);
+
+        if (!std::isalnum(c) && c != '+' && c != '-' && c != '.') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+std::string percent_encode_file_path(std::string_view path)
+{
+    constexpr char hex[] = "0123456789ABCDEF";
+
+    std::string result;
+    result.reserve(path.size());
+
+    for (unsigned char c : path) {
+        // Keep path separators and the Windows drive colon.
+        if (std::isalnum(c) ||
+            c == '-' ||
+            c == '_' ||
+            c == '.' ||
+            c == '~' ||
+            c == '/' ||
+            c == ':') {
+            result.push_back(static_cast<char>(c));
+        } else {
+            result.push_back('%');
+            result.push_back(hex[c >> 4]);
+            result.push_back(hex[c & 0x0f]);
+        }
+    }
+
+    return result;
+}
+
+std::string input_url(const std::string& input)
+{
+    namespace fs = std::filesystem;
+
+    std::error_code error;
+
+    // Existing paths take precedence, which matters for Windows drive names.
+    const bool existing_path =
+        fs::exists(fs::path(input), error) && !error;
+
+    if (!existing_path && looks_like_uri(input)) {
+        return input;
+    }
+
+    fs::path path = fs::absolute(fs::path(input), error);
+
+    if (error) {
+        throw std::runtime_error(
+            "Cannot resolve input path: " + input
+        );
+    }
+
+    path = path.lexically_normal();
+
+    const std::string encoded =
+        percent_encode_file_path(path.generic_string());
+
+#ifdef _WIN32
+    return "file:///" + encoded;
+#else
+    return "file://" + encoded;
+#endif
+}
+
+} // namespace
+
+static std::generator<Table> read_html_tables(std::string input)
+{
+    // In a larger application, manage curl_global_init/cleanup at program
+    // scope instead of inside this function.
     static const struct CurlGlobal {
         CurlGlobal()
         {
             const CURLcode result =
                 curl_global_init(CURL_GLOBAL_DEFAULT);
 
-            if (result != CURLE_OK)
+            if (result != CURLE_OK) {
                 throw std::runtime_error("curl_global_init failed");
+            }
         }
 
         ~CurlGlobal()
@@ -645,22 +716,29 @@ std::generator<Table> read_html_tables(std::string url)
         }
     } curl_global;
 
+    const std::string source_url = input_url(input);
+
     StreamState state;
-    HtmlParserPtr parser = make_parser(state, url);
-    CurlTransfer transfer(url, state);
+    HtmlParserPtr parser = make_parser(state, input);
+    CurlTransfer transfer(source_url, state);
 
     for (;;) {
-        /*
-         * First consume bytes already received. After one table closes,
-         * parse_available_input() stops and leaves later bytes untouched.
-         */
         parse_available_input(state);
 
-        while (!state.ready.empty()) {
+        // Yield one table, suspend, and continue parsing only when the caller
+        // increments the generator iterator.
+        if (!state.ready.empty()) {
             Table table = std::move(state.ready.front());
             state.ready.pop_front();
-            LOGGER("co_yield 1\n");
+
             co_yield std::move(table);
+            continue;
+        }
+
+        // Do not finalize a completed local transfer while unparsed bytes are
+        // still buffered in the application.
+        if (state.input_position < state.input.size()) {
+            continue;
         }
 
         if (transfer.done()) {
@@ -670,59 +748,60 @@ std::generator<Table> read_html_tables(std::string url)
             while (!state.ready.empty()) {
                 Table table = std::move(state.ready.front());
                 state.ready.pop_front();
-
-                LOGGER("co_yield 2\n");
                 co_yield std::move(table);
             }
 
-            LOGGER("co_return\n");
             co_return;
         }
 
-        /*
-         * No complete table is available and all buffered bytes have been
-         * consumed, so request another network chunk.
-         */
         transfer.resume();
         transfer.pump();
 
-        if (state.failure)
+        if (state.failure) {
             std::rethrow_exception(state.failure);
+        }
     }
 }
 
-static void process(Table &table) {
-        for (const auto& row : table)   {
-            for (std::size_t column = 0; column < row.size(); ++column) {
-                if (column != 0) {
-                    std::cout << '\t';
-                }
-                std::cout << row[column];
+static void process(const Table& table)
+{
+    for (const Row& row : table) {
+        for (std::size_t column = 0; column < row.size(); ++column) {
+            if (column != 0) {
+                std::cout << '\t';
             }
-            std::cout << '\n';
+
+            std::cout << row[column];
         }
-     }
 
-
-
-/*
-You can also try it out with:
-./read_html_tables "https://www.worldometers.info/demographics/life-expectancy"
-*/
-int main(int argc,char **argv) {
-    try {
-        std::string url;
-        if(argc>1) {
-            url=argv[1];
-            }
-        else
-            url="http://127.0.0.1:17580/x/meals?days=6";
-
-        for(Table table : read_html_tables( url)) {
-            process(table);
-            }
-         }
-     catch( const std::exception& error) {
-        std::cerr << "Error: " << error.what() << '\n';
-        }
+        std::cout << '\n';
     }
+}
+
+int main(int argc, char** argv)
+{
+    if (argc != 2) {
+        std::cerr
+            << "Usage: "
+            << argv[0]
+            << " <URL-or-HTML-file>\n";
+
+        return 2;
+    }
+
+    try {
+        bool first_table = true;
+
+        for (Table table : read_html_tables(argv[1])) {
+            if (!first_table) {
+                std::cout << '\n';
+            }
+
+            first_table = false;
+            process(table);
+        }
+    } catch (const std::exception& error) {
+        std::cerr << "Error: " << error.what() << '\n';
+        return 1;
+    }
+}

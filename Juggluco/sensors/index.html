@@ -19,17 +19,29 @@
 		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
 		h1.ctl { font-family: "Noto Sans Devanagari"; font-size: 18pt; font-weight: bold }
 		a:link { color: #000080; text-decoration: underline }
-.column {
-  float: left;
-  width: 15%;
-  padding: 5px;
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
 }
 
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+.row > .column {
+    float: none;
+    width: auto;
+    flex: 0 1 5cm;
+    min-width: 0;
 }
+
+.row figure {
+    margin: 0;
+}
+
+.row img {
+    display: block;
+    max-width: 100%;
+}
+
 	</style>
 </head>
 <body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h1 class="western">Sensors</h1>
@@ -88,13 +100,13 @@ that sensor is also displayed.</p>
 <p>
 <div class="row">
   <div class="column">
-<figure> <img src="GS3datamatrix.jpg" alt="GS3 data matrix" style="object-fit:contain;
+<figure > <img src="GS3datamatrix.jpg" alt="GS3 data matrix" style="object-fit:contain;
             width:5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Sibionics GS3 data matrix</span></figcaption>
 </figure>
   </div>
   <div class="column">
 
-<figure> <img src="oneAccountOnly.png" alt="GS3 one account only" style="object-fit:contain;
+<figure > <img src="oneAccountOnly.png" alt="GS3 one account only" style="object-fit:contain;
             width:5cm;		    height:auto;"> <figcaption><span style="font-size: 0.9em; font-family: Times New Roman;">Sibionics GS3 is restricted to one account</span></figcaption>
 </figure>
 

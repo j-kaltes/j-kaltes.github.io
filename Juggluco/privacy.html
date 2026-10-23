@@ -3,63 +3,101 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title></title>
-	<meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+	<meta name="generator" content="LibreOffice 26.2.5.2 (Linux)"/>
 	<meta name="created" content="2021-10-29T14:17:27.384505290"/>
-	<meta name="changed" content="2025-03-05T22:09:24.867734847"/>
+	<meta name="changed" content="2026-10-23T15:28:42.191147616"/>
 	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		h1 { margin-bottom: 0.08in; background: transparent }
+		@page { size: 21.01cm 29.69cm; margin: 2.01cm }
+		h1 { background: transparent; margin-bottom: 0.2cm }
 		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt }
 		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt }
-		h1.ctl { font-family: "Mangal"; font-size: 18pt }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h1.ctl { font-size: 18pt; font-family: "Mangal" }
+		p { background: transparent; margin-bottom: 0.25cm; line-height: 115% }
 	</style>
 </head>
 <body lang="en-US" dir="ltr"><h1 class="western">Privacy policy</h1>
-<p style="line-height: 100%; margin-bottom: 0in"><span lang="en-US">Juggluco
+<p style="line-height: 100%; margin-bottom: 0cm"><span lang="en-US">Juggluco
 saves unencrypted blood glucose relevant data on the device itself,
 but this is usually not available to other programs. Google Play and
 Android possibly collect information, but I haven't done anything to
-make this happen. The rest is totally under control of the user.
-Information can be saved with </span><span lang="en-US"><i>'export'</i></span>
+make this happen. </span><span lang="en-US">Juggluco</span><span lang="en-US">
+</span><span lang="en-US">doesn’t use Firebase analytics. I am
+uncertain whether some of the dependencies (com.google.mlkit via
+com.google.android.gms:play-services-code-scanner) makes use of it. </span>
+</p>
+<p style="line-height: 100%; margin-bottom: 0cm"><span lang="en-US">The
+rest is totally under control of the user. Information can be saved
+with </span><span lang="en-US"><i>'</i></span><a href="https://www.juggluco.nl/Jugglucohelp/helpexport.html"><span lang="en-US"><i>E</i></span><span lang="en-US"><i>xport</i></span></a><span lang="en-US"><i>'</i></span>
 <span lang="en-US">to a local file, but not directly on a Cloud
-server. With the </span><span lang="en-US"><i>'mirror'</i></span>
+server. With the </span><span lang="en-US"><i>'<a href="https://www.juggluco.nl/Jugglucohelp/connectionoverview.html">mirror</a>'</i></span>
 <span lang="en-US">function information can be sent to another IP
 address encrypted or unencrypted, but this will only be done under
 control of the user and to an IP address specified by the user.</span>
-<span lang="en-US">The user can make Juggluco send glucose values to
-a Nightscout server or to let other apps contact Juggluco via the web
-server or to receive glucose broadcasts.</span></p>
-<p style="line-height: 100%; margin-bottom: 0in">If a user checks
-'<i>Send to LibreView</i>' in settings and gives a working Libreview
-E-Mail address and password, glucose data will be sent to Libreview.
-Also account information given to Libreview will be received by
-Juggluco: FirstName, LastName, Country, DateOfBirth,
-GuardianLastName, GuardianFirstName. Use of this information by
-Juggluco is restricted to what is absolutely necessary to contact
-with Libreview and will only be used for contact with Libreview. What
-Libreview does with this information is unknown.</p>
-<p style="line-height: 100%; margin-bottom: 0in">To take over an
+If you make use of ICE (Interactive Connection Establishment), things
+are a little bit more complicated, but as long as you encrypt the
+data, nobody will know any content. Which IP connects to what IP is
+always visible for other servers that constitute the backbone of the
+internet. Some more servers are added to this list when you make use
+of ICE.</p>
+<p style="line-height: 100%; margin-bottom: 0cm">The user can make
+Juggluco send glucose values to a <a href="https://www.juggluco.nl/Jugglucohelp/NightPost.html">Nightscout
+server</a> or to let other apps contact Juggluco via the <a href="https://www.juggluco.nl/Jugglucohelp/Nightscouthelp.html">web
+server</a> or to receive <a href="https://www.juggluco.nl/Jugglucohelp/exchangehelp.html">glucose
+broadcasts</a>.</p>
+<p style="line-height: 100%; margin-bottom: 0cm">If a user checks
+'<i>Send to <a href="https://www.juggluco.nl/Jugglucohelp/libreview.html">LibreView</a></i>'
+in settings and gives a working Libreview E-Mail address and
+password, glucose data will be sent to Libreview. Also account
+information given to Libreview will be received by Juggluco:
+FirstName, LastName, Country, DateOfBirth, GuardianLastName,
+GuardianFirstName. Use of this information by Juggluco is restricted
+to what is absolutely necessary to contact with Libreview and will
+only be used for contact with Libreview. What Libreview does with
+this information is unknown.</p>
+<p style="line-height: 100%; margin-bottom: 0cm">To take over an
 already started FreeStyle Libre 3 sensor, users have to give the same
 Libreview E-Mail address they used in the Libre3 app that activated
 the sensor and this is used by Juggluco to get an Libreview Accound
 ID from Libreview. The only use of this Account ID is sending it to
 the sensor, because when a different number is sent to the sensor it
 refuses to function.</p>
-<p style="line-height: 100%; margin-bottom: 0in">If the user wants
+<p style="line-height: 100%; margin-bottom: 0cm">If you configure it,
+data will be sent to <a href="https://www.juggluco.nl/Jugglucohelp/clarityhelp.html">Dexcom
+Clarity</a>, but not otherwise.</p>
+<p style="line-height: 100%; margin-bottom: 0cm">If the user wants
 it, he/she can configure Juggluco to send glucose values to Health
 Connect (Left menu→Settings→Exchange data→Health Connect). This
 way other apps can make use of the glucose values, but no
 functionally of Juggluco depends on that. After Juggluco has written
 these glucose values to Health connect, which apps get access to
 these glucose values is controlled by Android and Health Connect.</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<p style="line-height: 100%; margin-bottom: 0cm">In Juggluco 11.5.0
+and later, you can configure Juggluco in left menu→Settings→Exchange
+data→<a href="https://www.juggluco.nl/Jugglucohelp/activities.html">Activities</a>
+to receive data from Health Connect. This information is used to
+display all kind of information about an activity in Juggluco. You
+can let Juggluco <a href="https://www.juggluco.nl/Jugglucohelp/assignActivity.html">create</a>
+an amount under a certain label from this information and by long
+pressing it and pressing “Activity” one can view all kind of
+activity information. You can also configure this number under this
+label to be sent to Libreview or Dexcom Clarity as a note. This
+information can also be retrieved via the web server in Juggluco (if
+you turn on the web server) or saved to a file in left middle
+menu→Export.</p>
+<p style="line-height: 100%; margin-bottom: 0cm">On phones running
+Android 6 until Android 11, <a href="https://www.juggluco.nl/Jugglucohelp/locationpermission.html">location
+permission</a> is required to <a href="https://developer.android.com/develop/connectivity/bluetooth/bt-permissions">scan
+for Bluetooth devices</a>. To do that when Juggluco is not in the
+foreground, BACKGROUND_LOCATION permission is needed. This permission
+isn’t used for anything else and is also not present on Android 12
+and later.</p>
+<p style="line-height: 100%; margin-bottom: 0cm"><br/>
 
 </p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<p style="line-height: 100%; margin-bottom: 0cm"><br/>
 
 </p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<p style="line-height: 100%; margin-bottom: 0cm"><br/>
 
 </p>
 </body>
